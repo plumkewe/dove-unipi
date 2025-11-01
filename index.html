@@ -1,0 +1,743 @@
+<!-- FATTO CON AMORE DA LYUBOMYR MALAY CON UTILIZZO DI INTELLIGENZA ARTIFICIALE
+        u                                 
+      .  x!X                                 
+    ."X M~~>                                 
+   d~~XX~~~k    .u.xZ `\ \ "%                
+  d~~~M!~~~?..+"~~~~~?:  "    h              
+ '~~~~~~~~~~~~~~~~~~~~~?      `              
+ 4~~~~~~~~~~~~~~~~~~~~~~>     '              
+ ':~~~~~~~~~~(X+"" X~~~~>    xHL             
+  %~~~~~(X="      'X"!~~% :RMMMRMRs          
+   ^"*f`          ' (~~~~~MMMMMMMMMMMx       
+     f     /`   %   !~~~~~MMMMMMMMMMMMMc     
+     F    ?      '  !~~~~~!MMMMMMMMMMMMMM.   
+    ' .  :": "   :  !X""(~~?MMMMMMMMMMMMMMh  
+    'x  .~  ^-+="   ? "f4!*  #MMMMMMMMMMMMMM.
+     /"               .."     `MMMMMMMMMMMMMM
+     h ..             '         #MMMMMMMMMMMM
+     f                '          @MMMMMMMMMMM
+   :         .:=""     >       dMMMMMMMMMMMMM
+   "+mm+=~("           RR     @MMMMMMMMMMMMM"
+           %          (MMNmHHMMMMMMMMMMMMMMF 
+          uR5         @MMMMMMMMMMMMMMMMMMMF  
+        dMRMM>       dMMMMMMMMMMMMMMMMMMMF   
+       RM$MMMF=x..=" RMRM$MMMMMMMMMMMMMMF    
+      MMMMMMM       'MMMMMMMMMMMMMMMMMMF     
+     dMMRMMMK       'MMMMMMMMMMMMMMMMM"      
+     RMMRMMME       3MMMMMMMMMMMMMMMM        
+    @MMMMMMM>       9MMMMMMMMMMMMMMM~        
+   'MMMMMMMM>       9MMMMMMMMMMMMMMF         
+   tMMMMMMMM        9MMMMMMMMMMMMMM          
+   MMMM$MMMM        9MMMMMMMMMMMMMM          
+  'MMMMRMMMM        9MMMMMMMMMMMMM9          
+  MMMMMMMMMM        9MMMMMMMMMMMMMM          
+  RMMM$MMMMM        9MMMMMMMMMMMMMM          
+ tMMMMMMMMMM        9MMMMMMMMMMMMMX          
+ RMMMMMMMMMM        9MMMMMMMMMMMMME          
+JMMMMMMMMMMM        MMMMMMMMMMMMMME          
+9MMMM$MMMMMM        RMMMMMMMMMMMMME          
+MMMMMRMMMMMX        RMMMMMMMMMMMMMR          
+RMMMMRMMMMME        EMMMMMMMMMMMMM!          
+9MMMMMMMMMME        MMMMMMMMMMMMMM> 
+-->
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.">
+    <meta name="author" content="Lyubomyr Malay">
+    <meta name="keywords" content="UniPi, Università di Pisa, Polo Fibonacci, aule, dove, navigatore, mappe, planimetrie">
+    <meta name="theme-color" content="#F3F4F6">
+    <title>DOVE?</title>
+
+    <meta property="og:title" content="DOV'È QUEL AULA?! DOVEEEEE!!!">
+    <meta property="og:description" content="So che ti sei perso al polo Fibonacci dell'Università di Pisa. Usa DOVE? UniPi per trovare le aule e orientarti tra gli edifici e i piani.">
+    <meta property="og:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:url" content="https://plumkewe.github.io/dove-unipi/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="Lyubomyr Malay">
+    <meta name="twitter:title" content="DOV'È QUEL AULA?! DOVEEEEE!!!">
+    <meta name="twitter:description" content="So che ti sei perso al polo Fibonacci dell'Università di Pisa. Usa DOVE? UniPi per trovare le aule e orientarti tra gli edifici e i piani.">
+    <meta name="twitter:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
+
+    <meta name="robots" content="index, follow">
+    <meta property="og:site_name" content="DOVE? UniPi">
+    <meta property="og:locale" content="it_IT">
+    
+    <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+    <!-- Caricamento di Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Caricamento di Google Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        /* Stile personalizzato */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none; /* Standard syntax */
+        }
+        /* Nascondi la scrollbar del menu di navigazione */
+        #navigation-menu::-webkit-scrollbar {
+            display: none;
+        }
+        #navigation-menu {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Stili per la transizione della sidebar */
+        .no-transition #sidebar {
+            transition: none;
+        }
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Stile per l'hover degli elementi */
+        .nav-item:hover {
+            background-color: rgba(0, 0, 0, 0.05); /* 5% black opacity */
+        }
+        /* Stile per l'effetto vetro (blur) */
+        .glass-sidebar {
+            background-color: rgba(255, 255, 255, 0.85); /* White 85% */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-right: 1px solid rgba(209, 213, 219, 0.5); /* gray-300 50% */
+        }
+        /* Stile per Google Material Symbols */
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+           display: inline-block; /* Helps with alignment */
+           vertical-align: middle; /* Aligns with text if needed */
+           -webkit-font-smoothing: antialiased; /* Migliora il rendering su WebKit */
+           -moz-osx-font-smoothing: grayscale; /* Migliora il rendering su Firefox */
+        }
+        /* Stili per l'animazione di cambio piano */
+        #viewer-container {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        #viewer-container.loading {
+            opacity: 0;
+            transform: scale(0.98);
+        }
+        /* Previeni il jittering durante lo zoom */
+        #viewer-container svg {
+            touch-action: none;
+            user-select: none;
+        }
+
+        /* Stili per i tooltip */
+        .tooltip {
+            position: absolute;
+            background-color: #D1D5DB; /* gray-300 */
+            color: #1F2937; /* gray-800 */
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            z-index: 1000; /* Aumentato per essere sopra tutto */
+            pointer-events: none; /* Evita che il tooltip intercetti i click */
+        }
+        .tooltip.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Stili per mobile */
+        @media (max-width: 768px) {
+            #main-content {
+                width: 100vw; /* Occupa tutta la larghezza dello schermo */
+            }
+            /* Forza la larghezza minima dell'SVG su mobile per evitare tagli */
+            #viewer-container svg {
+                min-width: 900px !important;
+                width: 900px !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 no-transition">
+
+    <!-- Contenitore per il tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- Bottone per Aprire la Sidebar (visibile solo quando è chiusa) -->
+    <button id="open-sidebar-button" class="fixed top-4 left-4 z-40 p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 transition-colors duration-200 text-gray-900" data-tooltip="Apri sidebar">
+        <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">
+        left_panel_open
+        </span>
+    </button>
+
+    <div id="app-container" class="relative min-h-screen">
+        
+        <!-- Sidebar -->
+        <div id="sidebar" class="glass-sidebar text-gray-900 w-64 h-screen fixed inset-y-0 left-0 transform -translate-x-full z-50 shadow-lg flex flex-col">
+            
+            <!-- Intestazione Sidebar -->
+            <div class="flex items-center justify-between p-4 h-16">
+                <div class="text-2xl font-bold tracking-wider">
+                    DOVE?
+                </div>
+                <!-- Bottone Chiudi (Desktop & Mobile) -->
+                <button id="close-sidebar-button" class="block p-1 rounded-lg hover:bg-gray-900/10" data-tooltip="Chiudi sidebar">
+                    <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;">
+                    left_panel_close
+                    </span>
+                </button>
+            </div>
+
+            <!-- Menu di Navigazione -->
+            <nav id="navigation-menu" class="flex-1 p-4 space-y-1 overflow-y-auto">
+                <div id="polos-list" class="space-y-1">
+                    <!-- I bottoni dei poli verranno inseriti qui -->
+                </div>
+                
+                <!-- Edifici -->
+                <div class="p-2">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Edifici</h3>
+                    <div id="buildings-list" class="mt-2 space-y-1">
+                        <!-- I bottoni degli edifici verranno inseriti qui -->
+                    </div>
+                </div>
+
+                <!-- Piani -->
+                <div class="p-2">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Piani</h3>
+                    <div id="floors-list" class="mt-2 space-y-1">
+                        <!-- I bottoni dei piani verranno inseriti qui -->
+                    </div>
+                </div>
+
+                <!-- Aule -->
+                <div class="p-2">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Aule</h3>
+                    <div id="rooms-list" class="mt-2 space-y-1">
+                        <!-- Le aule verranno inserite qui -->
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Footer Sidebar -->
+            <div class="p-4 border-t border-gray-300/50">
+                <a href="https://github.com/plumkewe/dove-unipi" target="_blank" class="nav-item flex items-center space-x-3 p-2 rounded-lg">
+                    <svg class="w-8 h-8 text-gray-800" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>
+                    <span>Repository GitHub</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Contenuto Principale -->
+        <div id="main-content" class="flex-1 ml-0 transition-all duration-300 ease-in-out">
+            <!-- Area Contenuto per il visualizzatore SVG -->
+            <div id="viewer-container" class="w-full h-screen overflow-hidden flex items-center justify-center bg-gray-200">
+                <!-- L'SVG verrà caricato qui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Controlli Zoom/Pan e Vista -->
+    <div class="fixed top-4 right-4 z-40 flex items-center space-x-2">
+        <!-- Controlli Vista -->
+        <div id="view-controls" class="flex space-x-1 hidden">
+            <button id="perspective-view-btn" class="p-2 rounded-lg bg-gray-300 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Vista Prospettica" data-tooltip="Vista Prospettica">
+                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">view_in_ar</span>
+            </button>
+            <button id="top-view-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Vista dall'alto" data-tooltip="Vista dall'alto">
+                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">grid_view</span>
+            </button>
+        </div>
+
+        <!-- Controlli Zoom -->
+        <div id="zoom-controls" class="flex space-x-1">
+            <button id="zoom-in-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Ingrandisci" data-tooltip="Ingrandisci">
+                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_in</span>
+            </button>
+            <button id="zoom-out-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Riduci" data-tooltip="Riduci">
+                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_out</span>
+            </button>
+            <button id="reset-zoom-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Centra visuale" data-tooltip="Centra visuale">
+                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">center_focus_strong</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 px-3 py-1 rounded-lg bg-gray-200 border border-gray-200">
+        <span class="text-sm text-gray-600 whitespace-nowrap">
+            Fatto con 
+            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">favorite</span> 
+            e 
+            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">smart_toy</span> 
+            da <a href="https://github.com/plumkewe" target="_blank" class="underline font-medium hover:text-gray-900">Lyubomyr Malay</a>
+        </span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltipElement = document.getElementById('tooltip');
+
+            const showTooltip = (event) => {
+                const target = event.currentTarget;
+                const tooltipText = target.getAttribute('data-tooltip');
+                if (!tooltipText) return;
+
+                // Applica il testo e rendi visibile per calcolare le dimensioni
+                tooltipElement.textContent = tooltipText;
+                tooltipElement.classList.add('visible');
+
+                const targetRect = target.getBoundingClientRect();
+                const tooltipRect = tooltipElement.getBoundingClientRect();
+                
+                const gap = 10;
+
+                // Posizione di default: centrato sopra
+                let top = targetRect.top - tooltipRect.height - gap;
+                let left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
+
+                // Se non c'è spazio sopra, mettilo sotto
+                if (top < 0) {
+                    top = targetRect.bottom + gap;
+                }
+
+                // Aggiustamenti orizzontali
+                if (left < 0) {
+                    // Se esce a sinistra, allinealo a sinistra
+                    left = gap;
+                } else if (left + tooltipRect.width > window.innerWidth) {
+                    // Se esce a destra, allinealo a destra
+                    left = window.innerWidth - tooltipRect.width - gap;
+                }
+
+                tooltipElement.style.top = `${top}px`;
+                tooltipElement.style.left = `${left}px`;
+            };
+
+            const hideTooltip = () => {
+                tooltipElement.classList.remove('visible');
+            };
+
+            const initializeTooltips = () => {
+                document.querySelectorAll('[data-tooltip]').forEach(element => {
+                    element.addEventListener('mouseenter', showTooltip);
+                    element.addEventListener('mouseleave', hideTooltip);
+                });
+            };
+            
+            initializeTooltips(); // Inizializza per gli elementi statici
+
+            const appContainer = document.getElementById('app-container');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            
+            const openSidebarBtn = document.getElementById('open-sidebar-button');
+            const closeSidebarBtn = document.getElementById('close-sidebar-button');
+
+            const polosList = document.getElementById('polos-list');
+            const buildingsList = document.getElementById('buildings-list');
+            const floorsList = document.getElementById('floors-list');
+            const roomsList = document.getElementById('rooms-list');
+            const viewerContainer = document.getElementById('viewer-container');
+
+            // Nuovi elementi per i controlli
+            const zoomControls = document.getElementById('zoom-controls');
+            const zoomInBtn = document.getElementById('zoom-in-btn');
+            const zoomOutBtn = document.getElementById('zoom-out-btn');
+            const resetZoomBtn = document.getElementById('reset-zoom-btn');
+            const viewControls = document.getElementById('view-controls');
+            const perspectiveViewBtn = document.getElementById('perspective-view-btn');
+            const topViewBtn = document.getElementById('top-view-btn');
+
+            let data = {};
+            let selectedPolo = '';
+            let selectedBuilding = '';
+            let selectedFloor = '0';
+            let currentView = 'top'; // 'perspective' o 'top'
+            let panzoomInstance = null;
+
+            // Funzione per chiudere la sidebar (logica unificata)
+            function closeSidebar() {
+                sidebar.classList.add('-translate-x-full');
+                openSidebarBtn.classList.remove('hidden'); // Mostra il bottone apri
+            }
+
+            // Funzione per aprire la sidebar (logica unificata)
+            function openSidebar() {
+                sidebar.classList.remove('-translate-x-full');
+                openSidebarBtn.classList.add('hidden'); // Nascondi il bottone apri
+            }
+            
+            // Event Listener per il bottone Apri
+            openSidebarBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openSidebar();
+            });
+
+            // Event Listener per il bottone Chiudi
+            closeSidebarBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeSidebar();
+            });
+            
+            // Aggiungi un listener per chiudere la sidebar se si clicca fuori
+            document.addEventListener('click', (e) => {
+                // Controlla se il clic è fuori dalla sidebar E non è il bottone apria
+                if (!sidebar.contains(e.target) && e.target !== openSidebarBtn && !openSidebarBtn.contains(e.target)) {
+                    // Solo se la sidebar è attualmente aperta (non ha -translate-x-full)
+                    if (!sidebar.classList.contains('-translate-x-full')) {
+                        closeSidebar();
+                    }
+                }
+            });
+
+            // Listener per i nuovi bottoni di zoom
+            zoomInBtn.addEventListener('click', () => {
+                if (panzoomInstance) {
+                    panzoomInstance.zoomIn();
+                }
+            });
+
+            zoomOutBtn.addEventListener('click', () => {
+                if (panzoomInstance) {
+                    panzoomInstance.zoomOut();
+                }
+            });
+
+            resetZoomBtn.addEventListener('click', () => {
+                if (panzoomInstance) {
+                    panzoomInstance.reset();
+                }
+            });
+
+            perspectiveViewBtn.addEventListener('click', () => {
+                if (currentView !== 'perspective') {
+                    selectView('perspective');
+                }
+            });
+
+            topViewBtn.addEventListener('click', () => {
+                if (currentView !== 'top') {
+                    selectView('top');
+                }
+            });
+
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+
+            // Carica i dati e popola la sidebar
+            fetch('data/rooms.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    const polos = Object.keys(data.polo);
+                    
+                    if (polos.length > 0) {
+                        populatePolos(polos);
+                        selectPolo(polos[0]);
+                    }
+                });
+
+            function populatePolos(polos) {
+                polosList.innerHTML = '';
+                polos.forEach(polo => {
+                    const button = document.createElement('button');
+                    button.className = 'nav-item flex items-center space-x-3 p-2 rounded-lg w-full';
+                    button.innerHTML = `
+                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
+                        school
+                        </span>
+                        <span>Polo ${polo.charAt(0).toUpperCase() + polo.slice(1)}</span>
+                    `;
+                    button.addEventListener('click', () => selectPolo(polo));
+                    polosList.appendChild(button);
+                });
+            }
+
+            function selectPolo(polo) {
+                selectedPolo = polo;
+                const buildings = Object.keys(data.polo[polo].edificio);
+                populateBuildings(buildings);
+
+                // Aggiorna lo stile dei bottoni dei poli
+                Array.from(polosList.children).forEach(child => {
+                    const poloName = child.querySelector('span:last-child').textContent.split(' ')[1].toLowerCase();
+                    if (poloName === polo) {
+                        child.classList.add('bg-gray-900/10');
+                    } else {
+                        child.classList.remove('bg-gray-900/10');
+                    }
+                });
+
+                if (buildings.length > 0) {
+                    selectBuilding(buildings[0]);
+                } else {
+                    floorsList.innerHTML = '';
+                    roomsList.innerHTML = '';
+                    viewerContainer.innerHTML = '<p class="p-2 text-gray-500">Nessun edificio in questo polo.</p>';
+                }
+            }
+
+            function populateBuildings(buildings) {
+                buildingsList.innerHTML = '';
+                buildings.forEach(building => {
+                    const button = document.createElement('button');
+                    button.className = 'nav-item w-full text-left flex items-center space-x-3 p-2 pl-6 rounded-lg';
+                    button.innerHTML = `
+                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
+                        corporate_fare
+                        </span>
+                        <span>Edificio ${building.toUpperCase()}</span>
+                    `;
+                    button.addEventListener('click', () => selectBuilding(building));
+                    buildingsList.appendChild(button);
+                });
+            }
+
+            function populateFloors(building) {
+                const floors = Object.keys(data.polo[selectedPolo].edificio[building].piano).sort((a, b) => a - b);
+                floorsList.innerHTML = '';
+                floors.forEach(floor => {
+                    const button = document.createElement('button');
+                    button.className = 'nav-item w-full text-left flex items-center space-x-3 p-2 pl-6 rounded-lg';
+                    button.innerHTML = `
+                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
+                        layers
+                        </span>
+                        <span>Piano ${floor}</span>
+                    `;
+                    button.addEventListener('click', () => selectFloor(floor));
+                    floorsList.appendChild(button);
+                });
+                // Seleziona il piano 0 di default se esiste
+                if (floors.includes('0')) {
+                    selectFloor('0');
+                } else if (floors.length > 0) {
+                    selectFloor(floors[0]);
+                }
+            }
+
+            function populateRooms(building, floor) {
+                roomsList.innerHTML = '';
+                const floorData = data.polo[selectedPolo].edificio[building]?.piano[floor];
+                
+                // Gestisce entrambe le strutture dati: array di aule o oggetto con chiave 'aule'
+                const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
+
+                if (rooms.length > 0) {
+                    rooms.forEach(room => {
+                        const roomContainer = document.createElement('div');
+                        roomContainer.className = 'nav-item-container';
+
+                        const roomElement = document.createElement('a');
+                        roomElement.href = '#';
+                        roomElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-8 rounded-lg';
+                        roomElement.innerHTML = `
+                            <span class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
+                                door_front
+                                </span>
+                                <span>${room.nome}</span>
+                            </span>
+                            <span class="material-symbols-outlined expand-icon" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
+                                expand_more
+                            </span>
+                        `;
+
+                        const capacityElement = document.createElement('div');
+                        capacityElement.className = 'capacity-info hidden pl-14 p-1 text-sm text-gray-600 flex items-center space-x-2';
+                        capacityElement.innerHTML = `
+                            <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">
+                            group
+                            </span>
+                            <span>Capienza: ${room.capienza}</span>
+                        `;
+
+                        roomElement.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            capacityElement.classList.toggle('hidden');
+                            const expandIcon = roomElement.querySelector('.expand-icon');
+                            expandIcon.style.transform = capacityElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                        });
+
+                        roomContainer.appendChild(roomElement);
+                        roomContainer.appendChild(capacityElement);
+                        roomsList.appendChild(roomContainer);
+                    });
+                } else {
+                    roomsList.innerHTML = '<p class="p-2 pl-8 text-sm text-gray-500">Nessuna aula trovata</p>';
+                }
+            }
+
+            function selectBuilding(building) {
+                selectedBuilding = building;
+                populateFloors(building);
+
+                // Aggiorna lo stile dei bottoni degli edifici
+                Array.from(buildingsList.children).forEach(child => {
+                    const buildingName = child.querySelector('span:last-child').textContent.split(' ')[1].toLowerCase();
+                    if (buildingName === building) {
+                        child.classList.add('bg-gray-900/10');
+                    } else {
+                        child.classList.remove('bg-gray-900/10');
+                    }
+                });
+            }
+
+            function selectFloor(floor) {
+                selectedFloor = floor;
+                // Resetta la vista a top quando si cambia piano
+                selectView('top', true); // Imposta sempre la vista top di default
+                populateRooms(selectedBuilding, selectedFloor);
+
+                // Aggiorna lo stile dei bottoni dei piani
+                Array.from(floorsList.children).forEach(child => {
+                    const floorName = child.querySelector('span:last-child').textContent.split(' ')[1];
+                    if (floorName === floor) {
+                        child.classList.add('bg-gray-900/10');
+                    } else {
+                        child.classList.remove('bg-gray-900/10');
+                    }
+                });
+            }
+
+            function selectView(viewType, forceReload = false) {
+                if (currentView === viewType && !forceReload) return;
+
+                currentView = viewType;
+                loadSVG(selectedBuilding, selectedFloor, currentView);
+
+                // Aggiorna stile bottoni vista
+                if (viewType === 'top') {
+                    topViewBtn.classList.add('bg-gray-300');
+                    topViewBtn.classList.remove('bg-gray-200');
+                    perspectiveViewBtn.classList.add('bg-gray-200');
+                    perspectiveViewBtn.classList.remove('bg-gray-300');
+                } else {
+                    perspectiveViewBtn.classList.add('bg-gray-300');
+                    perspectiveViewBtn.classList.remove('bg-gray-200');
+                    topViewBtn.classList.add('bg-gray-200');
+                    topViewBtn.classList.remove('bg-gray-300');
+                }
+            }
+
+            function checkForTopView(building, floor) {
+                const topViewPath = `polo/${selectedPolo}/edificio/${building}/piano/${floor}-top.svg`;
+                fetch(topViewPath, { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok) {
+                            viewControls.classList.remove('hidden');
+                            topViewBtn.classList.remove('hidden');
+                        } else {
+                            viewControls.classList.add('hidden');
+                        }
+                    })
+                    .catch(() => {
+                        viewControls.classList.add('hidden');
+                    });
+            }
+
+            function loadSVG(building, floor, viewType = 'top') {
+                // Controlla se la vista top è disponibile
+                checkForTopView(building, floor);
+
+                // Aggiungi classe loading per l'animazione
+                viewerContainer.classList.add('loading');
+                
+                const svgPath = viewType === 'top'
+                    ? `polo/${selectedPolo}/edificio/${building}/piano/${floor}-top.svg`
+                    : `polo/${selectedPolo}/edificio/${building}/piano/${floor}.svg`;
+                
+                fetch(svgPath)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Planimetria non trovata');
+                        }
+                        return response.text();
+                    })
+                    .then(svgData => {
+                        // Attendi che l'animazione di fade out sia completata
+                        setTimeout(() => {
+                            viewerContainer.innerHTML = svgData;
+                            const svgElement = viewerContainer.querySelector('svg');
+                            if (svgElement) {
+                                // Strip embedded tooltips so hovering the map stays silent
+                                svgElement.querySelectorAll('title, desc').forEach(node => node.remove());
+                                svgElement.querySelectorAll('[title]').forEach(el => el.removeAttribute('title'));
+                                svgElement.querySelectorAll('[data-tooltip]').forEach(el => el.removeAttribute('data-tooltip'));
+                                // MODIFICA: Rimuovi queste righe per permettere al flex di centrare
+                                // svgElement.style.width = '100%';
+                                // svgElement.style.height = '100%';
+
+                                // Distruggi l'istanza precedente di Panzoom
+                                if (panzoomInstance) {
+                                    panzoomInstance.destroy();
+                                }
+                                
+                                // Crea una nuova istanza di Panzoom con configurazione ottimizzata
+                                panzoomInstance = Panzoom(svgElement, {
+                                    maxScale: 10,
+                                    minScale: 0.5,
+                                    step: 0.15, // Incremento zoom più fluido
+                                    animate: true,
+                                    duration: 300, // Durata animazione più fluida
+                                    easing: 'ease-out',
+                                    startScale: 1,
+                                    panOnlyWhenZoomed: false,
+                                    disablePan: false,
+                                    cursor: 'move'
+                                });
+
+                                // Centra e adatta l'SVG al contenitore
+                                // Piccolo timeout per assicurare che il DOM sia pronto
+                                setTimeout(() => {
+                                    if (panzoomInstance) {
+                                        panzoomInstance.reset();
+                                    }
+                                }, 0);
+
+
+                                // Abilita lo zoom con la rotella del mouse
+                                // usando direttamente l'elemento SVG con la configurazione corretta
+                                svgElement.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel);
+                            }
+                            
+                            // Rimuovi la classe loading per il fade in
+                            setTimeout(() => {
+                                viewerContainer.classList.remove('loading');
+                            }, 50);
+                        }, 300); // Tempo sincronizzato con la durata della transizione CSS
+                    })
+                    .catch(error => {
+                        setTimeout(() => {
+                            viewerContainer.innerHTML = `<p class="text-red-500">${error.message}</p>`;
+                            viewerContainer.classList.remove('loading');
+                        }, 300);
+                    });
+            }
+
+            // Rimuovi la classe no-transition per abilitare le animazioni dopo il caricamento iniziale
+            // ma fallo in un timeout per evitare animazioni indesiderate al caricamento
+            setTimeout(() => {
+                document.body.classList.remove('no-transition');
+            }, 50);
+        });
+    </script>
+
+</body>
+</html>

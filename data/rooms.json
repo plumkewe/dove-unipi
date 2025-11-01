@@ -1,0 +1,99 @@
+{
+  "polo": {
+    "fibonacci": {
+      "edificio": {
+        "a": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        },
+        "b": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        },
+        "c": {
+          "piano": {
+            "-1": [],
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        },
+        "d": {
+          "piano": {
+            "0": [
+              {
+                "id": "D04",
+                "nome": "Aula D4",
+                "alias": ["D4"],
+                "capienza": 168,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "prese_rete": true,
+                "proiettore": true,
+                "lavagna": "nera",
+                "note": ""
+              },
+              {
+                "id": "D02",
+                "nome": "Aula D2",
+                "alias": ["D2"],
+                "capienza": 206,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "prese_rete": false,
+                "proiettore": false,
+                "lavagna": "nera",
+                "note": ""
+              },
+              {
+                "id": "D05",
+                "nome": "Aula D5",
+                "alias": ["D5"],
+                "capienza": 216,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "prese_rete": true,
+                "proiettore": true,
+                "lavagna": "nera",
+                "note": ""
+              },
+              {
+                "id": "D03",
+                "nome": "Aula D3",
+                "alias": ["D3"],
+                "capienza": 182,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "prese_rete": true,
+                "proiettore": true,
+                "lavagna": "nera",
+                "note": ""
+              }
+            ]
+          }
+        },
+        "e": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        }
+      }
+    }
+  }
+}
