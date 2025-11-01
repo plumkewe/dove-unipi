@@ -99,8 +99,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             transition: transform 0.3s ease-in-out;
         }
         /* Stile per l'hover degli elementi */
-        .nav-item:hover {
-            background-color: rgba(0, 0, 0, 0.05); /* 5% black opacity */
+        @media (hover: hover) {
+            .nav-item:hover {
+                background-color: rgba(0, 0, 0, 0.05); /* 5% black opacity */
+            }
+            .hover-effect:hover {
+                background-color: #D1D5DB; /* gray-300 */
+            }
+            .hover-effect-darker:hover {
+                background-color: rgba(0, 0, 0, 0.1); /* 10% black opacity */
+            }
+            .hover-text-effect:hover {
+                color: #1F2937; /* gray-800 */
+            }
         }
         /* Stile per l'effetto vetro (blur) */
         .glass-sidebar {
@@ -108,6 +119,30 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-right: 1px solid rgba(209, 213, 219, 0.5); /* gray-300 50% */
+        }
+        .search-result-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            border-top: 1px solid rgba(209, 213, 219, 0.7); /* gray-300 70% */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .search-result-item:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* 10% black opacity */
+        }
+        .search-result-item .title {
+            color: #1F2937; /* gray-800 */
+            font-weight: 600;
+        }
+        .search-result-item .details {
+            color: #4B5563; /* gray-600 */
+            font-size: 12px;
+        }
+        .search-result-item:hover .title,
+        .search-result-item:hover .details {
+            color: #1F2937; /* gray-800 */
+        }
+        .search-result-item.selected {
+            background-color: rgba(0, 0, 0, 0.1); /* 10% black opacity */
         }
         /* Stile per Google Material Symbols */
         .material-symbols-outlined {
@@ -156,6 +191,178 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             visibility: visible;
         }
 
+        /* Stili per la barra superiore responsiva */
+        #top-bar {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-areas: "open search controls";
+            align-items: center;
+            justify-items: center;
+            column-gap: 1rem;
+            row-gap: 0;
+        }
+        #open-sidebar-button {
+            grid-area: open;
+            justify-self: start;
+        }
+        #search-container {
+            grid-area: search;
+            justify-self: center;
+            width: 360px;
+            max-width: 90vw;
+            position: relative; /* Aggiunto per posizionare il wrapper */
+        }
+        #search-wrapper {
+            position: absolute; /* Sgancia dal flusso del layout */
+            width: 100%;
+            z-index: 50; /* Assicura che sia sopra gli altri elementi */
+            background-color: #E5E7EB; /* bg-gray-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+            --tw-ring-color: #9CA3AF; /* ring-gray-400 */
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+            overflow: hidden;
+        }
+        #search-results {
+            max-height: 240px;
+            overflow-y: auto;
+        }
+        #right-controls {
+            grid-area: controls;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem; /* space-x-2 */
+            flex-shrink: 0; /* Impedisce ai controlli di restringersi */
+            justify-self: end;
+        }
+
+        @media (max-width: 880px) {
+            #top-bar {
+                grid-template-columns: auto auto;
+                grid-template-rows: auto auto;
+                grid-template-areas:
+                    "open controls"
+                    "search search";
+                row-gap: 0.75rem;
+                justify-content: space-between;
+                align-items: center;
+            }
+            #open-sidebar-button {
+                justify-self: start;
+            }
+            #right-controls {
+                justify-self: end;
+            }
+            #search-container {
+                grid-column: 1 / span 2;
+                justify-self: center;
+                display: none; /* Nascondi la ricerca nella top-bar su mobile */
+            }
+
+            #mobile-search-container {
+                display: block; /* Mostra il contenitore della ricerca su mobile */
+                position: fixed;
+                bottom: 48px; /* Sopra il footer */
+                left: 0;
+                right: 0;
+                z-index: 40;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                display: flex;
+                justify-content: center;
+            }
+
+            #mobile-search-container .search-wrapper-mobile {
+                display: flex;
+                flex-direction: column-reverse; /* Inverte l'ordine: risultati sopra, input sotto */
+                width: 100%;
+                max-width: 360px;
+                /* Rimosso background e shadow per applicarli ai figli */
+            }
+
+            #mobile-search-container .search-wrapper-mobile > div {
+                background-color: #E5E7EB; /* bg-gray-200 */
+                --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+                --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+                --tw-ring-color: #9CA3AF; /* ring-gray-400 */
+                transition-property: all;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 300ms;
+            }
+
+            #mobile-search-container .search-wrapper-mobile > #search-results-mobile {
+                border-top-left-radius: 0.5rem;
+                border-top-right-radius: 0.5rem;
+                overflow: hidden;
+            }
+
+            #mobile-search-container .search-wrapper-mobile > .relative {
+                border-bottom-left-radius: 0.5rem;
+                border-bottom-right-radius: 0.5rem;
+                overflow: hidden;
+            }
+        }
+
+        /* Stili per la barra di ricerca mobile */
+        #mobile-search-container {
+            display: none; /* Nascosto di default */
+        }
+
+        /* Stili per mobile */
+        @media (max-width: 768px) {
+            #main-content {
+                width: 100vw; /* Occupa tutta la larghezza dello schermo */
+            }
+            /* Forza la larghezza minima dell'SVG su mobile per evitare tagli */
+            #viewer-container svg {
+                min-width: 900px !important;
+                width: 900px !important;
+            }
+        }        /* Stili per la barra di ricerca mobile */
+        #mobile-search-container {
+            display: none; /* Nascosto di default */
+        }
+
+        @media (max-width: 880px) {
+            #top-bar #search-container {
+                display: none; /* Nascondi la ricerca nella top-bar su mobile */
+            }
+
+            #mobile-search-container {
+                display: block; /* Mostra il contenitore della ricerca su mobile */
+                position: fixed;
+                bottom: 48px; /* Sopra il footer */
+                left: 0;
+                right: 0;
+                z-index: 40;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                display: flex;
+                justify-content: center;
+            }
+
+            #mobile-search-container #search-wrapper-mobile {
+                display: flex;
+                flex-direction: column-reverse; /* Inverte l'ordine: risultati sopra, input sotto */
+                width: 100%;
+                max-width: 360px;
+                background-color: #E5E7EB; /* bg-gray-200 */
+                border-radius: 0.5rem; /* rounded-lg */
+                --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+                --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+                --tw-ring-color: #9CA3AF; /* ring-gray-400 */
+                transition: border-radius 0.3s ease-in-out;
+                overflow: hidden;
+            }
+        }
+
         /* Stili per mobile */
         @media (max-width: 768px) {
             #main-content {
@@ -174,17 +381,76 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <!-- Contenitore per il tooltip -->
     <div id="tooltip" class="tooltip"></div>
 
-    <!-- Bottone per Aprire la Sidebar (visibile solo quando è chiusa) -->
-    <button id="open-sidebar-button" class="fixed top-4 left-4 z-40 p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 transition-colors duration-200 text-gray-900" data-tooltip="Apri sidebar">
-        <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">
-        left_panel_open
-        </span>
-    </button>
+    <!-- Top Bar Container -->
+    <div id="top-bar" class="fixed top-4 left-4 right-4 z-40">
+        <!-- Bottone per Aprire la Sidebar (visibile solo quando è chiusa) -->
+        <button id="open-sidebar-button" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200 flex-shrink-0" data-tooltip="Apri sidebar">
+            <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">
+            left_panel_open
+            </span>
+        </button>
+
+        <!-- Search Bar -->
+        <div id="search-container" class="max-w-md">
+            <div id="search-wrapper" class="relative bg-gray-200 rounded-lg ring-2 ring-gray-400 transition-all duration-300 overflow-hidden">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <span class="material-symbols-outlined text-gray-500">search</span>
+                    </span>
+                    <input type="text" id="search-input" placeholder="Cerca un'aula..." class="w-full p-3 pl-10 pr-4 bg-transparent border-none rounded-lg focus:outline-none" autocomplete="off">
+                </div>
+                <div id="search-results" class="hidden">
+                    <!-- I risultati della ricerca verranno inseriti qui -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Controlli a Destra (Vista e Zoom) -->
+        <div id="right-controls">
+            <!-- Controlli Vista -->
+            <div id="view-controls" class="flex space-x-1 hidden">
+                <button id="perspective-view-btn" class="p-2 rounded-lg bg-gray-300 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200" aria-label="Vista Prospettica" data-tooltip="Vista Prospettica">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">view_in_ar</span>
+                </button>
+                <button id="top-view-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200" aria-label="Vista dall'alto" data-tooltip="Vista dall'alto">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">grid_view</span>
+                </button>
+            </div>
+
+            <!-- Controlli Zoom -->
+            <div id="zoom-controls" class="flex space-x-1">
+                <button id="zoom-in-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200" aria-label="Ingrandisci" data-tooltip="Ingrandisci">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_in</span>
+                </button>
+                <button id="zoom-out-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200" aria-label="Riduci" data-tooltip="Riduci">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_out</span>
+                </button>
+                <button id="reset-zoom-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200" aria-label="Centra visuale" data-tooltip="Centra visuale">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">center_focus_strong</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Search Bar -->
+    <div id="mobile-search-container">
+        <div id="search-wrapper-mobile">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <span class="material-symbols-outlined text-gray-500">search</span>
+                </span>
+                <input type="text" id="search-input-mobile" placeholder="Cerca un'aula..." class="w-full p-3 pl-10 pr-4 bg-transparent border-none rounded-lg focus:outline-none" autocomplete="off">
+            </div>
+            <div id="search-results-mobile" class="overflow-y-auto max-h-48 hidden">
+                <!-- Mobile search results here -->
+            </div>
+        </div>
+    </div>
 
     <div id="app-container" class="relative min-h-screen">
         
         <!-- Sidebar -->
-        <div id="sidebar" class="glass-sidebar text-gray-900 w-64 h-screen fixed inset-y-0 left-0 transform -translate-x-full z-50 shadow-lg flex flex-col">
+        <div id="sidebar" class="glass-sidebar text-gray-900 w-64 h-screen fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col">
             
             <!-- Intestazione Sidebar -->
             <div class="flex items-center justify-between p-4 h-16">
@@ -192,7 +458,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     DOVE?
                 </div>
                 <!-- Bottone Chiudi (Desktop & Mobile) -->
-                <button id="close-sidebar-button" class="block p-1 rounded-lg hover:bg-gray-900/10" data-tooltip="Chiudi sidebar">
+                <button id="close-sidebar-button" class="block p-1 rounded-lg hover-effect-darker" data-tooltip="Chiudi sidebar">
                     <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;">
                     left_panel_close
                     </span>
@@ -251,29 +517,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     </div>
 
     <!-- Controlli Zoom/Pan e Vista -->
-    <div class="fixed top-4 right-4 z-40 flex items-center space-x-2">
-        <!-- Controlli Vista -->
-        <div id="view-controls" class="flex space-x-1 hidden">
-            <button id="perspective-view-btn" class="p-2 rounded-lg bg-gray-300 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Vista Prospettica" data-tooltip="Vista Prospettica">
-                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">view_in_ar</span>
-            </button>
-            <button id="top-view-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Vista dall'alto" data-tooltip="Vista dall'alto">
-                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">grid_view</span>
-            </button>
-        </div>
-
-        <!-- Controlli Zoom -->
-        <div id="zoom-controls" class="flex space-x-1">
-            <button id="zoom-in-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Ingrandisci" data-tooltip="Ingrandisci">
-                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_in</span>
-            </button>
-            <button id="zoom-out-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Riduci" data-tooltip="Riduci">
-                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_out</span>
-            </button>
-            <button id="reset-zoom-btn" class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover:bg-gray-300 text-gray-900 transition-colors duration-200" aria-label="Centra visuale" data-tooltip="Centra visuale">
-                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">center_focus_strong</span>
-            </button>
-        </div>
+    <div class="fixed top-4 right-4 z-40 flex items-center space-x-2 hidden">
+        <!-- Questo contenitore è ora un segnaposto e non verrà visualizzato -->
     </div>
 
     <!-- Footer -->
@@ -283,7 +528,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">favorite</span> 
             e 
             <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">smart_toy</span> 
-            da <a href="https://github.com/plumkewe" target="_blank" class="underline font-medium hover:text-gray-900">Lyubomyr Malay</a>
+            da <a href="https://github.com/plumkewe" target="_blank" class="underline font-medium hover-text-effect">Lyubomyr Malay</a>
         </span>
     </div>
 
@@ -293,6 +538,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const tooltipElement = document.getElementById('tooltip');
 
             const showTooltip = (event) => {
+                if (isMobile()) return; // Non mostrare tooltip su mobile
                 const target = event.currentTarget;
                 const tooltipText = target.getAttribute('data-tooltip');
                 if (!tooltipText) return;
@@ -363,23 +609,198 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const perspectiveViewBtn = document.getElementById('perspective-view-btn');
             const topViewBtn = document.getElementById('top-view-btn');
 
+            // Elementi della barra di ricerca
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const searchInputMobile = document.getElementById('search-input-mobile');
+            const searchResultsMobile = document.getElementById('search-results-mobile');
+
             let data = {};
             let selectedPolo = '';
             let selectedBuilding = '';
             let selectedFloor = '0';
             let currentView = 'top'; // 'perspective' o 'top'
             let panzoomInstance = null;
+            let selectedSearchResultIndex = -1;
+
+            // Funzione per la ricerca
+            function searchRooms(query = '') {
+                const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+                
+                if (!query) {
+                    currentSearchResults.innerHTML = '';
+                    currentSearchResults.classList.add('hidden');
+                    selectedSearchResultIndex = -1;
+                    return;
+                }
+
+                const queryLower = query.toLowerCase();
+                const results = [];
+
+                for (const poloName in data.polo) {
+                    const polo = data.polo[poloName];
+                    for (const buildingName in polo.edificio) {
+                        const building = polo.edificio[buildingName];
+                        for (const floorName in building.piano) {
+                            const rooms = building.piano[floorName];
+                            if (Array.isArray(rooms)) {
+                                rooms.forEach(room => {
+                                    const roomNameLower = room.nome.toLowerCase();
+                                    const aliasLower = room.alias.map(a => a.toLowerCase());
+                                    if (roomNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower))) {
+                                        results.push({
+                                            polo: poloName,
+                                            edificio: buildingName,
+                                            piano: floorName,
+                                            room: room
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+                displaySearchResults(results);
+            }
+
+            function displaySearchResults(results) {
+                const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+                const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+
+                currentSearchResults.innerHTML = '';
+                selectedSearchResultIndex = -1;
+                if (results.length === 0) {
+                    currentSearchResults.innerHTML = '<div class="p-3 text-gray-400">Nessun risultato trovato.</div>';
+                    currentSearchResults.classList.remove('hidden');
+                    return;
+                }
+
+                results.forEach((result, index) => {
+                    const resultElement = document.createElement('div');
+                    resultElement.className = 'search-result-item';
+                    resultElement.innerHTML = `
+                        <div class="title">${result.room.nome}</div>
+                        <div class="details">
+                            Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
+                            Edificio ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
+                            Piano ${result.piano}
+                        </div>
+                    `;
+                    resultElement.addEventListener('click', () => {
+                        selectPolo(result.polo, result.edificio, result.piano);
+                        currentSearchResults.classList.add('hidden');
+                        currentSearchInput.value = result.room.nome;
+                        // Sincronizza l'altro input
+                        const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
+                        otherInput.value = result.room.nome;
+                        if (isMobile()) {
+                            closeSidebar();
+                        }
+                    });
+                    resultElement.addEventListener('mouseenter', () => {
+                        updateSelectedSearchResult(index);
+                    });
+                    currentSearchResults.appendChild(resultElement);
+                });
+
+                currentSearchResults.classList.remove('hidden');
+            }
+
+            function updateSelectedSearchResult(index) {
+                const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+                const items = currentSearchResults.querySelectorAll('.search-result-item');
+                if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
+                    items[selectedSearchResultIndex].classList.remove('selected');
+                }
+                selectedSearchResultIndex = index;
+                if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
+                    items[selectedSearchResultIndex].classList.add('selected');
+                    items[selectedSearchResultIndex].scrollIntoView({ block: 'nearest' });
+                }
+            }
+
+            // Event listener per la ricerca
+            function setupSearchListeners(inputElement, resultsElement) {
+                inputElement.addEventListener('input', (e) => {
+                    const query = e.target.value;
+                    // Sincronizza l'altro input
+                    const otherInput = inputElement === searchInput ? searchInputMobile : searchInput;
+                    otherInput.value = query;
+                    searchRooms(query);
+                });
+
+                inputElement.addEventListener('keydown', (e) => {
+                    const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+                    const items = currentSearchResults.querySelectorAll('.search-result-item');
+                    if (currentSearchResults.classList.contains('hidden') || items.length === 0) return;
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const newIndex = (selectedSearchResultIndex + 1) % items.length;
+                        updateSelectedSearchResult(newIndex);
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const newIndex = (selectedSearchResultIndex - 1 + items.length) % items.length;
+                        updateSelectedSearchResult(newIndex);
+                    } else if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
+                            items[selectedSearchResultIndex].click();
+                        }
+                    }
+                });
+            }
+
+            setupSearchListeners(searchInput, searchResults);
+            setupSearchListeners(searchInputMobile, searchResultsMobile);
+
+
+            // Nascondi i risultati se si clicca fuori
+            document.addEventListener('click', (e) => {
+                if (!document.getElementById('search-container').contains(e.target) && !document.getElementById('mobile-search-container').contains(e.target)) {
+                    searchResults.classList.add('hidden');
+                    searchResultsMobile.classList.add('hidden');
+                }
+            });
+
+            // Funzione per aggiornare l'URL
+            function updateURL() {
+                if (!selectedPolo || !selectedBuilding || !selectedFloor) return;
+                
+                const params = new URLSearchParams(window.location.search);
+                params.set('polo', selectedPolo);
+                params.set('edificio', selectedBuilding);
+                params.set('piano', selectedFloor);
+
+                const newUrl = `${window.location.pathname}?${params.toString()}`;
+                // Aggiorna l'URL senza ricaricare la pagina
+                history.pushState({ polo: selectedPolo, building: selectedBuilding, floor: selectedFloor }, '', newUrl);
+            }
+
+            // Funzione per gestire il caricamento iniziale basato sull'URL
+            function handleInitialLoad() {
+                const params = new URLSearchParams(window.location.search);
+                const poloParam = params.get('polo');
+                const buildingParam = params.get('edificio');
+                const floorParam = params.get('piano');
+
+                const polos = Object.keys(data.polo);
+                if (polos.length === 0) return;
+
+                const poloToSelect = poloParam && data.polo[poloParam] ? poloParam : polos[0];
+                
+                // Passa i parametri dell'edificio e del piano alle funzioni di selezione
+                selectPolo(poloToSelect, buildingParam, floorParam);
+            }
 
             // Funzione per chiudere la sidebar (logica unificata)
             function closeSidebar() {
                 sidebar.classList.add('-translate-x-full');
-                openSidebarBtn.classList.remove('hidden'); // Mostra il bottone apri
             }
 
             // Funzione per aprire la sidebar (logica unificata)
             function openSidebar() {
                 sidebar.classList.remove('-translate-x-full');
-                openSidebarBtn.classList.add('hidden'); // Nascondi il bottone apri
             }
             
             // Event Listener per il bottone Apri
@@ -437,7 +858,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             });
 
             function isMobile() {
-                return window.innerWidth <= 768;
+                return window.innerWidth <= 880;
             }
 
             // Carica i dati e popola la sidebar
@@ -445,12 +866,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 .then(response => response.json())
                 .then(jsonData => {
                     data = jsonData;
-                    const polos = Object.keys(data.polo);
-                    
-                    if (polos.length > 0) {
-                        populatePolos(polos);
-                        selectPolo(polos[0]);
-                    }
+                    populatePolos(Object.keys(data.polo));
+                    handleInitialLoad(); // Gestisce il caricamento dall'URL
                 });
 
             function populatePolos(polos) {
@@ -469,7 +886,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
             }
 
-            function selectPolo(polo) {
+            function selectPolo(polo, buildingToSelect = null, floorToSelect = null) {
                 selectedPolo = polo;
                 const buildings = Object.keys(data.polo[polo].edificio);
                 populateBuildings(buildings);
@@ -485,7 +902,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
 
                 if (buildings.length > 0) {
-                    selectBuilding(buildings[0]);
+                    const building = buildingToSelect && buildings.includes(buildingToSelect) ? buildingToSelect : buildings[0];
+                    selectBuilding(building, floorToSelect);
                 } else {
                     floorsList.innerHTML = '';
                     roomsList.innerHTML = '';
@@ -524,12 +942,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     button.addEventListener('click', () => selectFloor(floor));
                     floorsList.appendChild(button);
                 });
-                // Seleziona il piano 0 di default se esiste
-                if (floors.includes('0')) {
-                    selectFloor('0');
-                } else if (floors.length > 0) {
-                    selectFloor(floors[0]);
-                }
             }
 
             function populateRooms(building, floor) {
@@ -584,7 +996,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             }
 
-            function selectBuilding(building) {
+            function selectBuilding(building, floorToSelect = null) {
                 selectedBuilding = building;
                 populateFloors(building);
 
@@ -597,6 +1009,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         child.classList.remove('bg-gray-900/10');
                     }
                 });
+
+                const floors = Object.keys(data.polo[selectedPolo].edificio[building].piano).sort((a, b) => a - b);
+                let floorToSet = '0'; // Default
+                if (floorToSelect && floors.includes(floorToSelect)) {
+                    floorToSet = floorToSelect;
+                } else if (floors.includes('0')) {
+                    floorToSet = '0';
+                } else if (floors.length > 0) {
+                    floorToSet = floors[0];
+                }
+                selectFloor(floorToSet);
             }
 
             function selectFloor(floor) {
@@ -614,6 +1037,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         child.classList.remove('bg-gray-900/10');
                     }
                 });
+                
+                updateURL(); // Aggiorna l'URL ogni volta che si seleziona un piano
             }
 
             function selectView(viewType, forceReload = false) {

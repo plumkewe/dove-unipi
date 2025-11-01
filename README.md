@@ -18,6 +18,7 @@
 
 ## Contributori
 
+[<img src="https://wsrv.nl/?url=github.com/calba-droid.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Calogero Alba" />](https://github.com/calba-droid)
 [<img src="https://wsrv.nl/?url=github.com/plumkewe.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Lyubomyr Malay" />](https://github.com/plumkewe)
 
 *Un ringraziamento speciale a chi ha dedicato il proprio tempo per la raccolta dati nelle aule.*
@@ -153,5 +154,5 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
 
 ## Funzionalità che vorrei aggiungere
 
-- [ ] **Ricerca intelligente:** Una ricerca che ti auta con il complementamento automatico, e prende in considerazioni i valori alias presenti su rooms.json e altro
+- [x] **Ricerca intelligente:** Una ricerca che ti auta con il complementamento automatico, e prende in considerazioni i valori alias presenti su rooms.json e altro
 - [ ] **Occupazoini aule:** Collegare in qualche modo University Planner da poter vedere le prenotazioni direttamente sul sito
