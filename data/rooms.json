@@ -692,9 +692,7 @@
         "e": {
           "piano": {
             "0": [],
-            "1": [],
-            "2": [],
-            "?": [
+            "1": [
               {
                 "id": "fib_magna-e-0",
                 "nome": "Aula Magna",
@@ -708,7 +706,10 @@
                 "acesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
-              },
+              }
+            ],
+            "2": [],
+            "?": [
               {
                 "id": "fib_ps1-e-0",
                 "nome": "Aula PS1",
