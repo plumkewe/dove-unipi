@@ -13,7 +13,583 @@
           "piano": {
             "0": [],
             "1": [],
-            "2": []
+            "2": [],
+            "?": [
+              {
+                "id": "fib_a1-b-0",
+                "nome": "Aula A1",
+                "alias": [
+                  "A1"
+                ],
+                "note": "",
+                "capienza": 137,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_i1-b-0",
+                "nome": "Aula I1",
+                "alias": [
+                  "I1"
+                ],
+                "note": "",
+                "capienza": 61,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_x3-b-0",
+                "nome": "Aula X3",
+                "alias": [
+                  "X3"
+                ],
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_a-b-0",
+                "nome": "Aula A",
+                "alias": [
+                  "A"
+                ],
+                "note": "",
+                "capienza": 217,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_h-lab-b-0",
+                "nome": "Aula H-Lab",
+                "alias": [
+                  "H-Lab"
+                ],
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "fib_l-b-0",
+                "nome": "Aula L",
+                "alias": [
+                  "L"
+                ],
+                "note": "",
+                "capienza": 87,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "fib_l1-b-0",
+                "nome": "Aula L1",
+                "alias": [
+                  "L1"
+                ],
+                "note": "",
+                "capienza": 69,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_m1-b-0",
+                "nome": "Aula M1",
+                "alias": [
+                  "M1"
+                ],
+                "note": "",
+                "capienza": 69,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_m-lab-b-0",
+                "nome": "Aula M-Lab",
+                "alias": [
+                  "M-Lab"
+                ],
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "fib_n-b-0",
+                "nome": "Aula N",
+                "alias": [
+                  "N"
+                ],
+                "note": "",
+                "capienza": 72,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "fib_n1-b-0",
+                "nome": "Aula N1",
+                "alias": [
+                  "N1"
+                ],
+                "note": "",
+                "capienza": 61,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_o-b-0",
+                "nome": "Aula O",
+                "alias": [
+                  "O"
+                ],
+                "note": "",
+                "capienza": 36,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_o1-b-0",
+                "nome": "Aula O1",
+                "alias": [
+                  "O1"
+                ],
+                "note": "",
+                "capienza": 60,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_p-b-0",
+                "nome": "Aula P",
+                "alias": [
+                  "P"
+                ],
+                "note": "",
+                "capienza": 36,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_p1-b-0",
+                "nome": "Aula P1",
+                "alias": [
+                  "P1"
+                ],
+                "note": "",
+                "capienza": 123,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_portatili_1-b-0",
+                "nome": "portatili 1",
+                "alias": [
+                  "portatili 1"
+                ],
+                "note": "",
+                "capienza": 100,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_q1-lab-b-0",
+                "nome": "Aula Q1-Lab",
+                "alias": [
+                  "Q1-Lab"
+                ],
+                "note": "",
+                "capienza": 10,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_r1-b-0",
+                "nome": "Aula R1",
+                "alias": [
+                  "R1"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_s1-b-0",
+                "nome": "Aula S1",
+                "alias": [
+                  "S1"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_t1-b-0",
+                "nome": "Aula T1",
+                "alias": [
+                  "T1"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_u1-b-0",
+                "nome": "Aula U1",
+                "alias": [
+                  "U1"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_v1-b-0",
+                "nome": "Aula V1",
+                "alias": [
+                  "V1"
+                ],
+                "note": "",
+                "capienza": 47,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_x1-b-0",
+                "nome": "Aula X1",
+                "alias": [
+                  "X1"
+                ],
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_x5-b-0",
+                "nome": "Aula X5",
+                "alias": [
+                  "X5"
+                ],
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_g1-b-0",
+                "nome": "Aula G1",
+                "alias": [
+                  "G1"
+                ],
+                "note": "",
+                "capienza": 61,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": true
+              },
+              {
+                "id": "fib_x2-b-0",
+                "nome": "Aula X2",
+                "alias": [
+                  "X2"
+                ],
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_x6-b-0",
+                "nome": "Aula X6",
+                "alias": [
+                  "X6"
+                ],
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_b-b-0",
+                "nome": "Aula B",
+                "alias": [
+                  "B"
+                ],
+                "note": "",
+                "capienza": 135,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_b1-b-0",
+                "nome": "Aula B1",
+                "alias": [
+                  "B1"
+                ],
+                "note": "",
+                "capienza": 109,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_c-b-0",
+                "nome": "Aula C",
+                "alias": [
+                  "C"
+                ],
+                "note": "",
+                "capienza": 135,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_c1-b-0",
+                "nome": "Aula C1",
+                "alias": [
+                  "C1"
+                ],
+                "note": "",
+                "capienza": 109,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_d-b-0",
+                "nome": "Aula D",
+                "alias": [
+                  "D"
+                ],
+                "note": "",
+                "capienza": 215,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_d1-b-0",
+                "nome": "Aula D1",
+                "alias": [
+                  "D1"
+                ],
+                "note": "",
+                "capienza": 137,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_e-b-0",
+                "nome": "Aula E",
+                "alias": [
+                  "E"
+                ],
+                "note": "",
+                "capienza": 217,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_e1-b-0",
+                "nome": "Aula E1",
+                "alias": [
+                  "E1"
+                ],
+                "note": "",
+                "capienza": 137,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_f-b-0",
+                "nome": "Aula F",
+                "alias": [
+                  "F"
+                ],
+                "note": "",
+                "capienza": 112,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "fib_f1-b-0",
+                "nome": "Aula F1",
+                "alias": [
+                  "F1"
+                ],
+                "note": "",
+                "capienza": 68,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_g-b-0",
+                "nome": "Aula G",
+                "alias": [
+                  "G"
+                ],
+                "note": "",
+                "capienza": 199,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_i-lab-b-0",
+                "nome": "Aula I-Lab",
+                "alias": [
+                  "I-Lab"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "fib_x4-b-0",
+                "nome": "Aula X4",
+                "alias": [
+                  "X4"
+                ],
+                "note": "",
+                "capienza": 6,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_x7-b-0",
+                "nome": "Aula X7",
+                "alias": [
+                  "X7"
+                ],
+                "note": "",
+                "capienza": 24,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
           }
         },
         "c": {
@@ -30,7 +606,9 @@
               {
                 "id": "D04",
                 "nome": "Aula D4",
-                "alias": ["D4"],
+                "alias": [
+                  "D4"
+                ],
                 "capienza": 168,
                 "presenza_pc": false,
                 "numero_pc": 0,
@@ -44,7 +622,9 @@
               {
                 "id": "D02",
                 "nome": "Aula D2",
-                "alias": ["D2"],
+                "alias": [
+                  "D2"
+                ],
                 "capienza": 206,
                 "presenza_pc": false,
                 "numero_pc": 0,
@@ -58,7 +638,9 @@
               {
                 "id": "D05",
                 "nome": "Aula D5",
-                "alias": ["D5"],
+                "alias": [
+                  "D5"
+                ],
                 "capienza": 216,
                 "presenza_pc": false,
                 "numero_pc": 0,
@@ -72,7 +654,9 @@
               {
                 "id": "D03",
                 "nome": "Aula D3",
-                "alias": ["D3"],
+                "alias": [
+                  "D3"
+                ],
                 "capienza": 182,
                 "presenza_pc": false,
                 "numero_pc": 0,
@@ -83,6 +667,64 @@
                 "lavagna": "nera",
                 "note": ""
               }
+            ],
+            "?": [
+              {
+                "id": "fib_d2-d-0",
+                "nome": "Aula D2",
+                "alias": [
+                  "D2"
+                ],
+                "note": "",
+                "capienza": 206,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_d3-d-0",
+                "nome": "Aula D3",
+                "alias": [
+                  "D3"
+                ],
+                "note": "",
+                "capienza": 182,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": true
+              },
+              {
+                "id": "fib_d4-d-0",
+                "nome": "Aula D4",
+                "alias": [
+                  "D4"
+                ],
+                "note": "",
+                "capienza": 168,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "fib_d5-d-0",
+                "nome": "Aula D5",
+                "alias": [
+                  "D5"
+                ],
+                "note": "",
+                "capienza": 216,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              }
             ]
           }
         },
@@ -90,7 +732,3227 @@
           "piano": {
             "0": [],
             "1": [],
-            "2": []
+            "2": [],
+            "?": [
+              {
+                "id": "fib_magna-e-0",
+                "nome": "Aula Magna",
+                "alias": [
+                  "Magna"
+                ],
+                "note": "",
+                "capienza": 224,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "fib_ps1-e-0",
+                "nome": "Aula PS1",
+                "alias": [
+                  "PS1"
+                ],
+                "note": "",
+                "capienza": 112,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "fib_ps4-e-0",
+                "nome": "Aula PS4",
+                "alias": [
+                  "PS4"
+                ],
+                "note": "",
+                "capienza": 48,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "benedettine": {
+      "edificio": {
+        "benedettine": {
+          "piano": {
+            "?": [
+              {
+                "id": "ben_a-benedettine-0",
+                "nome": "Aula A",
+                "alias": [
+                  "A"
+                ],
+                "note": "",
+                "capienza": 95,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ben_b-benedettine-0",
+                "nome": "Aula B",
+                "alias": [
+                  "B"
+                ],
+                "note": "",
+                "capienza": 77,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ben_c-benedettine-0",
+                "nome": "Aula C",
+                "alias": [
+                  "C"
+                ],
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ben_d-benedettine-0",
+                "nome": "Aula D",
+                "alias": [
+                  "D"
+                ],
+                "note": "",
+                "capienza": 22,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_e-benedettine-0",
+                "nome": "Aula E",
+                "alias": [
+                  "E"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_expo-benedettine-0",
+                "nome": "Aula eXpo",
+                "alias": [
+                  "eXpo"
+                ],
+                "note": "",
+                "capienza": 100,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_f-benedettine-0",
+                "nome": "Aula F",
+                "alias": [
+                  "F"
+                ],
+                "note": "",
+                "capienza": 24,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_g-riu-benedettine-0",
+                "nome": "Aula G-Riu",
+                "alias": [
+                  "G-Riu"
+                ],
+                "note": "",
+                "capienza": 12,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_h-benedettine-0",
+                "nome": "Aula H",
+                "alias": [
+                  "H"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_n-benedettine-0",
+                "nome": "Aula N",
+                "alias": [
+                  "N"
+                ],
+                "note": "",
+                "capienza": 23,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_l-benedettine-0",
+                "nome": "Aula L",
+                "alias": [
+                  "L"
+                ],
+                "note": "",
+                "capienza": 22,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_terrazza-benedettine-0",
+                "nome": "Terrazza",
+                "alias": [
+                  "Terrazza"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_m-benedettine-0",
+                "nome": "Aula M",
+                "alias": [
+                  "M"
+                ],
+                "note": "",
+                "capienza": 27,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_i-benedettine-0",
+                "nome": "Aula I",
+                "alias": [
+                  "I"
+                ],
+                "note": "",
+                "capienza": 26,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_o-benedettine-0",
+                "nome": "Aula O",
+                "alias": [
+                  "O"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_p-benedettine-0",
+                "nome": "Aula P",
+                "alias": [
+                  "P"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ben_q-benedettine-0",
+                "nome": "Aula Q",
+                "alias": [
+                  "Q"
+                ],
+                "note": "",
+                "capienza": 19,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "boileau / curini": {
+      "edificio": {
+        "curini": {
+          "piano": {
+            "?": [
+              {
+                "id": "cur_lab_4-curini-0",
+                "nome": "Lab 4",
+                "alias": [
+                  "Lab 4"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "cur_lab_8-curini-0",
+                "nome": "Lab 8",
+                "alias": [
+                  "Lab 8"
+                ],
+                "note": "",
+                "capienza": 55,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "cur_a4-curini-0",
+                "nome": "Aula A4",
+                "alias": [
+                  "A4"
+                ],
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "cur_lab_1-curini-0",
+                "nome": "Lab 1",
+                "alias": [
+                  "Lab 1"
+                ],
+                "note": "",
+                "capienza": 33,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "cur_c1-curini-0",
+                "nome": "Aula C1",
+                "alias": [
+                  "C1"
+                ],
+                "note": "",
+                "capienza": 18,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "cur_d1-curini-0",
+                "nome": "Aula D1",
+                "alias": [
+                  "D1"
+                ],
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "cur_d2-curini-0",
+                "nome": "Aula D2",
+                "alias": [
+                  "D2"
+                ],
+                "note": "",
+                "capienza": 50,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "cur_a1-curini-0",
+                "nome": "Aula A1",
+                "alias": [
+                  "A1"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "cur_lab_6-curini-0",
+                "nome": "Lab 6",
+                "alias": [
+                  "Lab 6"
+                ],
+                "note": "",
+                "capienza": 18,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "cur_a2-curini-0",
+                "nome": "Aula A2",
+                "alias": [
+                  "A2"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "cur_b2-curini-0",
+                "nome": "Aula B2",
+                "alias": [
+                  "B2"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "cur_l5-curini-0",
+                "nome": "Aula L5",
+                "alias": [
+                  "L5"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        },
+        "boilleau": {
+          "piano": {
+            "?": [
+              {
+                "id": "boi_magna-boilleau-0",
+                "nome": "Aula Magna",
+                "alias": [
+                  "Magna"
+                ],
+                "note": "",
+                "capienza": 80,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "boi_b1-boilleau-0",
+                "nome": "Aula B1",
+                "alias": [
+                  "B1"
+                ],
+                "note": "",
+                "capienza": 162,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "boi_b2-boilleau-0",
+                "nome": "Aula B2",
+                "alias": [
+                  "B2"
+                ],
+                "note": "",
+                "capienza": 190,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "boi_b3-boilleau-0",
+                "nome": "Aula B3",
+                "alias": [
+                  "B3"
+                ],
+                "note": "",
+                "capienza": 85,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "boi_b5-boilleau-0",
+                "nome": "Aula B5",
+                "alias": [
+                  "B5"
+                ],
+                "note": "",
+                "capienza": 24,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "boi_b6-boilleau-0",
+                "nome": "Aula B6",
+                "alias": [
+                  "B6"
+                ],
+                "note": "",
+                "capienza": 19,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "boi_b7-boilleau-0",
+                "nome": "Aula B7",
+                "alias": [
+                  "B7"
+                ],
+                "note": "",
+                "capienza": 19,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "boi_b8-boilleau-0",
+                "nome": "Aula B8",
+                "alias": [
+                  "B8"
+                ],
+                "note": "",
+                "capienza": 24,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "boi_b9-boilleau-0",
+                "nome": "Aula B9",
+                "alias": [
+                  "B9"
+                ],
+                "note": "",
+                "capienza": 24,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "boi_ib2-boilleau-0",
+                "nome": "Aula IB2",
+                "alias": [
+                  "IB2"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "boi_b4-boilleau-0",
+                "nome": "Aula B4",
+                "alias": [
+                  "B4"
+                ],
+                "note": "",
+                "capienza": 24,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "boi_ib1-boilleau-0",
+                "nome": "Aula IB1",
+                "alias": [
+                  "IB1"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "carmignani": {
+      "edificio": {
+        "carmignani": {
+          "piano": {
+            "?": [
+              {
+                "id": "car_1-carmignani-0",
+                "nome": "Aula 1",
+                "alias": [
+                  "1"
+                ],
+                "note": "",
+                "capienza": 97,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "car_4-carmignani-0",
+                "nome": "Aula 4",
+                "alias": [
+                  "4"
+                ],
+                "note": "",
+                "capienza": 55,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "car_3/4-carmignani-0",
+                "nome": "Aula 3/4",
+                "alias": [
+                  "3/4"
+                ],
+                "note": "",
+                "capienza": 110,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "car_2-carmignani-0",
+                "nome": "Aula 2",
+                "alias": [
+                  "2"
+                ],
+                "note": "",
+                "capienza": 177,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "car_magna-carmignani-0",
+                "nome": "Aula Magna",
+                "alias": [
+                  "Magna"
+                ],
+                "note": "",
+                "capienza": 330,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "car_3-carmignani-0",
+                "nome": "Aula 3",
+                "alias": [
+                  "3"
+                ],
+                "note": "",
+                "capienza": 55,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "economia": {
+      "edificio": {
+        "economia": {
+          "piano": {
+            "?": [
+              {
+                "id": "eco_1-economia-0",
+                "nome": "Aula 1",
+                "alias": [
+                  "1"
+                ],
+                "note": "",
+                "capienza": 70,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_3-economia-0",
+                "nome": "Aula 3",
+                "alias": [
+                  "3"
+                ],
+                "note": "",
+                "capienza": 90,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_5-economia-0",
+                "nome": "Aula 5",
+                "alias": [
+                  "5"
+                ],
+                "note": "",
+                "capienza": 250,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": true
+              },
+              {
+                "id": "eco_lab_inf-economia-0",
+                "nome": "Lab Inf",
+                "alias": [
+                  "Lab Inf"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_2-economia-0",
+                "nome": "Aula 2",
+                "alias": [
+                  "2"
+                ],
+                "note": "",
+                "capienza": 90,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_4-economia-0",
+                "nome": "Aula 4",
+                "alias": [
+                  "4"
+                ],
+                "note": "",
+                "capienza": 220,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": true
+              }
+            ]
+          }
+        },
+        "didattico": {
+          "piano": {
+            "?": [
+              {
+                "id": "eco_a-didattico-0",
+                "nome": "Aula A",
+                "alias": [
+                  "A"
+                ],
+                "note": "",
+                "capienza": 220,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": true
+              },
+              {
+                "id": "eco_c-didattico-0",
+                "nome": "Aula C",
+                "alias": [
+                  "C"
+                ],
+                "note": "",
+                "capienza": 220,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": true
+              },
+              {
+                "id": "eco_b-didattico-0",
+                "nome": "Aula B",
+                "alias": [
+                  "B"
+                ],
+                "note": "",
+                "capienza": 220,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_magna-didattico-0",
+                "nome": "Aula Magna",
+                "alias": [
+                  "Magna"
+                ],
+                "note": "",
+                "capienza": 90,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              }
+            ]
+          }
+        },
+        "csife": {
+          "piano": {
+            "?": [
+              {
+                "id": "eco_portatili_1-csife-0",
+                "nome": "1 (Carrello) - Polo 5",
+                "alias": [
+                  "1 (Carrello) - Polo 5",
+                  "Portatili 1"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_lab_mac-csife-0",
+                "nome": "Lab Mac (21 PC)",
+                "alias": [
+                  "Lab Mac (21 PC)",
+                  "Lab mac"
+                ],
+                "note": "",
+                "presenza_pc": true,
+                "numero_pc": 21,
+                "capienza": 33,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_lab_pc-csife-0",
+                "nome": "Lab PC (48 PC)",
+                "alias": [
+                  "Lab PC (48 PC)",
+                  "Lab pc"
+                ],
+                "note": "",
+                "presenza_pc": true,
+                "numero_pc": 48,
+                "capienza": 70,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_lab_win-csife-0",
+                "nome": "Lab Win (26 PC)",
+                "alias": [
+                  "Lab Win (26 PC)",
+                  "Lab win"
+                ],
+                "note": "",
+                "presenza_pc": true,
+                "numero_pc": 26,
+                "capienza": 47,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_portatili-csife-0",
+                "nome": "Aula portatili",
+                "alias": [
+                  "portatili"
+                ],
+                "note": "",
+                "capienza": 36,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_portatili_2-csife-0",
+                "nome": "2 (Carrello) - Polo 5",
+                "alias": [
+                  "2 (Carrello) - Polo 5",
+                  "Portatili 2"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "eco_portatili_3-csife-0",
+                "nome": "3 (Carrello) - Polo 5",
+                "alias": [
+                  "3 (Carrello) - Polo 5",
+                  "Portatili 3"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        },
+        "gruppo lingue": {
+          "piano": {
+            "?": [
+              {
+                "id": "eco_lab_mm-gruppo lingue-0",
+                "nome": "Lab MM",
+                "alias": [
+                  "Lab MM"
+                ],
+                "note": "",
+                "capienza": 13,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "guidotti": {
+      "edificio": {
+        "guidotti": {
+          "piano": {
+            "?": [
+              {
+                "id": "guid_g3-guidotti-0",
+                "nome": "Aula G3",
+                "alias": [
+                  "G3"
+                ],
+                "note": "",
+                "capienza": 28,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "guid_g2-guidotti-0",
+                "nome": "Aula G2",
+                "alias": [
+                  "G2"
+                ],
+                "note": "",
+                "capienza": 70,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "guid_g1-guidotti-0",
+                "nome": "Aula G1",
+                "alias": [
+                  "G1"
+                ],
+                "note": "",
+                "capienza": 91,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "guid_g6-guidotti-0",
+                "nome": "Aula G6",
+                "alias": [
+                  "G6"
+                ],
+                "note": "",
+                "capienza": 28,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "guid_g5-guidotti-0",
+                "nome": "Aula G5",
+                "alias": [
+                  "G5"
+                ],
+                "note": "",
+                "capienza": 40,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ingegneria": {
+      "edificio": {
+        "a": {
+          "piano": {
+            "?": [
+              {
+                "id": "ing_a24-a-0",
+                "nome": "Aula A24",
+                "alias": [
+                  "A24"
+                ],
+                "note": "",
+                "capienza": 65,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_a26-a-0",
+                "nome": "Aula A26",
+                "alias": [
+                  "A26"
+                ],
+                "note": "",
+                "capienza": 148,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_a11-a-0",
+                "nome": "Aula A11",
+                "alias": [
+                  "A11"
+                ],
+                "note": "",
+                "capienza": 43,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_a12-a-0",
+                "nome": "Aula A12",
+                "alias": [
+                  "A12"
+                ],
+                "note": "",
+                "capienza": 106,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_a13-a-0",
+                "nome": "Aula A13",
+                "alias": [
+                  "A13"
+                ],
+                "note": "",
+                "capienza": 108,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_a21-a-0",
+                "nome": "Aula A21",
+                "alias": [
+                  "A21"
+                ],
+                "note": "",
+                "capienza": 142,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_a22-a-0",
+                "nome": "Aula A22",
+                "alias": [
+                  "A22"
+                ],
+                "note": "",
+                "capienza": 99,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_a28-a-0",
+                "nome": "Aula A28",
+                "alias": [
+                  "A28"
+                ],
+                "note": "",
+                "capienza": 148,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_a23-a-0",
+                "nome": "Aula A23",
+                "alias": [
+                  "A23"
+                ],
+                "note": "",
+                "capienza": 48,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        },
+        "b": {
+          "piano": {
+            "?": [
+              {
+                "id": "ing_adii3-b-0",
+                "nome": "Aula ADII3",
+                "alias": [
+                  "ADII3"
+                ],
+                "note": "",
+                "capienza": 64,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_b11-b-0",
+                "nome": "Aula B11",
+                "alias": [
+                  "B11"
+                ],
+                "note": "",
+                "capienza": 324,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_b21-b-0",
+                "nome": "Aula B21",
+                "alias": [
+                  "B21"
+                ],
+                "note": "",
+                "capienza": 310,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_b22-b-0",
+                "nome": "Aula B22",
+                "alias": [
+                  "B22"
+                ],
+                "note": "",
+                "capienza": 38,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_si1-b-0",
+                "nome": "Aula SI1",
+                "alias": [
+                  "SI1"
+                ],
+                "note": "",
+                "capienza": 104,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_si3-b-0",
+                "nome": "Aula SI3",
+                "alias": [
+                  "SI3"
+                ],
+                "note": "",
+                "capienza": 56,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_si4-b-0",
+                "nome": "Aula SI4",
+                "alias": [
+                  "SI4"
+                ],
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_si5-b-0",
+                "nome": "Aula SI5",
+                "alias": [
+                  "SI5"
+                ],
+                "note": "",
+                "capienza": 84,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_si6-b-0",
+                "nome": "Aula SI6",
+                "alias": [
+                  "SI6"
+                ],
+                "note": "",
+                "capienza": 24,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_si7-b-0",
+                "nome": "Aula SI7",
+                "alias": [
+                  "SI7"
+                ],
+                "note": "",
+                "capienza": 50,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_b23-b-0",
+                "nome": "Aula B23",
+                "alias": [
+                  "B23"
+                ],
+                "note": "",
+                "capienza": 38,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_b24-b-0",
+                "nome": "Aula B24",
+                "alias": [
+                  "B24"
+                ],
+                "note": "",
+                "capienza": 38,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_b25-b-0",
+                "nome": "Aula B25",
+                "alias": [
+                  "B25"
+                ],
+                "note": "",
+                "capienza": 96,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_b31-b-0",
+                "nome": "Aula B31",
+                "alias": [
+                  "B31"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_b32-b-0",
+                "nome": "Aula B32",
+                "alias": [
+                  "B32"
+                ],
+                "note": "",
+                "capienza": 143,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_b33-b-0",
+                "nome": "Aula B33",
+                "alias": [
+                  "B33"
+                ],
+                "note": "",
+                "capienza": 80,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ing_b34-b-0",
+                "nome": "Aula B34",
+                "alias": [
+                  "B34"
+                ],
+                "note": "",
+                "capienza": 140,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_bstud_1-b-0",
+                "nome": "BStud 1",
+                "alias": [
+                  "BStud 1"
+                ],
+                "note": "",
+                "capienza": 74,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_bstud_2-b-0",
+                "nome": "BStud 2",
+                "alias": [
+                  "BStud 2"
+                ],
+                "note": "",
+                "capienza": 50,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        },
+        "c": {
+          "piano": {
+            "?": [
+              {
+                "id": "ing_c12-c-0",
+                "nome": "Aula C12",
+                "alias": [
+                  "C12"
+                ],
+                "note": "",
+                "capienza": 18,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c32-c-0",
+                "nome": "Aula C32",
+                "alias": [
+                  "C32"
+                ],
+                "note": "",
+                "capienza": 68,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c43-c-0",
+                "nome": "Aula C43",
+                "alias": [
+                  "C43"
+                ],
+                "note": "",
+                "capienza": 18,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c01-c-0",
+                "nome": "Aula C01",
+                "alias": [
+                  "C01"
+                ],
+                "note": "",
+                "capienza": 180,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_c22-c-0",
+                "nome": "Aula C22",
+                "alias": [
+                  "C22"
+                ],
+                "note": "",
+                "capienza": 36,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c41-c-0",
+                "nome": "Aula C41",
+                "alias": [
+                  "C41"
+                ],
+                "note": "",
+                "capienza": 72,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c11-c-0",
+                "nome": "Aula C11",
+                "alias": [
+                  "C11"
+                ],
+                "note": "",
+                "capienza": 158,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_c31-c-0",
+                "nome": "Aula C31",
+                "alias": [
+                  "C31"
+                ],
+                "note": "",
+                "capienza": 65,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c42-c-0",
+                "nome": "Aula C42",
+                "alias": [
+                  "C42"
+                ],
+                "note": "",
+                "capienza": 36,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c21-c-0",
+                "nome": "Aula C21",
+                "alias": [
+                  "C21"
+                ],
+                "note": "",
+                "capienza": 176,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ing_c33-c-0",
+                "nome": "Aula C33",
+                "alias": [
+                  "C33"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ing_c44-c-0",
+                "nome": "Aula C44",
+                "alias": [
+                  "C44"
+                ],
+                "note": "",
+                "capienza": 38,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nobili": {
+      "edificio": {
+        "nobili": {
+          "piano": {
+            "?": [
+              {
+                "id": "nob_es3-nobili-0",
+                "nome": "Aula ES3",
+                "alias": [
+                  "ES3"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "nob_lab_1-nobili-0",
+                "nome": "Lab 1",
+                "alias": [
+                  "Lab 1"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "nob_lab_2-nobili-0",
+                "nome": "Lab 2",
+                "alias": [
+                  "Lab 2"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "nob_a-nobili-0",
+                "nome": "Aula A",
+                "alias": [
+                  "A"
+                ],
+                "note": "",
+                "capienza": 166,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "nob_b-nobili-0",
+                "nome": "Aula B",
+                "alias": [
+                  "B"
+                ],
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "nob_c-nobili-0",
+                "nome": "Aula C",
+                "alias": [
+                  "C"
+                ],
+                "note": "",
+                "capienza": 54,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "nob_es1-nobili-0",
+                "nome": "Aula ES1",
+                "alias": [
+                  "ES1"
+                ],
+                "note": "",
+                "capienza": 30,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "nob_es2-nobili-0",
+                "nome": "Aula ES2",
+                "alias": [
+                  "ES2"
+                ],
+                "note": "",
+                "capienza": 18,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "piagge": {
+      "edificio": {
+        "piagge": {
+          "piano": {
+            "?": [
+              {
+                "id": "pia_e1-piagge-0",
+                "nome": "Aula E1",
+                "alias": [
+                  "E1"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_g1-piagge-0",
+                "nome": "Aula G1",
+                "alias": [
+                  "G1"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_i1-piagge-0",
+                "nome": "Aula I1",
+                "alias": [
+                  "I1"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_m1-piagge-0",
+                "nome": "Aula M1",
+                "alias": [
+                  "M1"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_o1-piagge-0",
+                "nome": "Aula O1",
+                "alias": [
+                  "O1"
+                ],
+                "note": "",
+                "capienza": 56,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_q2-piagge-0",
+                "nome": "Aula Q2",
+                "alias": [
+                  "Q2"
+                ],
+                "note": "",
+                "capienza": 57,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_f1-piagge-0",
+                "nome": "Aula F1",
+                "alias": [
+                  "F1"
+                ],
+                "note": "",
+                "capienza": 41,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_h1-piagge-0",
+                "nome": "Aula H1",
+                "alias": [
+                  "H1"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_l1-piagge-0",
+                "nome": "Aula L1",
+                "alias": [
+                  "L1"
+                ],
+                "note": "",
+                "capienza": 44,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_n1-piagge-0",
+                "nome": "Aula N1",
+                "alias": [
+                  "N1"
+                ],
+                "note": "",
+                "capienza": 82,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_o2-piagge-0",
+                "nome": "Aula O2",
+                "alias": [
+                  "O2"
+                ],
+                "note": "",
+                "capienza": 56,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_p1-piagge-0",
+                "nome": "Aula P1",
+                "alias": [
+                  "P1"
+                ],
+                "note": "",
+                "capienza": 57,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_stud-piagge-0",
+                "nome": "Aula Stud",
+                "alias": [
+                  "Stud"
+                ],
+                "note": "",
+                "capienza": 142,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_e2-piagge-0",
+                "nome": "Aula E2",
+                "alias": [
+                  "E2"
+                ],
+                "note": "",
+                "capienza": 46,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_g2-piagge-0",
+                "nome": "Aula G2",
+                "alias": [
+                  "G2"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_i2-piagge-0",
+                "nome": "Aula I2",
+                "alias": [
+                  "I2"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_m2-piagge-0",
+                "nome": "Aula M2",
+                "alias": [
+                  "M2"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_p2-piagge-0",
+                "nome": "Aula P2",
+                "alias": [
+                  "P2"
+                ],
+                "note": "",
+                "capienza": 57,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_a0-piagge-0",
+                "nome": "Aula A0",
+                "alias": [
+                  "A0"
+                ],
+                "note": "",
+                "capienza": 197,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_a1-piagge-0",
+                "nome": "Aula A1",
+                "alias": [
+                  "A1"
+                ],
+                "note": "",
+                "capienza": 91,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_a2-piagge-0",
+                "nome": "Aula A2",
+                "alias": [
+                  "A2"
+                ],
+                "note": "",
+                "capienza": 91,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_b1-piagge-0",
+                "nome": "Aula B1",
+                "alias": [
+                  "B1"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_b2-piagge-0",
+                "nome": "Aula B2",
+                "alias": [
+                  "B2"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pia_c1-piagge-0",
+                "nome": "Aula C1",
+                "alias": [
+                  "C1"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_c2-piagge-0",
+                "nome": "Aula C2",
+                "alias": [
+                  "C2"
+                ],
+                "note": "",
+                "capienza": 41,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_conv-piagge-0",
+                "nome": "Aula Conv",
+                "alias": [
+                  "Conv"
+                ],
+                "note": "",
+                "capienza": 224,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_d1-piagge-0",
+                "nome": "Aula D1",
+                "alias": [
+                  "D1"
+                ],
+                "note": "",
+                "capienza": 46,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pia_d2-piagge-0",
+                "nome": "Aula D2",
+                "alias": [
+                  "D2"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_f2-piagge-0",
+                "nome": "Aula F2",
+                "alias": [
+                  "F2"
+                ],
+                "note": "",
+                "capienza": 44,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_h2-piagge-0",
+                "nome": "Aula H2",
+                "alias": [
+                  "H2"
+                ],
+                "note": "",
+                "capienza": 45,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_l2-piagge-0",
+                "nome": "Aula L2",
+                "alias": [
+                  "L2"
+                ],
+                "note": "",
+                "capienza": 44,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_n2-piagge-0",
+                "nome": "Aula N2",
+                "alias": [
+                  "N2"
+                ],
+                "note": "",
+                "capienza": 82,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pia_q1-piagge-0",
+                "nome": "Aula Q1",
+                "alias": [
+                  "Q1"
+                ],
+                "note": "",
+                "capienza": 57,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "porta nuova": {
+      "edificio": {
+        "porta nuova": {
+          "piano": {
+            "?": [
+              {
+                "id": "pn_2-porta nuova-0",
+                "nome": "Aula 2",
+                "alias": [
+                  "2"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pn_6-porta nuova-0",
+                "nome": "Aula 6",
+                "alias": [
+                  "6"
+                ],
+                "note": "",
+                "capienza": 178,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pn_stud-porta nuova-0",
+                "nome": "Aula Stud",
+                "alias": [
+                  "Stud"
+                ],
+                "note": "",
+                "capienza": 100,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "pn_10-porta nuova-0",
+                "nome": "Aula 10",
+                "alias": [
+                  "10"
+                ],
+                "note": "",
+                "capienza": 100,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pn_5-porta nuova-0",
+                "nome": "Aula 5",
+                "alias": [
+                  "5"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pn_9-porta nuova-0",
+                "nome": "Aula 9",
+                "alias": [
+                  "9"
+                ],
+                "note": "",
+                "capienza": 50,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "pn_3-porta nuova-0",
+                "nome": "Aula 3",
+                "alias": [
+                  "3"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pn_7-porta nuova-0",
+                "nome": "Aula 7",
+                "alias": [
+                  "7"
+                ],
+                "note": "",
+                "capienza": 178,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pn_1-porta nuova-0",
+                "nome": "Aula 1",
+                "alias": [
+                  "1"
+                ],
+                "note": "",
+                "capienza": 241,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pn_4-porta nuova-0",
+                "nome": "Aula 4",
+                "alias": [
+                  "4"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "pn_8-porta nuova-0",
+                "nome": "Aula 8",
+                "alias": [
+                  "8"
+                ],
+                "note": "",
+                "capienza": 178,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ricci": {
+      "edificio": {
+        "ricci": {
+          "piano": {
+            "?": [
+              {
+                "id": "ricci_1-ricci-0",
+                "nome": "Aula R1",
+                "alias": [
+                  "R1",
+                  "1"
+                ],
+                "note": "",
+                "capienza": 50,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r10-ricci-0",
+                "nome": "Aula R10",
+                "alias": [
+                  "R10"
+                ],
+                "note": "",
+                "capienza": 50,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r2-ricci-0",
+                "nome": "Aula R2",
+                "alias": [
+                  "R2"
+                ],
+                "note": "",
+                "capienza": 120,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "ricci_r3-ricci-0",
+                "nome": "Aula R3",
+                "alias": [
+                  "R3"
+                ],
+                "note": "",
+                "capienza": 50,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r4-ricci-0",
+                "nome": "Aula R4",
+                "alias": [
+                  "R4"
+                ],
+                "note": "",
+                "capienza": 42,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r5-ricci-0",
+                "nome": "Aula R5",
+                "alias": [
+                  "R5"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r6-ricci-0",
+                "nome": "Aula R6",
+                "alias": [
+                  "R6"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r7-ricci-0",
+                "nome": "Aula R7",
+                "alias": [
+                  "R7"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r8-ricci-0",
+                "nome": "Aula R8",
+                "alias": [
+                  "R8"
+                ],
+                "note": "",
+                "capienza": 20,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_r9-ricci-0",
+                "nome": "Aula R9",
+                "alias": [
+                  "R9"
+                ],
+                "note": "",
+                "capienza": 15,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_rlab1-ricci-0",
+                "nome": "Aula RLab1",
+                "alias": [
+                  "RLab1"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_rlab2-ricci-0",
+                "nome": "Aula RLab2",
+                "alias": [
+                  "RLab2"
+                ],
+                "note": "",
+                "capienza": 15,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_rlab3-ricci-0",
+                "nome": "Aula RLab3",
+                "alias": [
+                  "RLab3"
+                ],
+                "note": "",
+                "capienza": 14,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "ricci_rm-ricci-0",
+                "nome": "Aula RM",
+                "alias": [
+                  "RM"
+                ],
+                "note": "",
+                "capienza": 120,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "capitini-ricci-0",
+                "nome": "Riunioni Capitini",
+                "alias": [
+                  "Riunioni Capitini",
+                  "Capitini"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "san rossore": {
+      "edificio": {
+        "1938": {
+          "piano": {
+            "?": [
+              {
+                "id": "sr_a-1938-0",
+                "nome": "Aula A",
+                "alias": [
+                  "A"
+                ],
+                "note": "",
+                "capienza": 252,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "sr_a1-1938-0",
+                "nome": "Aula A1",
+                "alias": [
+                  "A1"
+                ],
+                "note": "",
+                "capienza": 135,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "sr_b-1938-0",
+                "nome": "Aula B",
+                "alias": [
+                  "B"
+                ],
+                "note": "",
+                "capienza": 189,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "sr_b1-1938-0",
+                "nome": "Aula B1",
+                "alias": [
+                  "B1"
+                ],
+                "note": "",
+                "capienza": 135,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "sr_c-1938-0",
+                "nome": "Aula C",
+                "alias": [
+                  "C"
+                ],
+                "note": "",
+                "capienza": 114,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "sr_c1-1938-0",
+                "nome": "Aula C1",
+                "alias": [
+                  "C1"
+                ],
+                "note": "",
+                "capienza": 114,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "sr_d-1938-0",
+                "nome": "Aula D",
+                "alias": [
+                  "D"
+                ],
+                "note": "",
+                "capienza": 90,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "sr_d1-1938-0",
+                "nome": "Aula D1",
+                "alias": [
+                  "D1"
+                ],
+                "note": "",
+                "capienza": 42,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "sr_e1-1938-0",
+                "nome": "Aula E1",
+                "alias": [
+                  "E1"
+                ],
+                "note": "",
+                "capienza": 42,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "sr_f1-1938-0",
+                "nome": "Aula F1",
+                "alias": [
+                  "F1"
+                ],
+                "note": "",
+                "capienza": 42,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "sr_g1-1938-0",
+                "nome": "Aula G1",
+                "alias": [
+                  "G1"
+                ],
+                "note": "",
+                "capienza": 42,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "sr_lab_bio-1-1938-0",
+                "nome": "Lab Bio-1",
+                "alias": [
+                  "Lab Bio-1"
+                ],
+                "note": "",
+                "capienza": 28,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sr_lab_bio-2-1938-0",
+                "nome": "Lab Bio-2",
+                "alias": [
+                  "Lab Bio-2"
+                ],
+                "note": "",
+                "capienza": 28,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sr_lab_bio-3-1938-0",
+                "nome": "Lab Bio-3",
+                "alias": [
+                  "Lab Bio-3"
+                ],
+                "note": "",
+                "capienza": 28,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sr_lab_pc-1938-0",
+                "nome": "Lab PC",
+                "alias": [
+                  "Lab PC"
+                ],
+                "note": "",
+                "capienza": 16,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sapienza": {
+      "edificio": {
+        "sapienza": {
+          "piano": {
+            "?": [
+              {
+                "id": "sap_vi-sapienza-0",
+                "nome": "Aula VI",
+                "alias": [
+                  "VI"
+                ],
+                "note": "",
+                "capienza": 60,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_sala_rossa-sapienza-0",
+                "nome": "Sala Rossa",
+                "alias": [
+                  "Sala Rossa"
+                ],
+                "note": "",
+                "capienza": 12,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_v-sapienza-0",
+                "nome": "Aula V",
+                "alias": [
+                  "V"
+                ],
+                "note": "",
+                "capienza": 36,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_cortile-sapienza-0",
+                "nome": "Cortile",
+                "alias": [
+                  "Cortile"
+                ],
+                "note": "",
+                "capienza": 300,
+                "proiettore": false,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_i-sapienza-0",
+                "nome": "Aula I",
+                "alias": [
+                  "I"
+                ],
+                "note": "",
+                "capienza": 25,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_ii-sapienza-0",
+                "nome": "Aula II",
+                "alias": [
+                  "II"
+                ],
+                "note": "",
+                "capienza": 26,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_iii-sapienza-0",
+                "nome": "Aula III",
+                "alias": [
+                  "III"
+                ],
+                "note": "",
+                "capienza": 34,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_iv-sapienza-0",
+                "nome": "Aula IV",
+                "alias": [
+                  "IV"
+                ],
+                "note": "",
+                "capienza": 49,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap_magna_nuova-sapienza-0",
+                "nome": "Aula Magna Nuova",
+                "alias": [
+                  "Magna Nuova"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "sap_magna_storic-sapienza-0",
+                "nome": "Aula Magna Storic",
+                "alias": [
+                  "Magna Storic"
+                ],
+                "note": "",
+                "capienza": 100,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "sap_porticato_1_piano-sapienza-0",
+                "nome": "Porticato 1 piano",
+                "alias": [
+                  "Porticato 1 piano"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap._porticato_1_piano-sapienza-0",
+                "nome": "Porticato 1 piano",
+                "alias": [
+                  "Porticato 1 piano"
+                ],
+                "note": "",
+                "capienza": 150,
+                "proiettore": false,
+                "rete": false,
+                "acesso_disabili": false,
+                "autoparlanti": false,
+                "telecamera": false
+              },
+              {
+                "id": "sap._sala_professori-sapienza-0",
+                "nome": "Sala Professori",
+                "alias": [
+                  "Sala Professori"
+                ],
+                "note": "",
+                "capienza": 12,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              }
+            ]
+          }
+        }
+      }
+    },
+    "vitale": {
+      "edificio": {
+        "didattico etruria": {
+          "piano": {
+            "?": [
+              {
+                "id": "etr_f1-didattico etruria-0",
+                "nome": "Aula F1",
+                "alias": [
+                  "F1"
+                ],
+                "note": "",
+                "capienza": 111,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "etr_f2-didattico etruria-0",
+                "nome": "Aula F2",
+                "alias": [
+                  "F2"
+                ],
+                "note": "",
+                "capienza": 139,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "etr_f3-didattico etruria-0",
+                "nome": "Aula F3",
+                "alias": [
+                  "F3"
+                ],
+                "note": "",
+                "capienza": 105,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "etr_f4-didattico etruria-0",
+                "nome": "Aula F4",
+                "alias": [
+                  "F4"
+                ],
+                "note": "",
+                "capienza": 146,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "etr_f5-didattico etruria-0",
+                "nome": "Aula F5",
+                "alias": [
+                  "F5"
+                ],
+                "note": "",
+                "capienza": 103,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": false
+              },
+              {
+                "id": "etr_f9-didattico etruria-0",
+                "nome": "Aula F9",
+                "alias": [
+                  "F9"
+                ],
+                "note": "",
+                "capienza": 304,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "etr_f6-didattico etruria-0",
+                "nome": "Aula F6",
+                "alias": [
+                  "F6"
+                ],
+                "note": "",
+                "capienza": 197,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "etr_f8-didattico etruria-0",
+                "nome": "Aula F8",
+                "alias": [
+                  "F8"
+                ],
+                "note": "",
+                "capienza": 208,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              },
+              {
+                "id": "etr_f7-didattico etruria-0",
+                "nome": "Aula F7",
+                "alias": [
+                  "F7"
+                ],
+                "note": "",
+                "capienza": 106,
+                "proiettore": true,
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": true,
+                "telecamera": true
+              }
+            ]
           }
         }
       }
