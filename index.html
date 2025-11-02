@@ -668,6 +668,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const showTooltip = (event) => {
                 if (isMobile()) return; // Non mostrare tooltip su mobile
                 const target = event.currentTarget;
+                if ((target.id === 'share-btn' || target.closest('#zoom-controls')) && !accessibilityToggle.checked) {
+                    return;
+                }
                 let tooltipText = target.getAttribute('data-tooltip');
                 if (!tooltipText) return;
 
@@ -1465,24 +1468,48 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             </span>
                         `;
 
-                        const capacityElement = document.createElement('div');
-                        capacityElement.className = 'capacity-info hidden pl-14 p-1 text-sm text-gray-600 flex items-center space-x-2';
-                        capacityElement.innerHTML = `
-                            <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">
-                            group
-                            </span>
-                            <span>Capienza: ${room.capienza}</span>
-                        `;
+                        const roomInfoElement = document.createElement('div');
+                        function addInfoRow(condition, icon, text) {
+                            if (!condition) return false;
+                            roomInfoElement.innerHTML += `
+                                <div class="flex items-center space-x-2">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
+                                    <span>${text.replace("%s", `${condition}`)}</span>
+                                </div>
+                            `;
+                            return true;
+                        }
+                        roomInfoElement.className = 'capacity-info hidden pl-14 p-1 text-sm text-gray-600';
+
+                        // Accessibility
+                        addInfoRow(room.capienza, "group", "Capienza: %s");
+                        addInfoRow(room.accesso_disabili, "accessible_forward", "Accesso Disabili")
+                        addInfoRow(!room.accesso_disabili, "not_accessible_forward", "Mancato Accesso Disabili")
+
+                        // For the student
+                        addInfoRow(room.rete, "wifi", "Accesso di Rete")
+                        addInfoRow(room.porte_rete, "lan", "Porte di Rete")
+                        addInfoRow(room.prese_elettriche, "bolt", "Prese Elettriche")
+
+                        // Both - functionality / lab
+                        if (!addInfoRow(room.numero_pc, "computer", "Computer Presenti: %s"))
+                            addInfoRow(room.presenza_pc, "computer", "Computer Presenti") // In case we don't know the amount
+                        
+                        // For the professor
+                        addInfoRow(room.proiettore, "cast", "Proiettore")
+                        addInfoRow(room.autoparlanti, "speaker_group", "Autoparlanti")
+                        addInfoRow(room.telecamera, "speed_camera", "Telecamera fissa")
+                        addInfoRow(room.lavagna, "draw", "Lavagna: %s")
 
                         roomElement.addEventListener('click', (e) => {
                             e.preventDefault();
-                            capacityElement.classList.toggle('hidden');
+                            roomInfoElement.classList.toggle('hidden');
                             const expandIcon = roomElement.querySelector('.expand-icon');
-                            expandIcon.style.transform = capacityElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                            expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
                         });
 
                         roomContainer.appendChild(roomElement);
-                        roomContainer.appendChild(capacityElement);
+                        roomContainer.appendChild(roomInfoElement);
                         roomsList.appendChild(roomContainer);
                     });
                 } else {
@@ -1533,14 +1560,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 });
                 
-                updateURL(true); // Aggiorna l'URL ogni volta che si seleziona un piano
+                if (floor !== "?")
+                    updateURL(true); // Aggiorna l'URL ogni volta che si seleziona un piano
             }
 
             function selectView(viewType, forceReload = false, viewParams = null) {
                 if (currentView === viewType && !forceReload) return;
 
                 currentView = viewType;
-                loadSVG(selectedBuilding, selectedFloor, currentView, viewParams);
+                if (selectedFloor !== "?")
+                    loadSVG(selectedBuilding, selectedFloor, currentView, viewParams);
 
                 // Aggiorna stile bottoni vista
                 if (viewType === 'top') {

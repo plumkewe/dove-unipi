@@ -16,15 +16,36 @@
 </p>
 
 
+## Indice
+
+- [Indice](#indice)
+- [Contributori](#contributori)
+- [Perchè?](#perchè)
+- [Struttura del progetto](#struttura-del-progetto)
+- [rooms.json](#roomsjson)
+- [Funzionalità](#funzionalità)
+  - [SPA](#spa)
+    - [Ricerca intelligente](#ricerca-intelligente)
+    - [Accessibilità](#accessibilità)
+    - [Keyboard shortcuts](#keyboard-shortcuts)
+    - [Path sharing](#path-sharing)
+  - [Funzionalità che vorrei aggiungere](#funzionalità-che-vorrei-aggiungere)
+- [Problemi noti](#problemi-noti)
+  
+
 ## Contributori
 
 [<img src="https://wsrv.nl/?url=github.com/calba-droid.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Calogero Alba" />](https://github.com/calba-droid)
 [<img src="https://wsrv.nl/?url=github.com/plumkewe.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Lyubomyr Malay" />](https://github.com/plumkewe)
+[<img src="https://wsrv.nl/?url=github.com/piorpiedev.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="piorpiedev" />](https://github.com/piorpiedev)
 
 *Un ringraziamento speciale a chi ha dedicato il proprio tempo per la raccolta dati nelle aule.*
 
 
 ## Perchè?
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
 
 L'idea nasce da un'esigenza personale, sorta fin dal primo giorno di università, quando ci dissero di recarci in un'aula specifica, in un edificio di cui nessuno sapeva nulla.
 
@@ -50,6 +71,9 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 
 ## Struttura del progetto
 
+<p align="right">(<a href="#indice">indice</a>)</p>
+
+
 ```graphql
 ├── README.md
 ├── assets/
@@ -72,7 +96,7 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
         │   │       ├── 1-top.svg
         │   │       ├── 1.dwg
         │   │       ├── 1.svg
-        │   │       ├── 2-top.max.svg
+        │   │       ├── 2-top-max.svg
         │   │       ├── 2-top.svg
         │   │       ├── 2.dwg
         │   │       └── 2.svg
@@ -88,6 +112,9 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 ```
 
 ## rooms.json
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
 
 È il "database" dell'applicazione.
 
@@ -145,14 +172,85 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
 }
 ```
 
+## Funzionalità
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
+
+### SPA
+
+#### Ricerca intelligente 
+
+Effettua una ricerca non solo sul nome dell’aula ma anche sui suoi **alias**.  
+Supporta inoltre **filtri avanzati**: ad esempio, scrivendo `> 200` verranno mostrate le aule con capienza superiore a 200.  
+Sono supportati gli operatori: `<`, `>`, `==`, `>=`, `<=`.
+
+Puoi accedere alle **impostazioni** digitando `impostazioni` o `settings` nella barra di ricerca.  
+Da lì puoi abilitare anche le **funzionalità sperimentali**.
+
+Digitando `condividi` o `share`, potrai facilmente copiare il **link al sito** o a questa **repository** per condividerlo.
+
+
+#### Accessibilità 
+
+Attualmente è possibile aggiungere **bottoni aggiuntivi** per alcune funzioni come **zoom** e **condivisione**.  
+In futuro si prevede di introdurre **modalità ad alto contrasto** e una **modalità di navigazione basata solo su pulsanti**.
+*(Non garantiamo nulla in questa fase di sviluppo.)*
+
+#### Keyboard shortcuts
+
+Al momento sono disponibili le seguenti scorciatoie:
+
+<table>
+  <thead>
+    <tr>
+      <th>Funzione</th>
+      <th>Mac</th>
+      <th>Windows / Linux</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Copia il link da condividere</td>
+      <td><kbd>⌃</kbd> + <kbd>⌥</kbd> + <kbd>J</kbd></td>
+      <td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>J</kbd></td>
+    </tr>
+    <tr>
+      <td>Centralizza la visuale</td>
+      <td><kbd>⌃</kbd> + <kbd>⌥</kbd> + <kbd>K</kbd></td>
+      <td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd></td>
+    </tr>
+  </tbody>
+</table>
+
+
+#### Path sharing
+
+Per impostazione predefinita è attivo il **path sharing** di *polo*, *edificio* e *piano*. Questo significa che condividendo un link come:
+
+```
+https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=a&f=0&v=top
+```
+
+la parte `?p=fibonacci&b=a&f=0&v=top` farà sì che chi apre il link visualizzi **lo stesso polo, edificio e piano** di chi lo ha condiviso.
+
+Se non funziona, apri la barra di ricerca, digita `impostazioni` e verifica che l’opzione **“Condividi polo/edificio/piano”** sia attiva.
+
+> In fase **alpha** è disponibile anche la condivisione delle **coordinate**: chi apre il link vedrà l’elemento esatto evidenziato sulla mappa.  
+> Tuttavia, questa funzione è ancora instabile.
+
+
+
+### Funzionalità che vorrei aggiungere
+
+- [x] **Ricerca intelligente:** Una ricerca che ti auta con il complementamento automatico, e prende in considerazioni i valori alias presenti su rooms.json e altro
+- [ ] **Occupazione aule:** Collegare in qualche modo University Planner da poter vedere le prenotazioni direttamente sul sito
+
 ## Problemi noti
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
 
 - [ ] **Zoom anomalo:** Lo zoom non si comporta come previsto
 - [ ] **Visibilità bottone su Safari iOS:** Il bottnoe di GitHub nella sidebar non è visibile su Safari per iOS 26
 - [ ] **Mappe non aggiornate:** I nomi di alcune aule sulle planimetrie SVG/DWG non corrispondono a quelli reali.
-
-
-## Funzionalità che vorrei aggiungere
-
-- [x] **Ricerca intelligente:** Una ricerca che ti auta con il complementamento automatico, e prende in considerazioni i valori alias presenti su rooms.json e altro
-- [ ] **Occupazione aule:** Collegare in qualche modo University Planner da poter vedere le prenotazioni direttamente sul sito
