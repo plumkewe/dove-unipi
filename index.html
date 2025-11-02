@@ -752,6 +752,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const searchResultsMobile = document.getElementById('search-results-mobile');
             const shareBtn = document.getElementById('share-btn');
             const accessibilityToggle = document.getElementById('accessibility-toggle');
+            const storedShareCoordinates = localStorage.getItem('shareCoordinatesEnabled');
+            const storedSharePath = localStorage.getItem('sharePathEnabled');
+            const settingsConfig = {
+                shareCoordinates: storedShareCoordinates ? storedShareCoordinates === 'true' : false,
+                sharePath: storedSharePath ? storedSharePath === 'true' : true
+            };
 
             // Gestione controlli accessibilità
             const setAccessibilityControls = (visible) => {
@@ -761,6 +767,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 } else {
                     shareBtn.classList.add('hidden');
                     zoomControls.classList.add('hidden');
+                    hideTooltip();
                 }
             };
 
@@ -768,12 +775,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const savedAccessibilityState = localStorage.getItem('accessibilityEnabled') === 'true';
             accessibilityToggle.checked = savedAccessibilityState;
             setAccessibilityControls(savedAccessibilityState);
+            syncSettingsToggles();
 
             // Aggiungi listener per il cambio di stato
             accessibilityToggle.addEventListener('change', () => {
                 const isEnabled = accessibilityToggle.checked;
                 setAccessibilityControls(isEnabled);
                 localStorage.setItem('accessibilityEnabled', isEnabled);
+                syncSettingsToggles();
             });
 
             let data = {};
@@ -783,6 +792,43 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let currentView = 'top'; // 'perspective' o 'top'
             let panzoomInstance = null;
             let selectedSearchResultIndex = -1;
+
+            function parseCapacityQuery(rawQuery) {
+                const trimmed = rawQuery.trim();
+                const match = trimmed.match(/^(>=|<=|>|<|==|=|!=)\s*(\d+)$/);
+                if (!match) {
+                    return null;
+                }
+                const operator = match[1] === '=' ? '==' : match[1];
+                const value = parseInt(match[2], 10);
+                if (Number.isNaN(value)) {
+                    return null;
+                }
+                return { operator, value };
+            }
+
+            function matchesCapacity(capienza, filter) {
+                const capacityValue = typeof capienza === 'number' ? capienza : parseInt(capienza, 10);
+                if (Number.isNaN(capacityValue)) {
+                    return false;
+                }
+                switch (filter.operator) {
+                    case '>':
+                        return capacityValue > filter.value;
+                    case '>=':
+                        return capacityValue >= filter.value;
+                    case '<':
+                        return capacityValue < filter.value;
+                    case '<=':
+                        return capacityValue <= filter.value;
+                    case '!=':
+                        return capacityValue !== filter.value;
+                    case '==':
+                        return capacityValue === filter.value;
+                    default:
+                        return false;
+                }
+            }
 
             // Funzione per la ricerca
             function searchRooms(query = '') {
@@ -796,7 +842,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 const queryLower = query.toLowerCase();
+                const matchesSettingsQuery = queryLower.includes('impostazioni') || queryLower.includes('settings');
+                const matchesShareQuery = queryLower.includes('share') || queryLower.includes('condivid');
+                const capacityFilter = parseCapacityQuery(query);
                 const results = [];
+
+                if (matchesShareQuery) {
+                    results.push(
+                        {
+                            type: 'share',
+                            title: 'Condividi pagina',
+                            details: 'Copia https://plumkewe.github.io/dove-unipi/ negli appunti',
+                            url: 'https://plumkewe.github.io/dove-unipi/'
+                        },
+                        {
+                            type: 'share',
+                            title: 'Condividi GitHub',
+                            details: 'Copia https://github.com/plumkewe/dove-unipi negli appunti',
+                            url: 'https://github.com/plumkewe/dove-unipi'
+                        }
+                    );
+                }
 
                 for (const poloName in data.polo) {
                     const polo = data.polo[poloName];
@@ -806,8 +872,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             const rooms = building.piano[floorName];
                             if (Array.isArray(rooms)) {
                                 rooms.forEach(room => {
+                                    if (capacityFilter) {
+                                        if (matchesCapacity(room.capienza, capacityFilter)) {
+                                            results.push({
+                                                polo: poloName,
+                                                edificio: buildingName,
+                                                piano: floorName,
+                                                room: room
+                                            });
+                                        }
+                                        return;
+                                    }
+
                                     const roomNameLower = room.nome.toLowerCase();
-                                    const aliasLower = room.alias.map(a => a.toLowerCase());
+                                    const aliasLower = Array.isArray(room.alias) ? room.alias.map(a => a.toLowerCase()) : [];
                                     if (roomNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower))) {
                                         results.push({
                                             polo: poloName,
@@ -821,16 +899,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                     }
                 }
-                displaySearchResults(results);
+                displaySearchResults(results, matchesSettingsQuery);
             }
 
-            function displaySearchResults(results) {
+            function displaySearchResults(results, showSettings = false) {
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
 
                 currentSearchResults.innerHTML = '';
                 selectedSearchResultIndex = -1;
-                if (results.length === 0) {
+                if (showSettings) {
+                    renderSettingsBlock(currentSearchResults);
+                    if (results.length > 0) {
+                        const divider = document.createElement('div');
+                        divider.className = 'border-t border-gray-300/70 my-2';
+                        currentSearchResults.appendChild(divider);
+                    }
+                }
+
+                if (!showSettings && results.length === 0) {
                     currentSearchResults.innerHTML = '<div class="p-3 text-gray-400">Nessun risultato trovato.</div>';
                     currentSearchResults.classList.remove('hidden');
                     return;
@@ -839,32 +926,201 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 results.forEach((result, index) => {
                     const resultElement = document.createElement('div');
                     resultElement.className = 'search-result-item';
-                    resultElement.innerHTML = `
-                        <div class="title">${result.room.nome}</div>
-                        <div class="details">
-                            Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
-                            Edificio ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
-                            Piano ${result.piano}
-                        </div>
-                    `;
-                    resultElement.addEventListener('click', () => {
-                        selectPolo(result.polo, result.edificio, result.piano);
-                        currentSearchResults.classList.add('hidden');
-                        currentSearchInput.value = result.room.nome;
-                        // Sincronizza l'altro input
-                        const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
-                        otherInput.value = result.room.nome;
-                        if (isMobile()) {
-                            closeSidebar();
-                        }
-                    });
+
+                    if (result.type === 'share') {
+                        resultElement.innerHTML = `
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="title">${result.title}</div>
+                                    <div class="details">${result.details}</div>
+                                </div>
+                                <span class="material-symbols-outlined" data-copy-icon style="font-size: 20px; line-height: 1;">content_copy</span>
+                            </div>
+                        `;
+                        resultElement.addEventListener('click', () => {
+                            navigator.clipboard.writeText(result.url).then(() => {
+                                resultElement.classList.add('selected');
+                                const iconElement = resultElement.querySelector('[data-copy-icon]');
+                                if (iconElement) {
+                                    const originalIcon = iconElement.textContent;
+                                    iconElement.textContent = 'check';
+                                    setTimeout(() => {
+                                        iconElement.textContent = originalIcon;
+                                    }, 1200);
+                                }
+                                setTimeout(() => {
+                                    resultElement.classList.remove('selected');
+                                }, 1200);
+                            }).catch(err => {
+                                console.error('Errore nella copia del link: ', err);
+                            });
+                        });
+                    } else {
+                        const capacityDetails = result.room && result.room.capienza != null ? ` · Capienza ${result.room.capienza}` : '';
+                        resultElement.innerHTML = `
+                            <div class="title">${result.room.nome}</div>
+                            <div class="details">
+                                Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
+                                Edificio ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
+                                Piano ${result.piano}${capacityDetails}
+                            </div>
+                        `;
+                        resultElement.addEventListener('click', () => {
+                            selectPolo(result.polo, result.edificio, result.piano);
+                            currentSearchResults.classList.add('hidden');
+                            currentSearchInput.value = result.room.nome;
+                            // Sincronizza l'altro input
+                            const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
+                            otherInput.value = result.room.nome;
+                            if (isMobile()) {
+                                closeSidebar();
+                            }
+                        });
+                    }
+
                     resultElement.addEventListener('mouseenter', () => {
                         updateSelectedSearchResult(index);
                     });
+
                     currentSearchResults.appendChild(resultElement);
                 });
 
                 currentSearchResults.classList.remove('hidden');
+            }
+
+            function renderSettingsBlock(container) {
+                const settingsItems = [
+                    {
+                        key: 'sharePath',
+                        label: 'Condividi polo/edificio/piano',
+                        description: 'Include queste informazioni nel link condiviso',
+                        checked: settingsConfig.sharePath,
+                        onToggle: setSharePathSetting
+                    },
+                    {
+                        key: 'shareCoordinates',
+                        label: 'Condividi coordinate mappa (α)',
+                        description: 'Aggiunge posizione e zoom del viewer al link',
+                        checked: settingsConfig.shareCoordinates,
+                        onToggle: setShareCoordinatesSetting
+                    },
+                    {
+                        key: 'extraControls',
+                        label: 'Controlli extra',
+                        description: 'Mostra pulsante condividi e controlli zoom',
+                        checked: accessibilityToggle.checked,
+                        onToggle: setExtraControlsSetting
+                    }
+                ];
+
+                settingsItems.forEach(config => {
+                    const row = document.createElement('div');
+                    row.className = 'search-result-item flex items-center justify-between gap-4';
+                    const toggleContent = createSettingsToggle(config);
+                    row.appendChild(toggleContent);
+
+                    row.addEventListener('click', (event) => {
+                        const targetElement = event.target instanceof Element ? event.target : null;
+                        if ((targetElement && targetElement.closest('label')) || targetElement instanceof HTMLInputElement) {
+                            return;
+                        }
+                        const input = row.querySelector('input[data-settings-toggle]');
+                        if (input) {
+                            input.checked = !input.checked;
+                            input.dispatchEvent(new Event('change'));
+                        }
+                    });
+
+                    container.appendChild(row);
+                });
+
+                syncSettingsToggles();
+            }
+
+            function createSettingsToggle({ key, label, description, checked, onToggle }) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'flex items-center justify-between gap-4 w-full';
+
+                const textContainer = document.createElement('div');
+                textContainer.className = 'flex flex-col text-left';
+
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'title';
+                titleSpan.textContent = label;
+                textContainer.appendChild(titleSpan);
+
+                if (description) {
+                    const descriptionSpan = document.createElement('span');
+                    descriptionSpan.className = 'details';
+                    descriptionSpan.textContent = description;
+                    textContainer.appendChild(descriptionSpan);
+                }
+
+                const switchLabel = document.createElement('label');
+                switchLabel.className = 'relative inline-flex items-center cursor-pointer flex-shrink-0';
+
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.className = 'sr-only peer';
+                input.dataset.settingsToggle = key;
+                input.checked = checked;
+
+                const slider = document.createElement('div');
+                slider.className = "w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800";
+
+                input.addEventListener('change', () => {
+                    onToggle(input.checked);
+                });
+
+                switchLabel.appendChild(input);
+                switchLabel.appendChild(slider);
+
+                wrapper.appendChild(textContainer);
+                wrapper.appendChild(switchLabel);
+
+                return wrapper;
+            }
+
+            function setSharePathSetting(isEnabled) {
+                settingsConfig.sharePath = isEnabled;
+                localStorage.setItem('sharePathEnabled', isEnabled);
+                updateURL(true);
+                syncSettingsToggles();
+            }
+
+            function setShareCoordinatesSetting(isEnabled) {
+                settingsConfig.shareCoordinates = isEnabled;
+                localStorage.setItem('shareCoordinatesEnabled', isEnabled);
+                updateURL(true);
+                syncSettingsToggles();
+            }
+
+            function setExtraControlsSetting(isEnabled) {
+                if (accessibilityToggle.checked !== isEnabled) {
+                    accessibilityToggle.checked = isEnabled;
+                }
+                const changeEvent = new Event('change', { bubbles: true });
+                accessibilityToggle.dispatchEvent(changeEvent);
+                syncSettingsToggles();
+            }
+
+            function syncSettingsToggles() {
+                document.querySelectorAll('input[data-settings-toggle]').forEach(input => {
+                    const toggleType = input.getAttribute('data-settings-toggle');
+                    switch (toggleType) {
+                        case 'shareCoordinates':
+                            input.checked = settingsConfig.shareCoordinates;
+                            break;
+                        case 'sharePath':
+                            input.checked = settingsConfig.sharePath;
+                            break;
+                        case 'extraControls':
+                            input.checked = accessibilityToggle.checked;
+                            break;
+                        default:
+                            break;
+                    }
+                });
             }
 
             function updateSelectedSearchResult(index) {
@@ -981,12 +1237,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (!selectedPolo || !selectedBuilding || !selectedFloor) return;
                 
                 const params = new URLSearchParams();
-                params.set('p', selectedPolo);
-                params.set('b', selectedBuilding);
-                params.set('f', selectedFloor);
-                params.set('v', currentView); // Aggiunto per tracciare la vista
 
-                if (panzoomInstance) {
+                if (settingsConfig.sharePath) {
+                    params.set('p', selectedPolo);
+                    params.set('b', selectedBuilding);
+                    params.set('f', selectedFloor);
+                    params.set('v', currentView);
+                }
+
+                if (settingsConfig.shareCoordinates && panzoomInstance) {
                     const pan = panzoomInstance.getPan();
                     const scale = panzoomInstance.getScale();
                     params.set('x', Math.round(pan.x));
@@ -994,7 +1253,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     params.set('z', scale.toFixed(2));
                 }
 
-                const newUrl = `${window.location.pathname}?${params.toString()}`;
+                const paramString = params.toString();
+                const newUrl = paramString ? `${window.location.pathname}?${paramString}` : window.location.pathname;
                 const state = { polo: selectedPolo, building: selectedBuilding, floor: selectedFloor, view: currentView };
 
                 if (replace) {
