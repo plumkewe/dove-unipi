@@ -22,7 +22,7 @@
                 "capienza": 16,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -36,7 +36,7 @@
                 "capienza": 16,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -50,7 +50,7 @@
                 "capienza": 16,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -65,7 +65,7 @@
                 "capienza": 6,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -79,7 +79,7 @@
                 "capienza": 16,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -93,7 +93,7 @@
                 "capienza": 16,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -107,7 +107,7 @@
                 "capienza": 24,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -121,7 +121,7 @@
                 "capienza": 217,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -135,7 +135,7 @@
                 "capienza": 135,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -149,7 +149,7 @@
                 "capienza": 135,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -163,7 +163,7 @@
                 "capienza": 215,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -177,7 +177,7 @@
                 "capienza": 217,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -191,7 +191,7 @@
                 "capienza": 40,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -205,7 +205,7 @@
                 "capienza": 30,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -219,7 +219,7 @@
                 "capienza": 87,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -233,7 +233,7 @@
                 "capienza": 40,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -247,7 +247,7 @@
                 "capienza": 112,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -261,7 +261,7 @@
                 "capienza": 199,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -275,7 +275,7 @@
                 "capienza": 72,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -289,7 +289,7 @@
                 "capienza": 36,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -303,7 +303,7 @@
                 "capienza": 36,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -319,7 +319,7 @@
                 "capienza": 137,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -333,7 +333,7 @@
                 "capienza": 109,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -347,7 +347,7 @@
                 "capienza": 109,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -361,7 +361,7 @@
                 "capienza": 137,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -375,7 +375,7 @@
                 "capienza": 137,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -389,7 +389,7 @@
                 "capienza": 61,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -403,7 +403,7 @@
                 "capienza": 69,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -417,7 +417,7 @@
                 "capienza": 69,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -431,7 +431,7 @@
                 "capienza": 61,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -445,7 +445,7 @@
                 "capienza": 60,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -459,7 +459,7 @@
                 "capienza": 123,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -473,7 +473,7 @@
                 "capienza": 68,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -487,7 +487,7 @@
                 "capienza": 61,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": true
               },
@@ -501,7 +501,7 @@
                 "capienza": 47,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -515,7 +515,7 @@
                 "capienza": 10,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -529,7 +529,7 @@
                 "capienza": 30,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -543,7 +543,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -557,7 +557,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -574,7 +574,7 @@
                 "capienza": 100,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -588,7 +588,7 @@
                 "capienza": 20,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -622,7 +622,7 @@
                 "lavagna": "nera",
                 "note": "",
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -642,7 +642,7 @@
                 "lavagna": "nera",
                 "note": "",
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": true
               },
@@ -662,7 +662,7 @@
                 "lavagna": "nera",
                 "note": "",
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -682,7 +682,7 @@
                 "lavagna": "nera",
                 "note": "",
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -703,7 +703,7 @@
                 "capienza": 224,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               }
@@ -720,7 +720,7 @@
                 "capienza": 112,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -734,7 +734,7 @@
                 "capienza": 48,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               }
@@ -758,7 +758,7 @@
                 "capienza": 95,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -772,7 +772,7 @@
                 "capienza": 77,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -786,7 +786,7 @@
                 "capienza": 40,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -800,7 +800,7 @@
                 "capienza": 22,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -814,7 +814,7 @@
                 "capienza": 30,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -828,7 +828,7 @@
                 "capienza": 100,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -842,7 +842,7 @@
                 "capienza": 24,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -856,7 +856,7 @@
                 "capienza": 12,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -870,7 +870,7 @@
                 "capienza": 25,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -884,7 +884,7 @@
                 "capienza": 23,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -898,7 +898,7 @@
                 "capienza": 22,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -912,7 +912,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -926,7 +926,7 @@
                 "capienza": 27,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -940,7 +940,7 @@
                 "capienza": 26,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -954,7 +954,7 @@
                 "capienza": 25,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -968,7 +968,7 @@
                 "capienza": 20,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -982,7 +982,7 @@
                 "capienza": 19,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -1006,7 +1006,7 @@
                 "capienza": 20,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1020,7 +1020,7 @@
                 "capienza": 55,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1034,7 +1034,7 @@
                 "capienza": 40,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1048,7 +1048,7 @@
                 "capienza": 33,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1062,7 +1062,7 @@
                 "capienza": 18,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1076,7 +1076,7 @@
                 "capienza": 40,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1090,7 +1090,7 @@
                 "capienza": 50,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1104,7 +1104,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1118,7 +1118,7 @@
                 "capienza": 18,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1132,7 +1132,7 @@
                 "capienza": 20,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1146,7 +1146,7 @@
                 "capienza": 20,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1160,7 +1160,7 @@
                 "capienza": 20,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -1180,7 +1180,7 @@
                 "capienza": 80,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1194,7 +1194,7 @@
                 "capienza": 162,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1208,7 +1208,7 @@
                 "capienza": 190,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1222,7 +1222,7 @@
                 "capienza": 85,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1236,7 +1236,7 @@
                 "capienza": 24,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1250,7 +1250,7 @@
                 "capienza": 19,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1264,7 +1264,7 @@
                 "capienza": 19,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1278,7 +1278,7 @@
                 "capienza": 24,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1292,7 +1292,7 @@
                 "capienza": 24,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1306,7 +1306,7 @@
                 "capienza": 30,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1320,7 +1320,7 @@
                 "capienza": 24,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1334,7 +1334,7 @@
                 "capienza": 20,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -1358,7 +1358,7 @@
                 "capienza": 97,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1372,7 +1372,7 @@
                 "capienza": 55,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1386,7 +1386,7 @@
                 "capienza": 110,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1400,7 +1400,7 @@
                 "capienza": 177,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1414,7 +1414,7 @@
                 "capienza": 330,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1428,7 +1428,7 @@
                 "capienza": 55,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               }
@@ -1452,7 +1452,7 @@
                 "capienza": 70,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1466,7 +1466,7 @@
                 "capienza": 90,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1480,7 +1480,7 @@
                 "capienza": 250,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": true
               },
@@ -1494,7 +1494,7 @@
                 "capienza": 20,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1508,7 +1508,7 @@
                 "capienza": 90,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1522,7 +1522,7 @@
                 "capienza": 220,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": true
               }
@@ -1542,7 +1542,7 @@
                 "capienza": 220,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": true
               },
@@ -1556,7 +1556,7 @@
                 "capienza": 220,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": true
               },
@@ -1570,7 +1570,7 @@
                 "capienza": 220,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1584,7 +1584,7 @@
                 "capienza": 90,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               }
@@ -1605,7 +1605,7 @@
                 "capienza": 30,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1622,7 +1622,7 @@
                 "capienza": 33,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1639,7 +1639,7 @@
                 "capienza": 70,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1656,7 +1656,7 @@
                 "capienza": 47,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1670,7 +1670,7 @@
                 "capienza": 36,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1685,7 +1685,7 @@
                 "capienza": 30,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1700,7 +1700,7 @@
                 "capienza": 30,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -1720,7 +1720,7 @@
                 "capienza": 13,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -1744,7 +1744,7 @@
                 "capienza": 28,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1758,7 +1758,7 @@
                 "capienza": 70,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1772,7 +1772,7 @@
                 "capienza": 91,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1786,7 +1786,7 @@
                 "capienza": 28,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1800,7 +1800,7 @@
                 "capienza": 40,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -1824,7 +1824,7 @@
                 "capienza": 65,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1838,7 +1838,7 @@
                 "capienza": 148,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1852,7 +1852,7 @@
                 "capienza": 43,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1866,7 +1866,7 @@
                 "capienza": 106,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1880,7 +1880,7 @@
                 "capienza": 108,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1894,7 +1894,7 @@
                 "capienza": 142,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1908,7 +1908,7 @@
                 "capienza": 99,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -1922,7 +1922,7 @@
                 "capienza": 148,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1936,7 +1936,7 @@
                 "capienza": 48,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -1956,7 +1956,7 @@
                 "capienza": 64,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -1970,7 +1970,7 @@
                 "capienza": 324,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1984,7 +1984,7 @@
                 "capienza": 310,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -1998,7 +1998,7 @@
                 "capienza": 38,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2012,7 +2012,7 @@
                 "capienza": 104,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2026,7 +2026,7 @@
                 "capienza": 56,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2040,7 +2040,7 @@
                 "capienza": 16,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2054,7 +2054,7 @@
                 "capienza": 84,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2068,7 +2068,7 @@
                 "capienza": 24,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2082,7 +2082,7 @@
                 "capienza": 50,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2096,7 +2096,7 @@
                 "capienza": 38,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2110,7 +2110,7 @@
                 "capienza": 38,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2124,7 +2124,7 @@
                 "capienza": 96,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2138,7 +2138,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2152,7 +2152,7 @@
                 "capienza": 143,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2166,7 +2166,7 @@
                 "capienza": 80,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2180,7 +2180,7 @@
                 "capienza": 140,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2194,7 +2194,7 @@
                 "capienza": 74,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2208,7 +2208,7 @@
                 "capienza": 50,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -2228,7 +2228,7 @@
                 "capienza": 18,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2242,7 +2242,7 @@
                 "capienza": 68,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2256,7 +2256,7 @@
                 "capienza": 18,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2270,7 +2270,7 @@
                 "capienza": 180,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2284,7 +2284,7 @@
                 "capienza": 36,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2298,7 +2298,7 @@
                 "capienza": 72,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2312,7 +2312,7 @@
                 "capienza": 158,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2326,7 +2326,7 @@
                 "capienza": 65,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2340,7 +2340,7 @@
                 "capienza": 36,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2354,7 +2354,7 @@
                 "capienza": 176,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2368,7 +2368,7 @@
                 "capienza": 25,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2382,7 +2382,7 @@
                 "capienza": 38,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -2406,7 +2406,7 @@
                 "capienza": 20,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2420,7 +2420,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2434,7 +2434,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2448,7 +2448,7 @@
                 "capienza": 166,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2462,7 +2462,7 @@
                 "capienza": 40,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2476,7 +2476,7 @@
                 "capienza": 54,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2490,7 +2490,7 @@
                 "capienza": 30,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2504,7 +2504,7 @@
                 "capienza": 18,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -2528,7 +2528,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2542,7 +2542,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2556,7 +2556,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2570,7 +2570,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2584,7 +2584,7 @@
                 "capienza": 56,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2598,7 +2598,7 @@
                 "capienza": 57,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2612,7 +2612,7 @@
                 "capienza": 41,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2626,7 +2626,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2640,7 +2640,7 @@
                 "capienza": 44,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2654,7 +2654,7 @@
                 "capienza": 82,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2668,7 +2668,7 @@
                 "capienza": 56,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2682,7 +2682,7 @@
                 "capienza": 57,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2696,7 +2696,7 @@
                 "capienza": 142,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2710,7 +2710,7 @@
                 "capienza": 46,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2724,7 +2724,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2738,7 +2738,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2752,7 +2752,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2766,7 +2766,7 @@
                 "capienza": 57,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2780,7 +2780,7 @@
                 "capienza": 197,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2794,7 +2794,7 @@
                 "capienza": 91,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2808,7 +2808,7 @@
                 "capienza": 91,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2822,7 +2822,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2836,7 +2836,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -2850,7 +2850,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2864,7 +2864,7 @@
                 "capienza": 41,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2878,7 +2878,7 @@
                 "capienza": 224,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2892,7 +2892,7 @@
                 "capienza": 46,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -2906,7 +2906,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2920,7 +2920,7 @@
                 "capienza": 44,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2934,7 +2934,7 @@
                 "capienza": 45,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2948,7 +2948,7 @@
                 "capienza": 44,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2962,7 +2962,7 @@
                 "capienza": 82,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -2976,7 +2976,7 @@
                 "capienza": 57,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -3000,7 +3000,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3014,7 +3014,7 @@
                 "capienza": 178,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3028,7 +3028,7 @@
                 "capienza": 100,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3042,7 +3042,7 @@
                 "capienza": 100,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3056,7 +3056,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3070,7 +3070,7 @@
                 "capienza": 50,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3084,7 +3084,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3098,7 +3098,7 @@
                 "capienza": 178,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3112,7 +3112,7 @@
                 "capienza": 241,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3126,7 +3126,7 @@
                 "capienza": 150,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3140,7 +3140,7 @@
                 "capienza": 178,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               }
@@ -3165,7 +3165,7 @@
                 "capienza": 50,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3179,7 +3179,7 @@
                 "capienza": 50,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3193,7 +3193,7 @@
                 "capienza": 120,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3207,7 +3207,7 @@
                 "capienza": 50,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3221,7 +3221,7 @@
                 "capienza": 42,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3235,7 +3235,7 @@
                 "capienza": 25,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3249,7 +3249,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3263,7 +3263,7 @@
                 "capienza": 25,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3277,7 +3277,7 @@
                 "capienza": 20,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3291,7 +3291,7 @@
                 "capienza": 15,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3305,7 +3305,7 @@
                 "capienza": 25,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3319,7 +3319,7 @@
                 "capienza": 15,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3333,7 +3333,7 @@
                 "capienza": 14,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3347,7 +3347,7 @@
                 "capienza": 120,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3362,7 +3362,7 @@
                 "capienza": 25,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -3386,7 +3386,7 @@
                 "capienza": 252,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3400,7 +3400,7 @@
                 "capienza": 135,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3414,7 +3414,7 @@
                 "capienza": 189,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3428,7 +3428,7 @@
                 "capienza": 135,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3442,7 +3442,7 @@
                 "capienza": 114,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3456,7 +3456,7 @@
                 "capienza": 114,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3470,7 +3470,7 @@
                 "capienza": 90,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3484,7 +3484,7 @@
                 "capienza": 42,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3498,7 +3498,7 @@
                 "capienza": 42,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3512,7 +3512,7 @@
                 "capienza": 42,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3526,7 +3526,7 @@
                 "capienza": 42,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3540,7 +3540,7 @@
                 "capienza": 28,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3554,7 +3554,7 @@
                 "capienza": 28,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3568,7 +3568,7 @@
                 "capienza": 28,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3582,7 +3582,7 @@
                 "capienza": 16,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               }
@@ -3606,7 +3606,7 @@
                 "capienza": 60,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3620,7 +3620,7 @@
                 "capienza": 12,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3634,7 +3634,7 @@
                 "capienza": 36,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3648,7 +3648,7 @@
                 "capienza": 300,
                 "proiettore": false,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3662,7 +3662,7 @@
                 "capienza": 25,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3676,7 +3676,7 @@
                 "capienza": 26,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3690,7 +3690,7 @@
                 "capienza": 34,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3704,7 +3704,7 @@
                 "capienza": 49,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3718,7 +3718,7 @@
                 "capienza": 150,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3732,7 +3732,7 @@
                 "capienza": 100,
                 "proiettore": true,
                 "rete": true,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3746,7 +3746,7 @@
                 "capienza": 150,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3760,7 +3760,7 @@
                 "capienza": 150,
                 "proiettore": false,
                 "rete": false,
-                "acesso_disabili": false,
+                "accesso_disabili": false,
                 "autoparlanti": false,
                 "telecamera": false
               },
@@ -3774,7 +3774,7 @@
                 "capienza": 12,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               }
@@ -3798,7 +3798,7 @@
                 "capienza": 111,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3812,7 +3812,7 @@
                 "capienza": 139,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3826,7 +3826,7 @@
                 "capienza": 105,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3840,7 +3840,7 @@
                 "capienza": 146,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3854,7 +3854,7 @@
                 "capienza": 103,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": false
               },
@@ -3868,7 +3868,7 @@
                 "capienza": 304,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3882,7 +3882,7 @@
                 "capienza": 197,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3896,7 +3896,7 @@
                 "capienza": 208,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               },
@@ -3910,7 +3910,7 @@
                 "capienza": 106,
                 "proiettore": true,
                 "rete": false,
-                "acesso_disabili": true,
+                "accesso_disabili": true,
                 "autoparlanti": true,
                 "telecamera": true
               }

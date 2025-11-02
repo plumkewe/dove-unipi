@@ -45,7 +45,7 @@ class ParsedRoom:
         jsRoom["capienza"] = self.capacity
         jsRoom["proiettore"] = "Proiettore video" in self.services
         jsRoom["rete"] = "Rete" in self.services
-        jsRoom["acesso_disabili"] = "Accessibile a disabili" in self.services
+        jsRoom["accesso_disabili"] = "Accessibile a disabili" in self.services
         jsRoom["autoparlanti"] = "Amplificazione audio" in self.services
         jsRoom["telecamera"] = "Telecamera fissa" in self.services
     
