@@ -106,7 +106,7 @@ def main():
                     #"numero_pc": 0,
                     #"prese_elettriche": true,
                     #"numero_prese_elettriche": 0,
-                    #"prese_rete": true,
+                    #"porte_rete": true,
                     #"lavagna": "nera",
                     "note": ""
                 }

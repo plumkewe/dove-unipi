@@ -119,7 +119,7 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
                 "numero_pc": 0,
                 "prese_elettriche": true,
                 "numero_prese_elettriche": 0,
-                "prese_rete": true,
+                "porte_rete": true,
                 "proiettore": true,
                 "lavagna": "nera",
                 "note": ""
