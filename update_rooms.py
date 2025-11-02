@@ -60,7 +60,7 @@ class ParsedRoom:
 
 def main():
     calendarId = re.findall(CALENDAR_URLS_PATTERN, getUrlContent(CENTERS_URL))
-    with open("rooms.json", "rb") as f:
+    with open("data/rooms.json", "rb") as f:
         jsRooms:dict[str, dict[str, dict[str, dict[str, dict[str, dict[str, list[dict]]]]]]] = json.load(f)
     
     for url, calendarId, place in calendarId:
@@ -131,8 +131,8 @@ def main():
                 jsFloors["?"].append(jsRoom)
     
     # Save
-    os.rename("rooms.json", "rooms.json.old")
-    with open("rooms.json", "w") as f:
+    os.rename("data/rooms.json", "data/rooms.json.old")
+    with open("data/rooms.json", "w") as f:
         json.dump(jsRooms, f, indent=2)
 
 

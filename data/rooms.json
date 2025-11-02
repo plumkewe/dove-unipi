@@ -379,7 +379,6 @@
                 "autoparlanti": true,
                 "telecamera": true
               },
-
               {
                 "id": "fib_i1-b-0",
                 "nome": "Aula I1",
@@ -428,7 +427,13 @@
                 "alias": [
                   "N1"
                 ],
-                "note": ""
+                "note": "",
+                "capienza": 61,
+                "proiettore": true,
+                "rete": true,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
               },
               {
                 "id": "fib_o1-b-0",
@@ -602,7 +607,7 @@
           "piano": {
             "0": [
               {
-                "id": "D04",
+                "id": "fib_d4-d-0",
                 "nome": "Aula D4",
                 "alias": [
                   "D4"
@@ -615,10 +620,14 @@
                 "prese_rete": true,
                 "proiettore": true,
                 "lavagna": "nera",
-                "note": ""
+                "note": "",
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": false
               },
               {
-                "id": "D02",
+                "id": "fib_d2-d-0",
                 "nome": "Aula D2",
                 "alias": [
                   "D2"
@@ -629,81 +638,9 @@
                 "prese_elettriche": true,
                 "numero_prese_elettriche": 0,
                 "prese_rete": false,
-                "proiettore": false,
-                "lavagna": "nera",
-                "note": ""
-              },
-              {
-                "id": "D05",
-                "nome": "Aula D5",
-                "alias": [
-                  "D5"
-                ],
-                "capienza": 216,
-                "presenza_pc": false,
-                "numero_pc": 0,
-                "prese_elettriche": true,
-                "numero_prese_elettriche": 0,
-                "prese_rete": true,
                 "proiettore": true,
                 "lavagna": "nera",
-                "note": ""
-              },
-              {
-                "id": "D03",
-                "nome": "Aula D3",
-                "alias": [
-                  "D3"
-                ],
-                "capienza": 182,
-                "presenza_pc": false,
-                "numero_pc": 0,
-                "prese_elettriche": true,
-                "numero_prese_elettriche": 0,
-                "prese_rete": true,
-                "proiettore": true,
-                "lavagna": "nera",
-                "note": ""
-              }
-            ],
-            "?": [
-              {
-                "id": "fib_d2-d-0",
-                "nome": "Aula D2",
-                "alias": [
-                  "D2"
-                ],
                 "note": "",
-                "capienza": 206,
-                "proiettore": true,
-                "rete": false,
-                "acesso_disabili": true,
-                "autoparlanti": false,
-                "telecamera": false
-              },
-              {
-                "id": "fib_d3-d-0",
-                "nome": "Aula D3",
-                "alias": [
-                  "D3"
-                ],
-                "note": "",
-                "capienza": 182,
-                "proiettore": true,
-                "rete": false,
-                "acesso_disabili": true,
-                "autoparlanti": false,
-                "telecamera": true
-              },
-              {
-                "id": "fib_d4-d-0",
-                "nome": "Aula D4",
-                "alias": [
-                  "D4"
-                ],
-                "note": "",
-                "capienza": 168,
-                "proiettore": true,
                 "rete": false,
                 "acesso_disabili": true,
                 "autoparlanti": false,
@@ -715,13 +652,39 @@
                 "alias": [
                   "D5"
                 ],
-                "note": "",
                 "capienza": 216,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "prese_rete": true,
                 "proiettore": true,
+                "lavagna": "nera",
+                "note": "",
                 "rete": false,
                 "acesso_disabili": true,
                 "autoparlanti": false,
                 "telecamera": false
+              },
+              {
+                "id": "fib_d3-d-0",
+                "nome": "Aula D3",
+                "alias": [
+                  "D3"
+                ],
+                "capienza": 182,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "prese_rete": true,
+                "proiettore": true,
+                "lavagna": "nera",
+                "note": "",
+                "rete": false,
+                "acesso_disabili": true,
+                "autoparlanti": false,
+                "telecamera": true
               }
             ]
           }
