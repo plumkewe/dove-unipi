@@ -1557,14 +1557,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 });
                 
-                updateURL(true); // Aggiorna l'URL ogni volta che si seleziona un piano
+                if (floor !== "?")
+                    updateURL(true); // Aggiorna l'URL ogni volta che si seleziona un piano
             }
 
             function selectView(viewType, forceReload = false, viewParams = null) {
                 if (currentView === viewType && !forceReload) return;
 
                 currentView = viewType;
-                loadSVG(selectedBuilding, selectedFloor, currentView, viewParams);
+                if (selectedFloor !== "?")
+                    loadSVG(selectedBuilding, selectedFloor, currentView, viewParams);
 
                 // Aggiorna stile bottoni vista
                 if (viewType === 'top') {
