@@ -18,6 +18,7 @@
                 "alias": [
                   "X1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 16,
                 "proiettore": true,
@@ -30,6 +31,7 @@
                 "alias": [
                   "X2"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 16,
                 "proiettore": true,
@@ -42,6 +44,7 @@
                 "alias": [
                   "X3"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 16,
                 "proiettore": true,
@@ -55,6 +58,7 @@
                   "X4",
                   "Aula Studio X4"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 6,
                 "proiettore": false,
@@ -67,6 +71,7 @@
                 "alias": [
                   "X5"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 16,
                 "proiettore": true,
@@ -79,6 +84,7 @@
                 "alias": [
                   "X6"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 16,
                 "proiettore": true,
@@ -91,6 +97,7 @@
                 "alias": [
                   "X7"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 24,
                 "proiettore": true,
@@ -103,6 +110,7 @@
                 "alias": [
                   "A"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 217,
                 "proiettore": true,
@@ -115,6 +123,7 @@
                 "alias": [
                   "B"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 135,
                 "proiettore": true,
@@ -127,6 +136,7 @@
                 "alias": [
                   "C"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 135,
                 "proiettore": true,
@@ -139,6 +149,7 @@
                 "alias": [
                   "D"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 215,
                 "proiettore": true,
@@ -151,6 +162,7 @@
                 "alias": [
                   "E"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 217,
                 "proiettore": true,
@@ -163,6 +175,7 @@
                 "alias": [
                   "H-Lab"
                 ],
+                "type": "laboratorio",
                 "note": "",
                 "capienza": 40,
                 "proiettore": true,
@@ -175,6 +188,7 @@
                 "alias": [
                   "I-Lab"
                 ],
+                "type": "laboratorio",
                 "note": "",
                 "capienza": 30,
                 "proiettore": true,
@@ -187,6 +201,7 @@
                 "alias": [
                   "L"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 87,
                 "proiettore": true,
@@ -199,6 +214,7 @@
                 "alias": [
                   "M-Lab"
                 ],
+                "type": "laboratorio",
                 "note": "",
                 "capienza": 40,
                 "proiettore": true,
@@ -211,6 +227,7 @@
                 "alias": [
                   "F"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 112,
                 "proiettore": true,
@@ -223,6 +240,7 @@
                 "alias": [
                   "G"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 199,
                 "proiettore": true,
@@ -235,6 +253,7 @@
                 "alias": [
                   "N"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 72,
                 "proiettore": true,
@@ -247,6 +266,7 @@
                 "alias": [
                   "O"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 36,
                 "proiettore": true,
@@ -259,6 +279,7 @@
                 "alias": [
                   "P"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 36,
                 "proiettore": false,
@@ -273,6 +294,7 @@
                 "alias": [
                   "A1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 137,
                 "proiettore": true,
@@ -285,6 +307,7 @@
                 "alias": [
                   "B1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 109,
                 "proiettore": true,
@@ -297,6 +320,7 @@
                 "alias": [
                   "C1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 109,
                 "proiettore": true,
@@ -309,6 +333,7 @@
                 "alias": [
                   "D1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 137,
                 "proiettore": true,
@@ -321,6 +346,7 @@
                 "alias": [
                   "E1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 137,
                 "proiettore": true,
@@ -333,6 +359,7 @@
                 "alias": [
                   "I1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 61,
                 "proiettore": true,
@@ -345,6 +372,7 @@
                 "alias": [
                   "L1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 69,
                 "proiettore": true,
@@ -357,6 +385,7 @@
                 "alias": [
                   "M1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 69,
                 "proiettore": true,
@@ -369,6 +398,7 @@
                 "alias": [
                   "N1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 61,
                 "proiettore": true,
@@ -381,6 +411,7 @@
                 "alias": [
                   "O1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 60,
                 "proiettore": true,
@@ -393,6 +424,7 @@
                 "alias": [
                   "P1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 123,
                 "proiettore": true,
@@ -405,6 +437,7 @@
                 "alias": [
                   "F1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 68,
                 "proiettore": true,
@@ -417,6 +450,7 @@
                 "alias": [
                   "G1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 61,
                 "proiettore": true,
@@ -429,6 +463,7 @@
                 "alias": [
                   "V1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 47,
                 "proiettore": true,
@@ -441,6 +476,7 @@
                 "alias": [
                   "Q1-Lab"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 10,
                 "proiettore": false,
@@ -453,6 +489,7 @@
                 "alias": [
                   "R1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 30,
                 "proiettore": false,
@@ -465,6 +502,7 @@
                 "alias": [
                   "S1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 25,
                 "proiettore": false,
@@ -477,6 +515,7 @@
                 "alias": [
                   "T1"
                 ],
+                "type": "aula",
                 "note": "",
                 "capienza": 25,
                 "proiettore": false,
@@ -492,7 +531,20 @@
             "-1": [],
             "0": [],
             "1": [],
-            "2": []
+            "2": [
+              {
+                "id": "fib_di-c-2",
+                "nome": "Dipartimaento di Informatica",
+                "alias": [
+                  "DI"
+                ],
+                "type": "dipartimento",
+                "note": "",
+                "link-mappa": "https://di.unipi.it/mappa-dipartimento/",
+                "link-dipartimento": "https://di.unipi.it/"
+
+              }
+            ]
           }
         },
         "d": {
@@ -502,7 +554,11 @@
                 "id": "fib_d2-d-0",
                 "nome": "Aula D2",
                 "alias": [
-                  "D2"
+                  "D2",
+                  "Informatica",
+                  "Corso B",
+                  "Matricole",
+                  "Matricole Informatica"
                 ],
                 "capienza": 206,
                 "presenza_pc": false,
@@ -512,6 +568,7 @@
                 "porte_rete": false,
                 "proiettore": true,
                 "lavagna": "nera",
+                "type": "aula",
                 "note": "",
                 "rete": false,
                 "accesso_disabili": true
@@ -520,7 +577,10 @@
                 "id": "fib_d3-d-0",
                 "nome": "Aula D3",
                 "alias": [
-                  "D3"
+                  "D3",
+                  "Informatica",
+                  "Matricole",
+                  "Matricole Informatica"
                 ],
                 "capienza": 182,
                 "presenza_pc": false,
@@ -530,6 +590,7 @@
                 "porte_rete": true,
                 "proiettore": true,
                 "lavagna": "nera",
+                "type": "aula",
                 "note": "",
                 "rete": false,
                 "accesso_disabili": true
@@ -538,7 +599,8 @@
                 "id": "fib_d4-d-0",
                 "nome": "Aula D4",
                 "alias": [
-                  "D4"
+                  "D4",
+                  "Informatica"
                 ],
                 "capienza": 168,
                 "presenza_pc": false,
@@ -548,6 +610,7 @@
                 "porte_rete": true,
                 "proiettore": true,
                 "lavagna": "nera",
+                "type": "aula",
                 "note": "",
                 "rete": false,
                 "accesso_disabili": true
@@ -556,7 +619,10 @@
                 "id": "fib_d5-d-0",
                 "nome": "Aula D5",
                 "alias": [
-                  "D5"
+                  "D5",
+                  "Informatica",
+                  "Matricole",
+                  "Matricole Informatica"
                 ],
                 "capienza": 216,
                 "presenza_pc": false,
@@ -566,6 +632,7 @@
                 "porte_rete": true,
                 "proiettore": true,
                 "lavagna": "nera",
+                "type": "aula",
                 "note": "",
                 "rete": false,
                 "accesso_disabili": true
@@ -584,6 +651,7 @@
                   "Magna"
                 ],
                 "note": "",
+                "type": "aula",
                 "capienza": 224,
                 "proiettore": true,
                 "rete": false,

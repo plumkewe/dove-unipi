@@ -138,18 +138,27 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
           "piano": {
             "0": [
               {
-                "id": "D04",
-                "nome": "Aula D4",
-                "alias": ["D4"],
-                "capienza": 168,
+                "id": "fib_d2-d-0",
+                "nome": "Aula D2",
+                "alias": [
+                  "D2",
+                  "Informatica",
+                  "Corso B",
+                  "Matricole",
+                  "Matricole Informatica"
+                ],
+                "capienza": 206,
                 "presenza_pc": false,
                 "numero_pc": 0,
                 "prese_elettriche": true,
                 "numero_prese_elettriche": 0,
-                "prese_rete": true,
+                "porte_rete": false,
                 "proiettore": true,
                 "lavagna": "nera",
-                "note": ""
+                "type": "aula",
+                "note": "",
+                "rete": false,
+                "accesso_disabili": true
               },
               {
                 "..."
@@ -193,8 +202,11 @@ Digitando `condividi` o `share`, potrai facilmente copiare il **link al sito** o
 
 #### Accessibilità 
 
-Attualmente è possibile aggiungere **bottoni aggiuntivi** per alcune funzioni come **zoom** e **condivisione**.  
-In futuro si prevede di introdurre **modalità ad alto contrasto** e una **modalità di navigazione basata solo su pulsanti**.
+Attualmente è possibile aggiungere **pulsanti aggiuntivi** per alcune funzioni come **zoom** e **condivisione** ed attivare la **modalità ad alto contrasto**.
+
+Puoi accedere alle **impostazioni di accessibilità** digitando `impostazioni` o `settings` nella barra di ricerca.  
+
+In futuro si prevede di introdurre una **modalità di navigazione basata solo su pulsanti**.
 *(Non garantiamo nulla in questa fase di sviluppo.)*
 
 #### Keyboard shortcuts

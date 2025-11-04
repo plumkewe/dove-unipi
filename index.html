@@ -144,8 +144,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .search-result-item:hover .details {
             color: #1F2937; /* gray-800 */
         }
-        .search-result-item.selected {
-            background-color: rgba(0, 0, 0, 0.1); /* 10% black opacity */
+        .nav-item.selected {
+            background-color: rgba(0, 0, 0, 0.1);
         }
         /* Stile per Google Material Symbols */
         .material-symbols-outlined {
@@ -446,6 +446,91 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 z-index: 45;
             }
         }
+        /* High Contrast Mode */
+        .high-contrast {
+            background-color: white !important;
+            color: black !important;
+        }
+        .high-contrast * {
+            background-color: white !important;
+            color: black !important;
+            border-color: black !important;
+        }
+        .high-contrast svg * {
+            fill: black !important;
+            stroke: black !important;
+        }
+        .high-contrast .github-icon * {
+            fill: #1F2937 !important;
+            stroke: none !important;
+        }
+        .high-contrast #mobile-search-container {
+            background-color: transparent !important;
+        }
+        .high-contrast #share-btn {
+            width: 52px !important;
+            height: 52px !important;
+        }
+        .high-contrast button,
+        .high-contrast .button-group > button {
+            border: 2px solid black !important;
+        }
+        .high-contrast .button-group {
+            border: 2px solid black !important;
+        }
+        .high-contrast .button-group > button {
+            border: none !important;
+        }
+        .high-contrast .button-group > button.active {
+            background-color: black !important;
+            color: white !important;
+        }
+        .high-contrast .button-group > button.active .material-symbols-outlined {
+            color: white !important;
+            background-color: transparent !important;
+        }
+        .high-contrast .button-group > button.active svg * {
+            fill: white !important;
+            stroke: white !important;
+            background-color: transparent !important;
+        }
+        .high-contrast #top-bar {
+            background-color: transparent !important;
+        }
+        .high-contrast .nav-item.selected {
+            background-color: black !important;
+            color: white !important;
+        }
+        .high-contrast .nav-item.selected * {
+            background-color: transparent !important;
+            color: white !important;
+        }
+        .high-contrast .nav-item.selected .material-symbols-outlined {
+            color: white !important;
+            background-color: transparent !important;
+        }
+        .high-contrast .nav-item.selected svg * {
+            fill: white !important;
+            stroke: white !important;
+            background-color: transparent !important;
+        }
+        /* Toggle switches in high contrast mode */
+        .high-contrast label.relative.inline-flex > div {
+            background-color: black !important;
+            box-shadow: inset 0 0 0 1px white !important;
+        }
+        .high-contrast label.relative.inline-flex input:checked + div {
+            background-color: white !important;
+            box-shadow: inset 0 0 0 1px black !important;
+        }
+        .high-contrast label.relative.inline-flex > div::after {
+            background-color: white !important;
+            border-color: white !important;
+        }
+        .high-contrast label.relative.inline-flex input:checked + div::after {
+            background-color: black !important;
+            border-color: black !important;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 no-transition">
@@ -566,7 +651,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 <!-- Aule -->
                 <div class="p-2">
-                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Aule</h3>
                     <div id="rooms-list" class="mt-2 space-y-1">
                         <!-- Le aule verranno inserite qui -->
                     </div>
@@ -575,25 +659,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             <!-- Footer Sidebar -->
             <div class="p-4 border-t border-gray-300/50 space-y-4">
-                <!-- Accessibilità -->
-                <div>
-                    <h3 class="px-2 text-sm font-semibold text-gray-500 uppercase tracking-wider">Accessibilità</h3>
-                    <div class="mt-2 space-y-1">
-                        <div class="flex items-center justify-between p-2 rounded-lg">
-                            <label for="accessibility-toggle" class="flex items-center space-x-3 cursor-pointer">
-                                <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">accessibility_new</span>
-                                <span>Controlli extra</span>
-                            </label>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="accessibility-toggle" class="sr-only peer">
-                                <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
                 <a href="https://github.com/plumkewe/dove-unipi" target="_blank" class="nav-item flex items-center space-x-3 p-2 rounded-lg">
-                    <svg class="w-8 h-8 text-gray-800" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <svg class="w-8 h-8 text-gray-800 github-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                     </svg>
                     <span>Repository GitHub</span>
@@ -608,6 +675,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 <!-- L'SVG verrà caricato qui -->
             </div>
         </div>
+    </div>
+
+    <!-- Hidden accessibility toggle for script access -->
+    <div style="display: none;">
+        <input type="checkbox" id="accessibility-toggle">
     </div>
 
     <!-- Controlli Zoom/Pan e Vista -->
@@ -757,10 +829,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const accessibilityToggle = document.getElementById('accessibility-toggle');
             const storedShareCoordinates = localStorage.getItem('shareCoordinatesEnabled');
             const storedSharePath = localStorage.getItem('sharePathEnabled');
+            const storedHighContrast = localStorage.getItem('highContrastEnabled');
             const settingsConfig = {
                 shareCoordinates: storedShareCoordinates ? storedShareCoordinates === 'true' : false,
-                sharePath: storedSharePath ? storedSharePath === 'true' : true
+                sharePath: storedSharePath ? storedSharePath === 'true' : true,
+                highContrast: storedHighContrast ? storedHighContrast === 'true' : false
             };
+
+            // Apply initial high contrast setting
+            setHighContrastSetting(settingsConfig.highContrast);
 
             // Gestione controlli accessibilità
             const setAccessibilityControls = (visible) => {
@@ -959,13 +1036,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             });
                         });
                     } else {
-                        const capacityDetails = result.room && result.room.capienza != null ? ` · Capienza ${result.room.capienza}` : '';
+                        const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
                         resultElement.innerHTML = `
                             <div class="title">${result.room.nome}</div>
                             <div class="details">
                                 Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
                                 Edificio ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
-                                Piano ${result.piano}${capacityDetails}
+                                Piano ${result.piano}${capacityDetails ? '<div>Capienza ' + capacityDetails + '</div>' : ''}
                             </div>
                         `;
                         resultElement.addEventListener('click', () => {
@@ -1013,6 +1090,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         description: 'Mostra pulsante condividi e controlli zoom',
                         checked: accessibilityToggle.checked,
                         onToggle: setExtraControlsSetting
+                    },
+                    {
+                        key: 'highContrast',
+                        label: 'Alto contrasto',
+                        description: 'Sfondo bianco con testo nero per migliore accessibilità',
+                        checked: settingsConfig.highContrast,
+                        onToggle: setHighContrastSetting
                     }
                 ];
 
@@ -1107,6 +1191,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 syncSettingsToggles();
             }
 
+            function setHighContrastSetting(isEnabled) {
+                settingsConfig.highContrast = isEnabled;
+                localStorage.setItem('highContrastEnabled', isEnabled);
+                if (isEnabled) {
+                    document.body.classList.add('high-contrast');
+                } else {
+                    document.body.classList.remove('high-contrast');
+                }
+                syncSettingsToggles();
+            }
+
             function syncSettingsToggles() {
                 document.querySelectorAll('input[data-settings-toggle]').forEach(input => {
                     const toggleType = input.getAttribute('data-settings-toggle');
@@ -1119,6 +1214,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             break;
                         case 'extraControls':
                             input.checked = accessibilityToggle.checked;
+                            break;
+                        case 'highContrast':
+                            input.checked = settingsConfig.highContrast;
                             break;
                         default:
                             break;
@@ -1392,9 +1490,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 Array.from(polosList.children).forEach(child => {
                     const poloName = child.querySelector('span:last-child').textContent.split(' ')[1].toLowerCase();
                     if (poloName === polo) {
-                        child.classList.add('bg-gray-900/10');
+                        child.classList.add('selected');
                     } else {
-                        child.classList.remove('bg-gray-900/10');
+                        child.classList.remove('selected');
                     }
                 });
 
@@ -1448,8 +1546,57 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Gestisce entrambe le strutture dati: array di aule o oggetto con chiave 'aule'
                 const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
 
-                if (rooms.length > 0) {
-                    rooms.forEach(room => {
+                const departments = rooms.filter(room => room.type === 'dipartimento');
+                const regularRooms = rooms.filter(room => room.type !== 'dipartimento');
+
+                if (departments.length > 0) {
+                    // Add Dipartimento header
+                    const deptHeader = document.createElement('h4');
+                    deptHeader.textContent = 'Dipartimento';
+                    deptHeader.className = 'text-sm font-semibold text-gray-500 uppercase tracking-wider';
+                    roomsList.appendChild(deptHeader);
+
+                    // List departments
+                    departments.forEach(dept => {
+                        const deptElement = document.createElement('div');
+                        deptElement.className = 'w-full text-left p-2 pl-8';
+                        deptElement.innerHTML = `<span>${dept.nome}</span>`;
+                        
+                        const buttonsContainer = document.createElement('div');
+                        buttonsContainer.className = 'flex space-x-2 mt-2';
+                        
+                        if (dept['link-mappa']) {
+                            const mapBtn = document.createElement('a');
+                            mapBtn.href = dept['link-mappa'];
+                            mapBtn.target = '_blank';
+                            mapBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors';
+                            mapBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">map</span><span>Mappa</span>`;
+                            buttonsContainer.appendChild(mapBtn);
+                        }
+                        
+                        if (dept['link-dipartimento']) {
+                            const deptBtn = document.createElement('a');
+                            deptBtn.href = dept['link-dipartimento'];
+                            deptBtn.target = '_blank';
+                            deptBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors';
+                            deptBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">language</span><span>Sito</span>`;
+                            buttonsContainer.appendChild(deptBtn);
+                        }
+                        
+                        deptElement.appendChild(buttonsContainer);
+                        roomsList.appendChild(deptElement);
+                    });
+                }
+
+                // Always add Aule header
+                const auleHeader = document.createElement('h4');
+                auleHeader.textContent = 'Aule';
+                auleHeader.className = 'text-sm font-semibold text-gray-500 uppercase tracking-wider';
+                roomsList.appendChild(auleHeader);
+
+                // List regular rooms
+                if (regularRooms.length > 0) {
+                    regularRooms.forEach(room => {
                         const roomContainer = document.createElement('div');
                         roomContainer.className = 'nav-item-container';
 
@@ -1513,7 +1660,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         roomsList.appendChild(roomContainer);
                     });
                 } else {
-                    roomsList.innerHTML = '<p class="p-2 pl-8 text-sm text-gray-500">Nessuna aula trovata</p>';
+                    const noRoomsMsg = document.createElement('p');
+                    noRoomsMsg.className = 'p-2 pl-8 text-sm text-gray-500';
+                    noRoomsMsg.textContent = 'Nessuna aula trovata';
+                    roomsList.appendChild(noRoomsMsg);
                 }
             }
 
@@ -1525,9 +1675,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 Array.from(buildingsList.children).forEach(child => {
                     const buildingName = child.querySelector('span:last-child').textContent.split(' ')[1].toLowerCase();
                     if (buildingName === building) {
-                        child.classList.add('bg-gray-900/10');
+                        child.classList.add('selected');
                     } else {
-                        child.classList.remove('bg-gray-900/10');
+                        child.classList.remove('selected');
                     }
                 });
 
@@ -1554,9 +1704,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 Array.from(floorsList.children).forEach(child => {
                     const floorName = child.querySelector('span:last-child').textContent.split(' ')[1];
                     if (floorName === floor) {
-                        child.classList.add('bg-gray-900/10');
+                        child.classList.add('selected');
                     } else {
-                        child.classList.remove('bg-gray-900/10');
+                        child.classList.remove('selected');
                     }
                 });
                 
