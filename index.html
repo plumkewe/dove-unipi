@@ -49,7 +49,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="description" content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.">
     <meta name="author" content="Lyubomyr Malay">
     <meta name="keywords" content="UniPi, Università di Pisa, Polo Fibonacci, aule, dove, navigatore, mappe, planimetrie">
-    <meta name="theme-color" content="#F3F4F6">
+    <meta name="theme-color" content="#E5E7EB">
     <title>DOVE?</title>
 
     <meta property="og:title" content="DOV'È QUEL AULA?! DOVEEEEE!!!">
@@ -79,9 +79,32 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <style>
+        /* Caricamento del font OpenDyslexic */
+        @font-face {
+            font-family: 'OpenDyslexic';
+            src: url('assets/fonts/OpenDyslexic-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* Stile personalizzato */
         html, body {
             touch-action: manipulation;
+            overflow: hidden; /* Impedisce lo scroll su tutta la pagina */
+            height: 100vh; /* Forza l'altezza al 100% del viewport */
+            width: 100vw; /* Forza la larghezza al 100% del viewport */
+            margin: 0;
+            padding: 0;
+        }
+        /* Nascondi le scrollbar su tutti i browser */
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        html,
+        body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -91,6 +114,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             user-select: none; /* Standard syntax */
             font-size: 16px; /* Base font size */
             transition: font-size 0.2s ease-in-out;
+        }
+        /* Classe per il font OpenDyslexic */
+        body.dyslexic-font,
+        body.dyslexic-font * {
+            font-family: 'OpenDyslexic', sans-serif !important;
+        }
+        /* Escludi le icone Material Symbols dal font OpenDyslexic */
+        body.dyslexic-font .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined' !important;
         }
         /* Text size scaling classes */
         body.text-small {
@@ -697,33 +729,43 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .text-size-controls {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
+            background-color: #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 0.25rem;
         }
         .text-size-btn {
-            padding: 0.5rem;
-            background-color: #E5E7EB;
-            border: 1px solid #E5E7EB;
-            border-radius: 0.5rem;
+            padding: 0.375rem 0.5rem;
+            background-color: transparent;
+            border: none;
+            border-radius: 0.375rem;
             cursor: pointer;
             font-weight: 500;
             transition: background-color 0.2s ease-in-out;
-            min-width: 40px;
-            min-height: 40px;
+            min-width: 36px;
+            min-height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1F2937;
+            color: #4B5563;
         }
-        .text-size-btn:hover {
-            background-color: #D1D5DB;
+        .text-size-btn:hover:not(:disabled) {
+            background-color: rgba(0, 0, 0, 0.05);
         }
         .text-size-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
         }
-        .high-contrast .text-size-btn {
+        .text-size-btn.active {
+            background-color: #D1D5DB;
+            color: #1F2937;
+        }
+        .high-contrast .text-size-controls {
             background-color: white !important;
             border: 2px solid black !important;
+        }
+        .high-contrast .text-size-btn {
+            background-color: transparent !important;
             color: black !important;
             transition: none !important;
         }
@@ -735,17 +777,61 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             color: white !important;
             background-color: transparent !important;
         }
-        /* Language selector styles */
-        select.text-size-btn {
-            padding: 0.5rem 2.5rem 0.5rem 0.75rem;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234B5563' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            appearance: none;
-            min-width: 100px;
+        .high-contrast .text-size-btn.active {
+            background-color: black !important;
+            color: white !important;
         }
-        .high-contrast select.text-size-btn {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000000' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        .high-contrast .text-size-btn.active .material-symbols-outlined {
+            color: white !important;
+            background-color: transparent !important;
+        }
+        /* Language selector styles */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background-color: #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 0.25rem;
+        }
+        .language-btn {
+            padding: 0.375rem 0.75rem;
+            background-color: transparent;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4B5563;
+            font-size: 14px;
+        }
+        .language-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .language-btn.active {
+            background-color: #D1D5DB;
+            color: #1F2937;
+        }
+        .high-contrast .language-selector {
+            background-color: white !important;
+            border: 2px solid black !important;
+        }
+        .high-contrast .language-btn {
+            background-color: transparent !important;
+            color: black !important;
+            transition: none !important;
+        }
+        .high-contrast .language-btn:hover {
+            background-color: black !important;
+            color: white !important;
+        }
+        .high-contrast .language-btn.active {
+            background-color: black !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -1046,12 +1132,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const storedShareCoordinates = localStorage.getItem('shareCoordinatesEnabled');
             const storedSharePath = localStorage.getItem('sharePathEnabled');
             const storedHighContrast = localStorage.getItem('highContrastEnabled');
+            const storedDyslexicFont = localStorage.getItem('dyslexicFontEnabled');
             const storedTextSize = localStorage.getItem('textSizeEnabled');
-            const storedLanguage = localStorage.getItem('selectedLanguage') || 'it';
+            
+            // Detect browser language automatically
+            function detectBrowserLanguage() {
+                const browserLang = navigator.language || navigator.userLanguage;
+                // Extract the language code (e.g., 'it' from 'it-IT', 'en' from 'en-US')
+                const langCode = browserLang.split('-')[0].toLowerCase();
+                // Support only 'it' and 'en', default to 'it' for others
+                return (langCode === 'it' || langCode === 'en') ? langCode : 'it';
+            }
+            
+            const storedLanguage = localStorage.getItem('selectedLanguage') || detectBrowserLanguage();
             const settingsConfig = {
-                shareCoordinates: storedShareCoordinates ? storedShareCoordinates === 'true' : false,
+                shareCoordinates: storedShareCoordinates ? storedShareCoordinates === 'true' : true,
                 sharePath: storedSharePath ? storedSharePath === 'true' : true,
                 highContrast: storedHighContrast ? storedHighContrast === 'true' : false,
+                dyslexicFont: storedDyslexicFont ? storedDyslexicFont === 'true' : false,
                 language: storedLanguage
             };
 
@@ -1129,7 +1227,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     footerSpan.innerHTML = `
                         ${t('made_with')} 
                         <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">favorite</span> 
-                        e 
+                        ${t('made_and')} 
                         <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">smart_toy</span> 
                         ${t('made_by')} <a href="https://github.com/plumkewe" target="_blank" class="underline font-medium hover-text-effect">Lyubomyr Malay</a>
                     `;
@@ -1174,6 +1272,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Apply initial high contrast setting
             setHighContrastSetting(settingsConfig.highContrast);
+
+            // Apply initial dyslexic font setting
+            setDyslexicFontSetting(settingsConfig.dyslexicFont);
 
             // Load translations and apply them
             loadTranslations(currentLanguage).then(success => {
@@ -1223,6 +1324,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let map = null; // Istanza Leaflet
             let svgOverlay = null; // Layer SVG corrente
             let selectedSearchResultIndex = -1;
+
+            // Sistema di lazy loading e caching per le mappe SVG
+            const svgCache = new Map();
+            const MAX_CACHE_SIZE = 10; // Massimo numero di SVG in cache
+            const cacheAccessOrder = []; // Per gestire LRU (Least Recently Used)
 
             // Suggerimenti per la ricerca
             let searchSuggestions = [
@@ -1538,6 +1644,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         description: t('settings_high_contrast_description'),
                         checked: settingsConfig.highContrast,
                         onToggle: setHighContrastSetting
+                    },
+                    {
+                        key: 'dyslexicFont',
+                        label: t('settings_dyslexic_font'),
+                        description: t('settings_dyslexic_font_description'),
+                        checked: settingsConfig.dyslexicFont,
+                        onToggle: setDyslexicFontSetting
                     }
                 ];
 
@@ -1651,45 +1764,39 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const controlsContainer = document.createElement('div');
                 controlsContainer.className = 'text-size-controls flex-shrink-0';
 
-                const decreaseBtn = document.createElement('button');
-                decreaseBtn.className = 'text-size-btn';
-                decreaseBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">remove</span>';
-                decreaseBtn.title = 'Riduci dimensione testo';
-
-                const increaseBtn = document.createElement('button');
-                increaseBtn.className = 'text-size-btn';
-                increaseBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">add</span>';
-                increaseBtn.title = 'Aumenta dimensione testo';
-
                 const textSizes = ['text-small', 'text-normal', 'text-large', 'text-xlarge'];
+                const sizeLabels = ['A-', 'A', 'A+', 'A++'];
+
+                const buttons = [];
+
+                textSizes.forEach((size, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'text-size-btn';
+                    btn.textContent = sizeLabels[index];
+                    btn.title = `Imposta dimensione: ${sizeLabels[index]}`;
+                    btn.dataset.size = size;
+                    
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        setTextSizeSetting(size);
+                    });
+
+                    buttons.push(btn);
+                    controlsContainer.appendChild(btn);
+                });
 
                 function updateTextSize() {
                     const currentSize = textSizes.findIndex(size => document.body.classList.contains(size));
-                    const index = currentSize >= 0 ? currentSize : 1; // default to normal
-                    decreaseBtn.disabled = index === 0;
-                    increaseBtn.disabled = index === textSizes.length - 1;
+                    const index = currentSize >= 0 ? currentSize : 1;
+                    
+                    buttons.forEach((btn, i) => {
+                        if (i === index) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
                 }
-
-                decreaseBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const currentSize = textSizes.findIndex(size => document.body.classList.contains(size));
-                    const index = currentSize >= 0 ? currentSize : 1;
-                    if (index > 0) {
-                        setTextSizeSetting(textSizes[index - 1]);
-                    }
-                });
-
-                increaseBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const currentSize = textSizes.findIndex(size => document.body.classList.contains(size));
-                    const index = currentSize >= 0 ? currentSize : 1;
-                    if (index < textSizes.length - 1) {
-                        setTextSizeSetting(textSizes[index + 1]);
-                    }
-                });
-
-                controlsContainer.appendChild(decreaseBtn);
-                controlsContainer.appendChild(increaseBtn);
 
                 wrapper.appendChild(textContainer);
                 wrapper.appendChild(controlsContainer);
@@ -1722,36 +1829,43 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     textContainer.appendChild(descriptionSpan);
                 }
 
-                const selectContainer = document.createElement('div');
-                selectContainer.className = 'flex-shrink-0';
-
-                const select = document.createElement('select');
-                select.className = 'text-size-btn';
-                select.style.minWidth = '100px';
-                select.style.cursor = 'pointer';
+                const controlsContainer = document.createElement('div');
+                controlsContainer.className = 'language-selector flex-shrink-0';
 
                 const languages = [
-                    { code: 'it', label: t('language_italian') },
-                    { code: 'en', label: t('language_english') }
+                    { code: 'it', label: 'IT' },
+                    { code: 'en', label: 'EN' }
                 ];
 
+                const buttons = [];
+
                 languages.forEach(lang => {
-                    const option = document.createElement('option');
-                    option.value = lang.code;
-                    option.textContent = lang.label;
-                    option.selected = currentLanguage === lang.code;
-                    select.appendChild(option);
+                    const btn = document.createElement('button');
+                    btn.className = 'language-btn';
+                    btn.textContent = lang.label;
+                    btn.title = lang.code === 'it' ? 'Italiano' : 'English';
+                    btn.dataset.lang = lang.code;
+                    
+                    if (currentLanguage === lang.code) {
+                        btn.classList.add('active');
+                    }
+                    
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        if (currentLanguage !== lang.code) {
+                            await setLanguageSetting(lang.code);
+                            // Update active state
+                            buttons.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                        }
+                    });
+
+                    buttons.push(btn);
+                    controlsContainer.appendChild(btn);
                 });
 
-                select.addEventListener('change', async (e) => {
-                    e.stopPropagation();
-                    const newLang = e.target.value;
-                    await setLanguageSetting(newLang);
-                });
-
-                selectContainer.appendChild(select);
                 wrapper.appendChild(textContainer);
-                wrapper.appendChild(selectContainer);
+                wrapper.appendChild(controlsContainer);
 
                 return wrapper;
             }
@@ -1786,6 +1900,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     document.body.classList.add('high-contrast');
                 } else {
                     document.body.classList.remove('high-contrast');
+                }
+                syncSettingsToggles();
+            }
+
+            function setDyslexicFontSetting(isEnabled) {
+                settingsConfig.dyslexicFont = isEnabled;
+                localStorage.setItem('dyslexicFontEnabled', isEnabled);
+                if (isEnabled) {
+                    document.body.classList.add('dyslexic-font');
+                } else {
+                    document.body.classList.remove('dyslexic-font');
                 }
                 syncSettingsToggles();
             }
@@ -1850,6 +1975,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             break;
                         case 'highContrast':
                             input.checked = settingsConfig.highContrast;
+                            break;
+                        case 'dyslexicFont':
+                            input.checked = settingsConfig.dyslexicFont;
                             break;
                         default:
                             break;
@@ -2398,9 +2526,26 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             function checkForTopView(building, floor) {
                 const topViewPath = `polo/${selectedPolo}/edificio/${building}/piano/${floor}-top.svg`;
+                const cacheKey = `${selectedPolo}/${building}/${floor}/top-exists`;
+                
+                // Controlla prima nella cache
+                if (svgCache.has(cacheKey)) {
+                    const exists = svgCache.get(cacheKey);
+                    if (exists) {
+                        viewControls.classList.remove('hidden');
+                        topViewBtn.classList.remove('hidden');
+                    } else {
+                        viewControls.classList.add('hidden');
+                    }
+                    return;
+                }
+                
+                // Se non in cache, fai la richiesta HEAD
                 fetch(topViewPath, { method: 'HEAD' })
                     .then(response => {
-                        if (response.ok) {
+                        const exists = response.ok;
+                        svgCache.set(cacheKey, exists);
+                        if (exists) {
                             viewControls.classList.remove('hidden');
                             topViewBtn.classList.remove('hidden');
                         } else {
@@ -2408,8 +2553,119 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                     })
                     .catch(() => {
+                        svgCache.set(cacheKey, false);
                         viewControls.classList.add('hidden');
                     });
+            }
+
+            // Funzione per gestire la cache LRU (Least Recently Used)
+            function manageCacheSize(cacheKey) {
+                // Aggiorna l'ordine di accesso
+                const existingIndex = cacheAccessOrder.indexOf(cacheKey);
+                if (existingIndex > -1) {
+                    cacheAccessOrder.splice(existingIndex, 1);
+                }
+                cacheAccessOrder.push(cacheKey);
+                
+                // Rimuovi elementi più vecchi se la cache è piena
+                while (cacheAccessOrder.length > MAX_CACHE_SIZE) {
+                    const oldestKey = cacheAccessOrder.shift();
+                    svgCache.delete(oldestKey);
+                }
+            }
+
+            // Funzione per precaricare una SVG in background
+            function preloadSVG(building, floor, viewType = 'top') {
+                const cacheKey = `${selectedPolo}/${building}/${floor}/${viewType}`;
+                
+                // Se già in cache, non ricaricare
+                if (svgCache.has(cacheKey)) {
+                    return Promise.resolve(svgCache.get(cacheKey));
+                }
+                
+                const svgPath = viewType === 'top'
+                    ? `polo/${selectedPolo}/edificio/${building}/piano/${floor}-top.svg`
+                    : `polo/${selectedPolo}/edificio/${building}/piano/${floor}.svg`;
+                
+                return fetch(svgPath)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Planimetria non trovata');
+                        }
+                        return response.text();
+                    })
+                    .then(svgData => {
+                        // Parse e processa SVG
+                        const parser = new DOMParser();
+                        const svgDoc = parser.parseFromString(svgData, 'image/svg+xml');
+                        const svgElement = svgDoc.documentElement;
+                        
+                        // Strip embedded tooltips
+                        svgElement.querySelectorAll('title, desc').forEach(node => node.remove());
+                        svgElement.querySelectorAll('[title]').forEach(el => el.removeAttribute('title'));
+                        svgElement.querySelectorAll('[data-tooltip]').forEach(el => el.removeAttribute('data-tooltip'));
+                        
+                        // Ottieni viewBox o dimensioni SVG
+                        const viewBox = svgElement.getAttribute('viewBox');
+                        let width, height;
+                        
+                        if (viewBox) {
+                            const parts = viewBox.split(/\s+|,/);
+                            width = parseFloat(parts[2]);
+                            height = parseFloat(parts[3]);
+                        } else {
+                            width = parseFloat(svgElement.getAttribute('width')) || 1000;
+                            height = parseFloat(svgElement.getAttribute('height')) || 1000;
+                        }
+                        
+                        // Serializza SVG modificato
+                        const serializer = new XMLSerializer();
+                        const modifiedSvgData = serializer.serializeToString(svgElement);
+                        const svgDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(modifiedSvgData)));
+                        
+                        // Salva in cache
+                        const cacheData = {
+                            dataUrl: svgDataUrl,
+                            bounds: [[0, 0], [height, width]],
+                            width,
+                            height
+                        };
+                        
+                        svgCache.set(cacheKey, cacheData);
+                        manageCacheSize(cacheKey);
+                        
+                        return cacheData;
+                    })
+                    .catch(error => {
+                        console.warn(`Preload failed for ${svgPath}:`, error);
+                        return null;
+                    });
+            }
+
+            // Funzione per precaricare i piani adiacenti
+            function preloadAdjacentFloors(building, currentFloor) {
+                if (!data.polo || !data.polo[selectedPolo]) return;
+                
+                const edificio = data.polo[selectedPolo].edificio[building];
+                if (!edificio || !edificio.piano) return;
+                
+                const floors = Object.keys(edificio.piano).map(f => parseInt(f)).sort((a, b) => a - b);
+                const currentFloorInt = parseInt(currentFloor);
+                const currentIndex = floors.indexOf(currentFloorInt);
+                
+                if (currentIndex === -1) return;
+                
+                // Precarica piano sopra
+                if (currentIndex < floors.length - 1) {
+                    const nextFloor = floors[currentIndex + 1].toString();
+                    setTimeout(() => preloadSVG(building, nextFloor, currentView), 100);
+                }
+                
+                // Precarica piano sotto
+                if (currentIndex > 0) {
+                    const prevFloor = floors[currentIndex - 1].toString();
+                    setTimeout(() => preloadSVG(building, prevFloor, currentView), 200);
+                }
             }
 
             function loadSVG(building, floor, viewType = 'top', viewParams = null, roomData = null) {
@@ -2419,6 +2675,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Aggiungi classe loading per l'animazione
                 viewerContainer.classList.add('loading');
                 
+                const cacheKey = `${selectedPolo}/${building}/${floor}/${viewType}`;
+                
+                // Controlla prima se l'SVG è già in cache
+                if (svgCache.has(cacheKey)) {
+                    const cachedData = svgCache.get(cacheKey);
+                    manageCacheSize(cacheKey); // Aggiorna ordine di accesso
+                    
+                    // Usa i dati dalla cache
+                    setTimeout(() => {
+                        renderCachedSVG(cachedData, viewParams, roomData);
+                        // Precarica piani adiacenti in background
+                        preloadAdjacentFloors(building, floor);
+                    }, 300);
+                    
+                    return;
+                }
+                
+                // Se non in cache, carica la SVG
                 const svgPath = viewType === 'top'
                     ? `polo/${selectedPolo}/edificio/${building}/piano/${floor}-top.svg`
                     : `polo/${selectedPolo}/edificio/${building}/piano/${floor}.svg`;
@@ -2461,54 +2735,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             const modifiedSvgData = serializer.serializeToString(svgElement);
                             const svgDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(modifiedSvgData)));
                             
-                            // Crea bounds per Leaflet (coordinate semplici basate sulle dimensioni SVG)
-                            const bounds = [[0, 0], [height, width]];
+                            // Salva in cache
+                            const cacheData = {
+                                dataUrl: svgDataUrl,
+                                bounds: [[0, 0], [height, width]],
+                                width,
+                                height
+                            };
                             
-                            // Inizializza o re-inizializza la mappa
-                            if (!map) {
-                                map = L.map('map', {
-                                    crs: L.CRS.Simple,
-                                    minZoom: -2,
-                                    maxZoom: 4,
-                                    zoomControl: false,
-                                    attributionControl: false
-                                });
-                            } else {
-                                // Rimuovi il layer SVG precedente se esiste
-                                if (svgOverlay) {
-                                    map.removeLayer(svgOverlay);
-                                }
-                            }
+                            svgCache.set(cacheKey, cacheData);
+                            manageCacheSize(cacheKey);
                             
-                            // Crea e aggiungi overlay SVG
-                            svgOverlay = L.imageOverlay(svgDataUrl, bounds).addTo(map);
+                            // Renderizza
+                            renderCachedSVG(cacheData, viewParams, roomData);
                             
-                            // Aggiungi listener per aggiornare URL
-                            map.on('moveend zoomend', () => {
-                                updateURL(true);
-                            });
-                            
-                            // Imposta la vista iniziale
-                            // Priorità: 1) coordinate della room, 2) viewParams dall'URL, 3) fitBounds di default
-                            if (roomData && roomData.coordinates && roomData.coordinates.x != null && roomData.coordinates.y != null) {
-                                // Usa le coordinate dell'aula se presenti
-                                const center = [parseFloat(roomData.coordinates.y), parseFloat(roomData.coordinates.x)];
-                                const zoom = roomData.coordinates.zoom != null ? parseFloat(roomData.coordinates.zoom) : 2;
-                                map.setView(center, zoom);
-                            } else if (viewParams && viewParams.x && viewParams.y && viewParams.z) {
-                                // Usa i parametri salvati dall'URL
-                                const center = [parseFloat(viewParams.y), parseFloat(viewParams.x)];
-                                const zoom = parseFloat(viewParams.z);
-                                map.setView(center, zoom);
-                            } else {
-                                // Adatta alla vista
-                                map.fitBounds(bounds);
-                            }
-                            
-                            // Rimuovi la classe loading per il fade in
-                            setTimeout(() => {
-                                viewerContainer.classList.remove('loading');
-                            }, 50);
+                            // Precarica piani adiacenti in background
+                            preloadAdjacentFloors(building, floor);
                         }, 300); // Tempo sincronizzato con la durata della transizione CSS
                     })
                     .catch(error => {
@@ -2518,6 +2760,55 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             viewerContainer.classList.remove('loading');
                         }, 300);
                     });
+            }
+
+            // Funzione helper per renderizzare SVG dalla cache
+            function renderCachedSVG(cacheData, viewParams = null, roomData = null) {
+                // Inizializza o re-inizializza la mappa
+                if (!map) {
+                    map = L.map('map', {
+                        crs: L.CRS.Simple,
+                        minZoom: -2,
+                        maxZoom: 4,
+                        zoomControl: false,
+                        attributionControl: false
+                    });
+                } else {
+                    // Rimuovi il layer SVG precedente se esiste
+                    if (svgOverlay) {
+                        map.removeLayer(svgOverlay);
+                    }
+                }
+                
+                // Crea e aggiungi overlay SVG
+                svgOverlay = L.imageOverlay(cacheData.dataUrl, cacheData.bounds).addTo(map);
+                
+                // Aggiungi listener per aggiornare URL
+                map.on('moveend zoomend', () => {
+                    updateURL(true);
+                });
+                
+                // Imposta la vista iniziale
+                // Priorità: 1) coordinate della room, 2) viewParams dall'URL, 3) fitBounds di default
+                if (roomData && roomData.coordinates && roomData.coordinates.x != null && roomData.coordinates.y != null) {
+                    // Usa le coordinate dell'aula se presenti
+                    const center = [parseFloat(roomData.coordinates.y), parseFloat(roomData.coordinates.x)];
+                    const zoom = roomData.coordinates.zoom != null ? parseFloat(roomData.coordinates.zoom) : 2;
+                    map.setView(center, zoom);
+                } else if (viewParams && viewParams.x && viewParams.y && viewParams.z) {
+                    // Usa i parametri salvati dall'URL
+                    const center = [parseFloat(viewParams.y), parseFloat(viewParams.x)];
+                    const zoom = parseFloat(viewParams.z);
+                    map.setView(center, zoom);
+                } else {
+                    // Adatta alla vista
+                    map.fitBounds(cacheData.bounds);
+                }
+                
+                // Rimuovi la classe loading per il fade in
+                setTimeout(() => {
+                    viewerContainer.classList.remove('loading');
+                }, 50);
             }
 
             // Rimuovi la classe no-transition per abilitare le animazioni dopo il caricamento iniziale

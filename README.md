@@ -288,7 +288,8 @@ Digitando `condividi` o `share`, potrai facilmente copiare il **link al sito** o
 
 #### Accessibilità 
 
-Attualmente è possibile aggiungere **pulsanti aggiuntivi** per alcune funzioni come **zoom** e **condivisione** ed attivare la **modalità ad alto contrasto**. Inoltre, si può anche aumentare **la dimensione del testo.**
+Attualmente è possibile aggiungere **pulsanti extra** per funzioni come **zoom** e **condivisione,** oltre ad attivare la **modalità ad alto contrasto.**
+È inoltre possibile aumentare **la dimensione del testo** e attivare il **font per dislessia (OpenDyslexic).**
 
 Puoi accedere alle **impostazioni di accessibilità** digitando `impostazioni` o `settings` nella barra di ricerca.  
 
@@ -327,17 +328,22 @@ Al momento sono disponibili le seguenti scorciatoie:
 
 #### Path sharing
 
-Per impostazione predefinita è attivo il **path sharing** di *polo*, *edificio* e *piano*. Questo significa che condividendo un link come:
+Per impostazione predefinita è attivo il **path sharing** di *polo*, *edificio*, *piano* e *coordinate*.  
+Questo significa che, condividendo un link come:
 
 ```
-https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=a&f=0&v=top
+https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=a&f=0&v=top&x=504.00&y=322.42&z=1.00
 ```
 
-la parte `?p=fibonacci&b=a&f=0&v=top` farà sì che chi apre il link visualizzi **lo stesso polo, edificio e piano** di chi lo ha condiviso.
+la parte  
+```
+?p=fibonacci&b=a&f=0&v=top&x=504.00&y=322.42&z=1.00
+```
+permetterà a chi apre il link di visualizzare **lo stesso polo, edificio, piano** e anche l’**elemento evidenziato** di chi lo ha condiviso.
 
-Se non funziona, apri la barra di ricerca, digita `impostazioni` e verifica che l’opzione **“Condividi polo/edificio/piano”** sia attiva.
+Se la funzione non dovesse funzionare, apri la **barra di ricerca**, digita `impostazioni` e verifica che le opzioni **“Condividi polo/edificio/piano”** e **“Condividi coordinate mappa”** siano attive.
 
-È disponibile anche la condivisione delle **coordinate**: chi apre il link vedrà l’elemento esatto evidenziato sulla mappa.
+
 
 <hr>
 
@@ -348,6 +354,7 @@ In futuro verranno aggiunte altre **lingue!**
 
 Vuoi contribuire? Apri una issue oppure inviami un’email a: lyubomyr.malay@icloud.com **Grazie!**
 
+<hr>
 
 ### Funzionalità che vorrei aggiungere
 

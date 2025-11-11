@@ -115,6 +115,14 @@
     "original": "Sfondo bianco con testo nero per migliore accessibilità",
     "translation": "Sfondo bianco con testo nero per migliore accessibilità"
   },
+  "settings_dyslexic_font": {
+    "original": "Font per dislessia",
+    "translation": "Font per dislessia"
+  },
+  "settings_dyslexic_font_description": {
+    "original": "Usa il font OpenDyslexic per migliorare la leggibilità",
+    "translation": "Usa il font OpenDyslexic per migliorare la leggibilità"
+  },
   "settings_text_size": {
     "original": "Dimensione testo",
     "translation": "Dimensione testo"
@@ -150,6 +158,10 @@
   "made_with": {
     "original": "Fatto con",
     "translation": "Fatto con"
+  },
+  "made_and": {
+    "original": "e",
+    "translation": "e"
   },
   "made_by": {
     "original": "da",
