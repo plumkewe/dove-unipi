@@ -425,7 +425,10 @@
                 "id": "fib_h-lab-b-0",
                 "nome": "Aula H-Lab",
                 "alias": [
-                  "H-Lab"
+                  "H-Lab",
+                  "HLab",
+                  "H Lab",
+                  "Laboratorio H"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -444,8 +447,9 @@
                 "nome": "Aula I-Lab",
                 "alias": [
                   "I-Lab",
-                  "Ilab",
-                  "labI"
+                  "ILab",
+                  "I Lab",
+                  "Laboratorio I"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -482,7 +486,10 @@
                 "id": "fib_m-lab-b-0",
                 "nome": "Aula M-Lab",
                 "alias": [
-                  "M-Lab"
+                  "M-Lab",
+                  "MLab",
+                  "M Lab",
+                  "Laboratorio M"
                 ],
                 "type": "laboratorio",
                 "note": "",

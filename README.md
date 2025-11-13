@@ -2,7 +2,7 @@
   <img src="assets/logo/logo.svg" alt="DOVE? UniPI Logo" width="200">
 </p>
 
-<h1 align="center"> DOVE? UniPi </h1>
+<h1 align="center"> DOVE?UniPi </h1>
 
 <p align="center">Un'applicazione web single-page (SPA) per esplorare gli edifici, i piani e le aule del Polo Fibonacci dell’Università di Pisa.</p>
 
@@ -14,6 +14,8 @@
 <p align="center">
   <img src="assets/screenshots/desktop.png" alt="Screenshot dell'applicazione su desktop">
 </p>
+
+> Per rendere il progetto ulteriormente **accessibile a TUTTI**, oltre a un'interfaccia intuitiva e diretta, è disponibile una [**guida**](assets/screenshots/spiegazione.png) che spiega i vari elementi e pulsanti dell'applicazione.
 
 
 ## Indice
@@ -33,6 +35,7 @@
     - [Keyboard shortcuts](#keyboard-shortcuts)
     - [Path sharing](#path-sharing)
     - [Lingue supportate](#lingue-supportate)
+    - [Altri dati](#altri-dati)
   - [Funzionalità che vorrei aggiungere](#funzionalità-che-vorrei-aggiungere)
 - [Problemi noti](#problemi-noti)
   
@@ -89,7 +92,8 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 │   │   └── logo.svg
 │   └── screenshots/
 ├── data/
-│   └── rooms.json      <- file importante per far funzionare tutto
+│   ├── rooms.json      <- file importante per far funzionare tutto
+│   └── facilities.json 
 ├── locales             <- cartella per le traduzioni 
 │   └── en.json
 │   └── it.json
@@ -207,7 +211,10 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
 graph LR
     A[Planimetrie UniPi] -->|Conversione DWG/SVG| B[Mappe Edifici]
     C[University Planner] -->|Dati Aule| D[rooms.json]
+    G[Contributori] -->|Raccolta Dati| H[facilities.json]
+    G -->|Raccolta Dati| D
     D --> E[Applicazione Web]
+    H --> E
     B --> E
     E --> F[Interfaccia Utente]
 ```
@@ -305,12 +312,15 @@ graph TB
 Effettua una ricerca non solo sul nome dell’aula ma anche sui suoi **alias**. Una volta selezionata, l’aula verrà automaticamente zoomata sulla sua posizione (ovviamente, se le coordinate sono presenti nel file rooms.json).
 
 Supporta inoltre **filtri avanzati**: ad esempio, scrivendo `> 200` verranno mostrate le aule con capienza superiore a 200.  
-Sono supportati gli operatori: `<`, `>`, `==`, `>=`, `<=`.
+Sono supportati gli operatori: `<`, `>`, `==`, `=`, `>=`, `<=`.
 
 Puoi accedere alle **impostazioni** digitando `impostazioni` o `settings` nella barra di ricerca.  
 Da lì puoi abilitare anche le **funzionalità sperimentali**.
 
 Digitando `condividi` o `share`, potrai facilmente copiare il **link al sito** o a questa **repository** per condividerlo.
+
+Usa le frecce <kbd>↑</kbd> e <kbd>↓</kbd> per scorrere i risultati e premi <kbd>Invio</kbd> per selezionarne uno.
+La ricerca si avvia automaticamente mentre digiti — non serve cliccare sulla barra di ricerca.
 
 <hr>
 
@@ -371,16 +381,34 @@ permetterà a chi apre il link di visualizzare **lo stesso polo, edificio, piano
 
 Se la funzione non dovesse funzionare, apri la **barra di ricerca**, digita `impostazioni` e verifica che le opzioni **“Condividi polo/edificio/piano”** e **“Condividi coordinate mappa”** siano attive.
 
-
-
 <hr>
 
 #### Lingue supportate
 
 Attualmente sono supportate due lingue: **italiano** e **inglese.**
+
 In futuro verranno aggiunte altre **lingue!**
 
-Vuoi contribuire? Apri una issue oppure inviami un’email a: lyubomyr.malay@icloud.com **Grazie!**
+> [!TIP]
+> **Vuoi contribuire con una traduzione?**  
+> Apri una [issue](https://github.com/plumkewe/dove-unipi/issues) oppure inviami un'email a: [lyubomyr.malay@icloud.com](mailto:lyubomyr.malay@icloud.com)  
+> **Grazie per il supporto!**
+
+<hr>
+
+#### Altri dati
+
+È disponibile in **versione alfa** la possibilità di visualizzare i **distributori d'acqua** presenti negli edifici del Polo Fibonacci.
+
+Per attivarla, apri la **barra di ricerca**, digita `impostazioni` e assicurati che l'opzione **"Mostra erogatori d'acqua (ALFA)"** sia attiva.
+
+Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risultati saranno evidenziati con un **colore blu**, come omaggio al progetto [**CoSA** dell'Università di Pisa ↗](https://sostenibile.unipi.it)
+
+> [!TIP]
+> **Hai trovato distributori non mappati?**  
+> Ci servono dati sulla posizione di **distributori d'acqua**, **distributori di caffè**, **distributori di cibo...**
+> Apri una [issue](https://github.com/plumkewe/dove-unipi/issues) oppure inviami un'email a: [lyubomyr.malay@icloud.com](mailto:lyubomyr.malay@icloud.com)  
+> **Grazie per il supporto!**
 
 <hr>
 

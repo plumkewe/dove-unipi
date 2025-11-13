@@ -182,8 +182,29 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             width: 100%; /* Forza la larghezza al 100% del contenitore */
             box-sizing: border-box; /* Include padding nel calcolo della larghezza */
         }
-        .search-result-item:hover {
-            background-color: rgba(0, 0, 0, 0.1); /* 10% black opacity */
+        .search-result-item {
+            position: relative;
+        }
+        .search-result-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out;
+            pointer-events: none;
+        }
+        .search-result-item:hover::before {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .search-result-item.selected::before {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        /* Stile specifico per gli erogatori d'acqua */
+        .search-result-item.water-dispenser {
+            background-color: rgb(216, 220, 242);
         }
         .search-result-item .title {
             color: #1F2937; /* gray-800 */
@@ -204,9 +225,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .search-result-item:hover .title,
         .search-result-item:hover .details {
             color: #1F2937; /* gray-800 */
-        }
-        .search-result-item.selected {
-            background-color: rgba(0, 0, 0, 0.1); /* 10% black opacity */
         }
         .search-result-item.selected .title,
         .search-result-item.selected .details {
@@ -281,6 +299,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         /* Nascondi l'attribuzione di Leaflet */
         .leaflet-control-attribution {
             display: none;
+        }
+
+        /* Stili per i marker degli erogatori d'acqua */
+        .water-dispenser-marker {
+            background: none !important;
+            border: none !important;
         }
 
         /* Stili per i tooltip */
@@ -1207,6 +1231,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const storedHighContrast = localStorage.getItem('highContrastEnabled');
             const storedDyslexicFont = localStorage.getItem('dyslexicFontEnabled');
             const storedTextSize = localStorage.getItem('textSizeEnabled');
+            const storedShowWaterDispensers = localStorage.getItem('showWaterDispensersEnabled');
             
             // Detect browser language automatically
             function detectBrowserLanguage() {
@@ -1223,6 +1248,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 sharePath: storedSharePath ? storedSharePath === 'true' : true,
                 highContrast: storedHighContrast ? storedHighContrast === 'true' : false,
                 dyslexicFont: storedDyslexicFont ? storedDyslexicFont === 'true' : false,
+                showWaterDispensers: storedShowWaterDispensers ? storedShowWaterDispensers === 'true' : false,
                 language: storedLanguage
             };
 
@@ -1441,6 +1467,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             });
 
             let data = {};
+            let facilitiesData = {};
             let selectedPolo = '';
             let selectedBuilding = '';
             let selectedFloor = '0';
@@ -1448,6 +1475,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let map = null; // Istanza Leaflet
             let svgOverlay = null; // Layer SVG corrente
             let selectedSearchResultIndex = -1;
+            let waterDispenserMarkers = []; // Array per i marker degli erogatori d'acqua
 
             // Sistema di lazy loading e caching per le mappe SVG
             const svgCache = new Map();
@@ -1625,6 +1653,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     );
                 }
 
+                // Cerca nelle aule
                 for (const poloName in data.polo) {
                     const polo = data.polo[poloName];
                     for (const buildingName in polo.edificio) {
@@ -1660,6 +1689,40 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                     }
                 }
+
+                // Cerca negli erogatori d'acqua se la funzionalità è attiva
+                if (settingsConfig.showWaterDispensers && facilitiesData.polo) {
+                    for (const poloName in facilitiesData.polo) {
+                        const polo = facilitiesData.polo[poloName];
+                        if (!polo.edificio) continue;
+                        
+                        for (const buildingName in polo.edificio) {
+                            const building = polo.edificio[buildingName];
+                            if (!building.piano) continue;
+                            
+                            for (const floorName in building.piano) {
+                                const dispensers = building.piano[floorName];
+                                if (Array.isArray(dispensers)) {
+                                    dispensers.forEach(dispenser => {
+                                        const dispenserNameLower = dispenser.nome.toLowerCase();
+                                        const aliasLower = Array.isArray(dispenser.alias) ? dispenser.alias.map(a => a.toLowerCase()) : [];
+                                        
+                                        if (dispenserNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower))) {
+                                            results.push({
+                                                polo: poloName,
+                                                edificio: buildingName,
+                                                piano: floorName,
+                                                room: dispenser,
+                                                isWaterDispenser: true
+                                            });
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+
                 displaySearchResults(results, matchesSettingsQuery);
             }
 
@@ -1718,6 +1781,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         });
                     } else {
                         const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
+                        const isWaterDispenser = result.isWaterDispenser || false;
+                        
+                        // Aggiungi classe per gli erogatori d'acqua
+                        if (isWaterDispenser) {
+                            resultElement.classList.add('water-dispenser');
+                        }
+                        
                         resultElement.innerHTML = `
                             <div class="title">${result.room.nome}</div>
                             <div class="details">
@@ -1771,6 +1841,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         description: t('settings_extra_controls_description'),
                         checked: accessibilityToggle.checked,
                         onToggle: setExtraControlsSetting
+                    },
+                    {
+                        key: 'waterDispensers',
+                        label: t('settings_water_dispensers'),
+                        description: t('settings_water_dispensers_description'),
+                        checked: settingsConfig.showWaterDispensers,
+                        onToggle: setWaterDispensersSetting
                     },
                     {
                         key: 'highContrast',
@@ -2049,6 +2126,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 syncSettingsToggles();
             }
 
+            function setWaterDispensersSetting(isEnabled) {
+                settingsConfig.showWaterDispensers = isEnabled;
+                localStorage.setItem('showWaterDispensersEnabled', isEnabled);
+                if (isEnabled) {
+                    showWaterDispensers();
+                } else {
+                    hideWaterDispensers();
+                }
+                syncSettingsToggles();
+            }
+
             function setTextSizeSetting(sizeClass) {
                 const textSizes = ['text-small', 'text-normal', 'text-large', 'text-xlarge'];
                 // Remove all text size classes
@@ -2117,6 +2205,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             break;
                         case 'extraControls':
                             input.checked = accessibilityToggle.checked;
+                            break;
+                        case 'waterDispensers':
+                            input.checked = settingsConfig.showWaterDispensers;
                             break;
                         case 'highContrast':
                             input.checked = settingsConfig.highContrast;
@@ -2426,6 +2517,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const jsonData = await response.json();
                         data = jsonData;
                         dataLoaded = true;
+                        
+                        // Carica anche il file facilities.json
+                        try {
+                            const facilitiesResponse = await fetch('data/facilities.json');
+                            facilitiesData = await facilitiesResponse.json();
+                        } catch (facilitiesError) {
+                            console.error('Errore nel caricamento di facilities.json:', facilitiesError);
+                            facilitiesData = {}; // Fallback a oggetto vuoto
+                        }
+                        
                         populatePolos(Object.keys(data.polo));
                         handleInitialLoad(); // Ora le traduzioni sono sicuramente caricate
                     } catch (error) {
@@ -2727,6 +2828,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (currentView === viewType && !forceReload) return;
 
                 currentView = viewType;
+                
+                // Nascondi i marker degli erogatori d'acqua quando si passa alla vista prospettica
+                if (viewType === 'perspective') {
+                    hideWaterDispensers();
+                }
+                
                 if (selectedFloor !== "?")
                     loadSVG(selectedBuilding, selectedFloor, currentView, viewParams, roomData);
 
@@ -2884,6 +2991,53 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             }
 
+            // Funzioni per gestire i marker degli erogatori d'acqua
+            function showWaterDispensers() {
+                if (!map || !facilitiesData || !selectedPolo || !selectedBuilding || !selectedFloor) return;
+                
+                // Rimuovi marker esistenti
+                hideWaterDispensers();
+                
+                try {
+                    const facilities = facilitiesData.polo?.[selectedPolo]?.edificio?.[selectedBuilding]?.piano?.[selectedFloor];
+                    if (!facilities || !Array.isArray(facilities)) return;
+                    
+                    facilities.forEach(facility => {
+                        if (facility.type === 'erogatore_acqua' && facility.coordinates) {
+                            const { x, y } = facility.coordinates;
+                            if (x != null && y != null) {
+                                // Crea un'icona HTML personalizzata con dimensioni fisse (non scala con lo zoom)
+                                const icon = L.divIcon({
+                                    html: `<span class="material-symbols-outlined" style="font-size: 24px; color: #3B82F6;">water_ec</span>`,
+                                    className: 'water-dispenser-marker',
+                                    iconSize: [24, 24],
+                                    iconAnchor: [12, 12]
+                                });
+                                
+                                const marker = L.marker([parseFloat(y), parseFloat(x)], { 
+                                    icon: icon,
+                                    interactive: false // Rende il marker non interattivo
+                                });
+                                
+                                marker.addTo(map);
+                                waterDispenserMarkers.push(marker);
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Errore nel mostrare gli erogatori d\'acqua:', error);
+                }
+            }
+            
+            function hideWaterDispensers() {
+                if (!map) return;
+                
+                waterDispenserMarkers.forEach(marker => {
+                    map.removeLayer(marker);
+                });
+                waterDispenserMarkers = [];
+            }
+
             function loadSVG(building, floor, viewType = 'top', viewParams = null, roomData = null) {
                 // Controlla se la vista top è disponibile
                 checkForTopView(building, floor);
@@ -3025,6 +3179,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 setTimeout(() => {
                     viewerContainer.classList.remove('loading');
                 }, 50);
+                
+                // Mostra gli erogatori d'acqua solo se il setting è attivo E la vista è "top"
+                if (settingsConfig.showWaterDispensers && currentView === 'top') {
+                    showWaterDispensers();
+                }
             }
 
             // Rimuovi la classe no-transition per abilitare le animazioni dopo il caricamento iniziale

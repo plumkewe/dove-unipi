@@ -1,0 +1,93 @@
+{
+  "polo": {
+    "fibonacci": {
+      "edificio": {
+        "a": {
+          "piano": {
+            "0": [
+                {
+                "id": "fib_erogatore-a-0-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "coordinates": {
+                    "x": 503,
+                    "y": 153,
+                    "zoom": 2
+                }
+              }
+            ],
+            "1": [],
+            "2": []
+          }
+        },
+        "b": {
+          "piano": {
+            "0": [
+              {
+                "id": "fib_erogatore-b-0-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "coordinates": {
+                  "x": 358,
+                  "y": 259,
+                  "zoom": 2
+                }
+              }
+            ],
+            "1": [],
+            "2": []
+          }
+        },
+        "c": {
+          "piano": {
+            "-1": [],
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        },
+        "d": {
+          "piano": {
+            "0": [
+              {
+                "id": "fib_erogatore-d-0-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "coordinates": {
+                  "x": 252,
+                  "y": 279,
+                  "zoom": 2
+                }
+              }
+            ]
+          }
+        },
+        "e": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        }
+      }
+    }
+  }
+}

@@ -302,5 +302,13 @@
   "room_detail_blackboard": {
     "original": "Lavagna: %s",
     "translation": "Blackboard: %s"
+  },
+  "settings_water_dispensers": {
+    "original": "Mostra erogatori d'acqua (ALFA)",
+    "translation": "Show water dispensers (ALPHA)"
+  },
+  "settings_water_dispensers_description": {
+    "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
+    "translation": "Display water dispensers location on the map"
   }
 }
