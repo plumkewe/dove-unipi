@@ -68,8 +68,71 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="robots" content="index, follow">
     <meta property="og:site_name" content="DOVE? UniPi">
     <meta property="og:locale" content="it_IT">
+    <meta property="og:locale:alternate" content="en_US">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://plumkewe.github.io/dove-unipi/">
+
+    <!-- Google Verification-->
+    <meta name="google-site-verification" content="xlBn5i5J3qQtfPNRFDym6OA-74TvolPdXLckGrViAvM" />
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="IT-PI">
+    <meta name="geo.placename" content="Pisa, Italy">
+    <meta name="geo.position" content="43.7228;10.4017">
+    <meta name="ICBM" content="43.7228, 10.4017">
     
     <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+    
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "DOVE? UniPi",
+      "alternateName": "DOVE UniPi - Navigatore Polo Fibonacci",
+      "url": "https://plumkewe.github.io/dove-unipi/",
+      "description": "Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa. Trova rapidamente aule, dipartimenti e servizi.",
+      "applicationCategory": "NavigationApplication",
+      "operatingSystem": "Any",
+      "author": {
+        "@type": "Person",
+        "name": "Lyubomyr Malay",
+        "url": "https://github.com/plumkewe"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "DOVE? UniPi",
+        "url": "https://plumkewe.github.io/dove-unipi/"
+      },
+      "about": {
+        "@type": "EducationalOrganization",
+        "name": "Università di Pisa",
+        "alternateName": "UniPi",
+        "department": {
+          "@type": "Organization",
+          "name": "Polo Fibonacci"
+        }
+      },
+      "inLanguage": ["it-IT", "en-US"],
+      "screenshot": "https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png",
+      "featureList": [
+        "Ricerca aule per nome o codice",
+        "Visualizzazione planimetrie interattive",
+        "Navigazione per edificio e piano",
+        "Filtro per capienza aule",
+        "Supporto multilingua (Italiano/Inglese)",
+        "Modalità ad alto contrasto",
+        "Font per dislessici",
+        "Condivisione link diretti"
+      ],
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0",
+      "datePublished": "2025",
+      "dateModified": "2025-11-14"
+    }
+    </script>
+    
     <!-- Caricamento di Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Caricamento di Google Material Symbols -->
@@ -1656,21 +1719,69 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const queryLower = query.toLowerCase();
                 const matchesSettingsQuery = queryLower.includes('impostazioni') || queryLower.includes('settings');
                 const matchesShareQuery = queryLower.includes('share') || queryLower.includes('condivid');
+                const matchesFeedbackQuery = queryLower.includes('feedback');
                 const capacityFilter = parseCapacityQuery(query);
                 const results = [];
+
+                // Suggerimenti di autocompletamento per parole chiave speciali
+                const specialKeywords = [
+                    { keywords: ['impostazioni', 'settings', 'setting', 'impostazione', 'config'], type: 'settings', title: t('settings_title'), details: t('search_suggestion_settings_hint') },
+                    { keywords: ['share', 'condivid', 'condivisione'], type: 'share_suggestion', title: t('search_suggestion_share'), details: t('search_suggestion_share_hint') },
+                    { keywords: ['feedback', 'feedbac', 'feed'], type: 'feedback_suggestion', title: 'Feedback', details: t('search_suggestion_feedback_hint') }
+                ];
+
+                // Controlla se la query corrisponde parzialmente a una parola chiave
+                // Mostra suggerimenti solo se la query è abbastanza corta e non matcha già completamente
+                const shouldShowSuggestions = queryLower.length >= 2 && queryLower.length <= 10 && 
+                                             !matchesSettingsQuery && !matchesShareQuery && !matchesFeedbackQuery;
+
+                if (shouldShowSuggestions) {
+                    for (const keyword of specialKeywords) {
+                        const partialMatch = keyword.keywords.some(kw => 
+                            kw.startsWith(queryLower) && kw !== queryLower
+                        );
+                        
+                        if (partialMatch) {
+                            results.push({
+                                type: keyword.type,
+                                title: keyword.title,
+                                details: keyword.details,
+                                suggestion: true
+                            });
+                            break; // Mostra solo il primo suggerimento che matcha
+                        }
+                    }
+                }
+
+                if (matchesFeedbackQuery) {
+                    results.push(
+                        {
+                            type: 'feedback',
+                            title: t('feedback_email_title'),
+                            details: t('feedback_email_details'),
+                            action: 'email'
+                        },
+                        {
+                            type: 'feedback',
+                            title: t('feedback_github_title'),
+                            details: t('feedback_github_details'),
+                            action: 'github'
+                        }
+                    );
+                }
 
                 if (matchesShareQuery) {
                     results.push(
                         {
                             type: 'share',
-                            title: 'Condividi pagina',
-                            details: 'Copia https://plumkewe.github.io/dove-unipi/ negli appunti',
+                            title: t('share_page_title'),
+                            details: t('share_page_details'),
                             url: 'https://plumkewe.github.io/dove-unipi/'
                         },
                         {
                             type: 'share',
-                            title: 'Condividi GitHub',
-                            details: 'Copia https://github.com/plumkewe/dove-unipi negli appunti',
+                            title: t('share_github_title'),
+                            details: t('share_github_details'),
                             url: 'https://github.com/plumkewe/dove-unipi'
                         }
                     );
@@ -1765,7 +1876,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 if (!showSettings && results.length === 0) {
-                    currentSearchResults.innerHTML = `<div class="p-3 text-gray-400">${t('search_no_results')}</div>`;
+                    currentSearchResults.innerHTML = `
+                        <div class="p-4">
+                            <p class="text-gray-600 mb-2">${t('search_no_results')}</p>
+                            <p class="text-sm text-gray-500">
+                                ${t('no_results_feedback')} 
+                                <a href="mailto:lyubomyr.malay@icloud.com?subject=${encodeURIComponent('FEEDBACK DOVE?UNIPI')}" 
+                                   class="text-gray-800 underline font-medium hover-text-effect">
+                                    lyubomyr.malay@icloud.com
+                                </a>
+                            </p>
+                        </div>
+                    `;
                     currentSearchResults.classList.remove('hidden');
                     return;
                 }
@@ -1773,6 +1895,64 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 results.forEach((result, index) => {
                     const resultElement = document.createElement('div');
                     resultElement.className = 'search-result-item';
+
+                    // Gestione suggerimenti di autocompletamento
+                    if (result.suggestion) {
+                        resultElement.innerHTML = `
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1 min-w-0">
+                                    <div class="title">${result.title}</div>
+                                    <div class="details">${result.details}</div>
+                                </div>
+                                <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">keyboard_return</span>
+                            </div>
+                        `;
+                        resultElement.addEventListener('click', () => {
+                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                            const otherSearchInput = isMobile() ? searchInput : searchInputMobile;
+                            
+                            let newValue = '';
+                            if (result.type === 'settings') {
+                                newValue = currentLanguage === 'it' ? 'Impostazioni' : 'Settings';
+                            } else if (result.type === 'share_suggestion') {
+                                newValue = currentLanguage === 'it' ? 'Condividi' : 'Share';
+                            } else if (result.type === 'feedback_suggestion') {
+                                newValue = 'Feedback';
+                            }
+                            
+                            // Aggiorna entrambi gli input
+                            currentSearchInput.value = newValue;
+                            if (otherSearchInput) otherSearchInput.value = newValue;
+                            
+                            // Usa setTimeout per permettere l'aggiornamento dell'input prima di cercare
+                            setTimeout(() => {
+                                searchRooms(newValue);
+                            }, 10);
+                        });
+                        currentSearchResults.appendChild(resultElement);
+                        return;
+                    }
+
+                    if (result.type === 'feedback') {
+                        resultElement.innerHTML = `
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1 min-w-0">
+                                    <div class="title">${result.title}</div>
+                                    <div class="details">${result.details}</div>
+                                </div>
+                                <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">${result.action === 'email' ? 'mail' : 'bug_report'}</span>
+                            </div>
+                        `;
+                        resultElement.addEventListener('click', () => {
+                            if (result.action === 'email') {
+                                window.open('mailto:lyubomyr.malay@icloud.com?subject=' + encodeURIComponent('FEEDBACK DOVE?UNIPI'), '_blank');
+                            } else if (result.action === 'github') {
+                                window.open('https://github.com/plumkewe/dove-unipi/issues/new', '_blank');
+                            }
+                        });
+                        currentSearchResults.appendChild(resultElement);
+                        return;
+                    }
 
                     if (result.type === 'share') {
                         resultElement.innerHTML = `
@@ -1834,6 +2014,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                     resultElement.addEventListener('mouseenter', () => {
                         updateSelectedSearchResult(index);
+                    });
+
+                    resultElement.addEventListener('mouseleave', () => {
+                        if (selectedSearchResultIndex === index) {
+                            resultElement.classList.remove('selected');
+                            selectedSearchResultIndex = -1;
+                        }
                     });
 
                     currentSearchResults.appendChild(resultElement);
@@ -2291,8 +2478,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         updateSelectedSearchResult(newIndex);
                     } else if (e.key === 'Enter') {
                         e.preventDefault();
+                        
+                        // Se c'è un elemento selezionato con le frecce, cliccalo
                         if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
                             items[selectedSearchResultIndex].click();
+                        } else {
+                            // Altrimenti, se c'è un suggerimento visibile (primo elemento), completalo automaticamente
+                            const firstItem = items[0];
+                            if (firstItem) {
+                                const isSuggestion = firstItem.querySelector('.material-symbols-outlined')?.textContent.trim() === 'keyboard_return';
+                                if (isSuggestion) {
+                                    // È un suggerimento, cliccalo automaticamente
+                                    firstItem.click();
+                                }
+                            }
                         }
                     }
                 });

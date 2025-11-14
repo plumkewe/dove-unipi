@@ -310,5 +310,53 @@
   "settings_water_dispensers_description": {
     "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
     "translation": "Visualizza la posizione degli erogatori d'acqua sulla mappa"
+  },
+  "no_results_feedback": {
+    "original": "Non trovi ciò che ti aspettavi? Mandami un'email:",
+    "translation": "Non trovi ciò che ti aspettavi? Mandami un'email:"
+  },
+  "feedback_email_title": {
+    "original": "Invia feedback via email",
+    "translation": "Invia feedback via email"
+  },
+  "feedback_email_details": {
+    "original": "Apri il client email per mandare un messaggio",
+    "translation": "Apri il client email per mandare un messaggio"
+  },
+  "feedback_github_title": {
+    "original": "Apri una issue su GitHub",
+    "translation": "Apri una issue su GitHub"
+  },
+  "feedback_github_details": {
+    "original": "Segnala un bug o richiedi una funzionalità",
+    "translation": "Segnala un bug o richiedi una funzionalità"
+  },
+  "share_page_title": {
+    "original": "Condividi pagina",
+    "translation": "Condividi pagina"
+  },
+  "share_page_details": {
+    "original": "Copia https://plumkewe.github.io/dove-unipi/ negli appunti",
+    "translation": "Copia https://plumkewe.github.io/dove-unipi/ negli appunti"
+  },
+  "share_github_title": {
+    "original": "Condividi GitHub",
+    "translation": "Condividi GitHub"
+  },
+  "share_github_details": {
+    "original": "Copia https://github.com/plumkewe/dove-unipi negli appunti",
+    "translation": "Copia https://github.com/plumkewe/dove-unipi negli appunti"
+  },
+  "search_suggestion_settings_hint": {
+    "original": "Premi invio per visualizzare le impostazioni",
+    "translation": "Premi invio per visualizzare le impostazioni"
+  },
+  "search_suggestion_share_hint": {
+    "original": "Premi invio per condividere link",
+    "translation": "Premi invio per condividere link"
+  },
+  "search_suggestion_feedback_hint": {
+    "original": "Premi invio per inviare feedback",
+    "translation": "Premi invio per inviare feedback"
   }
 }

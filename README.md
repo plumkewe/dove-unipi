@@ -29,14 +29,14 @@
   - [Flusso Dati](#flusso-dati)
   - [Architettura del Progetto](#architettura-del-progetto)
 - [Funzionalità](#funzionalità)
-  - [SPA](#spa)
-    - [Ricerca intelligente](#ricerca-intelligente)
-    - [Accessibilità](#accessibilità)
-    - [Keyboard shortcuts](#keyboard-shortcuts)
-    - [Path sharing](#path-sharing)
-    - [Lingue supportate](#lingue-supportate)
-    - [Altri dati](#altri-dati)
-  - [Funzionalità che vorrei aggiungere](#funzionalità-che-vorrei-aggiungere)
+  - [Ricerca intelligente](#ricerca-intelligente)
+  - [Accessibilità](#accessibilità)
+  - [Keyboard shortcuts](#keyboard-shortcuts)
+  - [Path sharing](#path-sharing)
+  - [Lingue supportate](#lingue-supportate)
+  - [Altri dati](#altri-dati)
+    - [Distributori d'acqua](#distributori-dacqua)
+- [Funzionalità che vorrei aggiungere](#funzionalità-che-vorrei-aggiungere)
 - [Problemi noti](#problemi-noti)
   
 
@@ -305,9 +305,7 @@ graph TB
 <p align="right">(<a href="#indice">indice</a>)</p>
 
 
-### SPA
-
-#### Ricerca intelligente 
+### Ricerca intelligente 
 
 Effettua una ricerca non solo sul nome dell’aula ma anche sui suoi **alias**. Una volta selezionata, l’aula verrà automaticamente zoomata sulla sua posizione (ovviamente, se le coordinate sono presenti nel file rooms.json).
 
@@ -319,12 +317,14 @@ Da lì puoi abilitare anche le **funzionalità sperimentali**.
 
 Digitando `condividi` o `share`, potrai facilmente copiare il **link al sito** o a questa **repository** per condividerlo.
 
+Digitando `feedback` troverai due risultati per fornire feedback sul progetto. Inoltre, quando non trovi ciò che cerchi, ti verrà proposto automaticamente di lasciare un feedback per aiutarci a migliorare!
+
 Usa le frecce <kbd>↑</kbd> e <kbd>↓</kbd> per scorrere i risultati e premi <kbd>Invio</kbd> per selezionarne uno.
 La ricerca si avvia automaticamente mentre digiti — non serve cliccare sulla barra di ricerca.
 
 <hr>
 
-#### Accessibilità 
+### Accessibilità 
 
 Attualmente è possibile aggiungere **pulsanti extra** per funzioni come **zoom** e **condivisione,** oltre ad attivare la **modalità ad alto contrasto.**
 È inoltre possibile aumentare **la dimensione del testo** e attivare il **font per dislessia (OpenDyslexic).**
@@ -336,7 +336,7 @@ In futuro si prevede di introdurre una **modalità di navigazione basata solo su
 
 <hr>
 
-#### Keyboard shortcuts
+### Keyboard shortcuts
 
 Al momento sono disponibili le seguenti scorciatoie:
 
@@ -364,7 +364,7 @@ Al momento sono disponibili le seguenti scorciatoie:
 
 <hr>
 
-#### Path sharing
+### Path sharing
 
 Per impostazione predefinita è attivo il **path sharing** di *polo*, *edificio*, *piano* e *coordinate*.  
 Questo significa che, condividendo un link come:
@@ -383,7 +383,7 @@ Se la funzione non dovesse funzionare, apri la **barra di ricerca**, digita `imp
 
 <hr>
 
-#### Lingue supportate
+### Lingue supportate
 
 Attualmente sono supportate due lingue: **italiano** e **inglese.**
 
@@ -396,7 +396,9 @@ In futuro verranno aggiunte altre **lingue!**
 
 <hr>
 
-#### Altri dati
+### Altri dati
+
+#### Distributori d'acqua
 
 È disponibile in **versione alfa** la possibilità di visualizzare i **distributori d'acqua** presenti negli edifici del Polo Fibonacci.
 
@@ -412,7 +414,7 @@ Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risult
 
 <hr>
 
-### Funzionalità che vorrei aggiungere
+## Funzionalità che vorrei aggiungere
 
 - [ ] **Occupazione aule:** Collegare in qualche modo University Planner per poter vedere le prenotazioni direttamente sul sito.
 

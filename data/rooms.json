@@ -50,10 +50,10 @@
               },
               {
                 "id": "fib_lab1-b-0",
-                "nome": "Laboratorio 1",
+                "nome": "Laboratorio1",
                 "alias": [
                   "Lab 1",
-                  "Laboratorio1"
+                  "Laboratorio 1"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -66,10 +66,10 @@
               },
               {
                 "id": "fib_lab2-b-0",
-                "nome": "Laboratorio 2",
+                "nome": "Laboratorio2",
                 "alias": [
                   "Lab 2",
-                  "Laboratorio2"
+                  "Laboratorio 2"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -82,10 +82,10 @@
               },
               {
                 "id": "fib_lab3-b-0",
-                "nome": "Laboratorio 3",
+                "nome": "Laboratorio3",
                 "alias": [
                   "Lab 3",
-                  "Laboratorio3"
+                  "Laboratorio 3"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -98,10 +98,10 @@
               },
               {
                 "id": "fib_lab4-b-0",
-                "nome": "Laboratorio 4",
+                "nome": "Laboratorio4",
                 "alias": [
                   "Lab 4",
-                  "Laboratorio4"
+                  "Laboratorio 4"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -114,10 +114,10 @@
               },
               {
                 "id": "fib_lab5-b-0",
-                "nome": "Laboratorio 5",
+                "nome": "Laboratorio5",
                 "alias": [
                   "Lab 5",
-                  "Laboratorio5"
+                  "Laboratorio 5"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -130,10 +130,10 @@
               },
               {
                 "id": "fib_lab6-b-0",
-                "nome": "Laboratorio 6",
+                "nome": "Laboratorio6",
                 "alias": [
                   "Lab 6",
-                  "Laboratorio6"
+                  "Laboratorio 6"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -146,10 +146,10 @@
               },
               {
                 "id": "fib_lab7-b-0",
-                "nome": "Laboratorio 7",
+                "nome": "Laboratorio7",
                 "alias": [
                   "Lab 7",
-                  "Laboratorio7"
+                  "Laboratorio 7"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -162,10 +162,10 @@
               },
               {
                 "id": "fib_lab8-b-0",
-                "nome": "Laboratorio 8",
+                "nome": "Laboratorio8",
                 "alias": [
                   "Lab 8",
-                  "Laboratorio8"
+                  "Laboratorio 8"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -178,10 +178,10 @@
               },
               {
                 "id": "fib_lab9-b-0",
-                "nome": "Laboratorio 9",
+                "nome": "Laboratorio9",
                 "alias": [
                   "Lab 9",
-                  "Laboratorio9"
+                  "Laboratorio 9"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -194,10 +194,10 @@
               },
               {
                 "id": "fib_lab10-b-0",
-                "nome": "Laboratorio 10",
+                "nome": "Laboratorio10",
                 "alias": [
                   "Lab 10",
-                  "Laboratorio10"
+                  "Laboratorio 10"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -210,10 +210,10 @@
               },
               {
                 "id": "fib_lab11-b-0",
-                "nome": "Laboratorio 11",
+                "nome": "Laboratorio11",
                 "alias": [
                   "Lab 11",
-                  "Laboratorio11"
+                  "Laboratorio 11"
                 ],
                 "type": "laboratorio",
                 "note": "",
@@ -226,10 +226,10 @@
               },
               {
                 "id": "fib_lab12-b-0",
-                "nome": "Laboratorio 12",
+                "nome": "Laboratorio12",
                 "alias": [
                   "Lab 12",
-                  "Laboratorio12"
+                  "Laboratorio 12"
                 ],
                 "type": "laboratorio",
                 "note": "",

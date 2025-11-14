@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Main page -->
+    <url>
+        <loc>https://plumkewe.github.io/dove-unipi/</loc>
+        <lastmod>2025-11-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://plumkewe.github.io/dove-unipi/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://plumkewe.github.io/dove-unipi/?lang=en"/>
+    </url>
+    
+    <!-- GitHub repository -->
+    <url>
+        <loc>https://github.com/plumkewe/dove-unipi</loc>
+        <lastmod>2025-11-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Data files (for API/data consumers) -->
+    <url>
+        <loc>https://plumkewe.github.io/dove-unipi/data/rooms.json</loc>
+        <lastmod>2025-11-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://plumkewe.github.io/dove-unipi/data/facilities.json</loc>
+        <lastmod>2025-11-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+</urlset>

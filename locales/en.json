@@ -310,5 +310,53 @@
   "settings_water_dispensers_description": {
     "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
     "translation": "Display water dispensers location on the map"
+  },
+  "no_results_feedback": {
+    "original": "Non trovi ciò che ti aspettavi? Mandami un'email:",
+    "translation": "Can't find what you were looking for? Send me an email:"
+  },
+  "feedback_email_title": {
+    "original": "Invia feedback via email",
+    "translation": "Send feedback via email"
+  },
+  "feedback_email_details": {
+    "original": "Apri il client email per mandare un messaggio",
+    "translation": "Open email client to send a message"
+  },
+  "feedback_github_title": {
+    "original": "Apri una issue su GitHub",
+    "translation": "Open a GitHub issue"
+  },
+  "feedback_github_details": {
+    "original": "Segnala un bug o richiedi una funzionalità",
+    "translation": "Report a bug or request a feature"
+  },
+  "share_page_title": {
+    "original": "Condividi pagina",
+    "translation": "Share page"
+  },
+  "share_page_details": {
+    "original": "Copia https://plumkewe.github.io/dove-unipi/ negli appunti",
+    "translation": "Copy https://plumkewe.github.io/dove-unipi/ to clipboard"
+  },
+  "share_github_title": {
+    "original": "Condividi GitHub",
+    "translation": "Share GitHub"
+  },
+  "share_github_details": {
+    "original": "Copia https://github.com/plumkewe/dove-unipi negli appunti",
+    "translation": "Copy https://github.com/plumkewe/dove-unipi to clipboard"
+  },
+  "search_suggestion_settings_hint": {
+    "original": "Premi invio per visualizzare le impostazioni",
+    "translation": "Press enter to view settings"
+  },
+  "search_suggestion_share_hint": {
+    "original": "Premi invio per condividere link",
+    "translation": "Press enter to share links"
+  },
+  "search_suggestion_feedback_hint": {
+    "original": "Premi invio per inviare feedback",
+    "translation": "Press enter to send feedback"
   }
 }
