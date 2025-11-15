@@ -46,11 +46,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.">
+    <meta name="description" content="Trova aule e edifici al Polo Fibonacci UniPi: Edificio A, B, C, D, E. Cerca aule come D1, D2, M1, H, Aula Magna, laboratori informatica e dipartimenti. Mappe interattive e planimetrie per orientarti.">
     <meta name="author" content="Lyubomyr Malay">
-    <meta name="keywords" content="UniPi, Università di Pisa, Polo Fibonacci, aule, dove, navigatore, mappe, planimetrie">
+    <meta name="keywords" content="UniPi, Università di Pisa, Polo Fibonacci, aule, dove, navigatore, mappe, planimetrie, edificio A, edificio B, edificio C, edificio D, edificio E, aula D1, aula D2, aula M1, aula H, aula magna, laboratori, dipartimento informatica, dipartimento matematica, dipartimento fisica, piano terra, primo piano, secondo piano, aule informatica, aule studio, dove si trova, come arrivare, cercare aula"
     <meta name="theme-color" content="#E5E7EB">
-    <title>DOVE?</title>
+    <title>DOVE?UNIPI - Polo Fibonacci</title>
 
     <meta property="og:title" content="DOV'È QUEL AULA?! DOVEEEEE!!!">
     <meta property="og:description" content="So che ti sei perso al polo Fibonacci dell'Università di Pisa. Usa DOVE? UniPi per trovare le aule e orientarti tra gli edifici e i piani.">
@@ -66,12 +66,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="twitter:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
 
     <meta name="robots" content="index, follow">
-    <meta property="og:site_name" content="DOVE? UniPi">
+    <meta property="og:site_name" content="DOVE?UNIPI">
     <meta property="og:locale" content="it_IT">
     <meta property="og:locale:alternate" content="en_US">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://plumkewe.github.io/dove-unipi/">
+    
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://plumkewe.github.io/dove-unipi/sitemap.xml">
 
     <!-- Google Verification-->
     <meta name="google-site-verification" content="xlBn5i5J3qQtfPNRFDym6OA-74TvolPdXLckGrViAvM" />
@@ -83,6 +86,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="ICBM" content="43.7228, 10.4017">
     
     <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+    
+    <!-- Cache Control for static assets (1 month) -->
+    <meta http-equiv="Cache-Control" content="public, max-age=2592000">
+    
+    <!-- Preload critical assets with caching -->
+    <link rel="preload" href="assets/css/output.css" as="style">
+    <link rel="preload" href="assets/logo/favicon.png" as="image">
     
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
@@ -99,10 +109,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "DOVE? UniPi",
+      "name": "DOVE?UNIPI - Polo Fibonacci",
       "alternateName": "DOVE UniPi - Navigatore Polo Fibonacci",
       "url": "https://plumkewe.github.io/dove-unipi/",
-      "description": "Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa. Trova rapidamente aule, dipartimenti e servizi.",
+      "description": "Trova aule e edifici al Polo Fibonacci UniPi. Cerca aule come D1, D2, M1, H tra gli edifici A, B, C, D, E. Mappe interattive e planimetrie per orientarti tra i piani.",
       "applicationCategory": "NavigationApplication",
       "operatingSystem": "Any",
       "author": {
@@ -112,7 +122,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
       },
       "provider": {
         "@type": "Organization",
-        "name": "DOVE? UniPi",
+        "name": "DOVE?UNIPI",
         "url": "https://plumkewe.github.io/dove-unipi/"
       },
       "about": {
@@ -121,25 +131,34 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         "alternateName": "UniPi",
         "department": {
           "@type": "Organization",
-          "name": "Polo Fibonacci"
+          "name": "Polo Fibonacci",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pisa",
+            "addressRegion": "PI",
+            "addressCountry": "IT"
+          }
         }
       },
       "inLanguage": ["it-IT", "en-US"],
       "screenshot": "https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png",
       "featureList": [
-        "Ricerca aule per nome o codice",
-        "Visualizzazione planimetrie interattive",
-        "Navigazione per edificio e piano",
+        "Ricerca aule per nome o codice (D1, D2, M1, H, Aula Magna)",
+        "Visualizzazione planimetrie interattive edifici A, B, C, D, E",
+        "Navigazione per edificio e piano (piano terra, primo piano, secondo piano)",
         "Filtro per capienza aule",
+        "Mappe dettagliate di ogni piano",
+        "Informazioni su dipartimenti e laboratori",
         "Supporto multilingua (Italiano/Inglese)",
         "Modalità ad alto contrasto",
         "Font per dislessici",
-        "Condivisione link diretti"
+        "Condivisione link diretti alle aule"
       ],
+      "keywords": "aule unipi, polo fibonacci, edificio A B C D E, aula D1 D2 M1 H, dipartimento informatica matematica fisica, mappe polo fibonacci, planimetrie unipi, dove si trova aula, navigatore unipi",
       "browserRequirements": "Requires JavaScript. Requires HTML5.",
       "softwareVersion": "1.0",
       "datePublished": "2025",
-      "dateModified": "2025-11-14"
+      "dateModified": "2025-11-15"
     }
     </script>
     
@@ -980,6 +999,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 no-transition text-normal">
+
+    <!-- SEO Content: Hidden visually but accessible to search engines -->
+    <div style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true">
+        <h1>DOVE?UNIPI - Trova Aule e Edifici al Polo Fibonacci</h1>
+        <h2>Edifici disponibili</h2>
+        <p>Edificio A, Edificio B, Edificio C, Edificio D, Edificio E del Polo Fibonacci dell'Università di Pisa.</p>
+        <h2>Aule principali</h2>
+        <p>Aula D1, Aula D2, Aula D3, Aula M1, Aula M2, Aula H, Aula Magna, Aula N1, Aula C, Aula C1, Aula A1, Aula B1, Aula E1.</p>
+        <h2>Dipartimenti e Laboratori</h2>
+        <p>Dipartimento di Informatica, Dipartimento di Matematica, Dipartimento di Fisica, Laboratori Informatica, Sale Studio, Biblioteche.</p>
+        <h2>Come trovare un'aula</h2>
+        <p>Usa la ricerca per trovare rapidamente dove si trova un'aula specifica. Visualizza le planimetrie interattive di ogni piano per orientarti. Cerca per nome aula, edificio o capienza.</p>
+        <h2>Piano terra, primo piano, secondo piano</h2>
+        <p>Naviga tra i diversi piani degli edifici A, B, C, D ed E. Ogni piano mostra tutte le aule disponibili con mappe dettagliate.</p>
+    </div>
 
     <!-- Contenitore per il tooltip -->
     <div id="tooltip" class="tooltip"></div>
