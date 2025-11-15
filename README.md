@@ -30,6 +30,7 @@
   - [Architettura del Progetto](#architettura-del-progetto)
 - [Prestazioni](#prestazioni)
   - [PageSpeed Insights](#pagespeed-insights)
+  - [GTmetrix](#gtmetrix)
 - [Funzionalità](#funzionalità)
   - [Ricerca intelligente](#ricerca-intelligente)
   - [Accessibilità](#accessibilità)
