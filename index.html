@@ -1063,6 +1063,87 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* gray-800 */
         }
 
+        /* Occupancy Status Bar Styles */
+        .occupancy-status-bar {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin-top: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .occupancy-status-bar.loading {
+            background: linear-gradient(90deg, #d1d5db 25%, #9ca3af 50%, #d1d5db 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2.5s infinite;
+            color: #4b5563;
+        }
+
+        .occupancy-status-bar.free {
+            background-color: #8BACAA;
+            color: #ffffff;
+        }
+
+        .occupancy-status-bar.occupied {
+            background-color: #B04759;
+            color: #ffffff;
+        }
+
+        .occupancy-status-bar.unavailable {
+            background-color: #e5e7eb;
+            color: #6b7280;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .occupancy-expand-icon {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            font-size: 20px;
+            user-select: none;
+        }
+
+        .occupancy-expand-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .occupancy-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 12px;
+        }
+
+        .occupancy-details.expanded {
+            max-height: 200px;
+            padding: 8px 12px;
+        }
+
+        .occupancy-details-content {
+            font-size: 12px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .occupancy-details-content strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+
         .nav-item.selected {
             background-color: rgba(0, 0, 0, 0.1);
         }
@@ -1187,6 +1268,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         @media (pointer: coarse) {
+
             #map,
             #map .leaflet-pane,
             #map .leaflet-overlay-pane {
@@ -1797,6 +1879,72 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
         }
 
+        /* High contrast mode for occupancy status bars */
+        .high-contrast .occupancy-status-bar {
+            border: 2px solid black !important;
+            font-weight: 700 !important;
+        }
+
+        .high-contrast .occupancy-status-bar.loading {
+            background: white !important;
+            color: black !important;
+            animation: none !important;
+        }
+
+        .high-contrast .occupancy-status-bar.free {
+            background-color: white !important;
+            color: black !important;
+        }
+
+        .high-contrast .occupancy-status-bar.occupied {
+            background-color: black !important;
+            color: white !important;
+        }
+
+        .high-contrast .occupancy-status-bar.unavailable {
+            background-color: white !important;
+            color: black !important;
+        }
+
+        /* Ensure text remains visible on hover in high‑contrast mode (when hovering the search result) */
+        .high-contrast .search-result-item:hover .occupancy-status-bar,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.loading,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.free,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.occupied,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable {
+            background-color: white !important;
+            color: black !important;
+            border: 2px solid black !important;
+        }
+
+        /* Override the search-result-item * rule for children of occupancy bar */
+        .high-contrast .search-result-item:hover .occupancy-status-bar *,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.loading *,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.free *,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.occupied *,
+        .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable * {
+            color: black !important;
+            background-color: transparent !important;
+        }
+
+        .high-contrast .occupancy-expand-icon {
+            color: inherit !important;
+        }
+
+        .high-contrast .occupancy-details {
+            border: 2px solid black !important;
+            background-color: white !important;
+        }
+
+        .high-contrast .occupancy-details-content {
+            color: black !important;
+        }
+
+        .high-contrast .occupancy-details-content strong {
+            color: black !important;
+        }
+
+
         /* Toggle switches in high contrast mode */
         .high-contrast label.relative.inline-flex>div {
             background-color: black !important;
@@ -2037,8 +2185,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     aria-label="Vista dall'alto" data-tooltip="Vista dall'alto">
                     <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">grid_view</span>
                 </button>
-                <button id="flip-view-btn"
-                    class="p-2 hover-effect text-gray-900 transition-colors duration-200 hidden"
+                <button id="flip-view-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200 hidden"
                     aria-label="Ribalta mappa" data-tooltip="Ribalta mappa">
                     <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">
                         screen_rotation_alt
@@ -2578,6 +2725,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 searchSuggestions[3] = t('search_suggestion_capacity');
                 searchSuggestions[4] = t('search_suggestion_department');
                 searchSuggestions[5] = t('search_suggestion_share');
+                searchSuggestions[6] = t('search_suggestion_feedback');
+                searchSuggestions[7] = t('search_suggestion_bot');
 
                 // Riavvia il ciclo dei suggerimenti con le nuove traduzioni
                 currentSuggestionIndex = 0;
@@ -3006,6 +3155,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const matchesSettingsQuery = queryLower.includes('impostazioni') || queryLower.includes('settings');
                 const matchesShareQuery = queryLower.includes('share') || queryLower.includes('condivid');
                 const matchesFeedbackQuery = queryLower.includes('feedback');
+                const matchesBotQuery = queryLower.includes('bot') || queryLower.includes('telegram');
                 const capacityFilter = parseCapacityQuery(query);
                 const results = [];
 
@@ -3013,13 +3163,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const specialKeywords = [
                     { keywords: ['impostazioni', 'settings', 'setting', 'impostazione', 'config'], type: 'settings', title: t('settings_title'), details: t('search_suggestion_settings_hint') },
                     { keywords: ['share', 'condivid', 'condivisione'], type: 'share_suggestion', title: t('search_suggestion_share'), details: t('search_suggestion_share_hint') },
-                    { keywords: ['feedback', 'feedbac', 'feed'], type: 'feedback_suggestion', title: 'Feedback', details: t('search_suggestion_feedback_hint') }
+                    { keywords: ['feedback', 'feedbac', 'feed'], type: 'feedback_suggestion', title: 'Feedback', details: t('search_suggestion_feedback_hint') },
+                    { keywords: ['bot', 'telegram'], type: 'bot_suggestion', title: t('bot_title'), details: t('search_suggestion_bot_hint') }
                 ];
 
                 // Controlla se la query corrisponde parzialmente a una parola chiave
                 // Mostra suggerimenti solo se la query è abbastanza corta e non matcha già completamente
                 const shouldShowSuggestions = queryLower.length >= 2 && queryLower.length <= 10 &&
-                    !matchesSettingsQuery && !matchesShareQuery && !matchesFeedbackQuery;
+                    !matchesSettingsQuery && !matchesShareQuery && !matchesFeedbackQuery && !matchesBotQuery;
 
                 if (shouldShowSuggestions) {
                     for (const keyword of specialKeywords) {
@@ -3037,6 +3188,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             break; // Mostra solo il primo suggerimento che matcha
                         }
                     }
+                }
+
+                if (matchesBotQuery) {
+                    results.push({
+                        type: 'bot',
+                        title: t('bot_title'),
+                        details: t('bot_details'),
+                        action: 'link',
+                        url: 'https://t.me/doveunipibot'
+                    });
                 }
 
                 if (matchesFeedbackQuery) {
@@ -3204,6 +3365,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 newValue = currentLanguage === 'it' ? 'Condividi' : 'Share';
                             } else if (result.type === 'feedback_suggestion') {
                                 newValue = 'Feedback';
+                            } else if (result.type === 'bot_suggestion') {
+                                newValue = 'Bot';
                             }
 
                             // Aggiorna entrambi gli input
@@ -3215,6 +3378,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             setTimeout(() => {
                                 searchRooms(newValue);
                             }, 10);
+                        });
+                        currentSearchResults.appendChild(resultElement);
+                        return;
+                    }
+
+                    if (result.type === 'bot') {
+                        resultElement.innerHTML = `
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1 min-w-0">
+                                    <div class="title">${result.title}</div>
+                                    <div class="details">${result.details}</div>
+                                </div>
+                                <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">smart_toy</span>
+                            </div>
+                        `;
+                        resultElement.addEventListener('click', () => {
+                            window.open(result.url, '_blank');
                         });
                         currentSearchResults.appendChild(resultElement);
                         return;
@@ -3278,6 +3458,80 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             resultElement.classList.add('water-dispenser');
                         }
 
+                        // Occupazione corrente delle aule - caricamento on-demand
+                        const availabilitySource = window.classroomAvaibility || {};
+                        const classroomName = result.room?.nome || '';
+                        const availabilityData = classroomName && availabilitySource[classroomName];
+
+                        let statusClass = 'loading';
+                        let statusText = t('loading_occupancy');
+                        let timeRange = '';
+                        let showBar = true;
+
+                        if (availabilityData) {
+                            if (availabilityData.code === 0) {
+                                // Libera
+                                statusClass = 'free';
+                                statusText = t('availability_free');
+                            } else if (availabilityData.code === 1) {
+                                // Occupata
+                                statusClass = 'occupied';
+                                statusText = t('availability_occupied');
+                                if (availabilityData.startTime && availabilityData.endTime) {
+                                    timeRange = `${availabilityData.startTime} - ${availabilityData.endTime}`;
+                                }
+                            } else if (availabilityData.code === 2) {
+                                // Non disponibile - non mostrare la barra
+                                showBar = false;
+                            }
+                        } else if (classroomName) {
+                            // Carica i dati solo per questa aula specifica (on-demand)
+                            getClassroomAvailability(classroomName).then(availability => {
+                                const code = Number(Object.keys(availability)[0]);
+                                const value = availability[code];
+
+                                if (code === 1 && value) {
+                                    const scheduleStrArray = value.split("|");
+                                    window.classroomAvaibility[classroomName] = {
+                                        code: 1,
+                                        startTime: scheduleStrArray[0] || '',
+                                        endTime: scheduleStrArray[1] || '',
+                                        occupiedBy: scheduleStrArray[2] || ''
+                                    };
+                                } else {
+                                    window.classroomAvaibility[classroomName] = {
+                                        code: code,
+                                        startTime: '',
+                                        endTime: '',
+                                        occupiedBy: ''
+                                    };
+                                }
+                            }).catch(error => {
+                                console.warn(`Failed to get availability for ${classroomName}:`, error);
+                                window.classroomAvaibility[classroomName] = {
+                                    code: 2,
+                                    startTime: '',
+                                    endTime: '',
+                                    occupiedBy: ''
+                                };
+                            });
+                        }
+
+                        const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
+                        const availabilityHTML = showBar ? `
+                            <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomName}">
+                                <span class="occupancy-text">${statusText}</span>
+                                ${timeRange ? `<span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">expand_more</span>` : ''}
+                            </div>
+                            ${timeRange ? `
+                            <div class="occupancy-details" id="${occupancyId}">
+                                <div class="occupancy-details-content">
+                                    ${timeRange}
+                                </div>
+                            </div>` : ''}
+                        ` : '';
+                        // Fine occupazione corrente delle aule
+
                         resultElement.innerHTML = `
                             <div class="title">${result.room.nome}</div>
                             <div class="details">
@@ -3285,8 +3539,32 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 ${t('building')} ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
                                 ${t('floor')} ${result.piano}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
                             </div>
+                            ${availabilityHTML}
                         `;
-                        resultElement.addEventListener('click', () => {
+
+                        // Add click handler for occupancy bar
+                        const statusBar = resultElement.querySelector('.occupancy-status-bar');
+                        const expandIcon = resultElement.querySelector('.occupancy-expand-icon');
+
+                        if (statusBar && expandIcon) {
+                            // Make the entire bar clickable to expand
+                            statusBar.style.cursor = 'pointer';
+                            statusBar.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                const detailsId = expandIcon.getAttribute('data-occupancy-id');
+                                const detailsElement = document.getElementById(detailsId);
+                                if (detailsElement) {
+                                    detailsElement.classList.toggle('expanded');
+                                    expandIcon.classList.toggle('expanded');
+                                }
+                            });
+                        }
+
+                        resultElement.addEventListener('click', (e) => {
+                            // Don't navigate if clicking on status bar or expand icon
+                            if (e.target.closest('.occupancy-status-bar') || e.target.closest('.occupancy-expand-icon')) {
+                                return;
+                            }
                             selectRoom(result.polo, result.edificio, result.piano, result.room);
                             currentSearchResults.classList.add('hidden');
                             currentSearchInput.value = result.room.nome;
@@ -3728,7 +4006,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 selectedSearchResultIndex = index;
                 if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
                     items[selectedSearchResultIndex].classList.add('selected');
-                    items[selectedSearchResultIndex].scrollIntoView({ block: 'nearest' });
+                    // Removed scrollIntoView to avoid automatic highlighting
                 }
             }
 
@@ -4929,6 +5207,187 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     applyTranslations();
                 }
             });
+
+            // Occupazione corrente delle aule
+            window.classroomAvaibility = window.classroomAvaibility || {};
+            function populateClassroomAvailability() {
+
+                if (!data?.polo) {
+                    // Dati stanze non ancora caricati, riprovo...
+                    setTimeout(populateClassroomAvailability, 100);
+                    return;
+                }
+
+                // Collect all rooms first
+                const allRooms = [];
+                Object.entries(data.polo).forEach(([poloName, polo]) => {
+                    Object.entries(polo.edificio || {}).forEach(([buildingName, building]) => {
+                        Object.entries(building.piano || {}).forEach(([floorName, floorData]) => {
+                            const rooms = Array.isArray(floorData)
+                                ? floorData
+                                : (floorData?.aule ? Object.values(floorData.aule) : []);
+
+                            rooms.forEach(room => {
+                                if (room?.nome) {
+                                    allRooms.push(room.nome);
+                                }
+                            });
+                        });
+                    });
+                });
+
+                // Fetch all classroom availability data in parallel for much faster loading
+                Promise.all(
+                    allRooms.map(roomName =>
+                        getClassroomAvailability(roomName)
+                            .then(availability => ({ roomName, availability }))
+                            .catch(error => {
+                                console.warn(`Failed to get availability for ${roomName}:`, error);
+                                return { roomName, availability: { 2: t('availability_unavailable') } };
+                            })
+                    )
+                ).then(results => {
+                    results.forEach(({ roomName, availability }) => {
+                        const code = Number(Object.keys(availability)[0]);
+                        const value = availability[code];
+
+                        // code 1 = occupata, 0 = libera, 2 = informazioni non disponibili
+                        if (code === 1 && value) {
+                            // Parse occupied schedule: "startTime|endTime|occupiedBy"
+                            const scheduleStrArray = value.split("|");
+                            window.classroomAvaibility[roomName] = {
+                                code: 1,
+                                startTime: scheduleStrArray[0] || '',
+                                endTime: scheduleStrArray[1] || '',
+                                occupiedBy: scheduleStrArray[2] || ''
+                            };
+                        } else {
+                            // Free or unavailable
+                            window.classroomAvaibility[roomName] = {
+                                code: code,
+                                startTime: '',
+                                endTime: '',
+                                occupiedBy: ''
+                            };
+                        }
+                    });
+                });
+            }
+
+            function getClassroomAvailability(classroom) {
+                const unavailableLabel = t('availability_unavailable');
+                const freeLabel = t('availability_free');
+
+                const API_ENDPOINT = 'https://vps.giulionisi.me:54321/api/';
+                const AVAIBILITY_ENDPOINT = API_ENDPOINT + 'current_schedule_given_pole_and_room';
+                const POLE = "fibonacci";
+                const CLASSROOM_URL_ENCODED = classroom.toLowerCase().replace("aula", "fib").replace(" ", "%20");
+                const API_POLE_ARG = `pole_name`;
+                const API_CLASSROOM_ARG = `classroom`;
+
+                return fetch(`${AVAIBILITY_ENDPOINT}?${API_POLE_ARG}=${POLE}&${API_CLASSROOM_ARG}=${CLASSROOM_URL_ENCODED}`)
+                    .then(response => {
+                        // 2 significa che si è verificato un errore, fallback a informazioni non disponibili
+                        if (!response || !response.ok) {
+                            // Errore API
+                            console.warn('API classroom availability response not ok:', response.statusText);
+                            return { 2: unavailableLabel };
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!data || 2 in data) {
+                            return { 2: unavailableLabel };
+                        }
+                        const classroomKey = classroom.replace("Aula ", "Fib ");
+                        if (data && data[classroomKey] !== undefined) {
+                            // Aula libera
+                            if (data[classroomKey] === "") return { 0: freeLabel };
+                            // Aula con occupazione
+                            return { 1: data[classroomKey] };
+                        } else {
+                            // Aula non trovata nell'API, ad esempio per quelle del dipartimento non visibili su UniversityPlanner
+                            return { 2: unavailableLabel };
+                        }
+                    })
+                    .catch(error => {
+                        console.warn('API classroom availability error:', error);
+                        return { 2: unavailableLabel };
+                    });
+            }
+            // Removed: populateClassroomAvailability(); - Now loading on-demand when searching
+            // Appena la pagina è caricata, i dati vengono caricati solo quando necessario (on-demand)
+
+            // Aggiorna l'occupazione mostrata nei risultati di una ricerca se diventano disponibili
+            function refreshSearchResultsOccupancy() {
+                document.querySelectorAll(".occupancy-status-bar").forEach(statusBar => {
+                    const classroomName = statusBar.getAttribute('data-classroom');
+                    const availabilityData = classroomName && window.classroomAvaibility[classroomName];
+
+                    if (availabilityData && statusBar.classList.contains('loading')) {
+                        // Remove loading state
+                        statusBar.classList.remove('loading');
+
+                        // Update based on actual data
+                        if (availabilityData.code === 0) {
+                            // Libera
+                            statusBar.classList.add('free');
+                            const textSpan = statusBar.querySelector('.occupancy-text');
+                            if (textSpan) textSpan.textContent = t('availability_free');
+                        } else if (availabilityData.code === 1) {
+                            // Occupata
+                            statusBar.classList.add('occupied');
+                            const textSpan = statusBar.querySelector('.occupancy-text');
+                            if (textSpan) textSpan.textContent = t('availability_occupied');
+
+                            // Add expand icon if time range exists and not already present
+                            if (availabilityData.startTime && availabilityData.endTime && !statusBar.querySelector('.occupancy-expand-icon')) {
+                                const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
+                                const timeRange = `${availabilityData.startTime} - ${availabilityData.endTime}`;
+
+                                const expandIcon = document.createElement('span');
+                                expandIcon.className = 'occupancy-expand-icon material-symbols-outlined';
+                                expandIcon.setAttribute('data-occupancy-id', occupancyId);
+                                expandIcon.textContent = 'expand_more';
+                                statusBar.appendChild(expandIcon);
+
+                                // Make the entire bar clickable
+                                statusBar.style.cursor = 'pointer';
+                                statusBar.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    const detailsElement = document.getElementById(occupancyId);
+                                    if (detailsElement) {
+                                        detailsElement.classList.toggle('expanded');
+                                        expandIcon.classList.toggle('expanded');
+                                    }
+                                });
+
+                                // Add details section if not exists
+                                if (!document.getElementById(occupancyId)) {
+                                    const detailsDiv = document.createElement('div');
+                                    detailsDiv.className = 'occupancy-details';
+                                    detailsDiv.id = occupancyId;
+                                    detailsDiv.innerHTML = `
+                                        <div class="occupancy-details-content">
+                                            ${timeRange}
+                                        </div>
+                                    `;
+                                    statusBar.parentNode.insertBefore(detailsDiv, statusBar.nextSibling);
+                                }
+                            }
+                        } else if (availabilityData.code === 2) {
+                            // Dati non disponibili - rimuovi completamente la barra
+                            const parentElement = statusBar.parentNode;
+                            if (parentElement) {
+                                statusBar.remove();
+                            }
+                        }
+                    }
+                });
+            }
+            setInterval(refreshSearchResultsOccupancy, 200);  // Faster refresh: 200ms instead of 500ms
+            // Fine occupazione corrente aule
+
         } // End of initApp function
     </script>
 

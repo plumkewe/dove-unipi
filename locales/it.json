@@ -239,6 +239,14 @@
     "original": "Prova: Condividi",
     "translation": "Prova: Condividi"
   },
+  "search_suggestion_feedback": {
+    "original": "Prova: Feedback",
+    "translation": "Prova: Feedback"
+  },
+  "search_suggestion_bot": {
+    "original": "Prova: Bot",
+    "translation": "Prova: Bot"
+  },
   "back_button": {
     "original": "Indietro",
     "translation": "Indietro"
@@ -366,5 +374,33 @@
   "search_suggestion_feedback_hint": {
     "original": "Premi invio per inviare feedback",
     "translation": "Premi invio per inviare feedback"
+  },
+  "search_suggestion_bot_hint": {
+    "original": "Premi invio per aprire il bot Telegram",
+    "translation": "Premi invio per aprire il bot Telegram"
+  },
+  "bot_title": {
+    "original": "Bot Telegram",
+    "translation": "Bot Telegram"
+  },
+  "bot_details": {
+    "original": "Apri @doveunipibot su Telegram",
+    "translation": "Apri @doveunipibot su Telegram"
+  },
+  "loading_occupancy": {
+    "original": "Caricamento...",
+    "translation": "Caricamento..."
+  },
+  "availability_free": {
+    "original": "Libera",
+    "translation": "Libera"
+  },
+  "availability_occupied": {
+    "original": "Occupata",
+    "translation": "Occupata"
+  },
+  "availability_unavailable": {
+    "original": "Dati non disponibili",
+    "translation": "Dati non disponibili"
   }
 }

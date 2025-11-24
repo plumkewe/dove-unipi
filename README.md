@@ -40,7 +40,6 @@
   - [Altri dati](#altri-dati)
     - [Distributori d'acqua](#distributori-dacqua)
 - [Telegram Bot](#telegram-bot)
-- [Funzionalità che vorrei aggiungere](#funzionalità-che-vorrei-aggiungere)
 - [Problemi noti](#problemi-noti)
   
 
@@ -52,6 +51,7 @@
 [<img src="https://wsrv.nl/?url=github.com/L-myself.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="piorpiedev" />](https://github.com/L-myself)
 [<img src="https://wsrv.nl/?url=github.com/gregoriop06.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Gregorio Pescucci" />](https://github.com/gregoriop06)
 [<img src="https://wsrv.nl/?url=github.com/alesmk.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Alessia" />](https://github.com/alesmk)
+[<img src="https://wsrv.nl/?url=github.com/juliusnixi.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="JuliusNixi" />](https://github.com/juliusnixi)
 
 *Un ringraziamento speciale a chi ha dedicato il proprio tempo per la raccolta dati nelle aule.*
 
@@ -215,7 +215,8 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
 ```mermaid
 graph LR
     A[Planimetrie UniPi] -->|Conversione DWG/SVG| B[Mappe Edifici]
-    C[University Planner] -->|Dati Aule| D[rooms.json]
+    I[API] --> C[University Planner]
+    C -->|Dati Aule| D[rooms.json]
     G[Contributori] -->|Raccolta Dati| H[facilities.json]
     G -->|Raccolta Dati| D
     D --> E[Applicazione Web]
@@ -359,8 +360,10 @@ Digitando `condividi` o `share`, potrai facilmente copiare il **link al sito** o
 
 Digitando `feedback` troverai due risultati per fornire feedback sul progetto. Inoltre, quando non trovi ciò che cerchi, ti verrà proposto automaticamente di lasciare un feedback per aiutarci a migliorare!
 
-Usa le frecce <kbd>↑</kbd> e <kbd>↓</kbd> per scorrere i risultati e premi <kbd>Invio</kbd> per selezionarne uno.
+Usa le frecce <kbd>↑</kbd> e <kbd>↓</kbd> per scorrere i risultati e premi <kbd>Enter</kbd> per selezionarne uno.
 La ricerca si avvia automaticamente mentre digiti — non serve cliccare sulla barra di ricerca. Inoltre, se il risultato è unico oppure stai per cercare una special keyword (`impostazioni`, `feedback`, `condividi`...), ti basterà premere <kbd>Enter</kbd> per avviare la ricerca.
+
+Grazie all'API di JuliusNixi è possibile visualizzare l'occupazione delle aule in tempo reale. In futuro verrà implementata la possibilità di applicare filtri per visualizzare esclusivamente le aule libere.
 
 <hr>
 
@@ -468,9 +471,9 @@ Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risult
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
-È stato creato un **Telegram Bot inline**, attualmente in fase di **alfa test**, ma già disponibile per essere provato. Puoi accedervi seguendo questo link: [**@doveunipibot**](https://t.me/doveunipibot).
+È stato creato un **Telegram Bot inline**, attualmente in fase di **beta test**, ma già disponibile per essere provato. Puoi accedervi seguendo questo link: [**@doveunipibot**](https://t.me/doveunipibot).
 
-Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. Al momento, le sue funzionalità sono limitate, ma verranno migliorate nel tempo per offrire un'esperienza più completa.
+Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E anche alcune funzionalità aggiuntive come ad esempio la posibilità di mandare la mappa del polo con il nome degli edifici.
 
 <table>
   <tr>
@@ -480,25 +483,13 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. Al
   </tr>
 </table>
 
-> [!NOTE]
-> **Hai suggerimenti o feedback sul bot?**  
-> Apri una [issue](https://github.com/plumkewe/dove-unipi/issues) oppure inviami un'email a: [lyubomyr.malay@icloud.com](mailto:lyubomyr.malay@icloud.com).  
-> **Grazie per il supporto!**
-
-**Hostato su**
+**Hostato su:**
 
 <p>
   <a>
     <img src="https://simpleicons.org/icons/render.svg" alt="Render" width="32" height="32">
   </a>
 </p>
-
-
-## Funzionalità che vorrei aggiungere
-
-<p align="right">(<a href="#indice">indice</a>)</p>
-
-- [ ] **Occupazione aule:** Collegare in qualche modo University Planner per poter vedere le prenotazioni direttamente sul sito.
 
 ## Problemi noti
 
