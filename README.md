@@ -319,8 +319,8 @@ graph TB
   </thead>
   <tbody>
     <tr>
-      <td><img src="assets/screenshots/PSI_PC.jpg" alt="PageSpeed Insights Desktop"></td>
-      <td><img src="assets/screenshots/PSI_MB.jpg" alt="PageSpeed Insights Mobile"></td>
+      <td align="center" valign="middle"><img src="assets/screenshots/PSI_PC.jpg" alt="PageSpeed Insights Desktop"></td>
+      <td align="center" valign="middle"><img src="assets/screenshots/PSI_MB.jpg" alt="PageSpeed Insights Mobile"></td>
     </tr>
     <tr>
       <td colspan="2"><a href="https://pagespeed.web.dev/analysis/https-plumkewe-github-io-dove-unipi/uxur6o8s0g" target="_blank" rel="noopener noreferrer">Apri il report completo su PageSpeed Insights</a></td>
@@ -333,7 +333,7 @@ graph TB
 <table>
   <tbody>
     <tr>
-      <td><img src="assets/screenshots/GTM.jpg" alt="GTmetrix Performance"></td>
+      <td align="center" valign="middle"><img src="assets/screenshots/GTM.jpg" alt="GTmetrix Performance"></td>
     </tr>
     <tr>
       <td><a href="https://gtmetrix.com/reports/plumkewe.github.io/3r3h8Uf8/#" target="_blank" rel="noopener noreferrer">Apri il report completo su GTmetrix</a></td>
@@ -436,6 +436,8 @@ Corrisponde a:
 https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=d&f=0&v=top&x=380.00&y=296.00&z=2.00
 ```
 
+Aprendo quel link, oltre all’aula verranno mostrati anche i dati relativi alla ricerca, quindi la sua posizione, la capienza e lo stato.
+
 <hr>
 
 ### Lingue supportate
@@ -477,15 +479,15 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E 
 
 <table>
   <tr>
-    <td><img src="assets/screenshots/tg-bot1.JPEG" alt="Screenshot Telegram Bot 1"></td>
-    <td><img src="assets/screenshots/tg-bot2.JPEG" alt="Screenshot Telegram Bot 2"></td>
-    <td><img src="assets/screenshots/tg-bot3.JPEG" alt="Screenshot Telegram Bot 3"></td>
+    <td align="center" valign="middle"><img src="assets/screenshots/tg-bot1.JPEG" alt="Screenshot Telegram Bot 1"></td>
+    <td align="center" valign="middle"><img src="assets/screenshots/tg-bot2.JPEG" alt="Screenshot Telegram Bot 2"></td>
+    <td align="center" valign="middle"><img src="assets/screenshots/tg-bot3.JPEG" alt="Screenshot Telegram Bot 3"></td>
   </tr>
 </table>
 
 **Hostato su:**
 
-<p>
+<p align="center">
   <a>
     <img src="https://simpleicons.org/icons/render.svg" alt="Render" width="32" height="32">
   </a>
@@ -495,5 +497,4 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E 
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
-- [ ] **Visibilità bottone su Safari iOS:** Il bottone di GitHub nella sidebar non è visibile su Safari per iOS 26.
 - [ ] **Mappe non aggiornate:** I nomi di alcune aule sulle planimetrie SVG/DWG non corrispondono a quelli reali.

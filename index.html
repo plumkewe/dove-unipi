@@ -959,6 +959,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* gray-300 50% */
         }
 
+        /* Fix per Safari iOS - gestisce la barra degli indirizzi dinamica */
+        @supports (-webkit-touch-callout: none) {
+            #sidebar {
+                height: -webkit-fill-available;
+            }
+        }
+
         .search-result-item {
             padding: 10px 12px;
             cursor: pointer;
@@ -1146,6 +1153,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         .nav-item.selected {
             background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            -webkit-tap-highlight-color: transparent;
         }
 
         .clear-search-button {
@@ -2244,7 +2255,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         <!-- Sidebar -->
         <div id="sidebar"
-            class="glass-sidebar text-gray-900 w-64 h-screen fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col">
+            class="glass-sidebar text-gray-900 w-64 fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col"
+            style="height: 100vh; height: 100dvh; padding-bottom: env(safe-area-inset-bottom, 0px);">
 
             <!-- Intestazione Sidebar -->
             <div class="flex items-center justify-between p-4 h-16">
@@ -2261,7 +2273,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             </div>
 
             <!-- Menu di Navigazione -->
-            <nav id="navigation-menu" class="flex-1 p-4 space-y-1 overflow-y-auto">
+            <nav id="navigation-menu" class="p-4 space-y-1 overflow-y-auto"
+                style="flex: 1 1 0%; min-height: 0; max-height: calc(100vh - 8rem - env(safe-area-inset-bottom, 0px));">
                 <div id="polos-list" class="space-y-1">
                     <!-- I bottoni dei poli verranno inseriti qui -->
                 </div>
@@ -2294,7 +2307,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             </nav>
 
             <!-- Footer Sidebar -->
-            <div class="p-4 border-t border-gray-300/50 space-y-4">
+            <div class="flex-shrink-0 p-4 border-t border-gray-300/50 space-y-4">
                 <a href="https://github.com/plumkewe/dove-unipi" target="_blank"
                     class="nav-item flex items-center space-x-3 p-2 rounded-lg">
                     <svg class="w-8 h-8 text-gray-800 github-icon" viewBox="0 0 16 16" fill="currentColor"
@@ -2568,6 +2581,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const storedDyslexicFont = localStorage.getItem('dyslexicFontEnabled');
             const storedTextSize = localStorage.getItem('textSizeEnabled');
             const storedShowWaterDispensers = localStorage.getItem('showWaterDispensersEnabled');
+            const storedShowClassroomStatus = localStorage.getItem('showClassroomStatusEnabled');
 
             // Detect browser language automatically
             function detectBrowserLanguage() {
@@ -2585,6 +2599,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 highContrast: storedHighContrast ? storedHighContrast === 'true' : false,
                 dyslexicFont: storedDyslexicFont ? storedDyslexicFont === 'true' : false,
                 showWaterDispensers: storedShowWaterDispensers ? storedShowWaterDispensers === 'true' : false,
+                showClassroomStatus: storedShowClassroomStatus ? storedShowClassroomStatus === 'true' : true, // Default to true
                 language: storedLanguage
             };
 
@@ -3006,7 +3021,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Funzione per aggiornare il placeholder
             function updateSearchPlaceholder() {
-                currentSuggestionIndex = (currentSuggestionIndex + 1) % searchSuggestions.length;
+                // Se abbiamo pochi suggerimenti, usa il comportamento ciclico semplice per evitare loop infiniti
+                if (searchSuggestions.length <= 2) {
+                    currentSuggestionIndex = (currentSuggestionIndex + 1) % searchSuggestions.length;
+                } else {
+                    // Seleziona un indice casuale tra 1 e length-1 (escludendo 0 che è il default)
+                    // Assicura che non si ripeta lo stesso suggerimento due volte di fila
+                    let newIndex;
+                    do {
+                        newIndex = Math.floor(Math.random() * (searchSuggestions.length - 1)) + 1;
+                    } while (newIndex === currentSuggestionIndex);
+                    currentSuggestionIndex = newIndex;
+                }
+
                 const newPlaceholder = searchSuggestions[currentSuggestionIndex];
                 if (searchInput) searchInput.placeholder = newPlaceholder;
                 if (searchInputMobile) searchInputMobile.placeholder = newPlaceholder;
@@ -3459,77 +3486,82 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
 
                         // Occupazione corrente delle aule - caricamento on-demand
-                        const availabilitySource = window.classroomAvaibility || {};
-                        const classroomName = result.room?.nome || '';
-                        const availabilityData = classroomName && availabilitySource[classroomName];
+                        // Skip entirely if setting is disabled
+                        let availabilityHTML = '';
 
-                        let statusClass = 'loading';
-                        let statusText = t('loading_occupancy');
-                        let timeRange = '';
-                        let showBar = true;
+                        if (settingsConfig.showClassroomStatus) {
+                            const availabilitySource = window.classroomAvaibility || {};
+                            const classroomName = result.room?.nome || '';
+                            const availabilityData = classroomName && availabilitySource[classroomName];
 
-                        if (availabilityData) {
-                            if (availabilityData.code === 0) {
-                                // Libera
-                                statusClass = 'free';
-                                statusText = t('availability_free');
-                            } else if (availabilityData.code === 1) {
-                                // Occupata
-                                statusClass = 'occupied';
-                                statusText = t('availability_occupied');
-                                if (availabilityData.startTime && availabilityData.endTime) {
-                                    timeRange = `${availabilityData.startTime} - ${availabilityData.endTime}`;
+                            let statusClass = 'loading';
+                            let statusText = t('loading_occupancy');
+                            let timeRange = '';
+                            let showBar = true;
+
+                            if (availabilityData) {
+                                if (availabilityData.code === 0) {
+                                    // Libera
+                                    statusClass = 'free';
+                                    statusText = t('availability_free');
+                                } else if (availabilityData.code === 1) {
+                                    // Occupata
+                                    statusClass = 'occupied';
+                                    statusText = t('availability_occupied');
+                                    if (availabilityData.startTime && availabilityData.endTime) {
+                                        timeRange = `${availabilityData.startTime} - ${availabilityData.endTime}`;
+                                    }
+                                } else if (availabilityData.code === 2) {
+                                    // Non disponibile - non mostrare la barra
+                                    showBar = false;
                                 }
-                            } else if (availabilityData.code === 2) {
-                                // Non disponibile - non mostrare la barra
-                                showBar = false;
-                            }
-                        } else if (classroomName) {
-                            // Carica i dati solo per questa aula specifica (on-demand)
-                            getClassroomAvailability(classroomName).then(availability => {
-                                const code = Number(Object.keys(availability)[0]);
-                                const value = availability[code];
+                            } else if (classroomName) {
+                                // Carica i dati solo per questa aula specifica (on-demand)
+                                getClassroomAvailability(classroomName).then(availability => {
+                                    const code = Number(Object.keys(availability)[0]);
+                                    const value = availability[code];
 
-                                if (code === 1 && value) {
-                                    const scheduleStrArray = value.split("|");
+                                    if (code === 1 && value) {
+                                        const scheduleStrArray = value.split("|");
+                                        window.classroomAvaibility[classroomName] = {
+                                            code: 1,
+                                            startTime: scheduleStrArray[0] || '',
+                                            endTime: scheduleStrArray[1] || '',
+                                            occupiedBy: scheduleStrArray[2] || ''
+                                        };
+                                    } else {
+                                        window.classroomAvaibility[classroomName] = {
+                                            code: code,
+                                            startTime: '',
+                                            endTime: '',
+                                            occupiedBy: ''
+                                        };
+                                    }
+                                }).catch(error => {
+                                    console.warn(`Failed to get availability for ${classroomName}:`, error);
                                     window.classroomAvaibility[classroomName] = {
-                                        code: 1,
-                                        startTime: scheduleStrArray[0] || '',
-                                        endTime: scheduleStrArray[1] || '',
-                                        occupiedBy: scheduleStrArray[2] || ''
-                                    };
-                                } else {
-                                    window.classroomAvaibility[classroomName] = {
-                                        code: code,
+                                        code: 2,
                                         startTime: '',
                                         endTime: '',
                                         occupiedBy: ''
                                     };
-                                }
-                            }).catch(error => {
-                                console.warn(`Failed to get availability for ${classroomName}:`, error);
-                                window.classroomAvaibility[classroomName] = {
-                                    code: 2,
-                                    startTime: '',
-                                    endTime: '',
-                                    occupiedBy: ''
-                                };
-                            });
-                        }
+                                });
+                            }
 
-                        const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
-                        const availabilityHTML = showBar ? `
-                            <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomName}">
-                                <span class="occupancy-text">${statusText}</span>
-                                ${timeRange ? `<span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">expand_more</span>` : ''}
-                            </div>
-                            ${timeRange ? `
-                            <div class="occupancy-details" id="${occupancyId}">
-                                <div class="occupancy-details-content">
-                                    ${timeRange}
+                            const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
+                            availabilityHTML = showBar ? `
+                                <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomName}">
+                                    <span class="occupancy-text">${statusText}</span>
+                                    ${timeRange ? `<span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">expand_more</span>` : ''}
                                 </div>
-                            </div>` : ''}
-                        ` : '';
+                                ${timeRange ? `
+                                <div class="occupancy-details" id="${occupancyId}">
+                                    <div class="occupancy-details-content">
+                                        ${timeRange}
+                                    </div>
+                                </div>` : ''}
+                            ` : '';
+                        }
                         // Fine occupazione corrente delle aule
 
                         resultElement.innerHTML = `
@@ -3597,6 +3629,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             function renderSettingsBlock(container) {
                 const settingsItems = [
+                    {
+                        key: 'classroomStatus',
+                        label: t('settings_classroom_status'),
+                        description: t('settings_classroom_status_description'),
+                        checked: settingsConfig.showClassroomStatus,
+                        onToggle: setClassroomStatusSetting
+                    },
                     {
                         key: 'sharePath',
                         label: t('settings_share_path'),
@@ -3910,6 +3949,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 } else {
                     hideWaterDispensers();
                 }
+                syncSettingsToggles();
+            }
+
+            function setClassroomStatusSetting(isEnabled) {
+                settingsConfig.showClassroomStatus = isEnabled;
+                localStorage.setItem('showClassroomStatusEnabled', isEnabled);
                 syncSettingsToggles();
             }
 
@@ -4343,6 +4388,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             room: roomFromShortLink.room,
                             codeOverride: roomParam
                         });
+
+                        // Popola automaticamente il campo di ricerca con il nome dell'aula
+                        const roomName = roomFromShortLink.room.nome || roomParam;
+                        const searchQuery = `${roomName}`;
+
+                        if (searchInput) searchInput.value = searchQuery;
+                        if (searchInputMobile) searchInputMobile.value = searchQuery;
+
+                        // Triggerare la ricerca per mostrare i risultati
+                        searchRooms(searchQuery);
                     }
                 }
 
@@ -5140,6 +5195,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         zoomControl: false,
                         attributionControl: false
                     });
+
+                    // Patch mouseEventToContainerPoint to handle CSS rotation
+                    const originalMouseEventToContainerPoint = map.mouseEventToContainerPoint;
+                    map.mouseEventToContainerPoint = function (e) {
+                        const p = originalMouseEventToContainerPoint.call(this, e);
+                        if (isMapFlipped) {
+                            const size = this.getSize();
+                            p.x = size.x - p.x;
+                            p.y = size.y - p.y;
+                        }
+                        return p;
+                    };
+
                     registerMapInteractionGuards();
                     registerFlipDragHandler();
                 } else {
@@ -5278,6 +5346,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const unavailableLabel = t('availability_unavailable');
                 const freeLabel = t('availability_free');
 
+                // If setting is disabled, return unavailable (or a special code) immediately
+                if (!settingsConfig.showClassroomStatus) {
+                    return Promise.resolve({ 2: unavailableLabel });
+                }
+
                 const API_ENDPOINT = 'https://vps.giulionisi.me:54321/api/';
                 const AVAIBILITY_ENDPOINT = API_ENDPOINT + 'current_schedule_given_pole_and_room';
                 const POLE = "fibonacci";
@@ -5322,6 +5395,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function refreshSearchResultsOccupancy() {
                 document.querySelectorAll(".occupancy-status-bar").forEach(statusBar => {
                     const classroomName = statusBar.getAttribute('data-classroom');
+
+                    // If setting is disabled, ensure no bars are shown
+                    if (!settingsConfig.showClassroomStatus) {
+                        statusBar.remove();
+                        return;
+                    }
+
                     const availabilityData = classroomName && window.classroomAvaibility[classroomName];
 
                     if (availabilityData && statusBar.classList.contains('loading')) {

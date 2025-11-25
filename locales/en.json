@@ -327,6 +327,14 @@
     "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
     "translation": "Display water dispensers location on the map"
   },
+  "settings_classroom_status": {
+    "original": "Mostra stato aule",
+    "translation": "Show classroom status"
+  },
+  "settings_classroom_status_description": {
+    "original": "Mostra l'occupazione ed effettua chiamate API",
+    "translation": "Show occupancy status and make API calls"
+  },
   "no_results_feedback": {
     "original": "Non trovi ciò che ti aspettavi? Mandami un'email:",
     "translation": "Can't find what you were looking for? Send me an email:"
