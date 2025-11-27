@@ -10,6 +10,7 @@
           }
         },
         "b": {
+          "rotate": true,
           "piano": {
             "0": [
               {

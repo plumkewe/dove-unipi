@@ -3326,7 +3326,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                                 edificio: buildingName,
                                                 piano: floorName,
                                                 room: dispenser,
-                                                isWaterDispenser: true
+                                                isFacility: true
                                             });
                                         }
                                     });
@@ -3483,18 +3483,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         });
                     } else {
                         const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
-                        const isWaterDispenser = result.isWaterDispenser || false;
+                        const isFacility = result.isFacility || false;
 
                         // Aggiungi classe per gli erogatori d'acqua
-                        if (isWaterDispenser) {
+                        if (isFacility && result.room.type === 'erogatore_acqua') {
                             resultElement.classList.add('water-dispenser');
                         }
 
                         // Occupazione corrente delle aule - caricamento on-demand
-                        // Skip entirely if setting is disabled
+                        // Skip entirely if setting is disabled or if it's a facility (from facilities.json)
                         let availabilityHTML = '';
 
-                        if (settingsConfig.showClassroomStatus) {
+                        if (settingsConfig.showClassroomStatus && !isFacility) {
                             const availabilitySource = window.classroomAvaibility || {};
                             const classroomName = result.room?.nome || '';
                             const availabilityData = classroomName && availabilitySource[classroomName];
@@ -4099,13 +4099,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             // Event listener per la ricerca
+            let searchDebounceTimer = null;
             function setupSearchListeners(inputElement, resultsElement, clearButtonElement = null) {
                 inputElement.addEventListener('input', (e) => {
                     const query = e.target.value;
                     // Sincronizza l'altro input
                     const otherInput = inputElement === searchInput ? searchInputMobile : searchInput;
                     otherInput.value = query;
-                    searchRooms(query);
+
+                    // Debounce per migliorare le performance quando si digita velocemente
+                    if (searchDebounceTimer) {
+                        clearTimeout(searchDebounceTimer);
+                    }
+                    searchDebounceTimer = setTimeout(() => {
+                        searchRooms(query);
+                    }, 300);
+
                     updateClearButtonsVisibility();
                 });
 
@@ -4971,7 +4980,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             function updateFlipButtonVisibility(building) {
                 if (!flipViewBtn) return;
-                const shouldShow = building && building.toLowerCase() === 'b';
+
+                let shouldShow = false;
+                if (building && selectedPolo && data.polo[selectedPolo] && data.polo[selectedPolo].edificio[building]) {
+                    shouldShow = !!data.polo[selectedPolo].edificio[building].rotate;
+                }
+
                 flipViewBtn.classList.toggle('hidden', !shouldShow);
                 flipViewBtn.disabled = !shouldShow;
                 if (!shouldShow && isMapFlipped) {
