@@ -292,8 +292,12 @@
     "translation": "Network Ports"
   },
   "room_detail_power_outlets": {
-    "original": "Prese Elettriche",
-    "translation": "Power Outlets"
+    "original": "Sockets",
+    "translation": "Sockets"
+  },
+  "room_detail_power_outlets_count": {
+    "original": "Sockets: %s",
+    "translation": "Sockets: %s"
   },
   "room_detail_computers_count": {
     "original": "Computer Presenti: %s",
@@ -316,8 +320,8 @@
     "translation": "Fixed Camera"
   },
   "room_detail_blackboard": {
-    "original": "Lavagna: %s",
-    "translation": "Blackboard: %s"
+    "original": "Blackboard",
+    "translation": "Blackboard"
   },
   "settings_water_dispensers": {
     "original": "Mostra erogatori d'acqua (ALFA)",
@@ -334,6 +338,14 @@
   "settings_classroom_status_description": {
     "original": "Mostra l'occupazione ed effettua chiamate API",
     "translation": "Show occupancy status and make API calls"
+  },
+  "settings_show_ground_floor": {
+    "original": "Mostra \"Piano Terra\"",
+    "translation": "Show \"Ground Floor\""
+  },
+  "settings_show_ground_floor_description": {
+    "original": "Se disattivato mostra \"Piano 0\" invece di \"Piano Terra\"",
+    "translation": "If disabled shows \"Floor 0\" instead of \"Ground Floor\""
   },
   "no_results_feedback": {
     "original": "Non trovi ciò che ti aspettavi? Mandami un'email:",
@@ -410,5 +422,9 @@
   "availability_unavailable": {
     "original": "Dati non disponibili",
     "translation": "Data unavailable"
+  },
+  "floor_ground": {
+    "original": "Piano Terra",
+    "translation": "Ground Floor"
   }
 }

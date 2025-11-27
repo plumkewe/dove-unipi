@@ -97,8 +97,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <!-- Microsoft tile -->
     <meta name="msapplication-TileImage" content="https://plumkewe.github.io/dove-unipi/assets/logo/favicon.png">
 
+    <!-- Cache Control for better performance -->
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable">
+
     <!-- Preload critical CSS -->
-    <link rel="preload" href="assets/css/output.css" as="style">
+    <link rel="preload" href="assets/css/output.css?v=1.0" as="style">
 
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
@@ -163,7 +166,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
       "browserRequirements": "Requires JavaScript. Requires HTML5.",
       "softwareVersion": "1.0",
       "datePublished": "2025",
-      "dateModified": "2025-11-20"
+      "dateModified": "2025-11-26"
     }
     </script>
 
@@ -796,7 +799,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 </script>
 
     <!-- Tailwind CSS (compiled) -->
-    <link rel="stylesheet" href="assets/css/output.css">
+    <link rel="stylesheet" href="assets/css/output.css?v=1.0">
     <!-- Caricamento di Google Material Symbols - optimized to load only filled style -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
@@ -2582,6 +2585,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const storedTextSize = localStorage.getItem('textSizeEnabled');
             const storedShowWaterDispensers = localStorage.getItem('showWaterDispensersEnabled');
             const storedShowClassroomStatus = localStorage.getItem('showClassroomStatusEnabled');
+            const storedShowGroundFloor = localStorage.getItem('showGroundFloorEnabled');
 
             // Detect browser language automatically
             function detectBrowserLanguage() {
@@ -2600,6 +2604,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 dyslexicFont: storedDyslexicFont ? storedDyslexicFont === 'true' : false,
                 showWaterDispensers: storedShowWaterDispensers ? storedShowWaterDispensers === 'true' : false,
                 showClassroomStatus: storedShowClassroomStatus ? storedShowClassroomStatus === 'true' : true, // Default to true
+                showGroundFloor: storedShowGroundFloor ? storedShowGroundFloor === 'true' : true, // Default to true = "Piano Terra"
                 language: storedLanguage
             };
 
@@ -3569,7 +3574,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             <div class="details">
                                 Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
                                 ${t('building')} ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
-                                ${t('floor')} ${result.piano}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
+                                ${result.piano === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + result.piano}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
                             </div>
                             ${availabilityHTML}
                         `;
@@ -3604,6 +3609,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
                             otherInput.value = result.room.nome;
                             updateClearButtonsVisibility();
+
+                            // Espandi automaticamente i dettagli dell'aula nella sidebar
+                            // Usa un timeout per assicurarsi che la lista delle aule sia stata popolata
+                            setTimeout(() => {
+                                expandRoomDetailsInSidebar(result.room.nome);
+                            }, 100);
+
                             if (isMobile()) {
                                 closeSidebar();
                             }
@@ -3635,6 +3647,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         description: t('settings_classroom_status_description'),
                         checked: settingsConfig.showClassroomStatus,
                         onToggle: setClassroomStatusSetting
+                    },
+                    {
+                        key: 'showGroundFloor',
+                        label: t('settings_show_ground_floor'),
+                        description: t('settings_show_ground_floor_description'),
+                        checked: settingsConfig.showGroundFloor,
+                        onToggle: setShowGroundFloorSetting
                     },
                     {
                         key: 'sharePath',
@@ -3958,6 +3977,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 syncSettingsToggles();
             }
 
+            function setShowGroundFloorSetting(isEnabled) {
+                settingsConfig.showGroundFloor = isEnabled;
+                localStorage.setItem('showGroundFloorEnabled', isEnabled);
+                syncSettingsToggles();
+
+                // Refresh UI
+                if (typeof selectedBuilding !== 'undefined' && selectedBuilding) {
+                    populateFloors(selectedBuilding);
+                }
+
+                // Refresh search results if active
+                const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                if (currentSearchInput && currentSearchInput.value.trim() !== '') {
+                    searchRooms(currentSearchInput.value);
+                }
+            }
+
+
             function setTextSizeSetting(sizeClass) {
                 const textSizes = ['text-small', 'text-normal', 'text-large', 'text-xlarge'];
                 // Remove all text size classes
@@ -4035,6 +4072,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             break;
                         case 'dyslexicFont':
                             input.checked = settingsConfig.dyslexicFont;
+                            break;
+                        case 'classroomStatus':
+                            input.checked = settingsConfig.showClassroomStatus;
+                            break;
+                        case 'showGroundFloor':
+                            input.checked = settingsConfig.showGroundFloor;
                             break;
                         default:
                             break;
@@ -4410,6 +4453,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     viewParam,
                     roomFromShortLink ? roomFromShortLink.room : null
                 );
+
+                // Espandi automaticamente i dettagli dell'aula nella sidebar se proveniamo da un link breve
+                if (roomFromShortLink) {
+                    setTimeout(() => {
+                        expandRoomDetailsInSidebar(roomFromShortLink.room.nome);
+                    }, 200);
+                }
             }
 
             // Funzione per chiudere la sidebar (logica unificata)
@@ -4465,7 +4515,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 clearShortLinkContext();
                 if (map && svgOverlay) {
                     markProgrammaticMapChange();
-                    map.fitBounds(svgOverlay.getBounds());
+                    map.fitBounds(svgOverlay.getBounds(), { animate: false });
                 }
             });
 
@@ -4602,7 +4652,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
                         layers
                         </span>
-                        <span>${t('floor')} ${floor}</span>
+                        <span>${floor === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + floor}</span>
                     `;
                     button.addEventListener('click', () => {
                         clearShortLinkContext();
@@ -4747,7 +4797,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // For the student
                     addInfoRow(room.rete, "wifi", t('room_detail_network'));
                     addInfoRow(room.porte_rete, "lan", t('room_detail_network_ports'));
-                    addInfoRow(room.prese_elettriche, "bolt", t('room_detail_power_outlets'));
+                    if (room.numero_prese_elettriche > 0) {
+                        addInfoRow(room.numero_prese_elettriche, "bolt", t('room_detail_power_outlets_count'));
+                    } else {
+                        addInfoRow(room.prese_elettriche, "bolt", t('room_detail_power_outlets'));
+                    }
 
                     // Both - functionality / lab
                     if (!addInfoRow(room.numero_pc, "computer", t('room_detail_computers_count')))
@@ -4786,6 +4840,40 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     roomContainer.appendChild(roomElement);
                     roomContainer.appendChild(roomInfoElement);
                     roomsList.appendChild(roomContainer);
+                });
+            }
+
+            // Funzione per espandere automaticamente i dettagli dell'aula nella sidebar
+            function expandRoomDetailsInSidebar(roomName) {
+                if (!roomName) return;
+
+                // Chiudi tutti i dettagli aperti precedentemente
+                const allRoomInfos = roomsList.querySelectorAll('.capacity-info');
+                const allExpandIcons = roomsList.querySelectorAll('.expand-icon');
+
+                allRoomInfos.forEach(info => {
+                    info.classList.add('hidden');
+                });
+
+                allExpandIcons.forEach(icon => {
+                    icon.style.transform = 'rotate(0deg)';
+                });
+
+                // Trova e espandi l'aula specifica
+                const roomElements = roomsList.querySelectorAll('.nav-item');
+                roomElements.forEach((element) => {
+                    const roomNameSpan = element.querySelector('span:nth-child(2)');
+                    if (roomNameSpan && roomNameSpan.textContent === roomName) {
+                        // Trova il prossimo elemento sibling che è il dettaglio
+                        const roomContainer = element.parentElement;
+                        const roomInfo = roomContainer.querySelector('.capacity-info');
+                        const expandIcon = element.querySelector('.expand-icon');
+
+                        if (roomInfo && expandIcon) {
+                            roomInfo.classList.remove('hidden');
+                            expandIcon.style.transform = 'rotate(180deg)';
+                        }
+                    }
                 });
             }
 
@@ -5189,7 +5277,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         fadeAnimation: !isMobileDevice,
                         markerZoomAnimation: !isMobileDevice,
                         inertia: !isMobileDevice,
-                        touchZoom: isMobileDevice ? 'center' : true,
+                        touchZoom: true,
                         tap: !isMobileDevice,
                         preferCanvas: true,
                         zoomControl: false,
