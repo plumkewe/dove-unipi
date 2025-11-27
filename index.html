@@ -927,6 +927,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         #sidebar {
             transition: transform 0.3s ease-in-out;
+            max-width: 270px;
+            min-width: 270px;
+            width: 270px;
         }
 
         /* Stile per l'hover degli elementi */
@@ -949,6 +952,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             .hover-text-effect:hover {
                 color: #1F2937;
                 /* gray-800 */
+            }
+        }
+
+        /* Reset hover effects on touch devices to prevent sticky hover */
+        @media (hover: none) {
+            .nav-item:hover {
+                background-color: transparent;
             }
         }
 
@@ -1084,6 +1094,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             font-weight: 500;
             gap: 8px;
             transition: all 0.3s ease;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .occupancy-status-bar.loading {
@@ -1118,12 +1131,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
         }
 
+        .occupancy-text {
+            flex: 1 1 auto;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
         .occupancy-expand-icon {
             margin-left: auto;
             transition: transform 0.3s ease;
             cursor: pointer;
             font-size: 20px;
             user-select: none;
+            flex-shrink: 0;
         }
 
         .occupancy-expand-icon.expanded {
@@ -1146,6 +1167,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             font-size: 12px;
             color: #4b5563;
             line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
         }
 
         .occupancy-details-content strong {
@@ -1265,6 +1289,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         #map.map-flipped {
             transform: rotate(180deg) translateZ(0);
+        }
+
+        /* Ruota le icone dei servizi quando la mappa è girata per mantenerle dritte */
+        #map.map-flipped .water-dispenser-marker .material-symbols-outlined {
+            transform: rotate(180deg);
         }
 
         .leaflet-map-pane,
@@ -1418,6 +1447,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Aggiunto per coerenza */
             justify-content: center;
             /* Aggiunto per coerenza */
+        }
+
+        /* Animazione per invogliare l'apertura della sidebar */
+        @keyframes sidebar-button-pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #open-sidebar-button.pulse-animation {
+            animation: sidebar-button-pulse 0.6s ease-in-out 2;
         }
 
         #search-container {
@@ -2258,7 +2306,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         <!-- Sidebar -->
         <div id="sidebar"
-            class="glass-sidebar text-gray-900 w-64 fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col"
+            class="glass-sidebar text-gray-900 w-80 fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col"
             style="height: 100vh; height: 100dvh; padding-bottom: env(safe-area-inset-bottom, 0px);">
 
             <!-- Intestazione Sidebar -->
@@ -3183,7 +3231,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return;
                 }
 
-                const queryLower = query.toLowerCase();
+                // Check if query is wrapped in quotes for exact search
+                let queryLower = query.toLowerCase();
+                let isExactSearch = false;
+
+                if ((queryLower.startsWith('"') && queryLower.endsWith('"')) ||
+                    (queryLower.startsWith('"') && queryLower.endsWith('"'))) {
+                    // Remove quotes and mark as exact search
+                    queryLower = queryLower.slice(1, -1).trim();
+                    isExactSearch = true;
+                }
                 const matchesSettingsQuery = queryLower.includes('impostazioni') || queryLower.includes('settings');
                 const matchesShareQuery = queryLower.includes('share') || queryLower.includes('condivid');
                 const matchesFeedbackQuery = queryLower.includes('feedback');
@@ -3289,7 +3346,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                     const roomNameLower = room.nome.toLowerCase();
                                     const aliasLower = Array.isArray(room.alias) ? room.alias.map(a => a.toLowerCase()) : [];
-                                    if (roomNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower))) {
+
+                                    // Use exact match when search is in quotes, otherwise use partial match
+                                    const matches = isExactSearch
+                                        ? (roomNameLower === queryLower || aliasLower.some(a => a === queryLower))
+                                        : (roomNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+
+                                    if (matches) {
                                         results.push({
                                             polo: poloName,
                                             edificio: buildingName,
@@ -3320,7 +3383,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         const dispenserNameLower = dispenser.nome.toLowerCase();
                                         const aliasLower = Array.isArray(dispenser.alias) ? dispenser.alias.map(a => a.toLowerCase()) : [];
 
-                                        if (dispenserNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower))) {
+                                        // Use exact match when search is in quotes, otherwise use partial match
+                                        const matches = isExactSearch
+                                            ? (dispenserNameLower === queryLower || aliasLower.some(a => a === queryLower))
+                                            : (dispenserNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+
+                                        if (matches) {
                                             results.push({
                                                 polo: poloName,
                                                 edificio: buildingName,
@@ -3615,6 +3683,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             setTimeout(() => {
                                 expandRoomDetailsInSidebar(result.room.nome);
                             }, 100);
+
+                            // Anima il bottone della sidebar per invogliare l'utente ad aprirla
+                            triggerSidebarButtonAnimation();
 
                             if (isMobile()) {
                                 closeSidebar();
@@ -4094,7 +4165,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 selectedSearchResultIndex = index;
                 if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
                     items[selectedSearchResultIndex].classList.add('selected');
-                    // Removed scrollIntoView to avoid automatic highlighting
                 }
             }
 
@@ -4113,7 +4183,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                     searchDebounceTimer = setTimeout(() => {
                         searchRooms(query);
-                    }, 300);
+                    }, 0);
 
                     updateClearButtonsVisibility();
                 });
@@ -4136,19 +4206,37 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         e.preventDefault();
                         const newIndex = (selectedSearchResultIndex + 1) % items.length;
                         updateSelectedSearchResult(newIndex);
+                        // Scroll into view only when using arrow keys
+                        if (items[newIndex]) {
+                            items[newIndex].scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'nearest',
+                                inline: 'nearest'
+                            });
+                        }
                     } else if (e.key === 'ArrowUp') {
                         e.preventDefault();
                         const newIndex = (selectedSearchResultIndex - 1 + items.length) % items.length;
                         updateSelectedSearchResult(newIndex);
+                        // Scroll into view only when using arrow keys
+                        if (items[newIndex]) {
+                            items[newIndex].scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'nearest',
+                                inline: 'nearest'
+                            });
+                        }
                     } else if (e.key === 'Enter') {
                         e.preventDefault();
 
                         // Se c'è un solo risultato, selezionalo automaticamente
                         if (items.length === 1) {
                             items[0].click();
+                            inputElement.blur();
                         } else if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
                             // Se c'è un elemento selezionato con le frecce, cliccalo
                             items[selectedSearchResultIndex].click();
+                            inputElement.blur();
                         } else {
                             // Altrimenti, se c'è un suggerimento visibile (primo elemento), completalo automaticamente
                             const firstItem = items[0];
@@ -4157,6 +4245,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 if (isSuggestion) {
                                     // È un suggerimento, cliccalo automaticamente
                                     firstItem.click();
+                                    inputElement.blur();
                                 }
                             }
                         }
@@ -4480,6 +4569,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Funzione per aprire la sidebar (logica unificata)
             function openSidebar() {
                 sidebar.classList.remove('-translate-x-full');
+            }
+
+            // Funzione per animare il bottone della sidebar come feedback visivo
+            function triggerSidebarButtonAnimation() {
+                // Controlla se la sidebar è chiusa prima di animare
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    openSidebarBtn.classList.add('pulse-animation');
+
+                    // Rimuovi la classe dopo l'animazione per permettere animazioni future
+                    setTimeout(() => {
+                        openSidebarBtn.classList.remove('pulse-animation');
+                    }, 1200); // 0.6s * 2 ripetizioni = 1.2s
+                }
             }
 
             // Event Listener per il bottone Apri
@@ -4881,6 +4983,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (roomInfo && expandIcon) {
                             roomInfo.classList.remove('hidden');
                             expandIcon.style.transform = 'rotate(180deg)';
+
+                            // Scrolla la sidebar fino alla posizione dell'aula
+                            setTimeout(() => {
+                                element.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'center',
+                                    inline: 'nearest'
+                                });
+                            }, 100);
                         }
                     }
                 });

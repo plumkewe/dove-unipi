@@ -351,7 +351,7 @@ graph TB
 Effettua una ricerca non solo sul nome dell’aula ma anche sui suoi **alias**. Una volta selezionata, l’aula verrà automaticamente zoomata sulla sua posizione (ovviamente, se le coordinate sono presenti nel file rooms.json).
 
 Supporta inoltre **filtri avanzati**: ad esempio, scrivendo `> 200` verranno mostrate le aule con capienza superiore a 200.  
-Sono supportati gli operatori: `<`, `>`, `==`, `=`, `>=`, `<=`.
+Sono supportati gli operatori: `<`, `>`, `==`, `=`, `>=`, `<=`, `" "`.
 
 Puoi accedere alle **impostazioni** digitando `impostazioni` o `settings` nella barra di ricerca.  
 Da lì puoi abilitare anche le **funzionalità sperimentali**.
