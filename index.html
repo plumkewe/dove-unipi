@@ -69,6 +69,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="twitter:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
 
     <meta name="robots" content="index, follow">
+    <meta name="keywords"
+        content="università pisa, unipi, polo fibonacci, aule unipi, mappe unipi, edificio a b c d e, planimetrie unipi, aula magna, dipartimento informatica pisa, dipartimento matematica pisa, dipartimento fisica pisa, aule didattiche pisa, dove unipi, navigazione campus pisa, mappa interattiva università pisa">
     <meta property="og:site_name" content="DOVE?UNIPI">
     <meta property="og:locale" content="it_IT">
     <meta property="og:locale:alternate" content="en_US">
@@ -2161,7 +2163,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
     <section style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
 
-        <h2 id="about-dove-unipi">DOVE?UNIPI - La tua guida al Polo Fibonacci</h2>
+        <h1 id="about-dove-unipi">DOVE?UNIPI - La tua guida al Polo Fibonacci</h1>
 
         <p>
             <strong>DOVE?UNIPI</strong> è un'applicazione web progettata per aiutarti a navigare
@@ -2169,7 +2171,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             Trova rapidamente aule, laboratori, biblioteche e dipartimenti.
         </p>
 
-        <h3>Cosa puoi trovare?</h3>
+        <h2>Cosa puoi trovare?</h2>
         <ul>
             <li>
                 <strong>Edifici:</strong> Mappe interattive per gli edifici A, B, C, D ed E.
@@ -2184,7 +2186,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             </li>
         </ul>
 
-        <h3>Come funziona</h3>
+        <h2>Come funziona</h2>
         <p>
             Usa la barra di ricerca per trovare un luogo per nome, edificio o capienza.
             Puoi anche navigare visivamente tra le planimetrie del piano terra,
@@ -2208,7 +2210,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         <button id="open-sidebar-button"
             class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200 flex-shrink-0"
             data-tooltip="Apri sidebar">
-            <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">
+            <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                aria-label="Apri menu laterale">
                 left_panel_open
             </span>
         </button>
@@ -2219,14 +2222,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 class="relative bg-gray-200 rounded-lg ring-2 ring-gray-400 transition-all duration-300 overflow-hidden">
                 <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span class="material-symbols-outlined text-gray-500">search</span>
+                        <span class="material-symbols-outlined text-gray-500" aria-label="Cerca">search</span>
                     </span>
                     <input type="text" id="search-input" placeholder="Cerca un'aula..."
                         class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
                         autocomplete="off">
                     <button type="button" id="clear-search-btn" class="clear-search-button hidden"
                         aria-label="Cancella ricerca">
-                        <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;">close</span>
+                        <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
+                            aria-label="Cancella">close</span>
                     </button>
                 </div>
                 <div id="search-results" class="hidden">
@@ -2241,15 +2245,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             <div id="view-controls" class="button-group hidden">
                 <button id="perspective-view-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Vista Prospettica" data-tooltip="Vista Prospettica">
-                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">view_in_ar</span>
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Vista prospettica">view_in_ar</span>
                 </button>
                 <button id="top-view-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Vista dall'alto" data-tooltip="Vista dall'alto">
-                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">grid_view</span>
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Vista dall'alto">grid_view</span>
                 </button>
                 <button id="flip-view-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200 hidden"
                     aria-label="Ribalta mappa" data-tooltip="Ribalta mappa">
-                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Ribalta mappa">
                         screen_rotation_alt
                     </span>
                 </button>
@@ -2259,23 +2266,26 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             <button id="share-btn"
                 class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200 hidden"
                 aria-label="Condividi" data-tooltip="Copia link" data-shortcut="j">
-                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">share</span>
+                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                    aria-label="Condividi">share</span>
             </button>
 
             <!-- Controlli Zoom -->
             <div id="zoom-controls" class="button-group hidden">
                 <button id="zoom-in-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Ingrandisci" data-tooltip="Ingrandisci">
-                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_in</span>
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Zoom avanti">zoom_in</span>
                 </button>
                 <button id="zoom-out-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Riduci" data-tooltip="Riduci">
-                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;">zoom_out</span>
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Zoom indietro">zoom_out</span>
                 </button>
                 <button id="reset-zoom-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Centra visuale" data-tooltip="Centra visuale" data-shortcut="k">
-                    <span class="material-symbols-outlined"
-                        style="font-size: 32px; line-height: 1;">center_focus_strong</span>
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Centra vista">center_focus_strong</span>
                 </button>
             </div>
         </div>
@@ -2317,7 +2327,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 <!-- Bottone Chiudi (Desktop & Mobile) -->
                 <button id="close-sidebar-button" class="block p-1 rounded-lg hover-effect-darker"
                     data-tooltip="Chiudi sidebar">
-                    <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;">
+                    <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
+                        aria-label="Chiudi menu">
                         left_panel_close
                     </span>
                 </button>
@@ -2361,8 +2372,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             <div class="flex-shrink-0 p-4 border-t border-gray-300/50 space-y-4">
                 <a href="https://github.com/plumkewe/dove-unipi" target="_blank"
                     class="nav-item flex items-center space-x-3 p-2 rounded-lg">
-                    <svg class="w-8 h-8 text-gray-800 github-icon" viewBox="0 0 16 16" fill="currentColor"
-                        aria-hidden="true">
+                    <svg class="w-8 h-8 text-gray-800 github-icon" viewBox="0 0 16 16" fill="currentColor" role="img"
+                        aria-label="Logo GitHub">
                         <path
                             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
                         </path>
@@ -2396,9 +2407,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 px-3 py-1 rounded-lg bg-gray-200 border border-gray-200">
         <span class="text-sm text-gray-600 whitespace-nowrap">
             Fatto con
-            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">favorite</span>
+            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;"
+                aria-label="amore">favorite</span>
             e
-            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;">smart_toy</span>
+            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;"
+                aria-label="intelligenza artificiale">smart_toy</span>
             da <a href="https://github.com/plumkewe" target="_blank"
                 class="underline font-medium hover-text-effect">Lyubomyr Malay</a>
         </span>
@@ -2645,6 +2658,39 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             const storedLanguage = localStorage.getItem('selectedLanguage') || detectBrowserLanguage();
+            // Cache for rooms with no status
+            let noStatusCache = new Set();
+            const NO_STATUS_CACHE_KEY = 'noStatusCache';
+
+            function loadNoStatusCache() {
+                try {
+                    const cached = localStorage.getItem(NO_STATUS_CACHE_KEY);
+                    if (cached) {
+                        noStatusCache = new Set(JSON.parse(cached));
+                    }
+                } catch (e) {
+                    console.warn('Failed to load no status cache', e);
+                }
+            }
+
+            function saveNoStatusCache() {
+                try {
+                    localStorage.setItem(NO_STATUS_CACHE_KEY, JSON.stringify(Array.from(noStatusCache)));
+                } catch (e) {
+                    console.warn('Failed to save no status cache', e);
+                }
+            }
+
+            function addToNoStatusCache(classroomName) {
+                if (!classroomName) return;
+                if (!noStatusCache.has(classroomName)) {
+                    noStatusCache.add(classroomName);
+                    saveNoStatusCache();
+                }
+            }
+
+            loadNoStatusCache();
+
             const settingsConfig = {
                 shareCoordinates: storedShareCoordinates ? storedShareCoordinates === 'true' : true,
                 sharePath: storedSharePath ? storedSharePath === 'true' : true,
@@ -3562,7 +3608,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // Skip entirely if setting is disabled or if it's a facility (from facilities.json)
                         let availabilityHTML = '';
 
-                        if (settingsConfig.showClassroomStatus && !isFacility) {
+                        const isCachedNoStatus = noStatusCache.has(result.room?.nome);
+                        if (settingsConfig.showClassroomStatus && !isFacility && !isCachedNoStatus) {
                             const availabilitySource = window.classroomAvaibility || {};
                             const classroomName = result.room?.nome || '';
                             const availabilityData = classroomName && availabilitySource[classroomName];
@@ -3609,6 +3656,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                             endTime: '',
                                             occupiedBy: ''
                                         };
+                                        if (code === 2) {
+                                            addToNoStatusCache(classroomName);
+                                        }
                                     }
                                 }).catch(error => {
                                     console.warn(`Failed to get availability for ${classroomName}:`, error);
@@ -3618,6 +3668,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         endTime: '',
                                         occupiedBy: ''
                                     };
+                                    addToNoStatusCache(classroomName);
                                 });
                             }
 
@@ -4696,7 +4747,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const button = document.createElement('button');
                     button.className = 'nav-item flex items-center space-x-3 p-2 rounded-lg w-full';
                     button.innerHTML = `
-                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
+                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;" aria-label="Polo">
                         school
                         </span>
                         <span>Polo ${polo.charAt(0).toUpperCase() + polo.slice(1)}</span>
@@ -4807,7 +4858,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // Aggiungi i dipartimenti al contenitore dedicato
                     departments.forEach(dept => {
                         const deptElement = document.createElement('div');
-                        deptElement.className = 'w-full text-left p-2 pl-8';
+                        deptElement.className = 'department-item w-full text-left p-2 pl-8';
+                        deptElement.setAttribute('data-name', dept.nome);
                         deptElement.innerHTML = `<span>${dept.nome}</span>`;
 
                         const buttonsContainer = document.createElement('div');
@@ -4993,6 +5045,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 });
                             }, 100);
                         }
+                    }
+                });
+
+                // Cerca anche tra i dipartimenti (che hanno una struttura diversa)
+                const deptElements = roomsList.parentElement.querySelectorAll('.department-item');
+                deptElements.forEach((element) => {
+                    const deptName = element.getAttribute('data-name');
+                    if (deptName === roomName) {
+                        // Scrolla la sidebar fino alla posizione del dipartimento
+                        setTimeout(() => {
+                            element.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                                inline: 'nearest'
+                            });
+                            // Aggiungi un feedback visivo (opzionale, es. highlight temporaneo)
+                            element.classList.add('bg-yellow-100');
+                            setTimeout(() => {
+                                element.classList.remove('bg-yellow-100');
+                            }, 2000);
+                        }, 100);
                     }
                 });
             }
