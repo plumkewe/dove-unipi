@@ -3662,11 +3662,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     iconElement.textContent = 'check';
                                     setTimeout(() => {
                                         iconElement.textContent = originalIcon;
-                                    }, 1200);
+                                    }, 2500);
                                 }
                                 setTimeout(() => {
                                     resultElement.classList.remove('selected');
-                                }, 1200);
+                                }, 2500);
                             }).catch(err => {
                                 console.error('Errore nella copia del link: ', err);
                             });
@@ -4359,8 +4359,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Aggiungi listener per il focus: mostra i risultati se c'è del testo
                 inputElement.addEventListener('focus', (e) => {
                     const query = e.target.value.trim();
-                    if (query) {
-                        // Se c'è del testo, rimostra i risultati
+                    const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+
+                    // Only search if results are hidden or empty to avoid re-rendering and losing state (e.g. animations)
+                    if (query && (currentSearchResults.classList.contains('hidden') || currentSearchResults.innerHTML === '')) {
                         searchRooms(query);
                     }
                 });
