@@ -928,10 +928,36 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         #sidebar {
-            transition: transform 0.3s ease-in-out;
-            max-width: 270px;
-            min-width: 270px;
+            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, min-width 0.3s ease-in-out, max-width 0.3s ease-in-out;
+            /* Default width will be overridden by specific classes below */
             width: 270px;
+            min-width: 270px;
+            max-width: 270px;
+        }
+
+        /* Sidebar width adjustments based on text size */
+        body.text-small #sidebar {
+            width: 250px;
+            min-width: 250px;
+            max-width: 250px;
+        }
+
+        body.text-normal #sidebar {
+            width: 270px;
+            min-width: 270px;
+            max-width: 270px;
+        }
+
+        body.text-large #sidebar {
+            width: 300px;
+            min-width: 300px;
+            max-width: 300px;
+        }
+
+        body.text-xlarge #sidebar {
+            width: 330px;
+            min-width: 330px;
+            max-width: 330px;
         }
 
         /* Stile per l'hover degli elementi */
@@ -1011,7 +1037,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             pointer-events: none;
         }
 
-        .search-result-item:hover::before {
+        body:not(.keyboard-navigation-active) .search-result-item:hover::before {
             background-color: rgba(0, 0, 0, 0.1);
         }
 
@@ -1073,8 +1099,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             max-width: 100%;
         }
 
-        .search-result-item:hover .title,
-        .search-result-item:hover .details {
+        body:not(.keyboard-navigation-active) .search-result-item:hover .title,
+        body:not(.keyboard-navigation-active) .search-result-item:hover .details {
             color: #1F2937;
             /* gray-800 */
         }
@@ -1891,20 +1917,55 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 background-color: transparent !important;
             }
 
-            .high-contrast .search-result-item:hover:not(.selected) {
+            /* Disable ::before overlay in high contrast hover */
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected)::before,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected)::before {
+                background-color: transparent !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected),
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) {
                 background-color: black !important;
                 color: white !important;
             }
 
-            .high-contrast .search-result-item:hover:not(.selected) * {
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) *,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) * {
                 background-color: transparent !important;
                 color: white !important;
             }
 
-            .high-contrast .search-result-item:hover:not(.selected) .title,
-            .high-contrast .search-result-item:hover:not(.selected) .details {
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) .title,
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) .details,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) .title,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) .details {
                 color: white !important;
                 background-color: transparent !important;
+            }
+
+            /* Preserve toggle switch colors during hover in high contrast mode */
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div {
+                background-color: black !important;
+                box-shadow: inset 0 0 0 1px white !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div {
+                background-color: white !important;
+                box-shadow: inset 0 0 0 1px black !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after {
+                background-color: white !important;
+                border-color: white !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div::after,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div::after {
+                background-color: black !important;
+                border-color: black !important;
             }
 
             .high-contrast a.bg-gray-200:hover {
@@ -1971,22 +2032,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         /* Ensure text remains visible on hover in high‑contrast mode (when hovering the search result) */
-        .high-contrast .search-result-item:hover .occupancy-status-bar,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.loading,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.free,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.occupied,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable {
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.loading,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.free,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable {
             background-color: white !important;
             color: black !important;
             border: 2px solid black !important;
         }
 
         /* Override the search-result-item * rule for children of occupancy bar */
-        .high-contrast .search-result-item:hover .occupancy-status-bar *,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.loading *,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.free *,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.occupied *,
-        .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable * {
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.loading *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.free *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable * {
             color: black !important;
             background-color: transparent !important;
         }
@@ -2935,6 +2996,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let map = null; // Istanza Leaflet
             let svgOverlay = null; // Layer SVG corrente
             let selectedSearchResultIndex = -1;
+            let isKeyboardSelection = false;
             let waterDispenserMarkers = []; // Array per i marker degli erogatori d'acqua
             let shortLinkContext = null;
             let mapInteractionGuardsInstalled = false;
@@ -3274,6 +3336,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     currentSearchResults.innerHTML = '';
                     currentSearchResults.classList.add('hidden');
                     selectedSearchResultIndex = -1;
+                    document.body.classList.remove('keyboard-navigation-active');
                     return;
                 }
 
@@ -3457,8 +3520,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
 
+                // Store the current index to preserve it after re-render
+                const previousIndex = selectedSearchResultIndex;
+
                 currentSearchResults.innerHTML = '';
-                selectedSearchResultIndex = -1;
+                // Don't reset the index yet - we'll restore it after rendering if still valid
                 if (showSettings) {
                     renderSettingsBlock(currentSearchResults);
                     if (results.length > 0) {
@@ -3482,6 +3548,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         </div>
                     `;
                     currentSearchResults.classList.remove('hidden');
+                    selectedSearchResultIndex = -1;
+                    document.body.classList.remove('keyboard-navigation-active');
                     return;
                 }
 
@@ -3543,6 +3611,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         `;
                         resultElement.addEventListener('click', () => {
                             window.open(result.url, '_blank');
+                            // Keep focus on input to allow arrow key navigation
+                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                            setTimeout(() => currentSearchInput.focus(), 50);
                         });
                         currentSearchResults.appendChild(resultElement);
                         return;
@@ -3564,6 +3635,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             } else if (result.action === 'github') {
                                 window.open('https://github.com/plumkewe/dove-unipi/issues/new', '_blank');
                             }
+                            // Keep focus on input to allow arrow key navigation
+                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                            setTimeout(() => currentSearchInput.focus(), 50);
                         });
                         currentSearchResults.appendChild(resultElement);
                         return;
@@ -3596,6 +3670,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             }).catch(err => {
                                 console.error('Errore nella copia del link: ', err);
                             });
+                            // Keep focus on input to allow arrow key navigation
+                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                            setTimeout(() => currentSearchInput.focus(), 50);
                         });
                     } else {
                         const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
@@ -3747,6 +3824,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
 
                     resultElement.addEventListener('mouseenter', () => {
+                        // Se stiamo usando la tastiera, resetta lo stato e permetti l'hover del mouse
+                        if (isKeyboardSelection) {
+                            isKeyboardSelection = false;
+                            document.body.classList.remove('keyboard-navigation-active');
+                        }
                         updateSelectedSearchResult(index);
                     });
 
@@ -3754,11 +3836,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (selectedSearchResultIndex === index) {
                             resultElement.classList.remove('selected');
                             selectedSearchResultIndex = -1;
+                            document.body.classList.remove('keyboard-navigation-active');
                         }
                     });
 
                     currentSearchResults.appendChild(resultElement);
                 });
+
+                // Restore the previous selection index if it's still valid
+                const items = currentSearchResults.querySelectorAll('.search-result-item');
+                if (previousIndex >= 0 && previousIndex < items.length) {
+                    selectedSearchResultIndex = previousIndex;
+                    items[previousIndex].classList.add('selected');
+                } else {
+                    selectedSearchResultIndex = -1;
+                    document.body.classList.remove('keyboard-navigation-active');
+                }
 
                 currentSearchResults.classList.remove('hidden');
             }
@@ -4129,10 +4222,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 }
 
-                // Refresh search results if active
+                // Refresh search results if active, BUT NOT if we are in settings (to preserve animation)
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
                 if (currentSearchInput && currentSearchInput.value.trim() !== '') {
-                    searchRooms(currentSearchInput.value);
+                    const query = currentSearchInput.value.toLowerCase();
+                    // Only refresh if we are NOT in the settings menu
+                    if (!query.includes('impostazioni') && !query.includes('settings')) {
+                        searchRooms(currentSearchInput.value);
+                    }
                 }
             }
 
@@ -4274,6 +4371,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     if (currentSearchResults.classList.contains('hidden') || items.length === 0) return;
 
                     if (e.key === 'ArrowDown') {
+                        isKeyboardSelection = true;
+                        document.body.classList.add('keyboard-navigation-active');
                         e.preventDefault();
                         const newIndex = (selectedSearchResultIndex + 1) % items.length;
                         updateSelectedSearchResult(newIndex);
@@ -4286,6 +4385,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             });
                         }
                     } else if (e.key === 'ArrowUp') {
+                        isKeyboardSelection = true;
+                        document.body.classList.add('keyboard-navigation-active');
                         e.preventDefault();
                         const newIndex = (selectedSearchResultIndex - 1 + items.length) % items.length;
                         updateSelectedSearchResult(newIndex);
@@ -4297,17 +4398,75 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 inline: 'nearest'
                             });
                         }
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                        isKeyboardSelection = true;
+                        document.body.classList.add('keyboard-navigation-active');
+                        // Handle horizontal navigation within multi-button settings
+                        if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
+                            const currentItem = items[selectedSearchResultIndex];
+
+                            // Check if this item has multi-button controls (text size or language)
+                            const textSizeControls = currentItem.querySelector('.text-size-controls');
+                            const languageSelector = currentItem.querySelector('.language-selector');
+
+                            if (textSizeControls || languageSelector) {
+                                e.preventDefault();
+                                const container = textSizeControls || languageSelector;
+                                const buttons = Array.from(container.querySelectorAll('button'));
+                                const activeButton = buttons.find(btn => btn.classList.contains('active'));
+
+                                if (activeButton) {
+                                    const currentIndex = buttons.indexOf(activeButton);
+                                    let newIndex;
+
+                                    if (e.key === 'ArrowRight') {
+                                        newIndex = (currentIndex + 1) % buttons.length;
+                                    } else {
+                                        newIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                                    }
+
+                                    // Click the new button to activate it
+                                    buttons[newIndex].click();
+                                }
+                            }
+                        }
                     } else if (e.key === 'Enter') {
                         e.preventDefault();
 
                         // Se c'è un solo risultato, selezionalo automaticamente
                         if (items.length === 1) {
-                            items[0].click();
-                            inputElement.blur();
+                            const itemElement = items[0];
+                            const isSpecialResult = itemElement.querySelector('.material-symbols-outlined[data-copy-icon]') ||
+                                itemElement.textContent.includes('Feedback') ||
+                                itemElement.textContent.includes('Bot') ||
+                                itemElement.querySelector('input[data-settings-toggle]');
+                            itemElement.click();
+                            // Only blur if it's not a special result (feedback, bot, share, settings)
+                            if (!isSpecialResult) {
+                                inputElement.blur();
+                            }
                         } else if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
                             // Se c'è un elemento selezionato con le frecce, cliccalo
-                            items[selectedSearchResultIndex].click();
-                            inputElement.blur();
+                            const itemElement = items[selectedSearchResultIndex];
+
+                            // Check if this item has multi-button controls (text size or language)
+                            // In this case, Enter should be ignored as navigation is done via Left/Right arrows
+                            const hasMultiButtons = itemElement.querySelector('.text-size-controls') ||
+                                itemElement.querySelector('.language-selector');
+
+                            if (hasMultiButtons) {
+                                return;
+                            }
+
+                            const isSpecialResult = itemElement.querySelector('.material-symbols-outlined[data-copy-icon]') ||
+                                itemElement.textContent.includes('Feedback') ||
+                                itemElement.textContent.includes('Bot') ||
+                                itemElement.querySelector('input[data-settings-toggle]');
+                            itemElement.click();
+                            // Only blur if it's not a special result (feedback, bot, share, settings)
+                            if (!isSpecialResult) {
+                                inputElement.blur();
+                            }
                         } else {
                             // Altrimenti, se c'è un suggerimento visibile (primo elemento), completalo automaticamente
                             const firstItem = items[0];
@@ -4323,6 +4482,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     } else if (e.key === 'Escape') {
                         e.preventDefault();
                         selectedSearchResultIndex = -1;
+                        document.body.classList.remove('keyboard-navigation-active');
                         if (clearButtonElement && !clearButtonElement.classList.contains('hidden')) {
                             clearButtonElement.click();
                         } else {
@@ -4339,6 +4499,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             otherInput.value = '';
                         }
                         selectedSearchResultIndex = -1;
+                        document.body.classList.remove('keyboard-navigation-active');
                         searchRooms('');
                         resultsElement.classList.add('hidden');
                         const otherResultsElement = inputElement === searchInput ? searchResultsMobile : searchResults;
@@ -4354,6 +4515,30 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             setupSearchListeners(searchInput, searchResults, clearSearchBtn);
             setupSearchListeners(searchInputMobile, searchResultsMobile, clearSearchBtnMobile);
             updateClearButtonsVisibility();
+
+
+
+
+
+            // Riabilita l'hover del mouse quando l'utente muove il mouse dopo la navigazione da tastiera
+            let lastMouseX = 0;
+            let lastMouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                // Rileva un movimento significativo del mouse (non solo piccole vibrazioni)
+                if (isKeyboardSelection && (Math.abs(e.clientX - lastMouseX) > 5 || Math.abs(e.clientY - lastMouseY) > 5)) {
+                    // Rimuovi la selezione da tastiera
+                    const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+                    const items = currentSearchResults.querySelectorAll('.search-result-item');
+                    if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
+                        items[selectedSearchResultIndex].classList.remove('selected');
+                    }
+                    selectedSearchResultIndex = -1;
+                    isKeyboardSelection = false;
+                    document.body.classList.remove('keyboard-navigation-active');
+                }
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+            });
 
             // Aggiungi listener per le scorciatoie da tastiera
             document.addEventListener('keydown', (e) => {
