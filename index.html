@@ -3523,6 +3523,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             // Usa setTimeout per permettere l'aggiornamento dell'input prima di cercare
                             setTimeout(() => {
                                 searchRooms(newValue);
+                                // Keep focus on input to allow arrow key navigation
+                                currentSearchInput.focus();
                             }, 10);
                         });
                         currentSearchResults.appendChild(resultElement);
@@ -3828,6 +3830,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     row.appendChild(toggleContent);
 
                     row.addEventListener('click', (event) => {
+                        event.stopPropagation(); // Prevent closing search results
                         const targetElement = event.target instanceof Element ? event.target : null;
                         if ((targetElement && targetElement.closest('label')) || targetElement instanceof HTMLInputElement) {
                             return;
@@ -3850,6 +3853,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     description: t('settings_text_size_description')
                 });
                 textSizeRow.appendChild(textSizeControl);
+                textSizeRow.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent closing search results
+                });
                 container.appendChild(textSizeRow);
 
                 // Add language selector
@@ -3860,6 +3866,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     description: t('settings_language_description')
                 });
                 languageRow.appendChild(languageControl);
+                languageRow.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent closing search results
+                });
                 container.appendChild(languageRow);
 
                 syncSettingsToggles();
@@ -4107,6 +4116,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Refresh UI
                 if (typeof selectedBuilding !== 'undefined' && selectedBuilding) {
                     populateFloors(selectedBuilding);
+                    // Reapply selection to current floor after regenerating buttons
+                    if (typeof selectedFloor !== 'undefined' && selectedFloor) {
+                        Array.from(floorsList.children).forEach(child => {
+                            const floorValue = child.dataset.floor;
+                            if (floorValue === selectedFloor) {
+                                child.classList.add('selected');
+                            } else {
+                                child.classList.remove('selected');
+                            }
+                        });
+                    }
                 }
 
                 // Refresh search results if active
@@ -4295,8 +4315,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 const isSuggestion = firstItem.querySelector('.material-symbols-outlined')?.textContent.trim() === 'keyboard_return';
                                 if (isSuggestion) {
                                     // È un suggerimento, cliccalo automaticamente
+                                    // Don't blur to allow arrow navigation after suggestion is completed
                                     firstItem.click();
-                                    inputElement.blur();
                                 }
                             }
                         }
@@ -4608,6 +4628,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     setTimeout(() => {
                         expandRoomDetailsInSidebar(roomFromShortLink.room.nome);
                     }, 200);
+
+                    // Anima il bottone della sidebar per invogliare l'utente ad aprirla
+                    triggerSidebarButtonAnimation();
                 }
             }
 
@@ -4810,6 +4833,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 floors.forEach(floor => {
                     const button = document.createElement('button');
                     button.className = 'nav-item w-full text-left flex items-center space-x-3 p-2 pl-6 rounded-lg';
+                    button.dataset.floor = floor;
                     button.innerHTML = `
                         <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
                         layers
@@ -5106,8 +5130,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // Aggiorna lo stile dei bottoni dei piani
                 Array.from(floorsList.children).forEach(child => {
-                    const floorName = child.querySelector('span:last-child').textContent.split(' ')[1];
-                    if (floorName === floor) {
+                    const floorValue = child.dataset.floor;
+                    if (floorValue === floor) {
                         child.classList.add('selected');
                     } else {
                         child.classList.remove('selected');

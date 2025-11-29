@@ -48,7 +48,7 @@
 [<img src="https://wsrv.nl/?url=github.com/calba-droid.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Calogero Alba" />](https://github.com/calba-droid)
 [<img src="https://wsrv.nl/?url=github.com/plumkewe.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Lyubomyr Malay" />](https://github.com/plumkewe)
 [<img src="https://wsrv.nl/?url=github.com/piorpiedev.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="piorpiedev" />](https://github.com/piorpiedev)
-[<img src="https://wsrv.nl/?url=github.com/L-myself.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="piorpiedev" />](https://github.com/L-myself)
+[<img src="https://wsrv.nl/?url=github.com/L-myself.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="L-myself" />](https://github.com/L-myself)
 [<img src="https://wsrv.nl/?url=github.com/gregoriop06.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Gregorio Pescucci" />](https://github.com/gregoriop06)
 [<img src="https://wsrv.nl/?url=github.com/alesmk.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Alessia" />](https://github.com/alesmk)
 [<img src="https://wsrv.nl/?url=github.com/juliusnixi.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="JuliusNixi" />](https://github.com/juliusnixi)
@@ -370,7 +370,7 @@ Grazie all'API di JuliusNixi è possibile visualizzare l'occupazione delle aule 
 ### Accessibilità 
 
 Attualmente è possibile aggiungere **pulsanti extra** per funzioni come **zoom** e **condivisione,** oltre ad attivare la **modalità ad alto contrasto.**
-È inoltre possibile aumentare **la dimensione del testo** e attivare il **font per dislessia (OpenDyslexic).**
+È inoltre possibile aumentare **la dimensione del testo**, attivare il **font per dislessia (OpenDyslexic)** e scegliere la preferenza per mostrare il piano terra come **"Piano 0"** o **"Piano Terra"**.
 
 Puoi accedere alle **impostazioni di accessibilità** digitando `impostazioni` o `settings` nella barra di ricerca.  
 
