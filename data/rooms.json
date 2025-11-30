@@ -1180,7 +1180,8 @@
                 "id": "fib_magna-e-0",
                 "nome": "Aula Magna",
                 "alias": [
-                  "Magna"
+                  "Magna",
+                  "Pontecorvo"
                 ],
                 "note": "",
                 "type": "aula",

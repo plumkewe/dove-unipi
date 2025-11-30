@@ -1000,6 +1000,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* gray-300 50% */
         }
 
+        /* Fix per iOS cursor jumping */
+        @supports (-webkit-touch-callout: none) {
+            input[type="text"] {
+                font-size: 16px !important;
+                /* Previene lo zoom automatico su iOS */
+                transform: translateZ(0);
+                /* Forza l'accelerazione hardware */
+            }
+
+            /* Stabilizza il contenitore di ricerca su mobile */
+            #mobile-search-container {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+
         /* Fix per Safari iOS - gestisce la barra degli indirizzi dinamica */
         @supports (-webkit-touch-callout: none) {
             #sidebar {
@@ -3057,21 +3074,98 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 return value ? value.toString().trim().toLowerCase().replace(/\s+/g, '') : '';
             }
 
-            function getRoomShortCode(room) {
+            function getRoomBaseShortCode(room) {
                 if (!room) return null;
                 if (Array.isArray(room.alias)) {
                     const validAlias = room.alias.find(alias => alias && alias.trim().length > 0);
                     if (validAlias) {
-                        return validAlias.trim();
+                        return normalizeShortCode(validAlias);
                     }
                 }
                 if (room.nome && room.nome.trim().length > 0) {
-                    return room.nome.trim();
+                    return normalizeShortCode(room.nome);
                 }
                 if (room.id && room.id.trim().length > 0) {
-                    return room.id.trim();
+                    return normalizeShortCode(room.id);
                 }
                 return null;
+            }
+
+            function getAllRoomsInPolo(poloName) {
+                if (!data.polo || !data.polo[poloName]) return [];
+
+                const allRooms = [];
+                const buildings = data.polo[poloName].edificio || {};
+
+                // Sort buildings to ensure deterministic order
+                const sortedBuildingNames = Object.keys(buildings).sort();
+
+                for (const buildingName of sortedBuildingNames) {
+                    const building = buildings[buildingName];
+                    const floors = building.piano || {};
+                    // Sort floors to ensure deterministic order
+                    const sortedFloorNames = Object.keys(floors).sort((a, b) => {
+                        // Try numeric sort first
+                        const numA = parseFloat(a);
+                        const numB = parseFloat(b);
+                        if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                        return a.localeCompare(b);
+                    });
+
+                    for (const floorName of sortedFloorNames) {
+                        const floorData = floors[floorName];
+                        const rooms = Array.isArray(floorData)
+                            ? floorData
+                            : (floorData?.aule ? Object.values(floorData.aule) : []);
+
+                        // Sort rooms by name to ensure deterministic order
+                        const sortedRooms = [...rooms].sort((a, b) => {
+                            const nameA = a.nome || '';
+                            const nameB = b.nome || '';
+                            return nameA.localeCompare(nameB);
+                        });
+
+                        for (const room of sortedRooms) {
+                            if (room) {
+                                allRooms.push({
+                                    edificio: buildingName,
+                                    piano: floorName,
+                                    room
+                                });
+                            }
+                        }
+                    }
+                }
+                return allRooms;
+            }
+
+            function generateRobustShortCode(poloName, targetRoom) {
+                const baseCode = getRoomBaseShortCode(targetRoom);
+                if (!baseCode) return null;
+
+                const allRooms = getAllRoomsInPolo(poloName);
+
+                // Find all rooms that share the same base code
+                const conflictingRooms = allRooms.filter(item => {
+                    const otherBaseCode = getRoomBaseShortCode(item.room);
+                    return otherBaseCode === baseCode;
+                });
+
+                if (conflictingRooms.length <= 1) {
+                    return baseCode;
+                }
+
+                // Find index of our target room in the conflicting list
+                // We use object reference equality since we're iterating the same data structure
+                const index = conflictingRooms.findIndex(item => item.room === targetRoom);
+
+                if (index === 0) {
+                    return baseCode;
+                } else if (index > 0) {
+                    return `${baseCode}-${index + 1}`;
+                }
+
+                return baseCode; // Fallback
             }
 
             function setShortLinkContext({ polo, building, floor, room, codeOverride = null }) {
@@ -3080,7 +3174,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return;
                 }
 
-                const resolvedCode = (codeOverride && codeOverride.trim()) || getRoomShortCode(room);
+                const resolvedCode = (codeOverride && codeOverride.trim()) || generateRobustShortCode(polo, room);
                 if (!resolvedCode) {
                     shortLinkContext = null;
                     return;
@@ -3536,15 +3630,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 if (!showSettings && results.length === 0) {
                     currentSearchResults.innerHTML = `
-                        <div class="p-4">
-                            <p class="text-gray-600 mb-2">${t('search_no_results')}</p>
-                            <p class="text-sm text-gray-500">
-                                ${t('no_results_feedback')} 
+                        <div class="search-result-item">
+                            <div class="flex items-center justify-between">
+                            <div class="flex-1">
+                                    <div class="title">${t('search_no_results')}</div>
+                                    <div class="details">${t('no_results_feedback')}<br />
                                 <a href="mailto:lyubomyr.malay@icloud.com?subject=${encodeURIComponent('FEEDBACK DOVE?UNIPI')}" 
-                                   class="text-gray-800 underline font-medium hover-text-effect">
-                                    lyubomyr.malay@icloud.com
-                                </a>
-                            </p>
+                                   class="text-gray-800 underline font-medium hover-text-effect">lyubomyr.malay@icloud.com</a></div>
+                               </div>
+                             </div>
                         </div>
                     `;
                     currentSearchResults.classList.remove('hidden');
@@ -4700,37 +4794,49 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function findRoomByShortCode(poloName, code) {
                 if (!code || !data.polo || !data.polo[poloName]) return null;
 
-                const normalizedCode = normalizeShortCode(code);
-                if (!normalizedCode) return null;
+                const normalizedInput = normalizeShortCode(code);
+                if (!normalizedInput) return null;
 
-                const buildings = data.polo[poloName].edificio || {};
-                const buildingNames = Object.keys(buildings);
+                // Parse code to separate base and index
+                // Format: name or name-2, name-3, etc.
+                let baseCode = normalizedInput;
+                let targetIndex = 0;
 
-                for (const buildingName of buildingNames) {
-                    const building = buildings[buildingName];
-                    const floors = building.piano || {};
-                    const floorNames = Object.keys(floors);
+                // Check for suffix -N where N is a number
+                const match = normalizedInput.match(/^(.*)-(\d+)$/);
+                if (match) {
+                    baseCode = match[1];
+                    targetIndex = parseInt(match[2], 10) - 1; // Convert 2 -> index 1
+                }
 
-                    for (const floorName of floorNames) {
-                        const floorData = floors[floorName];
-                        const rooms = Array.isArray(floorData)
-                            ? floorData
-                            : (floorData?.aule ? Object.values(floorData.aule) : []);
+                const allRooms = getAllRoomsInPolo(poloName);
 
-                        for (const room of rooms) {
-                            if (!room) continue;
+                // Find all rooms matching the base code
+                const matchingRooms = allRooms.filter(item => {
+                    const itemBaseCode = getRoomBaseShortCode(item.room);
+                    return itemBaseCode === baseCode;
+                });
 
-                            const nameMatch = normalizeShortCode(room.nome) === normalizedCode;
-                            const idMatch = normalizeShortCode(room.id) === normalizedCode;
-                            const aliasMatch = Array.isArray(room.alias)
-                                ? room.alias.some(alias => normalizeShortCode(alias) === normalizedCode)
-                                : false;
+                if (matchingRooms.length > targetIndex) {
+                    return matchingRooms[targetIndex];
+                }
 
-                            if (nameMatch || idMatch || aliasMatch) {
-                                return { edificio: buildingName, piano: floorName, room };
-                            }
-                        }
-                    }
+                // Fallback: try exact match against original code (legacy behavior or edge cases)
+                // This might be needed if a room literally has a name like "lab-2"
+                // But getRoomBaseShortCode normalizes names, so "lab-2" would be base code "lab-2"
+                // If we didn't find it with the split logic, maybe it was a direct match?
+                // Actually, the split logic is safer for the new system. 
+                // Let's keep a fallback search just in case the splitting was wrong 
+                // (e.g. room name is literally "room-2" and it's the first one)
+
+                // If we didn't find anything with the suffix logic, try to find exact match 
+                // treating the whole input as the base code
+                if (match) {
+                    const exactMatches = allRooms.filter(item => {
+                        const itemBaseCode = getRoomBaseShortCode(item.room);
+                        return itemBaseCode === normalizedInput;
+                    });
+                    if (exactMatches.length > 0) return exactMatches[0];
                 }
 
                 return null;
