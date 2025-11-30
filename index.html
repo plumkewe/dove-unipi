@@ -833,11 +833,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             overflow: hidden;
             /* Impedisce lo scroll su tutta la pagina */
             height: 100vh;
-            /* Forza l'altezza al 100% del viewport */
+            /* Fallback per browser vecchi */
+            height: 100dvh;
+            /* Forza l'altezza al 100% del viewport dinamico (iOS fix) */
             width: 100vw;
             /* Forza la larghezza al 100% del viewport */
             margin: 0;
             padding: 0;
+            background-color: #E5E7EB;
+            /* Assicura che il background sia uniforme (gray-200) */
         }
 
         /* Nascondi le scrollbar su tutti i browser */
@@ -2237,7 +2241,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     </style>
 </head>
 
-<body class="bg-gray-100 text-gray-900 no-transition text-normal">
+<body class="bg-gray-200 text-gray-900 no-transition text-normal">
 
     <section style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
 
@@ -2916,7 +2920,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 searchSuggestions[2] = t('search_suggestion_classroom');
                 searchSuggestions[3] = t('search_suggestion_capacity');
                 searchSuggestions[4] = t('search_suggestion_department');
-                searchSuggestions[5] = t('search_suggestion_share');
+                searchSuggestions[5] = t('share_aria_label');
                 searchSuggestions[6] = t('search_suggestion_feedback');
                 searchSuggestions[7] = t('search_suggestion_bot');
 
@@ -3454,7 +3458,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Suggerimenti di autocompletamento per parole chiave speciali
                 const specialKeywords = [
                     { keywords: ['impostazioni', 'settings', 'setting', 'impostazione', 'config'], type: 'settings', title: t('settings_title'), details: t('search_suggestion_settings_hint') },
-                    { keywords: ['share', 'condivid', 'condivisione'], type: 'share_suggestion', title: t('search_suggestion_share'), details: t('search_suggestion_share_hint') },
+                    { keywords: ['share', 'condivid', 'condivisione'], type: 'share_suggestion', title: t('share_aria_label'), details: t('search_suggestion_share_hint') },
                     { keywords: ['feedback', 'feedbac', 'feed'], type: 'feedback_suggestion', title: 'Feedback', details: t('search_suggestion_feedback_hint') },
                     { keywords: ['bot', 'telegram'], type: 'bot_suggestion', title: t('bot_title'), details: t('search_suggestion_bot_hint') }
                 ];
