@@ -29,7 +29,8 @@
                   "x": 52,
                   "y": 379,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_x2-b-0",
@@ -47,7 +48,8 @@
                   "x": 54,
                   "y": 358,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_lab1-b-0",
@@ -64,7 +66,8 @@
                   "x": 585,
                   "y": 361,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab2-b-0",
@@ -81,7 +84,8 @@
                   "x": 626,
                   "y": 362,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab3-b-0",
@@ -98,7 +102,8 @@
                   "x": 666,
                   "y": 363,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab4-b-0",
@@ -115,7 +120,8 @@
                   "x": 708,
                   "y": 369,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab5-b-0",
@@ -132,7 +138,8 @@
                   "x": 584,
                   "y": 237,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab6-b-0",
@@ -149,7 +156,8 @@
                   "x": 625,
                   "y": 225,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab7-b-0",
@@ -166,7 +174,8 @@
                   "x": 668,
                   "y": 232,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab8-b-0",
@@ -183,7 +192,8 @@
                   "x": 709,
                   "y": 232,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab9-b-0",
@@ -200,7 +210,8 @@
                   "x": 465,
                   "y": 350,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab10-b-0",
@@ -217,7 +228,8 @@
                   "x": 512,
                   "y": 362,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab11-b-0",
@@ -234,7 +246,8 @@
                   "x": 462,
                   "y": 231,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_lab12-b-0",
@@ -251,7 +264,8 @@
                   "x": 506,
                   "y": 241,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_x3-b-0",
@@ -269,7 +283,8 @@
                   "x": 54,
                   "y": 334,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_x4-b-0",
@@ -287,7 +302,8 @@
                   "x": 61,
                   "y": 314,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_x5-b-0",
@@ -305,7 +321,8 @@
                   "x": 50,
                   "y": 246,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_x6-b-0",
@@ -323,7 +340,8 @@
                   "x": 60,
                   "y": 223,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_x7-b-0",
@@ -341,7 +359,8 @@
                   "x": 104,
                   "y": 229,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_a-b-0",
@@ -359,7 +378,8 @@
                   "x": 136,
                   "y": 357,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_b-b-0",
@@ -377,7 +397,8 @@
                   "x": 179,
                   "y": 356,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_c-b-0",
@@ -395,7 +416,8 @@
                   "x": 217,
                   "y": 354,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_d-b-0",
@@ -413,7 +435,8 @@
                   "x": 257,
                   "y": 356,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_e-b-0",
@@ -431,7 +454,8 @@
                   "x": 301,
                   "y": 355,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_h-lab-b-0",
@@ -452,7 +476,8 @@
                   "x": 136,
                   "y": 249,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_i-lab-b-0",
@@ -474,7 +499,8 @@
                   "x": 178,
                   "y": 242,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_l-b-0",
@@ -492,7 +518,8 @@
                   "x": 219,
                   "y": 240,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_m-lab-b-0",
@@ -513,7 +540,8 @@
                   "x": 256,
                   "y": 242,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_f-b-0",
@@ -531,7 +559,8 @@
                   "x": 381,
                   "y": 359,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_g-b-0",
@@ -549,7 +578,8 @@
                   "x": 420,
                   "y": 357,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_n-b-0",
@@ -567,7 +597,8 @@
                   "x": 380,
                   "y": 236,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_o-b-0",
@@ -585,7 +616,8 @@
                   "x": 413,
                   "y": 235,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_p-b-0",
@@ -603,7 +635,8 @@
                   "x": 433,
                   "y": 232,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               }
             ],
             "1": [
@@ -623,7 +656,8 @@
                   "x": 113,
                   "y": 303,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_b1-b-0",
@@ -641,7 +675,8 @@
                   "x": 158,
                   "y": 312,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_c1-b-0",
@@ -659,7 +694,8 @@
                   "x": 198,
                   "y": 311,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_d1-b-0",
@@ -677,7 +713,8 @@
                   "x": 242,
                   "y": 307,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_e1-b-0",
@@ -695,7 +732,8 @@
                   "x": 285,
                   "y": 304,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_i1-b-0",
@@ -713,7 +751,8 @@
                   "x": 137,
                   "y": 176,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_l1-b-0",
@@ -731,7 +770,8 @@
                   "x": 164,
                   "y": 177,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_m1-b-0",
@@ -749,7 +789,8 @@
                   "x": 193,
                   "y": 177,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_n1-b-0",
@@ -767,7 +808,8 @@
                   "x": 222,
                   "y": 175,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_o1-b-0",
@@ -785,7 +827,8 @@
                   "x": 250,
                   "y": 176,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_p1-b-0",
@@ -803,7 +846,8 @@
                   "x": 287,
                   "y": 176,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_f1-b-0",
@@ -821,7 +865,8 @@
                   "x": 372,
                   "y": 318,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_g1-b-0",
@@ -839,7 +884,8 @@
                   "x": 415,
                   "y": 317,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_v1-b-0",
@@ -857,11 +903,12 @@
                   "x": 461,
                   "y": 317,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_q1-lab-b-0",
-                "nome": "Aula Q1",
+                "nome": "Aula Q1-Lab",
                 "alias": [
                   "Q1-Lab"
                 ],
@@ -875,7 +922,8 @@
                   "x": 360,
                   "y": 258,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_r1-b-0",
@@ -893,7 +941,8 @@
                   "x": 386,
                   "y": 259,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_s1-b-0",
@@ -911,7 +960,8 @@
                   "x": 405,
                   "y": 261,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_t1-b-0",
@@ -929,7 +979,8 @@
                   "x": 429,
                   "y": 260,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               }
             ],
             "2": []
@@ -963,7 +1014,8 @@
                   "x": 49,
                   "y": 294,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_sre-c-2",
@@ -976,7 +1028,8 @@
                   "x": 48,
                   "y": 488,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_sd-c-2",
@@ -989,7 +1042,8 @@
                   "x": 764,
                   "y": 488,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_sg-c-2",
@@ -1004,7 +1058,8 @@
                   "x": 601,
                   "y": 395,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_sse-c-2",
@@ -1019,7 +1074,8 @@
                   "x": 201,
                   "y": 411,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               },
               {
                 "id": "fib_sse-c-2",
@@ -1034,7 +1090,8 @@
                   "x": 206,
                   "y": 371,
                   "zoom": 2
-                }
+                },
+                "hasStatus": false
               }
             ]
           }
@@ -1068,7 +1125,8 @@
                   "x": 380,
                   "y": 296,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_d3-d-0",
@@ -1095,7 +1153,8 @@
                   "x": 546,
                   "y": 295,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_d4-d-0",
@@ -1120,7 +1179,8 @@
                   "x": 297,
                   "y": 294,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_d5-d-0",
@@ -1147,7 +1207,8 @@
                   "x": 463,
                   "y": 295,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               }
             ]
           }
@@ -1172,7 +1233,8 @@
                   "x": 303,
                   "y": 320,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               }
             ],
             "1": [
@@ -1193,7 +1255,8 @@
                   "x": 521,
                   "y": 211,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               },
               {
                 "id": "fib_ps4-e-0",
@@ -1212,7 +1275,8 @@
                   "x": 255,
                   "y": 339,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true
               }
             ],
             "2": []
