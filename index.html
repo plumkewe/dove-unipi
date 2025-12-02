@@ -2740,6 +2740,38 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             const storedLanguage = localStorage.getItem('selectedLanguage') || detectBrowserLanguage();
+            // Cache for rooms with no status
+            let noStatusCache = new Set();
+            const NO_STATUS_CACHE_KEY = 'noStatusCache';
+
+            function loadNoStatusCache() {
+                try {
+                    const cached = localStorage.getItem(NO_STATUS_CACHE_KEY);
+                    if (cached) {
+                        noStatusCache = new Set(JSON.parse(cached));
+                    }
+                } catch (e) {
+                    console.warn('Failed to load no status cache', e);
+                }
+            }
+
+            function saveNoStatusCache() {
+                try {
+                    localStorage.setItem(NO_STATUS_CACHE_KEY, JSON.stringify(Array.from(noStatusCache)));
+                } catch (e) {
+                    console.warn('Failed to save no status cache', e);
+                }
+            }
+
+            function addToNoStatusCache(classroomName) {
+                if (!classroomName) return;
+                if (!noStatusCache.has(classroomName)) {
+                    noStatusCache.add(classroomName);
+                    saveNoStatusCache();
+                }
+            }
+
+            loadNoStatusCache();
 
             const settingsConfig = {
                 shareCoordinates: storedShareCoordinates ? storedShareCoordinates === 'true' : true,
@@ -2975,12 +3007,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 localStorage.setItem('accessibilityEnabled', isEnabled);
                 syncSettingsToggles();
             });
-
-            // ============================================
-            // CONFIGURAZIONE API - Cambia qui per switchare tra le API
-            // Valori possibili: 'giulio' oppure 'azure'
-            // ============================================
-            const API_SERVER = 'azure'; // giulio | azure
 
             let data = {};
             let facilitiesData = {};
@@ -3759,12 +3785,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // Skip entirely if setting is disabled or if it's a facility (from facilities.json)
                         let availabilityHTML = '';
 
-                        const hasStatus = result.room?.hasStatus;
-                        // If hasStatus is explicitly false, skip.
-                        // If hasStatus is undefined (e.g. old data) or true, proceed.
-                        const shouldCheckStatus = hasStatus !== false;
-
-                        if (settingsConfig.showClassroomStatus && !isFacility && shouldCheckStatus) {
+                        const isCachedNoStatus = noStatusCache.has(result.room?.nome);
+                        if (settingsConfig.showClassroomStatus && !isFacility && !isCachedNoStatus) {
                             const availabilitySource = window.classroomAvaibility || {};
                             const classroomName = result.room?.nome || '';
                             const availabilityData = classroomName && availabilitySource[classroomName];
@@ -3802,17 +3824,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                             code: 1,
                                             startTime: scheduleStrArray[0] || '',
                                             endTime: scheduleStrArray[1] || '',
-                                            occupiedBy: scheduleStrArray[2] || '',
-                                            professor: scheduleStrArray[5] || ''
+                                            occupiedBy: scheduleStrArray[2] || ''
                                         };
                                     } else {
                                         window.classroomAvaibility[classroomName] = {
                                             code: code,
                                             startTime: '',
                                             endTime: '',
-                                            occupiedBy: '',
-                                            professor: ''
+                                            occupiedBy: ''
                                         };
+                                        if (code === 2) {
+                                            addToNoStatusCache(classroomName);
+                                        }
                                     }
                                 }).catch(error => {
                                     console.warn(`Failed to get availability for ${classroomName}:`, error);
@@ -3820,15 +3843,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         code: 2,
                                         startTime: '',
                                         endTime: '',
-                                        occupiedBy: '',
-                                        professor: ''
+                                        occupiedBy: ''
                                     };
-                                    // Non cachiamo l'errore perché potrebbe essere temporaneo (es. pagina ricaricata, offline)
+                                    addToNoStatusCache(classroomName);
                                 });
                             }
 
                             const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
-                            const professor = availabilityData?.professor || '';
                             availabilityHTML = showBar ? `
                                 <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomName}">
                                     <span class="occupancy-text">${statusText}</span>
@@ -5864,75 +5885,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Occupazione corrente delle aule
             window.classroomAvaibility = window.classroomAvaibility || {};
-            
-            // Cache per le richieste API in corso per evitare duplicati
-            const pendingApiRequests = new Map();
-            
-            // Flag per sapere se abbiamo già caricato tutte le aule
-            let allClassroomsLoaded = false;
-            let loadingAllClassrooms = false;
-            
-            // Funzione per caricare TUTTE le aule in una sola chiamata (molto più veloce!)
-            function loadAllClassroomsStatus() {
-                if (allClassroomsLoaded || loadingAllClassrooms) {
-                    return Promise.resolve();
-                }
-                
-                loadingAllClassrooms = true;
-                
-                let apiUrl;
-                if (API_SERVER === 'azure') {
-                    // Azure ha un endpoint ottimizzato per tutte le aule
-                    // apiUrl = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net/api/free_classrooms_now_given_pole?pole_name=Fibonacci';
-                    
-                    // FIX: L'endpoint free_classrooms restituisce tutte le aule come libere anche se occupate.
-                    // Disabilitiamo l'ottimizzazione e usiamo le chiamate singole che funzionano (current_schedule).
-                    loadingAllClassrooms = false;
-                    return Promise.resolve();
-                } else if (API_SERVER === 'giulio') {
-                    apiUrl = 'https://vps.giulionisi.me:54321/api/free_classrooms_now_given_pole?pole_name=fibonacci';
-                } else {
-                    // Altri server non hanno questo endpoint, usiamo il metodo vecchio
-                    loadingAllClassrooms = false;
-                    return Promise.resolve();
-                }
-                
-                return fetch(apiUrl)
-                    .then(response => {
-                        if (!response || !response.ok) {
-                            throw new Error('Failed to load all classrooms');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data && data.free_classrooms && Array.isArray(data.free_classrooms)) {
-                            // Processa tutte le aule libere
-                            data.free_classrooms.forEach(item => {
-                                const classroomKey = Object.keys(item)[0];
-                                const value = item[classroomKey];
-                                
-                                // Converti "Fib X" in "Aula X" per il matching
-                                const classroomName = classroomKey.replace(/^Fib\s+/i, 'Aula ');
-                                
-                                window.classroomAvaibility[classroomName] = {
-                                    code: 0, // libera
-                                    startTime: '',
-                                    endTime: '',
-                                    occupiedBy: ''
-                                };
-                            });
-                            
-                            allClassroomsLoaded = true;
-                        }
-                    })
-                    .catch(error => {
-                        console.warn('Errore caricamento aule:', error);
-                    })
-                    .finally(() => {
-                        loadingAllClassrooms = false;
-                    });
-            }
-            
             function populateClassroomAvailability() {
 
                 if (!data?.polo) {
@@ -5976,14 +5928,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         // code 1 = occupata, 0 = libera, 2 = informazioni non disponibili
                         if (code === 1 && value) {
-                            // Parse occupied schedule: "startTime|endTime|occupiedBy|degree|room|professor"
+                            // Parse occupied schedule: "startTime|endTime|occupiedBy"
                             const scheduleStrArray = value.split("|");
                             window.classroomAvaibility[roomName] = {
                                 code: 1,
                                 startTime: scheduleStrArray[0] || '',
                                 endTime: scheduleStrArray[1] || '',
-                                occupiedBy: scheduleStrArray[2] || '',
-                                professor: scheduleStrArray[5] || ''
+                                occupiedBy: scheduleStrArray[2] || ''
                             };
                         } else {
                             // Free or unavailable
@@ -5991,8 +5942,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 code: code,
                                 startTime: '',
                                 endTime: '',
-                                occupiedBy: '',
-                                professor: ''
+                                occupiedBy: ''
                             };
                         }
                     });
@@ -6008,162 +5958,42 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return Promise.resolve({ 2: unavailableLabel });
                 }
 
-                // Se usiamo Azure o Giulio, carica tutte le aule in una volta (molto più veloce!)
-                if ((API_SERVER === 'azure' || API_SERVER === 'giulio') && !allClassroomsLoaded && !loadingAllClassrooms) {
-                    return loadAllClassroomsStatus().then(() => {
-                        // Dopo aver caricato tutte le aule, controlla se questa aula è nella lista
-                        if (window.classroomAvaibility[classroom]) {
-                            const cached = window.classroomAvaibility[classroom];
-                            if (cached.code === 0) {
-                                return { 0: freeLabel };
-                            } else if (cached.code === 1) {
-                                const value = `${cached.startTime}|${cached.endTime}|${cached.occupiedBy}|||${cached.professor || ''}`;
-                                return { 1: value };
-                            }
-                        }
-                        // Se non è nella lista delle libere, è occupata o non disponibile
-                        // Facciamo comunque una chiamata singola per avere i dettagli
-                        return getSingleClassroomStatus(classroom, unavailableLabel, freeLabel);
-                    });
-                }
+                const API_ENDPOINT = 'https://vps.giulionisi.me:54321/api/';
+                const AVAIBILITY_ENDPOINT = API_ENDPOINT + 'current_schedule_given_pole_and_room';
+                const POLE = "fibonacci";
+                const CLASSROOM_URL_ENCODED = classroom.toLowerCase().replace("aula", "fib").replace(" ", "%20");
+                const API_POLE_ARG = `pole_name`;
+                const API_CLASSROOM_ARG = `classroom`;
 
-                // Se si sta già caricando tutte le aule, aspetta
-                if ((API_SERVER === 'azure' || API_SERVER === 'giulio') && loadingAllClassrooms) {
-                    return loadAllClassroomsStatus().then(() => {
-                        if (window.classroomAvaibility[classroom]) {
-                            const cached = window.classroomAvaibility[classroom];
-                            if (cached.code === 0) {
-                                return { 0: freeLabel };
-                            } else if (cached.code === 1) {
-                                const value = `${cached.startTime}|${cached.endTime}|${cached.occupiedBy}|||${cached.professor || ''}`;
-                                return { 1: value };
-                            }
-                        }
-                        return getSingleClassroomStatus(classroom, unavailableLabel, freeLabel);
-                    });
-                }
-
-                // Se abbiamo già caricato tutte le aule, usa quei dati
-                if ((API_SERVER === 'azure' || API_SERVER === 'giulio') && allClassroomsLoaded && window.classroomAvaibility[classroom]) {
-                    const cached = window.classroomAvaibility[classroom];
-                    if (cached.code === 0) {
-                        return Promise.resolve({ 0: freeLabel });
-                    } else if (cached.code === 1) {
-                        const value = `${cached.startTime}|${cached.endTime}|${cached.occupiedBy}|||${cached.professor || ''}`;
-                        return Promise.resolve({ 1: value });
-                    }
-                }
-
-                // Altrimenti fai la chiamata singola (per Giulio o per aule non nella lista)
-                return getSingleClassroomStatus(classroom, unavailableLabel, freeLabel);
-            }
-
-            // Funzione helper per chiamate singole
-            function getSingleClassroomStatus(classroom, unavailableLabel, freeLabel) {
-                // Se c'è già una richiesta in corso per questa aula, restituisci quella promessa
-                // Questo evita richieste duplicate quando la stessa aula appare più volte nei risultati
-                if (pendingApiRequests.has(classroom)) {
-                    return pendingApiRequests.get(classroom);
-                }
-
-                let apiUrl;
-                let baseUrl, endpoint, poleName;
-                
-                // Converti sempre "Aula X" in "Fib X" per entrambe le API
-                const classroomName = classroom.replace(/^Aula\s+/i, 'Fib ');
-
-                if (API_SERVER === 'giulio') {
-                    // API VPS Giulio Nisi
-                    baseUrl = 'https://vps.giulionisi.me:54321/api';
-                    endpoint = '/current_schedule_given_pole_and_room';
-                    poleName = 'fibonacci';
-                } else if (API_SERVER === 'azure') {
-                    // API Azure
-                    baseUrl = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net/api';
-                    endpoint = '/current_schedule_given_pole_and_room';
-                    poleName = 'Fibonacci';
-                } else {
-                    console.error(`API_SERVER non riconosciuto: ${API_SERVER}`);
-                    return Promise.resolve({ 2: unavailableLabel });
-                }
-
-                const classroomEncoded = encodeURIComponent(classroomName);
-                apiUrl = `${baseUrl}${endpoint}?pole_name=${poleName}&classroom=${classroomEncoded}`;
-
-                // Crea la promessa e salvala nella cache delle richieste pendenti
-                const promise = fetch(apiUrl)
+                return fetch(`${AVAIBILITY_ENDPOINT}?${API_POLE_ARG}=${POLE}&${API_CLASSROOM_ARG}=${CLASSROOM_URL_ENCODED}`)
                     .then(response => {
+                        // 2 significa che si è verificato un errore, fallback a informazioni non disponibili
                         if (!response || !response.ok) {
-                            throw new Error(`API response not ok: ${response.status} ${response.statusText}`);
+                            // Errore API
+                            console.warn('API classroom availability response not ok:', response.statusText);
+                            return { 2: unavailableLabel };
                         }
                         return response.json();
                     })
                     .then(data => {
-                        // Entrambe le API restituiscono lo stesso formato: { "Fib X": "valore" }
-                        if (!data || typeof data !== 'object') {
+                        if (!data || 2 in data) {
                             return { 2: unavailableLabel };
                         }
-
-                        // Controlla se c'è un errore nell'API
-                        if (data.message || 2 in data) {
+                        const classroomKey = classroom.replace("Aula ", "Fib ");
+                        if (data && data[classroomKey] !== undefined) {
+                            // Aula libera
+                            if (data[classroomKey] === "") return { 0: freeLabel };
+                            // Aula con occupazione
+                            return { 1: data[classroomKey] };
+                        } else {
+                            // Aula non trovata nell'API, ad esempio per quelle del dipartimento non visibili su UniversityPlanner
                             return { 2: unavailableLabel };
                         }
-
-                        // Cerca la chiave dell'aula (dovrebbe essere "Fib X")
-                        const classroomKey = Object.keys(data)[0];
-                        if (!classroomKey) {
-                            return { 2: unavailableLabel };
-                        }
-
-                        const scheduleValue = data[classroomKey];
-                        
-                        // Se è vuoto, l'aula è libera
-                        if (scheduleValue === "" || scheduleValue === null) {
-                            return { 0: freeLabel };
-                        }
-                        
-                        // Se c'è un valore, l'aula è occupata
-                        if (API_SERVER === 'giulio') {
-                            // Giulio's format: "TimeRange|Course|Degree|Room|Professor"
-                            // Need to convert to: "StartTime|EndTime|Course|Degree|Room|Professor"
-                            const parts = scheduleValue.split('|');
-                            if (parts.length > 0) {
-                                const timeRange = parts[0];
-                                const timeParts = timeRange.split(' - ');
-                                if (timeParts.length === 2) {
-                                    const startTime = timeParts[0];
-                                    const endTime = timeParts[1];
-                                    // Reconstruct: StartTime|EndTime|Course|Degree|Room|Professor
-                                    // Giulio's parts: 0=TimeRange, 1=Course, 2=Degree, 3=Room, 4=Professor
-                                    // We want: StartTime|EndTime|Course|Degree|Room|Professor
-                                    // Note: parts[1] is Course, parts[2] is Degree, parts[3] is Room, parts[4] is Professor
-                                    
-                                    // Check if parts has enough elements
-                                    const course = parts[1] || '';
-                                    const degree = parts[2] || '';
-                                    const room = parts[3] || '';
-                                    const professor = parts[4] || '';
-                                    
-                                    const newScheduleValue = `${startTime}|${endTime}|${course}|${degree}|${room}|${professor}`;
-                                    return { 1: newScheduleValue };
-                                }
-                            }
-                        }
-                        
-                        return { 1: scheduleValue };
                     })
                     .catch(error => {
+                        console.warn('API classroom availability error:', error);
                         return { 2: unavailableLabel };
-                    })
-                    .finally(() => {
-                        // Rimuovi dalla cache delle richieste pendenti quando completata
-                        pendingApiRequests.delete(classroom);
                     });
-
-                // Salva la promessa nella cache delle richieste in corso
-                pendingApiRequests.set(classroom, promise);
-                
-                return promise;
             }
             // Removed: populateClassroomAvailability(); - Now loading on-demand when searching
             // Appena la pagina è caricata, i dati vengono caricati solo quando necessario (on-demand)
@@ -6201,7 +6031,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             if (availabilityData.startTime && availabilityData.endTime && !statusBar.querySelector('.occupancy-expand-icon')) {
                                 const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
                                 const timeRange = `${availabilityData.startTime} - ${availabilityData.endTime}`;
-                                const professor = availabilityData.professor || '';
 
                                 const expandIcon = document.createElement('span');
                                 expandIcon.className = 'occupancy-expand-icon material-symbols-outlined';
@@ -6225,8 +6054,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     const detailsDiv = document.createElement('div');
                                     detailsDiv.className = 'occupancy-details';
                                     detailsDiv.id = occupancyId;
-                                    let detailsContent = `<div class="occupancy-details-content">${timeRange}</div>`;
-                                    detailsDiv.innerHTML = detailsContent;
+                                    detailsDiv.innerHTML = `
+                                        <div class="occupancy-details-content">
+                                            ${timeRange}
+                                        </div>
+                                    `;
                                     statusBar.parentNode.insertBefore(detailsDiv, statusBar.nextSibling);
                                 }
                             }
