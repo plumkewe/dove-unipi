@@ -2537,8 +2537,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const mobileSearchContainer = document.getElementById('mobile-search-container');
             const searchInputMobileElement = document.getElementById('search-input-mobile');
 
+            let keyboardViewportAdjustmentActive = false;
+            let viewportResizeRaf = null;
+            let visualViewportListenersAttached = false;
+
             // Funzione per gestire il ridimensionamento della viewport (quando si apre la tastiera)
             function handleViewportResize() {
+                if (!isKeyboardViewportAdjustmentActive()) {
+                    return;
+                }
                 if (!mobileSearchContainer || !window.visualViewport) return;
 
                 // Calcola lo spostamento necessario
@@ -2557,28 +2564,62 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             }
 
-            // Listener per il ridimensionamento della viewport (iOS e Android moderni)
-            if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', handleViewportResize);
-                window.visualViewport.addEventListener('scroll', handleViewportResize);
+            function isKeyboardViewportAdjustmentActive() {
+                return keyboardViewportAdjustmentActive && !!window.visualViewport;
+            }
+
+            function scheduleViewportResize() {
+                if (!isKeyboardViewportAdjustmentActive()) return;
+                if (viewportResizeRaf) return;
+                viewportResizeRaf = requestAnimationFrame(() => {
+                    viewportResizeRaf = null;
+                    handleViewportResize();
+                });
+            }
+
+            function attachVisualViewportListeners() {
+                if (!window.visualViewport || visualViewportListenersAttached) return;
+                window.visualViewport.addEventListener('resize', scheduleViewportResize);
+                window.visualViewport.addEventListener('scroll', scheduleViewportResize);
+                visualViewportListenersAttached = true;
+            }
+
+            function detachVisualViewportListeners() {
+                if (!window.visualViewport || !visualViewportListenersAttached) return;
+                window.visualViewport.removeEventListener('resize', scheduleViewportResize);
+                window.visualViewport.removeEventListener('scroll', scheduleViewportResize);
+                visualViewportListenersAttached = false;
             }
 
             // Fallback per dispositivi che non supportano visualViewport
             // Monitora il focus sull'input di ricerca mobile
             if (searchInputMobileElement) {
                 searchInputMobileElement.addEventListener('focus', () => {
-                    // Usa un timeout per dare tempo alla tastiera di aprirsi
-                    setTimeout(() => {
-                        if (window.visualViewport) {
-                            handleViewportResize();
-                        } else {
-                            // Fallback: scroll per mantenere l'input visibile
+                    keyboardViewportAdjustmentActive = true;
+
+                    if (window.visualViewport) {
+                        attachVisualViewportListeners();
+                        // Usa un timeout per dare tempo alla tastiera di aprirsi
+                        setTimeout(() => {
+                            if (isKeyboardViewportAdjustmentActive()) {
+                                scheduleViewportResize();
+                            }
+                        }, 250);
+                    } else {
+                        // Fallback: scroll per mantenere l'input visibile
+                        setTimeout(() => {
                             searchInputMobileElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
-                    }, 300);
+                        }, 300);
+                    }
                 });
 
                 searchInputMobileElement.addEventListener('blur', () => {
+                    keyboardViewportAdjustmentActive = false;
+                    if (viewportResizeRaf) {
+                        cancelAnimationFrame(viewportResizeRaf);
+                        viewportResizeRaf = null;
+                    }
+                    detachVisualViewportListeners();
                     // Quando l'input perde il focus, ripristina la posizione
                     setTimeout(() => {
                         if (mobileSearchContainer) {
@@ -2740,38 +2781,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             const storedLanguage = localStorage.getItem('selectedLanguage') || detectBrowserLanguage();
-            // Cache for rooms with no status
-            let noStatusCache = new Set();
-            const NO_STATUS_CACHE_KEY = 'noStatusCache';
-
-            function loadNoStatusCache() {
-                try {
-                    const cached = localStorage.getItem(NO_STATUS_CACHE_KEY);
-                    if (cached) {
-                        noStatusCache = new Set(JSON.parse(cached));
-                    }
-                } catch (e) {
-                    console.warn('Failed to load no status cache', e);
-                }
-            }
-
-            function saveNoStatusCache() {
-                try {
-                    localStorage.setItem(NO_STATUS_CACHE_KEY, JSON.stringify(Array.from(noStatusCache)));
-                } catch (e) {
-                    console.warn('Failed to save no status cache', e);
-                }
-            }
-
-            function addToNoStatusCache(classroomName) {
-                if (!classroomName) return;
-                if (!noStatusCache.has(classroomName)) {
-                    noStatusCache.add(classroomName);
-                    saveNoStatusCache();
-                }
-            }
-
-            loadNoStatusCache();
 
             const settingsConfig = {
                 shareCoordinates: storedShareCoordinates ? storedShareCoordinates === 'true' : true,
@@ -3008,6 +3017,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 syncSettingsToggles();
             });
 
+            // ============================================
+            // CONFIGURAZIONE API - Cambia qui per switchare tra le API
+            // Valori possibili: 'giulio' oppure 'azure'
+            // ============================================
+            const API_SERVER = 'azure'; // giulio | azure
+
             let data = {};
             let facilitiesData = {};
             let selectedPolo = '';
@@ -3197,6 +3212,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     shortLinkContext = null;
                 }
             }
+
+            const hideSearchResultsPanels = () => {
+                if (searchResults) {
+                    searchResults.classList.add('hidden');
+                }
+                if (searchResultsMobile) {
+                    searchResultsMobile.classList.add('hidden');
+                }
+                stopOccupancyRefreshLoop();
+            };
 
             function registerMapInteractionGuards() {
                 if (mapInteractionGuardsInstalled || !map) return;
@@ -3432,7 +3457,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 if (!query) {
                     currentSearchResults.innerHTML = '';
-                    currentSearchResults.classList.add('hidden');
+                    hideSearchResultsPanels();
                     selectedSearchResultIndex = -1;
                     document.body.classList.remove('keyboard-navigation-active');
                     return;
@@ -3785,8 +3810,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // Skip entirely if setting is disabled or if it's a facility (from facilities.json)
                         let availabilityHTML = '';
 
-                        const isCachedNoStatus = noStatusCache.has(result.room?.nome);
-                        if (settingsConfig.showClassroomStatus && !isFacility && !isCachedNoStatus) {
+                        const hasStatus = result.room?.hasStatus;
+                        // If hasStatus is explicitly false, skip.
+                        // If hasStatus is undefined (e.g. old data) or true, proceed.
+                        const shouldCheckStatus = hasStatus !== false;
+
+                        if (settingsConfig.showClassroomStatus && !isFacility && shouldCheckStatus) {
                             const availabilitySource = window.classroomAvaibility || {};
                             const classroomName = result.room?.nome || '';
                             const availabilityData = classroomName && availabilitySource[classroomName];
@@ -3833,9 +3862,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                             endTime: '',
                                             occupiedBy: ''
                                         };
-                                        if (code === 2) {
-                                            addToNoStatusCache(classroomName);
-                                        }
                                     }
                                 }).catch(error => {
                                     console.warn(`Failed to get availability for ${classroomName}:`, error);
@@ -3845,7 +3871,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         endTime: '',
                                         occupiedBy: ''
                                     };
-                                    addToNoStatusCache(classroomName);
+                                    // Non cachiamo l'errore perché potrebbe essere temporaneo (es. pagina ricaricata, offline)
                                 });
                             }
 
@@ -3899,7 +3925,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 return;
                             }
                             selectRoom(result.polo, result.edificio, result.piano, result.room);
-                            currentSearchResults.classList.add('hidden');
+                                hideSearchResultsPanels();
                             currentSearchInput.value = result.room.nome;
                             // Sincronizza l'altro input
                             const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
@@ -3952,6 +3978,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 currentSearchResults.classList.remove('hidden');
+                manageOccupancyRefreshLoop();
             }
 
             function renderSettingsBlock(container) {
@@ -4601,11 +4628,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         selectedSearchResultIndex = -1;
                         document.body.classList.remove('keyboard-navigation-active');
                         searchRooms('');
-                        resultsElement.classList.add('hidden');
-                        const otherResultsElement = inputElement === searchInput ? searchResultsMobile : searchResults;
-                        if (otherResultsElement) {
-                            otherResultsElement.classList.add('hidden');
-                        }
+                        hideSearchResultsPanels();
                         updateClearButtonsVisibility();
                         inputElement.focus();
                     });
@@ -4715,8 +4738,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Nascondi i risultati se si clicca fuori
             document.addEventListener('click', (e) => {
                 if (!document.getElementById('search-container').contains(e.target) && !document.getElementById('mobile-search-container').contains(e.target)) {
-                    searchResults.classList.add('hidden');
-                    searchResultsMobile.classList.add('hidden');
+                    hideSearchResultsPanels();
                 }
             });
 
@@ -5885,6 +5907,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Occupazione corrente delle aule
             window.classroomAvaibility = window.classroomAvaibility || {};
+
+            // Cache per le richieste API in corso per evitare duplicati
+            const pendingApiRequests = new Map();
+
             function populateClassroomAvailability() {
 
                 if (!data?.polo) {
@@ -5958,48 +5984,154 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return Promise.resolve({ 2: unavailableLabel });
                 }
 
-                const API_ENDPOINT = 'https://vps.giulionisi.me:54321/api/';
-                const AVAIBILITY_ENDPOINT = API_ENDPOINT + 'current_schedule_given_pole_and_room';
-                const POLE = "fibonacci";
-                const CLASSROOM_URL_ENCODED = classroom.toLowerCase().replace("aula", "fib").replace(" ", "%20");
-                const API_POLE_ARG = `pole_name`;
-                const API_CLASSROOM_ARG = `classroom`;
+                // Se già in cache, restituisci immediatamente
+                if (window.classroomAvaibility[classroom]) {
+                    const cached = window.classroomAvaibility[classroom];
+                    if (cached.code === 0) {
+                        return Promise.resolve({ 0: freeLabel });
+                    } else if (cached.code === 1) {
+                        const value = `${cached.startTime}|${cached.endTime}|${cached.occupiedBy}`;
+                        return Promise.resolve({ 1: value });
+                    } else {
+                        return Promise.resolve({ 2: unavailableLabel });
+                    }
+                }
 
-                return fetch(`${AVAIBILITY_ENDPOINT}?${API_POLE_ARG}=${POLE}&${API_CLASSROOM_ARG}=${CLASSROOM_URL_ENCODED}`)
+                // Se c'è già una richiesta in corso per questa aula, restituisci quella promessa
+                if (pendingApiRequests.has(classroom)) {
+                    return pendingApiRequests.get(classroom);
+                }
+
+                let apiUrl;
+                let baseUrl, endpoint, poleName;
+
+                // Converti sempre "Aula X" in "Fib X" per entrambe le API
+                const classroomName = classroom.replace(/^Aula\s+/i, 'Fib ');
+
+                if (API_SERVER === 'giulio') {
+                    // API VPS Giulio Nisi
+                    baseUrl = 'https://vps.giulionisi.me:54321/api';
+                    endpoint = '/current_schedule_given_pole_and_room';
+                    poleName = 'fibonacci';
+                } else if (API_SERVER === 'azure') {
+                    // API Azure
+                    baseUrl = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net/api';
+                    endpoint = '/current_schedule_given_pole_and_room';
+                    poleName = 'fibonacci';
+                } else {
+                    console.error(`API_SERVER non riconosciuto: ${API_SERVER}`);
+                    return Promise.resolve({ 2: unavailableLabel });
+                }
+
+                const classroomEncoded = encodeURIComponent(classroomName);
+                apiUrl = `${baseUrl}${endpoint}?pole_name=${poleName}&classroom=${classroomEncoded}`;
+
+                // Crea la promessa e salvala nella cache delle richieste pendenti
+                const promise = fetch(apiUrl)
                     .then(response => {
-                        // 2 significa che si è verificato un errore, fallback a informazioni non disponibili
                         if (!response || !response.ok) {
-                            // Errore API
-                            console.warn('API classroom availability response not ok:', response.statusText);
-                            return { 2: unavailableLabel };
+                            throw new Error(`API response not ok: ${response.status} ${response.statusText}`);
                         }
                         return response.json();
                     })
                     .then(data => {
-                        if (!data || 2 in data) {
+                        // Entrambe le API restituiscono lo stesso formato: { "Fib X": "valore" }
+                        if (!data || typeof data !== 'object') {
                             return { 2: unavailableLabel };
                         }
-                        const classroomKey = classroom.replace("Aula ", "Fib ");
-                        if (data && data[classroomKey] !== undefined) {
-                            // Aula libera
-                            if (data[classroomKey] === "") return { 0: freeLabel };
-                            // Aula con occupazione
-                            return { 1: data[classroomKey] };
-                        } else {
-                            // Aula non trovata nell'API, ad esempio per quelle del dipartimento non visibili su UniversityPlanner
+
+                        // Controlla se c'è un errore nell'API
+                        if (data.message || 2 in data) {
                             return { 2: unavailableLabel };
                         }
+
+                        // Cerca la chiave dell'aula (dovrebbe essere "Fib X")
+                        const classroomKey = Object.keys(data)[0];
+                        if (!classroomKey) {
+                            return { 2: unavailableLabel };
+                        }
+
+                        const scheduleValue = data[classroomKey];
+
+                        // Se è vuoto, l'aula è libera
+                        if (scheduleValue === "" || scheduleValue === null) {
+                            return { 0: freeLabel };
+                        }
+
+                        // Se c'è un valore, l'aula è occupata
+                        return { 1: scheduleValue };
                     })
                     .catch(error => {
-                        console.warn('API classroom availability error:', error);
                         return { 2: unavailableLabel };
+                    })
+                    .finally(() => {
+                        // Rimuovi dalla cache delle richieste pendenti quando completata
+                        pendingApiRequests.delete(classroom);
                     });
+
+                // Salva la promessa nella cache
+                pendingApiRequests.set(classroom, promise);
+
+                return promise;
             }
             // Removed: populateClassroomAvailability(); - Now loading on-demand when searching
             // Appena la pagina è caricata, i dati vengono caricati solo quando necessario (on-demand)
 
+            let occupancyRefreshIntervalId = null;
+
+            function hasVisibleOccupancyBars() {
+                const desktopVisible = searchResults && !searchResults.classList.contains('hidden');
+                const mobileVisible = searchResultsMobile && !searchResultsMobile.classList.contains('hidden');
+
+                if (!desktopVisible && !mobileVisible) {
+                    return false;
+                }
+
+                if (desktopVisible && searchResults.querySelector('.occupancy-status-bar')) {
+                    return true;
+                }
+
+                if (mobileVisible && searchResultsMobile.querySelector('.occupancy-status-bar')) {
+                    return true;
+                }
+
+                return false;
+            }
+
+            function startOccupancyRefreshLoop() {
+                if (occupancyRefreshIntervalId || !hasVisibleOccupancyBars()) {
+                    return;
+                }
+                refreshSearchResultsOccupancy();
+                occupancyRefreshIntervalId = setInterval(() => {
+                    if (!hasVisibleOccupancyBars()) {
+                        stopOccupancyRefreshLoop();
+                        return;
+                    }
+                    refreshSearchResultsOccupancy();
+                }, 400);
+            }
+
+            function stopOccupancyRefreshLoop() {
+                if (occupancyRefreshIntervalId) {
+                    clearInterval(occupancyRefreshIntervalId);
+                    occupancyRefreshIntervalId = null;
+                }
+            }
+
+            function manageOccupancyRefreshLoop() {
+                if (hasVisibleOccupancyBars()) {
+                    startOccupancyRefreshLoop();
+                } else {
+                    stopOccupancyRefreshLoop();
+                }
+            }
+
             // Aggiorna l'occupazione mostrata nei risultati di una ricerca se diventano disponibili
             function refreshSearchResultsOccupancy() {
+                if (!hasVisibleOccupancyBars()) {
+                    return;
+                }
                 document.querySelectorAll(".occupancy-status-bar").forEach(statusBar => {
                     const classroomName = statusBar.getAttribute('data-classroom');
 
@@ -6072,7 +6204,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 });
             }
-            setInterval(refreshSearchResultsOccupancy, 200);  // Faster refresh: 200ms instead of 500ms
+            // L'aggiornamento ora parte solo quando i risultati con l'indicatore di occupazione sono visibili
             // Fine occupazione corrente aule
 
         } // End of initApp function
