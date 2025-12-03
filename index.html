@@ -3018,10 +3018,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             });
 
             // ============================================
-            // CONFIGURAZIONE API - Cambia qui per switchare tra le API
-            // Valori possibili: 'giulio' oppure 'azure'
+            // CONFIGURAZIONE API
             // ============================================
-            const API_SERVER = 'azure'; // giulio | azure
+            const API_BASE_URL = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net';
 
             let data = {};
             let facilitiesData = {};
@@ -5911,8 +5910,149 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Cache per le richieste API in corso per evitare duplicati
             const pendingApiRequests = new Map();
 
-            function populateClassroomAvailability() {
+            // ============================================
+            // NEW API INTEGRATION - Complete Rewrite
+            // ============================================
 
+            /**
+             * GET /api/poles_data
+             * Returns { "poles_data": [ { "<Pole Name>": "<pole URL>" }, ... ] }
+             */
+            async function getPolesData() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/poles_data`);
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Failed to fetch poles data:', error);
+                    return null;
+                }
+            }
+
+            /**
+             * GET /api/get_all_rooms_given_pole?pole_name=<text>
+             * Response { "pole": "<resolved pole name>", "all_rooms": ["Fib A", "Fib B", ...] }
+             */
+            async function getAllRoomsGivenPole(poleName) {
+                try {
+                    const url = `${API_BASE_URL}/api/get_all_rooms_given_pole?pole_name=${encodeURIComponent(poleName)}`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        if (response.status === 400) {
+                            console.error('Missing pole parameter');
+                        } else if (response.status === 404) {
+                            console.error('Pole not found');
+                        } else if (response.status === 502) {
+                            console.error('Scrape failure');
+                        }
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Failed to fetch rooms for pole:', poleName, error);
+                    return null;
+                }
+            }
+
+            /**
+             * GET /api/all_schedules_given_pole_and_room?pole_name=<text>&classroom=<text>
+             * Response { "<Classroom>": ["08:30 - 10:30|Course|Degree|Teacher,...", ...] }
+             */
+            async function getAllSchedulesGivenPoleAndRoom(poleName, classroom) {
+                try {
+                    const url = `${API_BASE_URL}/api/all_schedules_given_pole_and_room?pole_name=${encodeURIComponent(poleName)}&classroom=${encodeURIComponent(classroom)}`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        if (response.status === 400) {
+                            console.error('Missing pole or classroom parameter');
+                        } else if (response.status === 404) {
+                            console.error('Pole or classroom not found');
+                        } else if (response.status === 502) {
+                            console.error('Scrape failure');
+                        }
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Failed to fetch schedules:', poleName, classroom, error);
+                    return null;
+                }
+            }
+
+            /**
+             * GET /api/free_classrooms_now_given_pole?pole_name=<text>
+             * Response { "free_classrooms": [ { "Fib A": "Free until: 14:30" }, { "Fib D": "Free until: end of day" }, ... ] }
+             */
+            async function getFreeClassroomsNowGivenPole(poleName) {
+                try {
+                    const url = `${API_BASE_URL}/api/free_classrooms_now_given_pole?pole_name=${encodeURIComponent(poleName)}`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Failed to fetch free classrooms:', poleName, error);
+                    return null;
+                }
+            }
+
+            /**
+             * GET /api/current_schedule_given_pole_and_room?pole_name=<text>&classroom=<text>
+             * Response { "<Classroom>": "08:30 - 10:30|Course|..." } if occupied now, { "<Classroom>": "" } if free
+             */
+            async function getCurrentScheduleGivenPoleAndRoom(poleName, classroom) {
+                try {
+                    const url = `${API_BASE_URL}/api/current_schedule_given_pole_and_room?pole_name=${encodeURIComponent(poleName)}&classroom=${encodeURIComponent(classroom)}`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        if (response.status === 400) {
+                            console.error('Missing pole or classroom parameter');
+                        } else if (response.status === 404) {
+                            console.error('Pole or classroom not found');
+                        } else if (response.status === 502) {
+                            console.error('Scrape failure');
+                        }
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Failed to fetch current schedule:', poleName, classroom, error);
+                    return null;
+                }
+            }
+
+            /**
+             * GET /api/schedules_payload_given_pole?pole_name=<text>[&classrooms=comma,list]
+             * Response { "pole": "<resolved pole name>", "schedules": { "Fib A": ["..."], "Fib B": ["..."], ... } }
+             */
+            async function getSchedulesPayloadGivenPole(poleName, classrooms = null) {
+                try {
+                    let url = `${API_BASE_URL}/api/schedules_payload_given_pole?pole_name=${encodeURIComponent(poleName)}`;
+                    if (classrooms) {
+                        url += `&classrooms=${encodeURIComponent(classrooms)}`;
+                    }
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            console.error('No classrooms matched');
+                        }
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Failed to fetch schedules payload:', poleName, error);
+                    return null;
+                }
+            }
+
+            // ============================================
+            // CLASSROOM AVAILABILITY FUNCTIONS
+            // ============================================
+
+            function populateClassroomAvailability() {
                 if (!data?.polo) {
                     // Dati stanze non ancora caricati, riprovo...
                     setTimeout(populateClassroomAvailability, 100);
@@ -5954,13 +6094,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         // code 1 = occupata, 0 = libera, 2 = informazioni non disponibili
                         if (code === 1 && value) {
-                            // Parse occupied schedule: "startTime|endTime|occupiedBy"
+                            // Parse occupied schedule: "HH:MM - HH:MM|Course|Degree|Teacher"
                             const scheduleStrArray = value.split("|");
+                            const timeRange = scheduleStrArray[0] || '';
+                            const timeParts = timeRange.split(' - ');
                             window.classroomAvaibility[roomName] = {
                                 code: 1,
-                                startTime: scheduleStrArray[0] || '',
-                                endTime: scheduleStrArray[1] || '',
-                                occupiedBy: scheduleStrArray[2] || ''
+                                startTime: timeParts[0] || '',
+                                endTime: timeParts[1] || '',
+                                occupiedBy: scheduleStrArray.slice(1).join('|') || ''
                             };
                         } else {
                             // Free or unavailable
@@ -5975,25 +6117,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
             }
 
-            function getClassroomAvailability(classroom) {
+            async function getClassroomAvailability(classroom) {
                 const unavailableLabel = t('availability_unavailable');
                 const freeLabel = t('availability_free');
 
-                // If setting is disabled, return unavailable (or a special code) immediately
+                // If setting is disabled, return unavailable immediately
                 if (!settingsConfig.showClassroomStatus) {
-                    return Promise.resolve({ 2: unavailableLabel });
+                    return { 2: unavailableLabel };
                 }
 
                 // Se già in cache, restituisci immediatamente
                 if (window.classroomAvaibility[classroom]) {
                     const cached = window.classroomAvaibility[classroom];
                     if (cached.code === 0) {
-                        return Promise.resolve({ 0: freeLabel });
+                        return { 0: freeLabel };
                     } else if (cached.code === 1) {
                         const value = `${cached.startTime}|${cached.endTime}|${cached.occupiedBy}`;
-                        return Promise.resolve({ 1: value });
+                        return { 1: value };
                     } else {
-                        return Promise.resolve({ 2: unavailableLabel });
+                        return { 2: unavailableLabel };
                     }
                 }
 
@@ -6002,50 +6144,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return pendingApiRequests.get(classroom);
                 }
 
-                let apiUrl;
-                let baseUrl, endpoint, poleName;
-
-                // Converti sempre "Aula X" in "Fib X" per entrambe le API
+                // Converti sempre "Aula X" in "Fib X" per l'API
                 const classroomName = classroom.replace(/^Aula\s+/i, 'Fib ');
 
-                if (API_SERVER === 'giulio') {
-                    // API VPS Giulio Nisi
-                    baseUrl = 'https://vps.giulionisi.me:54321/api';
-                    endpoint = '/current_schedule_given_pole_and_room';
-                    poleName = 'fibonacci';
-                } else if (API_SERVER === 'azure') {
-                    // API Azure
-                    baseUrl = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net/api';
-                    endpoint = '/current_schedule_given_pole_and_room';
-                    poleName = 'fibonacci';
-                } else {
-                    console.error(`API_SERVER non riconosciuto: ${API_SERVER}`);
-                    return Promise.resolve({ 2: unavailableLabel });
-                }
-
-                const classroomEncoded = encodeURIComponent(classroomName);
-                apiUrl = `${baseUrl}${endpoint}?pole_name=${poleName}&classroom=${classroomEncoded}`;
-
                 // Crea la promessa e salvala nella cache delle richieste pendenti
-                const promise = fetch(apiUrl)
-                    .then(response => {
-                        if (!response || !response.ok) {
-                            throw new Error(`API response not ok: ${response.status} ${response.statusText}`);
-                        }
-                        return response.json();
-                    })
+                const promise = getCurrentScheduleGivenPoleAndRoom('Fibonacci', classroomName)
                     .then(data => {
-                        // Entrambe le API restituiscono lo stesso formato: { "Fib X": "valore" }
+                        // data format: { "Fib X": "valore" } or { "Fib X": "" }
                         if (!data || typeof data !== 'object') {
                             return { 2: unavailableLabel };
                         }
 
-                        // Controlla se c'è un errore nell'API
-                        if (data.message || 2 in data) {
-                            return { 2: unavailableLabel };
-                        }
-
-                        // Cerca la chiave dell'aula (dovrebbe essere "Fib X")
+                        // Cerca la chiave dell'aula
                         const classroomKey = Object.keys(data)[0];
                         if (!classroomKey) {
                             return { 2: unavailableLabel };
@@ -6062,6 +6172,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         return { 1: scheduleValue };
                     })
                     .catch(error => {
+                        console.error('Error fetching classroom availability:', error);
                         return { 2: unavailableLabel };
                     })
                     .finally(() => {
@@ -6074,8 +6185,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 return promise;
             }
-            // Removed: populateClassroomAvailability(); - Now loading on-demand when searching
-            // Appena la pagina è caricata, i dati vengono caricati solo quando necessario (on-demand)
+
+            // ============================================
+            // OCCUPANCY REFRESH LOGIC
+            // ============================================
+
 
             let occupancyRefreshIntervalId = null;
 
