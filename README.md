@@ -39,6 +39,7 @@
   - [Lingue supportate](#lingue-supportate)
   - [Altri dati](#altri-dati)
     - [Distributori d'acqua](#distributori-dacqua)
+- [API](#api)
 - [Telegram Bot](#telegram-bot)
 - [Problemi noti](#problemi-noti)
   
@@ -234,7 +235,7 @@ graph TB
     LoadTranslations --> LoadData[Carica dati<br/>edifici e aule]
     
     LoadData --> CheckURL{Link con<br/>parametri?}
-    CheckURL -->|Sì| UseURL[Apri polo, edificio,<br/>piano e posizione<br/>dal link]
+    CheckURL -->|"Sì (Full/Short)"| UseURL[Apri polo, edificio,<br/>piano e posizione<br/>dal link]
     CheckURL -->|No| UseDefault[Apri primo polo<br/>disponibile]
     
     UseURL --> ShowMap[Mostra mappa<br/>interattiva]
@@ -252,11 +253,18 @@ graph TB
     SearchType -->|Capienza es: >200| FindByCapacity[Trova aule per<br/>capienza]
     SearchType -->|Impostazioni| OpenSettings[Apri pannello<br/>impostazioni]
     SearchType -->|Condividi| OpenShare[Mostra opzioni<br/>condivisione]
+    SearchType -->|Feedback| OpenFeedback[Mostra link<br/>feedback]
+    SearchType -->|Distributori| FindWater[Trova distributori<br/>acqua]
     
     FindByName --> ShowResults[Mostra risultati]
     FindByCapacity --> ShowResults
+    FindWater --> ShowResults
+    OpenFeedback --> ShowResults
+    
     ShowResults --> SelectResult[Seleziona risultato]
-    SelectResult --> CheckFloor{Stesso<br/>piano?}
+    SelectResult --> CheckOccupancy[Controlla stato<br/>occupazione API]
+    CheckOccupancy --> CheckFloor{Stesso<br/>piano?}
+    
     CheckFloor -->|Sì| ZoomToRoom[Zoom sull'aula]
     CheckFloor -->|No| ChangeFloor[Cambia piano<br/>e zoom sull'aula]
     
@@ -281,7 +289,7 @@ graph TB
     LoadTop --> ShowMap
     
     %% Impostazioni
-    OpenSettings --> SettingsPanel[Pannello impostazioni:<br/>• Lingua IT/EN<br/>• Contrasto alto<br/>• Font dislessia<br/>• Dimensione testo<br/>• Controlli extra<br/>• Opzioni condivisione]
+    OpenSettings --> SettingsPanel[Pannello impostazioni:<br/>• Lingua IT/EN<br/>• Contrasto alto<br/>• Font dislessia<br/>• Dimensione testo<br/>• Controlli extra<br/>• Opzioni condivisione<br/>• Erogatori acqua]
     SettingsPanel --> SaveSettings[Salva preferenze]
     SaveSettings --> ApplySettings[Applica modifiche]
     ApplySettings --> Ready
@@ -302,6 +310,7 @@ graph TB
     style OpenSettings fill:#8250df,stroke:#6639ba,stroke-width:2px,color:#ffffff
     style LoadData fill:#bf8700,stroke:#9a6700,stroke-width:2px,color:#ffffff
     style SaveSettings fill:#bf8700,stroke:#9a6700,stroke-width:2px,color:#ffffff
+    style CheckOccupancy fill:#bf8700,stroke:#9a6700,stroke-width:2px,color:#ffffff
 ```
 
 ## Prestazioni
@@ -468,6 +477,24 @@ Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risult
 > Ci servono dati sulla posizione di **distributori d'acqua**, **distributori di caffè**, **distributori di cibo...**
 > Apri una [issue](https://github.com/plumkewe/dove-unipi/issues) oppure inviami un'email a: [lyubomyr.malay@icloud.com](mailto:lyubomyr.malay@icloud.com)  
 > **Grazie per il supporto!**
+
+## API
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
+Il progetto include un servizio API (sviluppato in Python con Flask) che permette di ottenere informazioni in tempo reale sullo stato delle aule, effettuando lo scraping del portale [aule.webhost1.unipi.it](https://aule.webhost1.unipi.it/poli-didattici/).
+
+Le API offrono diversi endpoint per recuperare:
+- L'elenco dei poli didattici.
+- Le aule di un determinato polo.
+- L'orario completo, lo stato attuale o le attività future di una specifica aula.
+- L'elenco delle aule libere in un dato momento.
+
+Il servizio utilizza `requests` e `playwright` per il recupero dei dati e implementa un sistema di caching per ottimizzare le prestazioni e ridurre il carico sul server di origine.
+
+>[!NOTE]
+>L'API pubblica originale è quella di Giulio e la trovate qui: https://github.com/JuliusNixi/unipi-free-classrooms-now
+>Quella utilizzata in questo progetto è stata modificata per poter essere eseguita su Azure.
 
 ## Telegram Bot
 

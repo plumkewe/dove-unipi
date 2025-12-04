@@ -2929,7 +2929,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 searchSuggestions[2] = t('search_suggestion_classroom');
                 searchSuggestions[3] = t('search_suggestion_capacity');
                 searchSuggestions[4] = t('search_suggestion_department');
-                searchSuggestions[5] = t('share_aria_label');
+                searchSuggestions[5] = t('search_suggestion_share');
                 searchSuggestions[6] = t('search_suggestion_feedback');
                 searchSuggestions[7] = t('search_suggestion_bot');
 
@@ -3235,14 +3235,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 });
 
+                let updateUrlTimer;
+                const debouncedUpdateUrl = () => {
+                    if (updateUrlTimer) clearTimeout(updateUrlTimer);
+                    updateUrlTimer = setTimeout(() => {
+                        updateURL(true);
+                    }, 100);
+                };
+
                 map.on('moveend', () => {
                     clearProgrammaticMapChangeFlag();
-                    updateURL(true);
+                    debouncedUpdateUrl();
                 });
 
                 map.on('zoomend', () => {
                     clearProgrammaticMapChangeFlag();
-                    updateURL(true);
+                    debouncedUpdateUrl();
                 });
 
                 mapInteractionGuardsInstalled = true;
@@ -5813,15 +5821,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         crs: L.CRS.Simple,
                         minZoom: -2,
                         maxZoom: 4,
-                        zoomAnimation: !isMobileDevice,
-                        fadeAnimation: !isMobileDevice,
-                        markerZoomAnimation: !isMobileDevice,
-                        inertia: !isMobileDevice,
+                        zoomAnimation: false,
+                        fadeAnimation: false,
+                        markerZoomAnimation: false,
+                        inertia: false,
+                        zoomSnap: 0,
+                        zoomDelta: 1,
+                        wheelPxPerZoomLevel: 60,
+                        wheelDebounceTime: 1,
                         touchZoom: true,
                         tap: !isMobileDevice,
                         preferCanvas: true,
                         zoomControl: false,
-                        attributionControl: false
+                        attributionControl: false,
+                        updateWhenIdle: true
                     });
 
                     // Patch mouseEventToContainerPoint to handle CSS rotation
@@ -6326,4 +6339,4 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
 </body>
 
-</html>
+</html> 
