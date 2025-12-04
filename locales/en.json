@@ -211,6 +211,10 @@
     "original": "Dipartimento",
     "translation": "Department"
   },
+  "library_title": {
+    "original": "Biblioteca",
+    "translation": "LIBRARY"
+  },
   "map_button": {
     "original": "Mappa",
     "translation": "Map"

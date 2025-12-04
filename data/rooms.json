@@ -641,7 +641,7 @@
             ],
             "1": [
               {
-                "id": "fib_a1-b-0",
+                "id": "fib_a1-b-1",
                 "nome": "Aula A1",
                 "alias": [
                   "A1"
@@ -660,7 +660,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_b1-b-0",
+                "id": "fib_b1-b-1",
                 "nome": "Aula B1",
                 "alias": [
                   "B1"
@@ -679,7 +679,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_c1-b-0",
+                "id": "fib_c1-b-1",
                 "nome": "Aula C1",
                 "alias": [
                   "C1"
@@ -698,7 +698,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_d1-b-0",
+                "id": "fib_d1-b-1",
                 "nome": "Aula D1",
                 "alias": [
                   "D1"
@@ -717,7 +717,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_e1-b-0",
+                "id": "fib_e1-b-1",
                 "nome": "Aula E1",
                 "alias": [
                   "E1"
@@ -736,7 +736,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_i1-b-0",
+                "id": "fib_i1-b-1",
                 "nome": "Aula I1",
                 "alias": [
                   "I1"
@@ -755,7 +755,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_l1-b-0",
+                "id": "fib_l1-b-1",
                 "nome": "Aula L1",
                 "alias": [
                   "L1"
@@ -774,7 +774,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_m1-b-0",
+                "id": "fib_m1-b-1",
                 "nome": "Aula M1",
                 "alias": [
                   "M1"
@@ -793,7 +793,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_n1-b-0",
+                "id": "fib_n1-b-1",
                 "nome": "Aula N1",
                 "alias": [
                   "N1"
@@ -812,7 +812,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_o1-b-0",
+                "id": "fib_o1-b-1",
                 "nome": "Aula O1",
                 "alias": [
                   "O1"
@@ -831,7 +831,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_p1-b-0",
+                "id": "fib_p1-b-1",
                 "nome": "Aula P1",
                 "alias": [
                   "P1"
@@ -850,7 +850,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_f1-b-0",
+                "id": "fib_f1-b-1",
                 "nome": "Aula F1",
                 "alias": [
                   "F1"
@@ -869,7 +869,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_g1-b-0",
+                "id": "fib_g1-b-1",
                 "nome": "Aula G1",
                 "alias": [
                   "G1"
@@ -888,7 +888,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_v1-b-0",
+                "id": "fib_v1-b-1",
                 "nome": "Aula V1",
                 "alias": [
                   "V1"
@@ -907,7 +907,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_q1-lab-b-0",
+                "id": "fib_q1-lab-b-1",
                 "nome": "Aula Q1-Lab",
                 "alias": [
                   "Q1-Lab"
@@ -926,7 +926,7 @@
                 "hasStatus": false
               },
               {
-                "id": "fib_r1-b-0",
+                "id": "fib_r1-b-1",
                 "nome": "Aula R1",
                 "alias": [
                   "R1"
@@ -945,7 +945,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_s1-b-0",
+                "id": "fib_s1-b-1",
                 "nome": "Aula S1",
                 "alias": [
                   "S1"
@@ -964,7 +964,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_t1-b-0",
+                "id": "fib_t1-b-1",
                 "nome": "Aula T1",
                 "alias": [
                   "T1"
@@ -981,6 +981,29 @@
                   "zoom": 2
                 },
                 "hasStatus": true
+              },
+              {
+                "id": "fib_bib-b-1",
+                "nome": "Biblioteca di Matematica, Informatica e Fisica",
+                "alias": [
+                  "B-MIF",
+                  "Biblioteca MIF",
+                  "Library MIF",
+                  "Library of Mathematics, Computer Science and Physics",
+                  "Library"
+                ],
+                "type": "biblioteca",
+                "note": "",
+                "capienza": 210,
+                "prese_elettriche": true,
+                "link_sito": "https://www.sba.unipi.it/it/biblioteche/polo-3/matematica-informatica-fisica",
+                "accesso_disabili": true,
+                "coordinates": {
+                    "x": 431,
+                    "y": 190,
+                    "zoom": 1
+                },
+                "hasStatus": false
               }
             ],
             "2": []
@@ -1239,7 +1262,7 @@
             ],
             "1": [
               {
-                "id": "fib_magna-e-0",
+                "id": "fib_magna-e-1",
                 "nome": "Aula Magna",
                 "alias": [
                   "Magna",
@@ -1259,7 +1282,7 @@
                 "hasStatus": true
               },
               {
-                "id": "fib_ps4-e-0",
+                "id": "fib_ps4-e-1",
                 "nome": "Aula PS4",
                 "alias": [
                   "PS4"

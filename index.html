@@ -1261,6 +1261,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* gray-600 */
         }
 
+        /* Add padding to input when clear button is visible */
+        #search-input,
+        #search-input-mobile {
+            padding-right: 40px;
+        }
+
         .clear-search-button:focus-visible {
             outline: 2px solid #4B5563;
             outline-offset: 2px;
@@ -2666,7 +2672,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             const showTooltip = (event) => {
-                if (isMobile()) return; // Non mostrare tooltip su mobile
+                if (isTouchDevice()) return; // Non mostrare tooltip su dispositivi touch
                 const target = event.currentTarget;
                 if ((target.id === 'share-btn' || target.closest('#zoom-controls')) && !accessibilityToggle.checked) {
                     return;
@@ -3061,7 +3067,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let currentSuggestionIndex = 0;
             let searchPlaceholderInterval = null;
 
-            const SHORT_LINK_ELIGIBLE_TYPES = new Set(['aula', 'dipartimento', 'laboratorio', 'sala']);
+            const SHORT_LINK_ELIGIBLE_TYPES = new Set(['aula', 'dipartimento', 'laboratorio', 'sala', 'biblioteca']);
 
             function isRoomEligibleForShortLink(room) {
                 if (!room) return false;
@@ -3350,7 +3356,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 const center = [parseFloat(room.coordinates.y), parseFloat(room.coordinates.x)];
                 const zoom = room.coordinates.zoom != null ? parseFloat(room.coordinates.zoom) : 2;
-                const isMobileDevice = typeof isMobile === 'function' ? isMobile() : window.innerWidth <= 880;
+                const isMobileDevice = typeof isRealMobileDevice === 'function' ? isRealMobileDevice() : false;
 
                 const currentCenter = map.getCenter();
                 const currentZoom = map.getZoom();
@@ -3641,6 +3647,32 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             }
                         }
                     }
+                }
+
+                // Ordina i risultati in modo logico: priorità a quelli che iniziano con la query
+                if (results.length > 0 && !capacityFilter) {
+                    results.sort((a, b) => {
+                        const aName = a.room?.nome?.toLowerCase() || '';
+                        const bName = b.room?.nome?.toLowerCase() || '';
+                        const aAliases = Array.isArray(a.room?.alias) ? a.room.alias.map(al => al.toLowerCase()) : [];
+                        const bAliases = Array.isArray(b.room?.alias) ? b.room.alias.map(al => al.toLowerCase()) : [];
+
+                        // Controlla se il nome o un alias inizia con la query
+                        const aStartsWithName = aName.startsWith(queryLower);
+                        const bStartsWithName = bName.startsWith(queryLower);
+                        const aStartsWithAlias = aAliases.some(al => al.startsWith(queryLower));
+                        const bStartsWithAlias = bAliases.some(al => al.startsWith(queryLower));
+                        
+                        const aStartsWith = aStartsWithName || aStartsWithAlias;
+                        const bStartsWith = bStartsWithName || bStartsWithAlias;
+
+                        // 1. Priorità massima: inizia con la query
+                        if (aStartsWith && !bStartsWith) return -1;
+                        if (!aStartsWith && bStartsWith) return 1;
+
+                        // 2. Se entrambi iniziano (o nessuno inizia), ordina alfabeticamente per nome
+                        return aName.localeCompare(bName);
+                    });
                 }
 
                 displaySearchResults(results, matchesSettingsQuery);
@@ -3955,19 +3987,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
 
                     resultElement.addEventListener('mouseenter', () => {
-                        // Se stiamo usando la tastiera, resetta lo stato e permetti l'hover del mouse
-                        if (isKeyboardSelection) {
-                            isKeyboardSelection = false;
-                            document.body.classList.remove('keyboard-navigation-active');
+                        // Ignora completamente il mouse quando si sta usando la navigazione da tastiera
+                        if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
+                            return;
                         }
                         updateSelectedSearchResult(index);
                     });
 
                     resultElement.addEventListener('mouseleave', () => {
+                        // Ignora completamente il mouse quando si sta usando la navigazione da tastiera
+                        if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
+                            return;
+                        }
                         if (selectedSearchResultIndex === index) {
                             resultElement.classList.remove('selected');
                             selectedSearchResultIndex = -1;
-                            document.body.classList.remove('keyboard-navigation-active');
                         }
                     });
 
@@ -3985,6 +4019,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 currentSearchResults.classList.remove('hidden');
+                
+                // Reset scroll position to top after showing the results panel
+                if (currentSearchResults) {
+                    currentSearchResults.scrollTop = 0;
+                }
+                
                 manageOccupancyRefreshLoop();
             }
 
@@ -4655,7 +4695,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let lastMouseY = 0;
             document.addEventListener('mousemove', (e) => {
                 // Rileva un movimento significativo del mouse (non solo piccole vibrazioni)
-                if (isKeyboardSelection && (Math.abs(e.clientX - lastMouseX) > 5 || Math.abs(e.clientY - lastMouseY) > 5)) {
+                const hasMoved = Math.abs(e.clientX - lastMouseX) > 10 || Math.abs(e.clientY - lastMouseY) > 10;
+                
+                if ((isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) && hasMoved) {
                     // Rimuovi la selezione da tastiera
                     const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                     const items = currentSearchResults.querySelectorAll('.search-result-item');
@@ -5051,8 +5093,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
             }
 
+            // Rileva se è un dispositivo touch reale (mobile/tablet)
+            function isTouchDevice() {
+                return (
+                    ('ontouchstart' in window) ||
+                    (navigator.maxTouchPoints > 0) ||
+                    (navigator.msMaxTouchPoints > 0)
+                );
+            }
+
+            // Rileva se la finestra è piccola (mobile layout)
             function isMobile() {
                 return window.innerWidth <= 880;
+            }
+
+            // Rileva se è un vero dispositivo mobile (touch + piccolo schermo)
+            function isRealMobileDevice() {
+                return isTouchDevice() && isMobile();
             }
 
             // Carica le traduzioni prima, poi i dati delle stanze
@@ -5184,13 +5241,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
 
                 const departments = rooms.filter(room => room.type === 'dipartimento');
-                const regularRooms = rooms.filter(room => room.type !== 'dipartimento');
+                const libraries = rooms.filter(room => room.type === 'biblioteca');
+                const regularRooms = rooms.filter(room => room.type !== 'dipartimento' && room.type !== 'biblioteca');
 
                 // Rimuovi eventuali elementi temporanei precedenti
                 const oldDeptHeader = document.getElementById('temp-dept-header');
                 if (oldDeptHeader) oldDeptHeader.remove();
                 const oldDeptContainer = document.getElementById('temp-dept-container');
                 if (oldDeptContainer) oldDeptContainer.remove();
+
+                const oldLibHeader = document.getElementById('temp-lib-header');
+                if (oldLibHeader) oldLibHeader.remove();
+                const oldLibContainer = document.getElementById('temp-lib-container');
+                if (oldLibContainer) oldLibContainer.remove();
 
                 // Se ci sono dipartimenti, crea una sezione dedicata PRIMA del titolo "Aule"
                 if (departments.length > 0) {
@@ -5240,30 +5303,126 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // Inserisci header e contenitore dipartimenti PRIMA del titolo "Aule"
                     roomsListParent.insertBefore(deptContainer, roomsTitleElement);
                     roomsListParent.insertBefore(deptHeader, deptContainer);
+                }
 
-                    // Determina il titolo in base al tipo predominante di stanze
-                    const hasSale = regularRooms.some(room => room.type === 'sala');
-                    if (roomsTitleElement) {
-                        if (regularRooms.length > 0) {
-                            roomsTitleElement.textContent = hasSale ? (currentLanguage === 'it' ? 'Sale' : 'Rooms') : t('rooms_title');
-                            roomsTitleElement.style.display = '';
-                        } else {
-                            roomsTitleElement.style.display = 'none';
+                // Se ci sono biblioteche, crea una sezione dedicata
+                if (libraries.length > 0) {
+                    const libHeader = document.createElement('h3');
+                    libHeader.textContent = t('library_title');
+                    libHeader.className = 'text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2';
+                    libHeader.id = 'temp-lib-header';
+
+                    const libContainer = document.createElement('div');
+                    libContainer.id = 'temp-lib-container';
+                    libContainer.className = 'mb-4';
+
+                    libraries.forEach(lib => {
+                        const libContainerItem = document.createElement('div');
+                        libContainerItem.className = 'nav-item-container mb-2';
+
+                        // 1. Header (Toggle) - Solo nome e icona espansione
+                        const libHeader = document.createElement('div');
+                        libHeader.className = 'w-full text-left p-2 pl-8 rounded-lg cursor-pointer transition-colors flex items-center justify-between';
+                        
+                        libHeader.innerHTML = `
+                            <span class="font-medium">${lib.nome}</span>
+                            <span class="material-symbols-outlined expand-icon" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
+                                expand_more
+                            </span>
+                        `;
+
+                        // 2. Website Button (Always Visible, Outside Toggle)
+                        let buttonContainer = null;
+                        if (lib.link_sito) {
+                            buttonContainer = document.createElement('div');
+                            buttonContainer.className = 'pl-8 mt-1 mb-2';
+                            
+                            const linkBtn = document.createElement('a');
+                            linkBtn.href = lib.link_sito;
+                            linkBtn.target = '_blank';
+                            // Stile identico a quello dei dipartimenti
+                            linkBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex';
+                            linkBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">language</span><span>${t('website_button')}</span>`;
+                            
+                            buttonContainer.appendChild(linkBtn);
                         }
-                        roomsTitleElement.style.marginTop = ''; // Nessun margine extra necessario
-                    }
-                } else {
-                    // Determina il titolo in base al tipo predominante di stanze
-                    const hasSale = regularRooms.some(room => room.type === 'sala');
-                    if (roomsTitleElement) {
-                        if (regularRooms.length > 0) {
-                            roomsTitleElement.textContent = hasSale ? (currentLanguage === 'it' ? 'Sale' : 'Rooms') : t('rooms_title');
-                            roomsTitleElement.style.display = '';
-                        } else {
-                            roomsTitleElement.style.display = 'none';
+
+                        // 3. Details (Hidden by default)
+                        const roomInfoElement = document.createElement('div');
+                        function addInfoRow(condition, icon, text) {
+                            if (!condition) return false;
+                            roomInfoElement.innerHTML += `
+                                <div class="flex items-center space-x-2">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
+                                    <span>${text.replace("%s", `${condition}`)}</span>
+                                </div>
+                            `;
+                            return true;
                         }
-                        roomsTitleElement.style.marginTop = '';
+                        roomInfoElement.className = 'capacity-info hidden pl-14 p-1 text-sm text-gray-600 mt-2';
+
+                        addInfoRow(lib.capienza, "group", t('room_detail_capacity'));
+                        addInfoRow(lib.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
+                        addInfoRow(!lib.accesso_disabili, "not_accessible_forward", t('room_detail_not_accessible'));
+                        addInfoRow(lib.rete, "wifi", t('room_detail_network'));
+                        addInfoRow(lib.porte_rete, "lan", t('room_detail_network_ports'));
+                        if (lib.numero_prese_elettriche > 0) {
+                            addInfoRow(lib.numero_prese_elettriche, "bolt", t('room_detail_power_outlets_count'));
+                        } else {
+                            addInfoRow(lib.prese_elettriche, "bolt", t('room_detail_power_outlets'));
+                        }
+                        if (!addInfoRow(lib.numero_pc, "computer", t('room_detail_computers_count')))
+                            addInfoRow(lib.presenza_pc, "computer", t('room_detail_computers'));
+                        addInfoRow(lib.proiettore, "cast", t('room_detail_projector'));
+                        addInfoRow(lib.altoparlanti, "speaker_group", t('room_detail_speakers'));
+                        addInfoRow(lib.telecamera, "speed_camera", t('room_detail_camera'));
+                        addInfoRow(lib.lavagna, "draw", t('room_detail_blackboard'));
+
+                        // Click Listener on Header
+                        libHeader.addEventListener('click', (e) => {
+                            e.preventDefault();
+
+                            if (isRoomEligibleForShortLink(lib)) {
+                                setShortLinkContext({
+                                    polo: selectedPolo,
+                                    building: selectedBuilding,
+                                    floor: selectedFloor,
+                                    room: lib
+                                });
+                                updateURL(true);
+                            } else {
+                                clearShortLinkContext();
+                            }
+
+                            centerMapOnRoom(lib);
+
+                            roomInfoElement.classList.toggle('hidden');
+                            const expandIcon = libHeader.querySelector('.expand-icon');
+                            expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                        });
+
+                        libContainerItem.appendChild(libHeader);
+                        if (buttonContainer) {
+                            libContainerItem.appendChild(buttonContainer);
+                        }
+                        libContainerItem.appendChild(roomInfoElement);
+                        libContainer.appendChild(libContainerItem);
+                    });
+
+                    roomsListParent.insertBefore(libContainer, roomsTitleElement);
+                    roomsListParent.insertBefore(libHeader, libContainer);
+                }
+
+                // Determina il titolo in base al tipo predominante di stanze
+                const hasSale = regularRooms.some(room => room.type === 'sala');
+                if (roomsTitleElement) {
+                    if (regularRooms.length > 0) {
+                        roomsTitleElement.textContent = hasSale ? (currentLanguage === 'it' ? 'Sale' : 'Rooms') : t('rooms_title');
+                        roomsTitleElement.style.display = '';
+                    } else {
+                        roomsTitleElement.style.display = 'none';
                     }
+                    roomsTitleElement.style.marginTop = '';
                 }
 
                 // Svuota la lista delle aule
@@ -5372,6 +5531,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     icon.style.transform = 'rotate(0deg)';
                 });
 
+                // Chiudi anche i dettagli delle biblioteche
+                const libContainer = document.getElementById('temp-lib-container');
+                if (libContainer) {
+                    const libInfos = libContainer.querySelectorAll('.capacity-info');
+                    const libIcons = libContainer.querySelectorAll('.expand-icon');
+                    libInfos.forEach(info => info.classList.add('hidden'));
+                    libIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
+                }
+
                 // Trova e espandi l'aula specifica
                 const roomElements = roomsList.querySelectorAll('.nav-item');
                 roomElements.forEach((element) => {
@@ -5397,6 +5565,34 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                     }
                 });
+
+                // Cerca anche tra le biblioteche
+                if (libContainer) {
+                    const libContainerItems = libContainer.querySelectorAll('.nav-item-container');
+                    libContainerItems.forEach((container) => {
+                        const roomNameSpan = container.querySelector('.font-medium');
+                        if (roomNameSpan && roomNameSpan.textContent === roomName) {
+                            const roomInfo = container.querySelector('.capacity-info');
+                            const expandIcon = container.querySelector('.expand-icon');
+                            const libHeader = container.querySelector('div[class*="cursor-pointer"]');
+
+                            if (roomInfo && expandIcon) {
+                                roomInfo.classList.remove('hidden');
+                                expandIcon.style.transform = 'rotate(180deg)';
+
+                                setTimeout(() => {
+                                    if (libHeader) {
+                                        libHeader.scrollIntoView({
+                                            behavior: 'smooth',
+                                            block: 'center',
+                                            inline: 'nearest'
+                                        });
+                                    }
+                                }, 100);
+                            }
+                        }
+                    });
+                }
 
                 // Cerca anche tra i dipartimenti (che hanno una struttura diversa)
                 const deptElements = roomsList.parentElement.querySelectorAll('.department-item');
@@ -5509,6 +5705,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (flipViewBtn) {
                     flipViewBtn.classList.toggle('active', shouldFlip);
                     flipViewBtn.setAttribute('aria-pressed', shouldFlip ? 'true' : 'false');
+                }
+                
+                // Disattiva l'inerzia quando la mappa è girata
+                if (map && map.dragging) {
+                    if (shouldFlip) {
+                        map.options.inertia = false;
+                        if (map.dragging._draggable) {
+                            map.dragging._draggable._inertia = false;
+                        }
+                    } else {
+                        map.options.inertia = true;
+                        if (map.dragging._draggable) {
+                            map.dragging._draggable._inertia = true;
+                        }
+                    }
                 }
             }
 
@@ -5816,25 +6027,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function renderCachedSVG(cacheData, viewParams = null, roomData = null) {
                 // Inizializza o re-inizializza la mappa
                 if (!map) {
-                    const isMobileDevice = typeof isMobile === 'function' ? isMobile() : window.innerWidth <= 880;
+                    const isMobileDevice = typeof isRealMobileDevice === 'function' ? isRealMobileDevice() : false;
                     map = L.map('map', {
                         crs: L.CRS.Simple,
                         minZoom: -2,
                         maxZoom: 4,
-                        zoomAnimation: false,
-                        fadeAnimation: false,
-                        markerZoomAnimation: false,
-                        inertia: false,
-                        zoomSnap: 0,
-                        zoomDelta: 1,
-                        wheelPxPerZoomLevel: 60,
-                        wheelDebounceTime: 1,
+                        zoomAnimation: !isMobileDevice,
+                        fadeAnimation: !isMobileDevice,
+                        markerZoomAnimation: !isMobileDevice,
+                        inertia: !isMobileDevice,
                         touchZoom: true,
                         tap: !isMobileDevice,
                         preferCanvas: true,
                         zoomControl: false,
-                        attributionControl: false,
-                        updateWhenIdle: true
+                        attributionControl: false
                     });
 
                     // Patch mouseEventToContainerPoint to handle CSS rotation
