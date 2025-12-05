@@ -156,35 +156,36 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
           "..."
         },
         "d": {
+          "rotate": true, <- valore true fa apparire il bottone per girare la cartina
           "piano": {
             "0": [
               {
-                "id": "fib_d2-d-0",
-                "nome": "Aula D2",
+                "id": "fib_d5-d-0",
+                "nome": "Aula D5",
                 "alias": [
-                  "D2",
+                  "D5",
                   "Informatica",
-                  "Corso B",
                   "Matricole",
                   "Matricole Informatica"
                 ],
-                "capienza": 206,
+                "capienza": 216,
                 "presenza_pc": false,
                 "numero_pc": 0,
                 "prese_elettriche": true,
-                "numero_prese_elettriche": 0,
-                "porte_rete": false,
+                "numero_prese_elettriche": 5,
+                "porte_rete": true,
                 "proiettore": true,
-                "lavagna": "nera",
+                "lavagna": true,
                 "type": "aula",
                 "note": "",
                 "rete": false,
                 "accesso_disabili": true,
                 "coordinates": {
-                  "x": 380,
-                  "y": 296,
+                  "x": 463,
+                  "y": 295,
                   "zoom": 2
-                }
+                },
+                "hasStatus": true <- serve per evitare le chiamate API e mostrare animazione di cerca di un'aula che non ha lo status
               },
               {
                 "..."
@@ -410,6 +411,11 @@ Al momento sono disponibili le seguenti scorciatoie:
       <td>Centra la visuale</td>
       <td><kbd>⌃</kbd> + <kbd>⌥</kbd> + <kbd>K</kbd></td>
       <td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd></td>
+    </tr>
+    <tr>
+      <td>Apri/Chiudi Sidebar</td>
+      <td><kbd>⌘</kbd> + <kbd>Enter</kbd></td>
+      <td><kbd>Ctrl</kbd> + <kbd>Enter</kbd></td>
     </tr>
   </tbody>
 </table>

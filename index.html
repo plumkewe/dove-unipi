@@ -1574,7 +1574,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             justify-self: end;
         }
 
-        @media (max-width: 880px) {
+        @media (max-width: 1200px) {
             #top-bar {
                 grid-template-columns: auto auto;
                 grid-template-rows: auto auto;
@@ -1684,7 +1684,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Nascosto di default */
         }
 
-        @media (max-width: 880px) {
+        @media (max-width: 1200px) {
             #top-bar #search-container {
                 display: none;
                 /* Nascondi la ricerca nella top-bar su mobile */
@@ -2297,7 +2297,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         <!-- Bottone per Aprire la Sidebar (visibile solo quando è chiusa) -->
         <button id="open-sidebar-button"
             class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200 flex-shrink-0"
-            data-tooltip="Apri sidebar">
+            data-tooltip="Apri sidebar" data-shortcut="enter">
             <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
                 aria-label="Apri menu laterale">
                 left_panel_open
@@ -2414,7 +2414,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 </div>
                 <!-- Bottone Chiudi (Desktop & Mobile) -->
                 <button id="close-sidebar-button" class="block p-1 rounded-lg hover-effect-darker"
-                    data-tooltip="Chiudi sidebar">
+                    data-tooltip="Chiudi sidebar" data-shortcut="enter">
                     <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
                         aria-label="Chiudi menu">
                         left_panel_close
@@ -2682,9 +2682,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 const shortcutKey = target.getAttribute('data-shortcut');
                 if (shortcutKey) {
-                    const modifiers = getShortcutModifiers();
                     const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-                    const shortcutDisplay = isMac ? `${modifiers}${shortcutKey.toUpperCase()}` : `${modifiers}${shortcutKey.toUpperCase()}`;
+                    let modifiers = '';
+                    let keyDisplay = shortcutKey.toUpperCase();
+
+                    if (shortcutKey.toLowerCase() === 'enter') {
+                        modifiers = isMac ? '⌘' : 'Ctrl+';
+                        keyDisplay = 'Enter';
+                    } else {
+                        modifiers = getShortcutModifiers();
+                    }
+
+                    const shortcutDisplay = `${modifiers}${keyDisplay}`;
                     tooltipText += ` (${shortcutDisplay})`;
                 }
 
@@ -4714,6 +4723,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Aggiungi listener per le scorciatoie da tastiera
             document.addEventListener('keydown', (e) => {
+                // Scorciatoia per aprire/chiudere la sidebar (Cmd+Enter su Mac, Ctrl+Enter su Windows)
+                const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                const isCmdOrCtrl = isMac ? e.metaKey : e.ctrlKey;
+
+                if (isCmdOrCtrl && e.key === 'Enter') {
+                    e.preventDefault();
+                    if (sidebar.classList.contains('-translate-x-full')) {
+                        openSidebar();
+                    } else {
+                        closeSidebar();
+                    }
+                    return;
+                }
+
                 // Scorciatoie con modificatori (Ctrl+Alt+J, Ctrl+Alt+K)
                 if ((e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') && e.ctrlKey && e.altKey) {
                     // Permetti le scorciatoie anche se si è in un input
@@ -5104,7 +5127,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Rileva se la finestra è piccola (mobile layout)
             function isMobile() {
-                return window.innerWidth <= 880;
+                return window.innerWidth <= 1200;
             }
 
             // Rileva se è un vero dispositivo mobile (touch + piccolo schermo)
@@ -6040,7 +6063,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         tap: !isMobileDevice,
                         preferCanvas: true,
                         zoomControl: false,
-                        attributionControl: false
+                        attributionControl: false,
+                        wheelDebounceTime: 150,
+                        wheelPxPerZoomLevel: 120
                     });
 
                     // Patch mouseEventToContainerPoint to handle CSS rotation
