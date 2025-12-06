@@ -3283,15 +3283,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const imagePoint = new OpenSeadragon.Point(osdX, osdY);
                 const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
 
-                // Map Leaflet zoom to OSD zoom. 
-                // Leaflet zoom 2 is roughly 4x. OSD zoom 1 is fit-to-screen.
+                // Map Leaflet zoom to OSD Image Zoom (magnification) for consistency across devices
                 const zoom = room.coordinates.zoom != null ? parseFloat(room.coordinates.zoom) : 2;
-                // Simple mapping for now
-                const osdZoom = Math.max(1, zoom); 
+                // Convert Image Zoom to Viewport Zoom
+                const viewportZoom = tiledImage.imageToViewportZoom(zoom);
 
                 markProgrammaticMapChange();
                 viewer.viewport.panTo(viewportPoint);
-                viewer.viewport.zoomTo(osdZoom);
+                viewer.viewport.zoomTo(viewportZoom);
 
                 return true;
             }
@@ -4963,11 +4962,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const leafletY = contentSize.y - imagePoint.y;
                         const leafletX = imagePoint.x;
                         
-                        const zoom = viewer.viewport.getZoom();
+                        // Use Image Zoom (magnification) instead of Viewport Zoom for consistency across devices
+                        const viewportZoom = viewer.viewport.getZoom();
+                        const imageZoom = tiledImage.viewportToImageZoom(viewportZoom);
                         
                         params.set('x', leafletX.toFixed(2));
                         params.set('y', leafletY.toFixed(2));
-                        params.set('z', zoom.toFixed(2));
+                        params.set('z', imageZoom.toFixed(2));
                     }
                 }
 
@@ -6270,8 +6271,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // Add handler for tile-loaded to set alt attribute
                     viewer.addHandler('tile-loaded', (event) => {
                         const altText = `Polo ${selectedPolo.charAt(0).toUpperCase() + selectedPolo.slice(1)}, Edificio ${selectedBuilding.toUpperCase()}, Piano ${selectedFloor}`;
-                        if (event.image) {
-                            event.image.alt = altText;
+                        if (event.data) {
+                            event.data.alt = altText;
                         }
                     });
 
@@ -6300,11 +6301,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
                         
                         const zoom = roomData.coordinates.zoom != null ? parseFloat(roomData.coordinates.zoom) : 2;
-                        const osdZoom = Math.max(1, zoom);
+                        // Use Image Zoom
+                        const viewportZoom = tiledImage.imageToViewportZoom(zoom);
 
                         markProgrammaticMapChange();
                         viewer.viewport.panTo(viewportPoint);
-                        viewer.viewport.zoomTo(osdZoom);
+                        viewer.viewport.zoomTo(viewportZoom);
                     } else if (viewParams && viewParams.x && viewParams.y && viewParams.z) {
                         // Usa i parametri salvati dall'URL (Leaflet coords)
                         const osdY = contentSize.y - parseFloat(viewParams.y);
@@ -6313,11 +6315,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
                         
                         const zoom = parseFloat(viewParams.z);
-                        const osdZoom = Math.max(1, zoom);
+                        // Use Image Zoom
+                        const viewportZoom = tiledImage.imageToViewportZoom(zoom);
 
                         markProgrammaticMapChange();
                         viewer.viewport.panTo(viewportPoint);
-                        viewer.viewport.zoomTo(osdZoom);
+                        viewer.viewport.zoomTo(viewportZoom);
                     } else {
                         // Adatta alla vista
                         markProgrammaticMapChange();
