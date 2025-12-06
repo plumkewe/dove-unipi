@@ -1336,10 +1336,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             contain: layout paint;
             transform: translateZ(0);
             transform-origin: center center;
-        }
-
-        #map.map-flip-animating {
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #map.map-flipped {
@@ -1609,26 +1606,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 border-bottom-left-radius: 0.5rem;
                 border-bottom-right-radius: 0.5rem;
                 overflow: hidden;
-            }
-        }
-
-        /* Stili per la barra di ricerca mobile */
-        #mobile-search-container {
-            display: none;
-            /* Nascosto di default */
-        }
-
-        /* Stili per mobile */
-        @media (max-width: 768px) {
-            #main-content {
-                width: 100vw;
-                /* Occupa tutta la larghezza dello schermo */
-            }
-
-            /* Forza la larghezza minima dell'SVG su mobile per evitare tagli */
-            #viewer-container svg {
-                min-width: 900px !important;
-                width: 900px !important;
             }
         }
 
@@ -2723,7 +2700,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const perspectiveViewBtn = document.getElementById('perspective-view-btn');
             const topViewBtn = document.getElementById('top-view-btn');
             const flipViewBtn = document.getElementById('flip-view-btn');
-            const mapContainer = document.getElementById('map');
             if (flipViewBtn) {
                 flipViewBtn.setAttribute('aria-pressed', 'false');
             }
@@ -3012,7 +2988,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let programmaticMapChange = false;
             let programmaticMapChangeResetTimeout = null;
             let isMapFlipped = false;
-            let mapFlipAnimationTimeout = null;
+            const buildingFlipStates = {}; // Store flip state per building
 
             // Sistema di lazy loading e caching per le mappe SVG
             const svgCache = new Map();
@@ -3044,10 +3020,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (programmaticMapChangeResetTimeout) {
                     clearTimeout(programmaticMapChangeResetTimeout);
                 }
+                // Aumentato a 2000ms per coprire l'animationTime di 1.5s su mobile
                 programmaticMapChangeResetTimeout = setTimeout(() => {
                     programmaticMapChange = false;
                     programmaticMapChangeResetTimeout = null;
-                }, 800);
+                }, 2000);
             }
 
             function clearProgrammaticMapChangeFlag() {
@@ -3162,7 +3139,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return;
                 }
 
-                const resolvedCode = (codeOverride && codeOverride.trim()) || generateRobustShortCode(polo, room);
+                let resolvedCode = codeOverride && codeOverride.trim();
+                
+                if (!resolvedCode) {
+                    // Use precalculated code if available (O(1)), otherwise fallback to robust generation (O(N))
+                    if (room.calculatedShortCode) {
+                        resolvedCode = room.calculatedShortCode;
+                    } else {
+                        resolvedCode = generateRobustShortCode(polo, room);
+                    }
+                }
+
                 if (!resolvedCode) {
                     shortLinkContext = null;
                     return;
@@ -3317,10 +3304,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         selectView('top', true, null, room);
                     } else {
                         centerMapOnRoom(room);
-                    }
-
-                    if (eligibleForShortLink) {
-                        updateURL(true);
                     }
                 } else {
                     // Cambio di piano necessario, ricarica la mappa in vista top con le coordinate dell'aula
@@ -5231,35 +5214,110 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 return isTouchDevice() && isMobile();
             }
 
+            function precalculateShortCodes() {
+                if (!data || !data.polo) return;
+
+                Object.keys(data.polo).forEach(poloName => {
+                    const allRooms = getAllRoomsInPolo(poloName);
+                    
+                    // Group by base code
+                    const roomsByBaseCode = {};
+                    
+                    allRooms.forEach(item => {
+                        const baseCode = getRoomBaseShortCode(item.room);
+                        if (baseCode) {
+                            if (!roomsByBaseCode[baseCode]) {
+                                roomsByBaseCode[baseCode] = [];
+                            }
+                            roomsByBaseCode[baseCode].push(item.room);
+                        }
+                    });
+                    
+                    // Assign codes
+                    Object.keys(roomsByBaseCode).forEach(baseCode => {
+                        const rooms = roomsByBaseCode[baseCode];
+                        if (rooms.length === 1) {
+                            rooms[0].calculatedShortCode = baseCode;
+                        } else {
+                            rooms.forEach((room, index) => {
+                                if (index === 0) {
+                                    room.calculatedShortCode = baseCode;
+                                } else {
+                                    room.calculatedShortCode = `${baseCode}-${index + 1}`;
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
             // Carica le traduzioni prima, poi i dati delle stanze
             let dataLoaded = false;
 
             async function loadDataAndInitialize() {
-                // Aspetta che le traduzioni siano caricate
                 await ensureTranslationsLoaded();
+                if (dataLoaded) return;
 
-                // Poi carica i dati delle stanze
-                if (!dataLoaded) {
-                    try {
-                        const response = await fetch('data/rooms.json');
-                        const jsonData = await response.json();
-                        data = jsonData;
+                const DATA_CACHE_KEY = 'dove_unipi_rooms_data_v1';
+                const FACILITIES_CACHE_KEY = 'dove_unipi_facilities_data_v1';
+                let loadedFromCache = false;
+
+                // 1. Tentativo caricamento da cache
+                try {
+                    const cachedRooms = localStorage.getItem(DATA_CACHE_KEY);
+                    const cachedFacilities = localStorage.getItem(FACILITIES_CACHE_KEY);
+
+                    if (cachedRooms) {
+                        data = JSON.parse(cachedRooms);
+                        facilitiesData = cachedFacilities ? JSON.parse(cachedFacilities) : {};
                         dataLoaded = true;
-
-                        // Carica anche il file facilities.json
-                        try {
-                            const facilitiesResponse = await fetch('data/facilities.json');
-                            facilitiesData = await facilitiesResponse.json();
-                        } catch (facilitiesError) {
-                            console.error('Errore nel caricamento di facilities.json:', facilitiesError);
-                            facilitiesData = {}; // Fallback a oggetto vuoto
-                        }
-
+                        loadedFromCache = true;
+                        
                         populatePolos(Object.keys(data.polo));
-                        handleInitialLoad(); // Ora le traduzioni sono sicuramente caricate
-                    } catch (error) {
-                        console.error('Failed to load rooms data:', error);
+                        handleInitialLoad();
+                        console.log('Dati caricati dalla cache');
                     }
+                } catch (e) {
+                    console.warn('Errore lettura cache:', e);
+                }
+
+                // 2. Fetch dati aggiornati
+                try {
+                    const roomsResponse = await fetch('data/rooms.json');
+                    const roomsJson = await roomsResponse.json();
+
+                    let facilitiesJson = {};
+                    try {
+                        const facilitiesResponse = await fetch('data/facilities.json');
+                        facilitiesJson = await facilitiesResponse.json();
+                    } catch (e) {
+                        console.warn('Errore facilities.json:', e);
+                    }
+
+                    // Calcola short codes sui nuovi dati
+                    // Usiamo un trucco per usare la funzione esistente che dipende da 'data' globale
+                    const currentData = data;
+                    data = roomsJson;
+                    precalculateShortCodes();
+                    
+                    try {
+                        localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(roomsJson));
+                        localStorage.setItem(FACILITIES_CACHE_KEY, JSON.stringify(facilitiesJson));
+                    } catch (e) {
+                        console.warn('Quota storage superata:', e);
+                    }
+
+                    if (!loadedFromCache) {
+                        facilitiesData = facilitiesJson;
+                        dataLoaded = true;
+                        populatePolos(Object.keys(data.polo));
+                        handleInitialLoad();
+                    } else {
+                        data = currentData; // Ripristina per coerenza UI sessione corrente
+                        console.log('Cache aggiornata');
+                    }
+                } catch (error) {
+                    console.error('Failed to load rooms data:', error);
                 }
             }
 
@@ -5665,7 +5723,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 floor: selectedFloor,
                                 room
                             });
-                            updateURL(true);
                         } else {
                             clearShortLinkContext();
                         }
@@ -5673,10 +5730,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // Centra la mappa sull'aula usando la funzione centralizzata
                         centerMapOnRoom(room);
 
-                        // Toggle delle informazioni dell'aula
-                        roomInfoElement.classList.toggle('hidden');
-                        const expandIcon = roomElement.querySelector('.expand-icon');
-                        expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                        // Defer heavy UI updates to next frame to allow animation to start smoothly
+                        requestAnimationFrame(() => {
+                            // Toggle delle informazioni dell'aula
+                            roomInfoElement.classList.toggle('hidden');
+                            const expandIcon = roomElement.querySelector('.expand-icon');
+                            expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                        });
                     });
 
                     roomContainer.appendChild(roomElement);
@@ -5857,30 +5917,52 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             }
 
-            function setMapFlipState(shouldFlip) {
-                if (!mapContainer) return;
+            function setMapFlipState(shouldFlip, animate = true, delayVisuals = 0, persistState = true) {
                 isMapFlipped = shouldFlip;
-                
-                if (mapFlipAnimationTimeout) {
-                    clearTimeout(mapFlipAnimationTimeout);
-                    mapFlipAnimationTimeout = null;
+
+                // Save state for current building
+                if (persistState && selectedPolo && selectedBuilding) {
+                    const key = `${selectedPolo}-${selectedBuilding}`;
+                    buildingFlipStates[key] = shouldFlip;
                 }
                 
-                mapContainer.classList.add('map-flip-animating');
-                
-                requestAnimationFrame(() => {
-                    mapContainer.classList.toggle('map-flipped', shouldFlip);
-                    
-                    if (flipViewBtn) {
-                        flipViewBtn.classList.toggle('active', shouldFlip);
-                        flipViewBtn.setAttribute('aria-pressed', shouldFlip ? 'true' : 'false');
-                    }
+                // if (viewer && viewer.viewport) {
+                //     viewer.viewport.setRotation(shouldFlip ? 180 : 0);
+                //     viewer.forceRedraw();
+                // }
 
-                    mapFlipAnimationTimeout = setTimeout(() => {
-                        mapContainer.classList.remove('map-flip-animating');
-                        mapFlipAnimationTimeout = null;
-                    }, 320);
-                });
+                if (flipViewBtn) {
+                    flipViewBtn.classList.toggle('active', shouldFlip);
+                    flipViewBtn.setAttribute('aria-pressed', shouldFlip ? 'true' : 'false');
+                }
+
+                const updateMap = () => {
+                    const mapContainer = document.getElementById('map');
+                    if (mapContainer) {
+                        if (!animate) {
+                            mapContainer.style.transition = 'none';
+                        }
+                        
+                        mapContainer.classList.toggle('map-flipped', shouldFlip);
+                        
+                        if (!animate) {
+                            // Force reflow
+                            void mapContainer.offsetWidth;
+                            // Restore transition on the next paint to avoid flash during building switch
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => {
+                                    mapContainer.style.transition = '';
+                                });
+                            });
+                        }
+                    }
+                };
+
+                if (delayVisuals > 0) {
+                    setTimeout(updateMap, delayVisuals);
+                } else {
+                    updateMap();
+                }
             }
 
             function updateFlipButtonVisibility(building) {
@@ -5893,8 +5975,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 flipViewBtn.classList.toggle('hidden', !shouldShow);
                 flipViewBtn.disabled = !shouldShow;
-                if (!shouldShow && isMapFlipped) {
-                    setMapFlipState(false);
+                
+                if (shouldShow) {
+                    // Restore state
+                    const key = `${selectedPolo}-${building}`;
+                    const savedState = buildingFlipStates[key] || false;
+                    // Only update if different, and disable animation for restoration on switch
+                    if (isMapFlipped !== savedState) {
+                        setMapFlipState(savedState, false, 300);
+                    }
+                } else {
+                    // If rotation not supported, ensure it is not flipped
+                    if (isMapFlipped) {
+                        setMapFlipState(false, false, 300, false);
+                    }
                 }
             }
 
@@ -6196,8 +6290,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     viewer = OpenSeadragon({
                         id: "map",
                         prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/images/",
-                        animationTime: isMobileDevice ? 0.4 : 1.2,
-                        springStiffness: isMobileDevice ? 10 : 6.5,
+                        animationTime: isMobileDevice ? 1.5 : 1.2,
+                        springStiffness: isMobileDevice ? 5.0 : 6.5,
                         showNavigationControl: false,
                         showNavigator: false,
                         defaultZoomLevel: 1,
@@ -6226,7 +6320,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (isMapFlipped) {
                             e.preventDefaultAction = true;
                             const viewportDelta = viewer.viewport.deltaPointsFromPixels(e.delta);
-                            viewer.viewport.panBy(viewportDelta);
+                            viewer.viewport.panBy(viewportDelta, true);
                         }
                     });
 
@@ -6253,18 +6347,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             e.preventDefaultAction = true;
                             // Handle Zoom
                             const zoomFactor = e.distance / e.lastDistance;
-                            const point = e.center;
+                            const point = e.lastCenter;
                             const invertedPoint = new OpenSeadragon.Point(
                                 viewer.container.clientWidth - point.x,
                                 viewer.container.clientHeight - point.y
                             );
                             const viewportPoint = viewer.viewport.pointFromPixel(invertedPoint);
-                            viewer.viewport.zoomBy(zoomFactor, viewportPoint);
+                            viewer.viewport.zoomBy(zoomFactor, viewportPoint, true);
                             
                             // Handle Pan
                             const delta = e.center.minus(e.lastCenter);
                             const viewportDelta = viewer.viewport.deltaPointsFromPixels(delta);
-                            viewer.viewport.panBy(viewportDelta);
+                            viewer.viewport.panBy(viewportDelta, true);
                         }
                     });
 
@@ -6305,8 +6399,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const viewportZoom = tiledImage.imageToViewportZoom(zoom);
 
                         markProgrammaticMapChange();
-                        viewer.viewport.panTo(viewportPoint);
-                        viewer.viewport.zoomTo(viewportZoom);
+                        
+                        // Use requestAnimationFrame to ensure the map is fully rendered before starting animation
+                        // This prevents the "first frame lag" when switching buildings
+                        requestAnimationFrame(() => {
+                            viewer.viewport.panTo(viewportPoint);
+                            viewer.viewport.zoomTo(viewportZoom);
+                        });
                     } else if (viewParams && viewParams.x && viewParams.y && viewParams.z) {
                         // Usa i parametri salvati dall'URL (Leaflet coords)
                         const osdY = contentSize.y - parseFloat(viewParams.y);
@@ -6319,15 +6418,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const viewportZoom = tiledImage.imageToViewportZoom(zoom);
 
                         markProgrammaticMapChange();
-                        viewer.viewport.panTo(viewportPoint);
-                        viewer.viewport.zoomTo(viewportZoom);
+                        requestAnimationFrame(() => {
+                            viewer.viewport.panTo(viewportPoint);
+                            viewer.viewport.zoomTo(viewportZoom);
+                        });
                     } else {
                         // Adatta alla vista
                         markProgrammaticMapChange();
                         viewer.viewport.goHome(true);
                     }
 
-                    // Ensure CSS class is applied
+                    // Apply rotation if needed
+                    // viewer.viewport.setRotation(isMapFlipped ? 180 : 0);
+                    
                     const mapContainer = document.getElementById('map');
                     if (mapContainer) {
                         mapContainer.classList.toggle('map-flipped', isMapFlipped);
