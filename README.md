@@ -39,7 +39,14 @@
   - [Lingue supportate](#lingue-supportate)
   - [Altri dati](#altri-dati)
     - [Distributori d'acqua](#distributori-dacqua)
-- [API](#api)
+- [API Orari Biblioteca](#api-orari-biblioteca)
+  - [Endpoint](#endpoint)
+  - [Parametri](#parametri)
+  - [Esempio di chiamata](#esempio-di-chiamata)
+  - [Risposta JSON](#risposta-json)
+  - [Campi della risposta](#campi-della-risposta)
+  - [Altre biblioteche disponibili](#altre-biblioteche-disponibili)
+- [API Aule](#api-aule)
 - [Telegram Bot](#telegram-bot)
 - [Problemi noti](#problemi-noti)
   
@@ -484,7 +491,94 @@ Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risult
 > Apri una [issue](https://github.com/plumkewe/dove-unipi/issues) oppure inviami un'email a: [lyubomyr.malay@icloud.com](mailto:lyubomyr.malay@icloud.com)  
 > **Grazie per il supporto!**
 
-## API
+## API Orari Biblioteca
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
+Il progetto utilizza l'API pubblica del Sistema Bibliotecario di Ateneo (SBA) dell'Università di Pisa per ottenere gli orari di apertura delle **Biblioteche**.
+
+### Endpoint
+
+```
+GET https://www.sba.unipi.it/it/opening_hours/instances
+```
+
+### Parametri
+
+| Parametro | Tipo | Descrizione |
+|-----------|------|-------------|
+| `from_date` | string | Data di inizio (formato: `YYYY-MM-DD`) |
+| `to_date` | string | Data di fine (formato: `YYYY-MM-DD`) |
+| `nid` | string | ID della biblioteca (`1185` = Fisica) |
+
+### Esempio di chiamata
+
+```bash
+curl "https://www.sba.unipi.it/it/opening_hours/instances?from_date=2025-12-05&to_date=2025-12-12&nid=1185"
+```
+
+### Risposta JSON
+
+```json
+[
+  {
+    "nid": 1185,
+    "date": "2025-12-05",
+    "start_time": "09:00",
+    "end_time": "20:00",
+    "notice": null
+  },
+  {
+    "nid": 1185,
+    "date": "2025-12-09",
+    "start_time": "09:00",
+    "end_time": "20:00",
+    "notice": null
+  }
+]
+```
+
+### Campi della risposta
+
+| Campo | Descrizione |
+|-------|-------------|
+| `nid` | ID della biblioteca |
+| `date` | Data (formato `YYYY-MM-DD`) |
+| `start_time` | Orario di apertura |
+| `end_time` | Orario di chiusura |
+| `notice` | Eventuali avvisi o note |
+
+
+### Altre biblioteche disponibili
+
+| NID | Biblioteca |
+|-----|------------|
+| 1173 | Agraria |
+| 1174 | Anglistica |
+| 1177 | Antichistica |
+| 1178 | Economia |
+| 1179 | Filosofia e Storia |
+| 1184 | Chimica |
+| 1185 | Fisica |
+| 1187 | Informatica |
+| 1195 | Giurisprudenza |
+| 1196 | Ingegneria |
+| 1197 | Matematica |
+| 1198 | Medicina |
+| 1213 | Scienze Politiche |
+| 1361 | CIPEI |
+| 1362 | Archivio generale di Ateneo |
+| 1409 | Storia e Romanistica |
+| 1477 | Scienze del turismo (Lucca) |
+| 1481 | Sistemi logistici (Livorno) |
+
+> [!NOTE]
+> L'API è pubblica, non richiede autenticazione e restituisce dati in formato JSON.
+> Fonte: [sba.unipi.it/it/biblioteche/orari-di-apertura-delle-sedi](https://www.sba.unipi.it/it/biblioteche/orari-di-apertura-delle-sedi)
+
+<hr>
+
+## API Aule
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 

@@ -120,8 +120,8 @@
     "translation": "Alto contrasto"
   },
   "settings_high_contrast_description": {
-    "original": "Sfondo bianco con testo nero per migliore accessibilità",
-    "translation": "Sfondo bianco con testo nero per migliore accessibilità"
+    "original": "Temporaneamente disattivato",
+    "translation": "Temporaneamente disattivato"
   },
   "settings_dyslexic_font": {
     "original": "Font per dislessia",
@@ -222,6 +222,22 @@
   "website_button": {
     "original": "Sito",
     "translation": "Sito"
+  },
+  "hours_button": {
+    "original": "Orari",
+    "translation": "Orari"
+  },
+  "opens_at": {
+    "original": "Apre alle",
+    "translation": "Apre alle"
+  },
+  "closes_at": {
+    "original": "Chiude alle",
+    "translation": "Chiude alle"
+  },
+  "Closed": {
+    "original": "Chiusa",
+    "translation": "Chiusa"
   },
   "search_suggestion_settings": {
     "original": "Prova: Impostazioni",

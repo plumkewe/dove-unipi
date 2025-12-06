@@ -1170,6 +1170,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             color: #6b7280;
         }
 
+
+
         @keyframes shimmer {
             0% {
                 background-position: 200% 0;
@@ -1208,7 +1210,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .occupancy-details.expanded {
-            max-height: 200px;
+            max-height: 500px;
             padding: 8px 12px;
         }
 
@@ -1643,7 +1645,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 border-top-left-radius: 0.5rem;
                 border-top-right-radius: 0.5rem;
                 overflow: hidden;
-                max-height: 240px;
+                max-height: 50vh;
                 overflow-y: auto;
                 overflow-x: hidden;
                 /* Previene lo scroll orizzontale */
@@ -1917,7 +1919,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         /* Disable transitions on department buttons in high contrast mode */
-        .high-contrast a.bg-gray-200 {
+        .high-contrast a.bg-gray-200,
+        .high-contrast button.bg-gray-200 {
             transition: none !important;
         }
 
@@ -1995,17 +1998,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 border-color: black !important;
             }
 
-            .high-contrast a.bg-gray-200:hover {
+            .high-contrast a.bg-gray-200:hover,
+            .high-contrast button.bg-gray-200:hover {
                 background-color: black !important;
                 color: white !important;
             }
 
-            .high-contrast a.bg-gray-200:hover * {
+            .high-contrast a.bg-gray-200:hover *,
+            .high-contrast button.bg-gray-200:hover * {
                 background-color: transparent !important;
                 color: white !important;
             }
 
-            .high-contrast a.bg-gray-200:hover .material-symbols-outlined {
+            .high-contrast a.bg-gray-200:hover .material-symbols-outlined,
+            .high-contrast button.bg-gray-200:hover .material-symbols-outlined {
                 color: white !important;
                 background-color: transparent !important;
             }
@@ -2033,29 +2039,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         /* High contrast mode for occupancy status bars */
         .high-contrast .occupancy-status-bar {
-            border: 2px solid black !important;
+            border: 2px solid currentColor !important;
             font-weight: 700 !important;
+            background-color: transparent !important;
+            color: inherit !important;
         }
 
-        .high-contrast .occupancy-status-bar.loading {
-            background: white !important;
-            color: black !important;
-            animation: none !important;
-        }
-
-        .high-contrast .occupancy-status-bar.free {
-            background-color: white !important;
-            color: black !important;
-        }
-
-        .high-contrast .occupancy-status-bar.occupied {
-            background-color: black !important;
-            color: white !important;
-        }
-
+        .high-contrast .occupancy-status-bar.loading,
+        .high-contrast .occupancy-status-bar.free,
+        .high-contrast .occupancy-status-bar.occupied,
         .high-contrast .occupancy-status-bar.unavailable {
-            background-color: white !important;
-            color: black !important;
+            background: none !important;
+            background-color: transparent !important;
+            color: inherit !important;
+            animation: none !important;
         }
 
         /* Ensure text remains visible on hover in high‑contrast mode (when hovering the search result) */
@@ -2064,9 +2061,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.free,
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied,
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable {
-            background-color: white !important;
-            color: black !important;
-            border: 2px solid black !important;
+            background-color: transparent !important;
+            color: inherit !important;
+            border: 2px solid currentColor !important;
         }
 
         /* Override the search-result-item * rule for children of occupancy bar */
@@ -2075,7 +2072,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.free *,
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied *,
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable * {
-            color: black !important;
+            color: inherit !important;
             background-color: transparent !important;
         }
 
@@ -2084,16 +2081,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .high-contrast .occupancy-details {
-            border: 2px solid black !important;
-            background-color: white !important;
+            border: none !important;
+            background-color: transparent !important;
+            color: inherit !important;
         }
 
         .high-contrast .occupancy-details-content {
-            color: black !important;
+            color: inherit !important;
         }
 
         .high-contrast .occupancy-details-content strong {
-            color: black !important;
+            color: inherit !important;
         }
 
 
@@ -2383,7 +2381,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <div id="mobile-search-container">
         <div id="search-wrapper-mobile">
             <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 z-10 pointer-events-none">
                     <span class="material-symbols-outlined text-gray-500">search</span>
                 </span>
                 <input type="text" id="search-input-mobile" placeholder="Cerca un'aula..."
@@ -3687,6 +3685,129 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 displaySearchResults(results, matchesSettingsQuery);
             }
 
+            function fetchLibrarySchedule(nid, container) {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                const fromDate = `${yyyy}-${mm}-${dd}`;
+                
+                const nextWeek = new Date(today);
+                nextWeek.setDate(today.getDate() + 6);
+                const yyyy2 = nextWeek.getFullYear();
+                const mm2 = String(nextWeek.getMonth() + 1).padStart(2, '0');
+                const dd2 = String(nextWeek.getDate()).padStart(2, '0');
+                const toDate = `${yyyy2}-${mm2}-${dd2}`;
+
+                const apiUrl = `https://www.sba.unipi.it/it/opening_hours/instances?from_date=${fromDate}&to_date=${toDate}&nid=${nid}`;
+                // Use a CORS proxy as a fallback because the SBA API doesn't support CORS
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
+
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        updateLibraryUI(container, data);
+                    })
+                    .catch(err => {
+                        console.warn("Direct fetch failed, trying proxy...", err);
+                        fetch(proxyUrl)
+                            .then(response => {
+                                if (!response.ok) throw new Error('Proxy response was not ok');
+                                return response.json();
+                            })
+                            .then(data => {
+                                updateLibraryUI(container, data);
+                            })
+                            .catch(err2 => {
+                                console.error("Proxy fetch also failed:", err2);
+                                updateLibraryUI(container, null, true);
+                            });
+                    });
+            }
+
+            function updateLibraryUI(container, data, isError = false) {
+                const statusBar = container.querySelector('.occupancy-status-bar');
+                const statusText = container.querySelector('.occupancy-text');
+                const detailsContent = container.querySelector('.occupancy-details-content');
+                
+                if (!statusBar || !statusText || !detailsContent) return;
+
+                statusBar.classList.remove('loading');
+
+                if (isError || !data) {
+                    statusBar.classList.add('unavailable');
+                    statusText.textContent = t('availability_unavailable');
+                    return;
+                }
+
+                // 1. Determine current status
+                const todayStr = new Date().toISOString().split('T')[0];
+                const todayEntry = data.find(d => d.date === todayStr);
+                
+                let currentStatusText = t('Closed');
+                let colorClass = 'occupied'; // Red for closed
+
+                if (todayEntry) {
+                    const now = new Date();
+                    const currentHours = String(now.getHours()).padStart(2, '0');
+                    const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+                    const currentTime = `${currentHours}:${currentMinutes}`;
+                    const startTime = todayEntry.start_time.substring(0, 5);
+                    const endTime = todayEntry.end_time.substring(0, 5);
+
+                    if (currentTime < startTime) {
+                        currentStatusText = `${t('opens_at')} ${startTime}`;
+                        colorClass = 'occupied'; // Red
+                    } else if (currentTime >= startTime && currentTime < endTime) {
+                        currentStatusText = `${t('closes_at')} ${endTime}`;
+                        colorClass = 'free'; // Green
+                    } else {
+                        currentStatusText = t('Closed');
+                        colorClass = 'occupied'; // Red
+                    }
+                } else {
+                     currentStatusText = t('Closed');
+                     colorClass = 'occupied';
+                }
+
+                statusBar.classList.add(colorClass);
+                statusText.textContent = currentStatusText;
+
+                // 2. Build weekly schedule HTML
+                let scheduleHTML = '<div class="flex flex-col gap-1">';
+                
+                for (let i = 0; i < 7; i++) {
+                    const d = new Date();
+                    d.setDate(d.getDate() + i);
+                    const dateStr = d.toISOString().split('T')[0];
+                    
+                    const dayName = d.toLocaleDateString(currentLanguage === 'it' ? 'it-IT' : 'en-US', { weekday: 'long' });
+                    const label = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+                    
+                    const entry = data.find(e => e.date === dateStr);
+                    let hoursText = t('Closed');
+                    if (entry) {
+                        hoursText = `${entry.start_time.substring(0, 5)} - ${entry.end_time.substring(0, 5)}`;
+                    }
+                    
+                    const isToday = i === 0;
+                    const rowStyle = isToday ? 'font-weight: bold;' : '';
+
+                    scheduleHTML += `
+                        <div class="flex justify-between" style="${rowStyle}">
+                            <span>${label}</span>
+                            <span>${hoursText}</span>
+                        </div>
+                    `;
+                }
+                scheduleHTML += '</div>';
+                
+                detailsContent.innerHTML = scheduleHTML;
+            }
+
             function displaySearchResults(results, showSettings = false) {
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
@@ -3848,6 +3969,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     } else {
                         const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
                         const isFacility = result.isFacility || false;
+                        const isLibrary = result.room.type === 'biblioteca';
 
                         // Aggiungi classe per gli erogatori d'acqua
                         if (isFacility && result.room.type === 'erogatore_acqua') {
@@ -3863,7 +3985,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // If hasStatus is undefined (e.g. old data) or true, proceed.
                         const shouldCheckStatus = hasStatus !== false;
 
-                        if (settingsConfig.showClassroomStatus && !isFacility && shouldCheckStatus) {
+                        if (isLibrary) {
+                            const libraryNid = result.room.nid;
+                            const occupancyId = `library-schedule-${libraryNid}`;
+                            
+                            availabilityHTML = `
+                                <div class="occupancy-status-bar loading" data-library-nid="${libraryNid}">
+                                    <span class="occupancy-text">${t('loading_occupancy')}</span>
+                                    <span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">expand_more</span>
+                                </div>
+                                <div class="occupancy-details" id="${occupancyId}">
+                                    <div class="occupancy-details-content">
+                                        <!-- Content will be filled by JS -->
+                                    </div>
+                                </div>
+                            `;
+                        } else if (settingsConfig.showClassroomStatus && !isFacility && shouldCheckStatus) {
                             const availabilitySource = window.classroomAvaibility || {};
                             const classroomName = result.room?.nome || '';
                             const availabilityData = classroomName && availabilitySource[classroomName];
@@ -3965,6 +4102,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     expandIcon.classList.toggle('expanded');
                                 }
                             });
+                        }
+
+                        if (isLibrary) {
+                            fetchLibrarySchedule(result.room.nid, resultElement);
                         }
 
                         resultElement.addEventListener('click', (e) => {
@@ -4086,7 +4227,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         label: t('settings_high_contrast'),
                         description: t('settings_high_contrast_description'),
                         checked: settingsConfig.highContrast,
-                        onToggle: setHighContrastSetting
+                        onToggle: setHighContrastSetting,
+                        disabled: true
                     },
                     {
                         key: 'dyslexicFont',
@@ -4148,7 +4290,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 syncSettingsToggles();
             }
 
-            function createSettingsToggle({ key, label, description, checked, onToggle }) {
+            function createSettingsToggle({ key, label, description, checked, onToggle, disabled = false }) {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'flex items-center justify-between gap-4 w-full';
 
@@ -4168,19 +4310,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 const switchLabel = document.createElement('label');
-                switchLabel.className = 'relative inline-flex items-center cursor-pointer flex-shrink-0';
+                switchLabel.className = 'relative inline-flex items-center flex-shrink-0' + (disabled ? ' opacity-50 cursor-not-allowed' : ' cursor-pointer');
 
                 const input = document.createElement('input');
                 input.type = 'checkbox';
                 input.className = 'sr-only peer';
                 input.dataset.settingsToggle = key;
                 input.checked = checked;
+                input.disabled = disabled;
 
                 const slider = document.createElement('div');
                 slider.className = "w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800";
 
                 input.addEventListener('change', () => {
-                    onToggle(input.checked);
+                    if (!disabled) {
+                        onToggle(input.checked);
+                    }
                 });
 
                 switchLabel.appendChild(input);
@@ -5358,16 +5503,67 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         let buttonContainer = null;
                         if (lib.link_sito) {
                             buttonContainer = document.createElement('div');
-                            buttonContainer.className = 'pl-8 mt-1 mb-2';
+                            buttonContainer.className = 'pl-8 mt-1 mb-2 flex space-x-2';
                             
                             const linkBtn = document.createElement('a');
                             linkBtn.href = lib.link_sito;
                             linkBtn.target = '_blank';
                             // Stile identico a quello dei dipartimenti
-                            linkBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex';
+                            linkBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
                             linkBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">language</span><span>${t('website_button')}</span>`;
                             
                             buttonContainer.appendChild(linkBtn);
+
+                            // Bottone Orari
+                            const hoursBtn = document.createElement('button');
+                            hoursBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
+                            hoursBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">schedule</span><span>${t('hours_button')}</span>`;
+                            
+                            hoursBtn.addEventListener('click', () => {
+                                // Chiudi la sidebar se su mobile
+                                if (isMobile()) {
+                                    closeSidebar();
+                                }
+                                
+                                // Imposta il valore di ricerca
+                                const searchVal = lib.nome;
+                                searchInput.value = searchVal;
+                                searchInputMobile.value = searchVal;
+                                currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                                
+                                // Triggera la ricerca
+                                performSearch(searchVal);
+                                
+                                // Espandi automaticamente gli orari dopo che i risultati sono stati renderizzati
+                                // Usiamo un timeout per dare tempo al DOM di aggiornarsi
+                                setTimeout(() => {
+                                    // Seleziona il container corretto in base alla vista
+                                    const container = isMobile() ? document.getElementById('search-results-mobile') : document.getElementById('search-results');
+                                    if (!container) return;
+
+                                    const results = container.querySelectorAll('.search-result-item');
+                                    results.forEach(result => {
+                                        const title = result.querySelector('.title');
+                                        if (title && title.textContent === lib.nome) {
+                                            const expandIcon = result.querySelector('.occupancy-expand-icon');
+                                            // Usa querySelector relativo per evitare conflitti di ID duplicati
+                                            const detailsElement = result.querySelector('.occupancy-details');
+                                            
+                                            if (expandIcon && detailsElement && !detailsElement.classList.contains('expanded')) {
+                                                detailsElement.classList.add('expanded');
+                                                expandIcon.classList.add('expanded');
+                                                
+                                                // Scorrimento per centrare il risultato
+                                                setTimeout(() => {
+                                                    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                }, 100);
+                                            }
+                                        }
+                                    });
+                                }, 100);
+                            });
+                            
+                            buttonContainer.appendChild(hoursBtn);
                         }
 
                         // 3. Details (Hidden by default)
