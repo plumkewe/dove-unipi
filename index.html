@@ -129,7 +129,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
       "author": {
         "@type": "Person",
         "name": "Lyubomyr Malay",
-        "url": "https://github.com/plumkewe"
+        "githubUrl": "https://github.com/plumkewe",
+        "linkedinUrl": "https://www.linkedin.com/in/myrmyr"
       },
       "provider": {
         "@type": "Organization",
@@ -163,12 +164,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         "Supporto multilingua (Italiano/Inglese)",
         "Modalità ad alto contrasto",
         "Font per dislessici",
-        "Condivisione link diretti alle aule"
+        "Condivisione link diretti alle aule",
+        "Status delle aule in tempo reale",
+        "Orario delle biblioteche in tempo reale"
       ],
       "browserRequirements": "Requires JavaScript. Requires HTML5.",
       "softwareVersion": "1.0",
       "datePublished": "2025",
-      "dateModified": "2025-11-26"
+      "dateModified": "2025-12-06"
     }
     </script>
 
@@ -1058,8 +1061,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             pointer-events: none;
         }
 
-        body:not(.keyboard-navigation-active) .search-result-item:hover::before {
-            background-color: rgba(0, 0, 0, 0.1);
+        @media (hover: hover) {
+            body:not(.keyboard-navigation-active) .search-result-item:hover::before {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
         }
 
         .search-result-item.selected::before {
@@ -1120,10 +1125,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             max-width: 100%;
         }
 
-        body:not(.keyboard-navigation-active) .search-result-item:hover .title,
-        body:not(.keyboard-navigation-active) .search-result-item:hover .details {
-            color: #1F2937;
-            /* gray-800 */
+        @media (hover: hover) {
+            body:not(.keyboard-navigation-active) .search-result-item:hover .title,
+            body:not(.keyboard-navigation-active) .search-result-item:hover .details {
+                color: #1F2937;
+                /* gray-800 */
+            }
         }
 
         .search-result-item.selected .title,
@@ -3692,6 +3699,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const dd = String(today.getDate()).padStart(2, '0');
                 const fromDate = `${yyyy}-${mm}-${dd}`;
                 
+                // Check cache
+                const cacheKey = `library_schedule_${nid}`;
+                try {
+                    const cachedData = localStorage.getItem(cacheKey);
+                    if (cachedData) {
+                        const parsed = JSON.parse(cachedData);
+                        // Check if cache is from today
+                        if (parsed.date === fromDate && parsed.data) {
+                            // console.log('Using cached library schedule');
+                            updateLibraryUI(container, parsed.data);
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Error reading library cache:', e);
+                }
+
                 const nextWeek = new Date(today);
                 nextWeek.setDate(today.getDate() + 6);
                 const yyyy2 = nextWeek.getFullYear();
@@ -3709,6 +3733,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         return response.json();
                     })
                     .then(data => {
+                        // Save to cache
+                        try {
+                            localStorage.setItem(cacheKey, JSON.stringify({
+                                date: fromDate,
+                                data: data
+                            }));
+                        } catch (e) {
+                            console.warn('Error saving library cache:', e);
+                        }
                         updateLibraryUI(container, data);
                     })
                     .catch(err => {
@@ -3719,6 +3752,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 return response.json();
                             })
                             .then(data => {
+                                // Save to cache
+                                try {
+                                    localStorage.setItem(cacheKey, JSON.stringify({
+                                        date: fromDate,
+                                        data: data
+                                    }));
+                                } catch (e) {
+                                    console.warn('Error saving library cache:', e);
+                                }
                                 updateLibraryUI(container, data);
                             })
                             .catch(err2 => {
@@ -4137,6 +4179,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
 
                     resultElement.addEventListener('mouseenter', () => {
+                        // Ignora su dispositivi touch per evitare selezione indesiderata al tocco (es. espandendo status bar)
+                        if (isTouchDevice()) return;
+
                         // Ignora completamente il mouse quando si sta usando la navigazione da tastiera
                         if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
                             return;
@@ -4145,6 +4190,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     });
 
                     resultElement.addEventListener('mouseleave', () => {
+                        // Ignora su dispositivi touch
+                        if (isTouchDevice()) return;
+
                         // Ignora completamente il mouse quando si sta usando la navigazione da tastiera
                         if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
                             return;
