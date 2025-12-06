@@ -808,17 +808,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <!-- Caricamento di Google Material Symbols - optimized to load only filled style -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
-    <!-- Leaflet CSS - loaded asynchronously -->
-    <link rel="preload" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" as="style"
-        onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin="">
-    <noscript>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    </noscript>
-    <!-- Leaflet JS - deferred -->
-    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- OpenSeadragon JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js"></script>
     <style>
         /* Caricamento del font OpenDyslexic */
         @font-face {
@@ -1325,7 +1316,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             user-select: none;
         }
 
-        /* Stili per Leaflet map */
+        /* Stili per OpenSeadragon map */
         #viewer-container {
             position: relative;
             z-index: 1;
@@ -1360,25 +1351,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             transform: rotate(180deg);
         }
 
-        .leaflet-map-pane,
-        .leaflet-pane,
-        .leaflet-overlay-pane,
-        .leaflet-image-layer {
-            will-change: transform;
-            backface-visibility: hidden;
-            transform: translateZ(0);
-        }
-
-        .svg-floor-overlay {
-            image-rendering: optimizeSpeed;
-            pointer-events: none;
-        }
-
         @media (pointer: coarse) {
-
-            #map,
-            #map .leaflet-pane,
-            #map .leaflet-overlay-pane {
+            #map {
                 touch-action: none;
             }
         }
@@ -1390,43 +1364,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Contenuto principale dietro all'interfaccia */
         }
 
-        .leaflet-container {
-            background-color: #E5E7EB !important;
-            /* gray-200 */
-            z-index: 1 !important;
-            /* Forza la mappa a stare sotto */
-        }
-
-        .leaflet-pane {
-            z-index: 1 !important;
-            /* Tutti i pannelli Leaflet al livello base */
-        }
-
-        /* Forza tutti i layer interni di Leaflet a stare sotto l'interfaccia */
-        .leaflet-map-pane,
-        .leaflet-tile-pane,
-        .leaflet-overlay-pane,
-        .leaflet-shadow-pane,
-        .leaflet-marker-pane,
-        .leaflet-tooltip-pane,
-        .leaflet-popup-pane {
-            z-index: 1 !important;
-        }
-
-        /* Nascondi i controlli di zoom di Leaflet (useremo i nostri) */
-        .leaflet-control-zoom {
-            display: none;
-        }
-
-        /* Nascondi l'attribuzione di Leaflet */
-        .leaflet-control-attribution {
-            display: none;
-        }
-
         /* Stili per i marker degli erogatori d'acqua */
         .water-dispenser-marker {
             background: none !important;
             border: none !important;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Stili per i tooltip */
@@ -2513,10 +2458,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <script>
         // Wait for both DOM and Leaflet to be ready
         let domReady = false;
-        let leafletReady = false;
+        let osdReady = false;
 
         function checkAndInit() {
-            if (domReady && leafletReady) {
+            if (domReady && osdReady) {
                 initApp();
             }
         }
@@ -2529,18 +2474,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             });
         } else {
             domReady = true;
+            checkAndInit();
         }
 
-        // Check if Leaflet is loaded
-        function checkLeaflet() {
-            if (typeof L !== 'undefined') {
-                leafletReady = true;
+        // Check if OpenSeadragon is loaded
+        function checkOpenSeadragon() {
+            if (typeof OpenSeadragon !== 'undefined') {
+                osdReady = true;
                 checkAndInit();
             } else {
-                setTimeout(checkLeaflet, 50);
+                setTimeout(checkOpenSeadragon, 50);
             }
         }
-        checkLeaflet();
+        checkOpenSeadragon();
 
         // Main initialization function
         function initApp() {
@@ -2643,19 +2589,28 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const preventNativeZoomGestures = () => {
                 let lastTouchEnd = 0;
 
+                const allowInsideViewer = (event) => {
+                    const target = event.target;
+                    return target && (target.closest('#map') || target.closest('#viewer-container'));
+                };
+
                 document.addEventListener('gesturestart', (event) => {
+                    if (allowInsideViewer(event)) return; // Lascia che OpenSeadragon gestisca pinch/zoom
                     event.preventDefault();
                 }, { passive: false });
 
                 document.addEventListener('gesturechange', (event) => {
+                    if (allowInsideViewer(event)) return;
                     event.preventDefault();
                 }, { passive: false });
 
                 document.addEventListener('gestureend', (event) => {
+                    if (allowInsideViewer(event)) return;
                     event.preventDefault();
                 }, { passive: false });
 
                 document.addEventListener('touchend', (event) => {
+                    if (allowInsideViewer(event)) return; // Permetti doppio tap/pinch sul viewer
                     const now = Date.now();
                     if (now - lastTouchEnd <= 350) {
                         event.preventDefault();
@@ -3048,21 +3003,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let selectedBuilding = '';
             let selectedFloor = '0';
             let currentView = 'top'; // 'perspective' o 'top'
-            let map = null; // Istanza Leaflet
-            let svgOverlay = null; // Layer SVG corrente
+            let viewer = null; // Istanza OpenSeadragon
             let selectedSearchResultIndex = -1;
             let isKeyboardSelection = false;
-            let waterDispenserMarkers = []; // Array per i marker degli erogatori d'acqua
+            let waterDispenserOverlays = []; // Array per gli overlay degli erogatori d'acqua
             let shortLinkContext = null;
-            let mapInteractionGuardsInstalled = false;
+            let viewerInteractionGuardsInstalled = false;
             let programmaticMapChange = false;
             let programmaticMapChangeResetTimeout = null;
             let isMapFlipped = false;
             let mapFlipAnimationTimeout = null;
-            let originalMapPanBy = null;
-            let originalMapInternalPanBy = null;
-            let mapPanByPatched = false;
-            let flipDragHandlerRegistered = false;
 
             // Sistema di lazy loading e caching per le mappe SVG
             const svgCache = new Map();
@@ -3242,16 +3192,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 stopOccupancyRefreshLoop();
             };
 
-            function registerMapInteractionGuards() {
-                if (mapInteractionGuardsInstalled || !map) return;
+            function registerViewerInteractionGuards() {
+                if (viewerInteractionGuardsInstalled || !viewer) return;
 
-                map.on('dragstart', () => {
+                viewer.addHandler('canvas-drag', () => {
                     clearShortLinkContext();
                 });
 
-                map.on('zoomstart', () => {
-                    if (!programmaticMapChange) {
-                        clearShortLinkContext();
+                viewer.addHandler('zoom', (event) => {
+                    // OpenSeadragon fires zoom events frequently during animation
+                    // We only want to clear context if it's a user interaction
+                    if (!programmaticMapChange && event.refPoint) {
+                         clearShortLinkContext();
                     }
                 });
 
@@ -3263,60 +3215,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }, 100);
                 };
 
-                map.on('moveend', () => {
+                viewer.addHandler('animation-finish', () => {
                     clearProgrammaticMapChangeFlag();
                     debouncedUpdateUrl();
                 });
 
-                map.on('zoomend', () => {
-                    clearProgrammaticMapChangeFlag();
-                    debouncedUpdateUrl();
-                });
-
-                mapInteractionGuardsInstalled = true;
-            }
-
-            function ensurePanByPatch() {
-                if (!map || mapPanByPatched || typeof L === 'undefined') return;
-
-                const wrapPanBy = (originalFn) => {
-                    if (typeof originalFn !== 'function') return null;
-                    return function (offset, options) {
-                        let pointOffset = L.point(offset);
-                        if (isMapFlipped && !programmaticMapChange) {
-                            pointOffset = L.point(-pointOffset.x, -pointOffset.y);
-                        }
-                        return originalFn.call(this, pointOffset, options);
-                    };
-                };
-
-                originalMapPanBy = originalMapPanBy || map.panBy;
-                originalMapInternalPanBy = originalMapInternalPanBy || (typeof map._panBy === 'function' ? map._panBy : null);
-
-                if (originalMapPanBy) {
-                    map.panBy = wrapPanBy(originalMapPanBy);
-                }
-                if (originalMapInternalPanBy) {
-                    map._panBy = wrapPanBy(originalMapInternalPanBy);
-                }
-
-                mapPanByPatched = true;
-            }
-
-            function registerFlipDragHandler() {
-                if (flipDragHandlerRegistered || !map || !map.dragging || !map.dragging._draggable || typeof map.dragging._draggable.on !== 'function') {
-                    return;
-                }
-
-                const draggable = map.dragging._draggable;
-                draggable.on('predrag', function () {
-                    if (!isMapFlipped || !this._newPos || !this._startPos) return;
-                    const offsetX = this._newPos.x - this._startPos.x;
-                    const offsetY = this._newPos.y - this._startPos.y;
-                    this._newPos = L.point(this._startPos.x - offsetX, this._startPos.y - offsetY);
-                });
-
-                flipDragHandlerRegistered = true;
+                viewerInteractionGuardsInstalled = true;
             }
 
             function updateClearButtonsVisibility() {
@@ -3364,45 +3268,30 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return false; // Nessuna coordinata disponibile
                 }
 
-                if (!map) {
+                if (!viewer) {
                     return false; // Mappa non ancora inizializzata
                 }
 
-                const center = [parseFloat(room.coordinates.y), parseFloat(room.coordinates.x)];
+                const tiledImage = viewer.world.getItemAt(0);
+                if (!tiledImage) return false;
+
+                const contentSize = tiledImage.getContentSize();
+                // Convert Leaflet Y (bottom-up) to OSD Y (top-down)
+                const osdY = contentSize.y - parseFloat(room.coordinates.y);
+                const osdX = parseFloat(room.coordinates.x);
+                
+                const imagePoint = new OpenSeadragon.Point(osdX, osdY);
+                const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
+
+                // Map Leaflet zoom to OSD zoom. 
+                // Leaflet zoom 2 is roughly 4x. OSD zoom 1 is fit-to-screen.
                 const zoom = room.coordinates.zoom != null ? parseFloat(room.coordinates.zoom) : 2;
-                const isMobileDevice = typeof isRealMobileDevice === 'function' ? isRealMobileDevice() : false;
-
-                const currentCenter = map.getCenter();
-                const currentZoom = map.getZoom();
-                const distance = Math.sqrt(
-                    Math.pow(center[0] - currentCenter.lat, 2) +
-                    Math.pow(center[1] - currentCenter.lng, 2)
-                );
-                const zoomDiff = Math.abs(zoom - currentZoom);
-
-                const microMove = distance < 0.003 && zoomDiff < 0.03;
-                if (microMove) {
-                    markProgrammaticMapChange();
-                    map.setView(center, zoom, { animate: false });
-                    return true;
-                }
-
-                const factor = Math.max(
-                    Math.min(distance * 35, 1),
-                    Math.min(zoomDiff * 0.35, 1)
-                );
-
-                const minDuration = isMobileDevice ? 0.22 : 0.26;
-                const maxDuration = isMobileDevice ? 0.45 : 0.55;
-                const duration = minDuration + (maxDuration - minDuration) * factor;
+                // Simple mapping for now
+                const osdZoom = Math.max(1, zoom); 
 
                 markProgrammaticMapChange();
-                map.flyTo(center, zoom, {
-                    animate: true,
-                    duration,
-                    easeLinearity: 0.5,
-                    noMoveStart: true
-                });
+                viewer.viewport.panTo(viewportPoint);
+                viewer.viewport.zoomTo(osdZoom);
 
                 return true;
             }
@@ -5063,12 +4952,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     params.set('v', currentView);
                 }
 
-                if (!canUseShortLink && settingsConfig.shareCoordinates && map) {
-                    const center = map.getCenter();
-                    const zoom = map.getZoom();
-                    params.set('x', center.lng.toFixed(2));
-                    params.set('y', center.lat.toFixed(2));
-                    params.set('z', zoom.toFixed(2));
+                if (!canUseShortLink && settingsConfig.shareCoordinates && viewer) {
+                    const tiledImage = viewer.world.getItemAt(0);
+                    if (tiledImage) {
+                        const center = viewer.viewport.getCenter();
+                        const imagePoint = tiledImage.viewportToImageCoordinates(center);
+                        const contentSize = tiledImage.getContentSize();
+                        
+                        // Convert back to Leaflet Y (bottom-up)
+                        const leafletY = contentSize.y - imagePoint.y;
+                        const leafletX = imagePoint.x;
+                        
+                        const zoom = viewer.viewport.getZoom();
+                        
+                        params.set('x', leafletX.toFixed(2));
+                        params.set('y', leafletY.toFixed(2));
+                        params.set('z', zoom.toFixed(2));
+                    }
                 }
 
                 const paramString = params.toString();
@@ -5268,23 +5168,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Listener per i nuovi bottoni di zoom
             zoomInBtn.addEventListener('click', () => {
                 clearShortLinkContext();
-                if (map) {
-                    map.zoomIn();
+                if (viewer) {
+                    viewer.viewport.zoomBy(1.2);
+                    viewer.viewport.applyConstraints();
                 }
             });
 
             zoomOutBtn.addEventListener('click', () => {
                 clearShortLinkContext();
-                if (map) {
-                    map.zoomOut();
+                if (viewer) {
+                    viewer.viewport.zoomBy(0.8);
+                    viewer.viewport.applyConstraints();
                 }
             });
 
             resetZoomBtn.addEventListener('click', () => {
                 clearShortLinkContext();
-                if (map && svgOverlay) {
+                if (viewer) {
                     markProgrammaticMapChange();
-                    map.fitBounds(svgOverlay.getBounds(), { animate: false });
+                    viewer.viewport.goHome();
                 }
             });
 
@@ -5957,37 +5859,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function setMapFlipState(shouldFlip) {
                 if (!mapContainer) return;
                 isMapFlipped = shouldFlip;
+                
                 if (mapFlipAnimationTimeout) {
                     clearTimeout(mapFlipAnimationTimeout);
                     mapFlipAnimationTimeout = null;
                 }
+                
                 mapContainer.classList.add('map-flip-animating');
+                
                 requestAnimationFrame(() => {
                     mapContainer.classList.toggle('map-flipped', shouldFlip);
+                    
+                    if (flipViewBtn) {
+                        flipViewBtn.classList.toggle('active', shouldFlip);
+                        flipViewBtn.setAttribute('aria-pressed', shouldFlip ? 'true' : 'false');
+                    }
+
                     mapFlipAnimationTimeout = setTimeout(() => {
                         mapContainer.classList.remove('map-flip-animating');
                         mapFlipAnimationTimeout = null;
                     }, 320);
                 });
-                if (flipViewBtn) {
-                    flipViewBtn.classList.toggle('active', shouldFlip);
-                    flipViewBtn.setAttribute('aria-pressed', shouldFlip ? 'true' : 'false');
-                }
-                
-                // Disattiva l'inerzia quando la mappa è girata
-                if (map && map.dragging) {
-                    if (shouldFlip) {
-                        map.options.inertia = false;
-                        if (map.dragging._draggable) {
-                            map.dragging._draggable._inertia = false;
-                        }
-                    } else {
-                        map.options.inertia = true;
-                        if (map.dragging._draggable) {
-                            map.dragging._draggable._inertia = true;
-                        }
-                    }
-                }
             }
 
             function updateFlipButtonVisibility(building) {
@@ -6151,10 +6043,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Funzioni per gestire i marker degli erogatori d'acqua
             function showWaterDispensers() {
-                if (!map || !facilitiesData || !selectedPolo || !selectedBuilding || !selectedFloor) return;
+                if (!viewer || !facilitiesData || !selectedPolo || !selectedBuilding || !selectedFloor) return;
 
                 // Rimuovi marker esistenti
                 hideWaterDispensers();
+
+                const tiledImage = viewer.world.getItemAt(0);
+                if (!tiledImage) return;
+                const contentSize = tiledImage.getContentSize();
 
                 try {
                     const facilities = facilitiesData.polo?.[selectedPolo]?.edificio?.[selectedBuilding]?.piano?.[selectedFloor];
@@ -6164,21 +6060,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (facility.type === 'erogatore_acqua' && facility.coordinates) {
                             const { x, y } = facility.coordinates;
                             if (x != null && y != null) {
-                                // Crea un'icona HTML personalizzata con dimensioni fisse (non scala con lo zoom)
-                                const icon = L.divIcon({
-                                    html: `<span class="material-symbols-outlined" style="font-size: 24px; color: #3B82F6;">water_ec</span>`,
-                                    className: 'water-dispenser-marker',
-                                    iconSize: [24, 24],
-                                    iconAnchor: [12, 12]
-                                });
+                                const osdY = contentSize.y - parseFloat(y);
+                                const osdX = parseFloat(x);
+                                const imagePoint = new OpenSeadragon.Point(osdX, osdY);
+                                const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
 
-                                const marker = L.marker([parseFloat(y), parseFloat(x)], {
-                                    icon: icon,
-                                    interactive: false // Rende il marker non interattivo
+                                const element = document.createElement('div');
+                                element.className = 'water-dispenser-marker';
+                                element.innerHTML = `<span class="material-symbols-outlined" style="font-size: 24px; color: #3B82F6;">water_ec</span>`;
+                                
+                                viewer.addOverlay({
+                                    element: element,
+                                    location: viewportPoint,
+                                    placement: 'CENTER'
                                 });
-
-                                marker.addTo(map);
-                                waterDispenserMarkers.push(marker);
+                                waterDispenserOverlays.push(element);
                             }
                         }
                     });
@@ -6188,12 +6084,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             function hideWaterDispensers() {
-                if (!map) return;
+                if (!viewer) return;
 
-                waterDispenserMarkers.forEach(marker => {
-                    map.removeLayer(marker);
+                waterDispenserOverlays.forEach(element => {
+                    viewer.removeOverlay(element);
                 });
-                waterDispenserMarkers = [];
+                waterDispenserOverlays = [];
             }
 
             function loadSVG(building, floor, viewType = 'top', viewParams = null, roomData = null) {
@@ -6293,83 +6189,156 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Funzione helper per renderizzare SVG dalla cache
             function renderCachedSVG(cacheData, viewParams = null, roomData = null) {
                 // Inizializza o re-inizializza la mappa
-                if (!map) {
+                if (!viewer) {
                     const isMobileDevice = typeof isRealMobileDevice === 'function' ? isRealMobileDevice() : false;
-                    map = L.map('map', {
-                        crs: L.CRS.Simple,
-                        minZoom: -2,
-                        maxZoom: 4,
-                        zoomAnimation: !isMobileDevice,
-                        fadeAnimation: !isMobileDevice,
-                        markerZoomAnimation: !isMobileDevice,
-                        inertia: !isMobileDevice,
-                        touchZoom: true,
-                        tap: !isMobileDevice,
-                        preferCanvas: true,
-                        zoomControl: false,
-                        attributionControl: false,
-                        wheelDebounceTime: 150,
-                        wheelPxPerZoomLevel: 120
+                    
+                    viewer = OpenSeadragon({
+                        id: "map",
+                        prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/images/",
+                        animationTime: isMobileDevice ? 0.4 : 1.2,
+                        springStiffness: isMobileDevice ? 10 : 6.5,
+                        showNavigationControl: false,
+                        showNavigator: false,
+                        defaultZoomLevel: 1,
+                        minZoomLevel: 0.25,
+                        maxZoomLevel: 20,
+                        visibilityRatio: 0,
+                        constrainDuringPan: false,
+                        zoomPerScroll: 1.1,
+                        zoomPerClick: 1,
+                        // Disabilitiamo il canvas per mantenere le SVG nitide (nessuna rasterizzazione)
+                        useCanvas: false,
+                        smoothTileEdges: false,
+                        gestureSettingsMouse: {
+                            clickToZoom: false
+                        },
+                        gestureSettingsTouch: {
+                            clickToZoom: false,
+                            dblClickToZoom: false,
+                            pinchToZoom: true,
+                            flickEnabled: false
+                        },
                     });
 
-                    // Patch mouseEventToContainerPoint to handle CSS rotation
-                    const originalMouseEventToContainerPoint = map.mouseEventToContainerPoint;
-                    map.mouseEventToContainerPoint = function (e) {
-                        const p = originalMouseEventToContainerPoint.call(this, e);
+                    // Add handler for inverted controls when flipped
+                    viewer.addHandler('canvas-drag', (e) => {
                         if (isMapFlipped) {
-                            const size = this.getSize();
-                            p.x = size.x - p.x;
-                            p.y = size.y - p.y;
+                            e.preventDefaultAction = true;
+                            const viewportDelta = viewer.viewport.deltaPointsFromPixels(e.delta);
+                            viewer.viewport.panBy(viewportDelta);
                         }
-                        return p;
-                    };
+                    });
 
-                    registerMapInteractionGuards();
-                    registerFlipDragHandler();
-                } else {
-                    // Rimuovi il layer SVG precedente se esiste
-                    if (svgOverlay) {
-                        map.removeLayer(svgOverlay);
+                    // Add handler for inverted scroll zoom when flipped
+                    viewer.addHandler('canvas-scroll', (e) => {
+                        if (isMapFlipped) {
+                            e.preventDefaultAction = true;
+                            const scroll = e.scroll;
+                            const zoomFactor = Math.pow(viewer.zoomPerScroll, scroll);
+                            // Invert the point coordinates relative to the container
+                            const point = e.position;
+                            const invertedPoint = new OpenSeadragon.Point(
+                                viewer.container.clientWidth - point.x,
+                                viewer.container.clientHeight - point.y
+                            );
+                            const viewportPoint = viewer.viewport.pointFromPixel(invertedPoint);
+                            viewer.viewport.zoomBy(zoomFactor, viewportPoint);
+                        }
+                    });
+
+                    // Add handler for inverted pinch zoom when flipped
+                    viewer.addHandler('canvas-pinch', (e) => {
+                        if (isMapFlipped) {
+                            e.preventDefaultAction = true;
+                            // Handle Zoom
+                            const zoomFactor = e.distance / e.lastDistance;
+                            const point = e.center;
+                            const invertedPoint = new OpenSeadragon.Point(
+                                viewer.container.clientWidth - point.x,
+                                viewer.container.clientHeight - point.y
+                            );
+                            const viewportPoint = viewer.viewport.pointFromPixel(invertedPoint);
+                            viewer.viewport.zoomBy(zoomFactor, viewportPoint);
+                            
+                            // Handle Pan
+                            const delta = e.center.minus(e.lastCenter);
+                            const viewportDelta = viewer.viewport.deltaPointsFromPixels(delta);
+                            viewer.viewport.panBy(viewportDelta);
+                        }
+                    });
+
+                    registerViewerInteractionGuards();
+                }
+
+                // Open the image
+                viewer.open({
+                    type: 'image',
+                    url: cacheData.dataUrl,
+                    buildPyramid: false
+                });
+
+                // Wait for open event to set view
+                viewer.addOnceHandler('open', () => {
+                    const tiledImage = viewer.world.getItemAt(0);
+
+                    // Aggiungi alt alle immagini SVG
+                    setTimeout(() => {
+                        const mapImages = document.querySelectorAll('#map img');
+                        const altText = `Polo ${selectedPolo.charAt(0).toUpperCase() + selectedPolo.slice(1)}, Edificio ${selectedBuilding.toUpperCase()}, Piano ${selectedFloor}`;
+                        mapImages.forEach(img => img.setAttribute('alt', altText));
+                    }, 50);
+
+                    if (!tiledImage) return;
+                    const contentSize = tiledImage.getContentSize();
+
+                    // Imposta la vista iniziale
+                    if (roomData && roomData.coordinates && roomData.coordinates.x != null && roomData.coordinates.y != null) {
+                        const osdY = contentSize.y - parseFloat(roomData.coordinates.y);
+                        const osdX = parseFloat(roomData.coordinates.x);
+                        const imagePoint = new OpenSeadragon.Point(osdX, osdY);
+                        const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
+                        
+                        const zoom = roomData.coordinates.zoom != null ? parseFloat(roomData.coordinates.zoom) : 2;
+                        const osdZoom = Math.max(1, zoom);
+
+                        markProgrammaticMapChange();
+                        viewer.viewport.panTo(viewportPoint);
+                        viewer.viewport.zoomTo(osdZoom);
+                    } else if (viewParams && viewParams.x && viewParams.y && viewParams.z) {
+                        // Usa i parametri salvati dall'URL (Leaflet coords)
+                        const osdY = contentSize.y - parseFloat(viewParams.y);
+                        const osdX = parseFloat(viewParams.x);
+                        const imagePoint = new OpenSeadragon.Point(osdX, osdY);
+                        const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
+                        
+                        const zoom = parseFloat(viewParams.z);
+                        const osdZoom = Math.max(1, zoom);
+
+                        markProgrammaticMapChange();
+                        viewer.viewport.panTo(viewportPoint);
+                        viewer.viewport.zoomTo(osdZoom);
+                    } else {
+                        // Adatta alla vista
+                        markProgrammaticMapChange();
+                        viewer.viewport.goHome(true);
                     }
-                    registerFlipDragHandler();
-                }
-                ensurePanByPatch();
 
-                // Crea e aggiungi overlay SVG
-                svgOverlay = L.imageOverlay(cacheData.dataUrl, cacheData.bounds, {
-                    className: 'svg-floor-overlay',
-                    interactive: false
-                }).addTo(map);
+                    // Ensure CSS class is applied
+                    const mapContainer = document.getElementById('map');
+                    if (mapContainer) {
+                        mapContainer.classList.toggle('map-flipped', isMapFlipped);
+                    }
 
-                // Imposta la vista iniziale
-                // Priorità: 1) coordinate della room, 2) viewParams dall'URL, 3) fitBounds di default
-                if (roomData && roomData.coordinates && roomData.coordinates.x != null && roomData.coordinates.y != null) {
-                    // Usa le coordinate dell'aula se presenti
-                    const center = [parseFloat(roomData.coordinates.y), parseFloat(roomData.coordinates.x)];
-                    const zoom = roomData.coordinates.zoom != null ? parseFloat(roomData.coordinates.zoom) : 2;
-                    markProgrammaticMapChange();
-                    map.setView(center, zoom);
-                } else if (viewParams && viewParams.x && viewParams.y && viewParams.z) {
-                    // Usa i parametri salvati dall'URL
-                    const center = [parseFloat(viewParams.y), parseFloat(viewParams.x)];
-                    const zoom = parseFloat(viewParams.z);
-                    markProgrammaticMapChange();
-                    map.setView(center, zoom);
-                } else {
-                    // Adatta alla vista
-                    markProgrammaticMapChange();
-                    map.fitBounds(cacheData.bounds);
-                }
+                    // Rimuovi la classe loading per il fade in
+                    setTimeout(() => {
+                        viewerContainer.classList.remove('loading');
+                    }, 50);
 
-                // Rimuovi la classe loading per il fade in
-                setTimeout(() => {
-                    viewerContainer.classList.remove('loading');
-                }, 50);
-
-                // Mostra gli erogatori d'acqua solo se il setting è attivo E la vista è "top"
-                if (settingsConfig.showWaterDispensers && currentView === 'top') {
-                    showWaterDispensers();
-                }
+                    // Mostra gli erogatori d'acqua solo se il setting è attivo E la vista è "top"
+                    if (settingsConfig.showWaterDispensers && currentView === 'top') {
+                        showWaterDispensers();
+                    }
+                });
             }
 
             // Rimuovi la classe no-transition per abilitare le animazioni dopo il caricamento iniziale
@@ -6557,7 +6526,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 : (floorData?.aule ? Object.values(floorData.aule) : []);
 
                             rooms.forEach(room => {
-                                if (room?.nome) {
+                                if (room?.nome && room.hasStatus !== false) {
                                     allRooms.push(room.nome);
                                 }
                             });
