@@ -6267,6 +6267,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                     });
 
+                    // Add handler for tile-loaded to set alt attribute
+                    viewer.addHandler('tile-loaded', (event) => {
+                        const altText = `Polo ${selectedPolo.charAt(0).toUpperCase() + selectedPolo.slice(1)}, Edificio ${selectedBuilding.toUpperCase()}, Piano ${selectedFloor}`;
+                        if (event.image) {
+                            event.image.alt = altText;
+                        }
+                    });
+
                     registerViewerInteractionGuards();
                 }
 
@@ -6280,13 +6288,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Wait for open event to set view
                 viewer.addOnceHandler('open', () => {
                     const tiledImage = viewer.world.getItemAt(0);
-
-                    // Aggiungi alt alle immagini SVG
-                    setTimeout(() => {
-                        const mapImages = document.querySelectorAll('#map img');
-                        const altText = `Polo ${selectedPolo.charAt(0).toUpperCase() + selectedPolo.slice(1)}, Edificio ${selectedBuilding.toUpperCase()}, Piano ${selectedFloor}`;
-                        mapImages.forEach(img => img.setAttribute('alt', altText));
-                    }, 50);
 
                     if (!tiledImage) return;
                     const contentSize = tiledImage.getContentSize();

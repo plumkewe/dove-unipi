@@ -1025,7 +1025,8 @@
                 "type": "dipartimento",
                 "note": "",
                 "link-mappa": "https://di.unipi.it/mappa-dipartimento/",
-                "link-dipartimento": "https://di.unipi.it/"
+                "link-dipartimento": "https://di.unipi.it/",
+                "hasStatus": false
               },
               {
                 "id": "fib_sro-c-2",
