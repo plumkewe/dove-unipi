@@ -103,17 +103,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable">
 
     <!-- Preload critical CSS -->
-    <link rel="preload" href="assets/css/output.css?v=1.0" as="style">
+    <link rel="preload" href="assets/css/output.css" as="style">
+    <!-- Preload data to shorten critical path -->
+    <link rel="preload" href="data/rooms.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/facilities.json" as="fetch" crossorigin="anonymous">
 
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" href="assets/fonts/material-symbols-outlined-subset.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- JSON-LD Structured Data for SEO -->
     <script type="application/ld+json">
@@ -804,18 +804,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 </script>
 
     <!-- Tailwind CSS (compiled) -->
-    <link rel="stylesheet" href="assets/css/output.css?v=1.0">
-    <!-- Caricamento di Google Material Symbols - optimized to load only filled style -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
-    <!-- OpenSeadragon JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js"></script>
+    <link rel="stylesheet" href="assets/css/output.css">
     <style>
         /* Caricamento del font OpenDyslexic */
         @font-face {
             font-family: 'OpenDyslexic';
             src: url('assets/fonts/OpenDyslexic-Regular.otf') format('opentype');
             font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Material Symbols (self-hosted) */
+        @font-face {
+            font-family: 'Material Symbols Outlined';
+            src: url('assets/fonts/material-symbols-outlined-subset.woff2') format('woff2');
+            font-weight: 400;
             font-style: normal;
             font-display: swap;
         }
@@ -1285,6 +1289,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         /* Stile per Google Material Symbols */
         .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: 400;
+            font-style: normal;
             font-variation-settings:
                 'FILL' 0,
                 'wght' 400,
@@ -2433,9 +2440,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     </div>
 
     <script>
-        // Wait for both DOM and Leaflet to be ready
+        // Wait for DOM and lazy-loaded OpenSeadragon before booting the app
         let domReady = false;
         let osdReady = false;
+        let osdLoadPromise = null;
 
         function checkAndInit() {
             if (domReady && osdReady) {
@@ -2443,27 +2451,56 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
         }
 
-        // Check if DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                domReady = true;
+        function loadOpenSeadragon() {
+            if (osdLoadPromise) return osdLoadPromise;
+
+            osdLoadPromise = new Promise((resolve, reject) => {
+                if (typeof OpenSeadragon !== 'undefined') {
+                    resolve(window.OpenSeadragon);
+                    return;
+                }
+
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js';
+                script.async = true;
+                script.defer = true;
+                script.onload = () => resolve(window.OpenSeadragon);
+                script.onerror = () => reject(new Error('Failed to load OpenSeadragon'));
+                document.head.appendChild(script);
+            }).then(() => {
+                osdReady = true;
                 checkAndInit();
+            }).catch((error) => {
+                console.error(error);
             });
-        } else {
+
+            return osdLoadPromise;
+        }
+
+        function kickOffOpenSeadragonLoad() {
+            const loader = () => loadOpenSeadragon();
+            if (window.requestIdleCallback) {
+                requestIdleCallback(loader, { timeout: 1200 });
+            } else {
+                setTimeout(loader, 250);
+            }
+        }
+
+        function markDomReady() {
             domReady = true;
             checkAndInit();
         }
 
-        // Check if OpenSeadragon is loaded
-        function checkOpenSeadragon() {
-            if (typeof OpenSeadragon !== 'undefined') {
-                osdReady = true;
-                checkAndInit();
-            } else {
-                setTimeout(checkOpenSeadragon, 50);
-            }
+        // Check if DOM is ready and then lazily load OpenSeadragon
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                markDomReady();
+                kickOffOpenSeadragonLoad();
+            });
+        } else {
+            markDomReady();
+            kickOffOpenSeadragonLoad();
         }
-        checkOpenSeadragon();
 
         // Main initialization function
         function initApp() {
@@ -3905,7 +3942,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             availabilityHTML = `
                                 <div class="occupancy-status-bar loading" data-library-nid="${libraryNid}">
                                     <span class="occupancy-text">${t('loading_occupancy')}</span>
-                                    <span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">expand_more</span>
+                                    <span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">keyboard_arrow_down</span>
                                 </div>
                                 <div class="occupancy-details" id="${occupancyId}">
                                     <div class="occupancy-details-content">
@@ -3977,7 +4014,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             availabilityHTML = showBar ? `
                                 <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomName}">
                                     <span class="occupancy-text">${statusText}</span>
-                                    ${timeRange ? `<span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">expand_more</span>` : ''}
+                                    ${timeRange ? `<span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">keyboard_arrow_down</span>` : ''}
                                 </div>
                                 ${timeRange ? `
                                 <div class="occupancy-details" id="${occupancyId}">
@@ -5251,16 +5288,33 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
             }
 
-            // Carica le traduzioni prima, poi i dati delle stanze
+            // Carica le traduzioni e i dati delle stanze in parallelo
             let dataLoaded = false;
 
             async function loadDataAndInitialize() {
-                await ensureTranslationsLoaded();
+                const translationsPromise = ensureTranslationsLoaded();
                 if (dataLoaded) return;
 
                 const DATA_CACHE_KEY = 'dove_unipi_rooms_data_v1';
                 const FACILITIES_CACHE_KEY = 'dove_unipi_facilities_data_v1';
                 let loadedFromCache = false;
+                let bootstrapFromCache = false;
+
+                // Kick off network fetch immediately (runs in parallel with translations)
+                const networkFetchPromise = (async () => {
+                    const roomsResponse = await fetch('data/rooms.json');
+                    const roomsJson = await roomsResponse.json();
+
+                    let facilitiesJson = {};
+                    try {
+                        const facilitiesResponse = await fetch('data/facilities.json');
+                        facilitiesJson = await facilitiesResponse.json();
+                    } catch (e) {
+                        console.warn('Errore facilities.json:', e);
+                    }
+
+                    return { roomsJson, facilitiesJson };
+                })();
 
                 // 1. Tentativo caricamento da cache
                 try {
@@ -5272,27 +5326,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         facilitiesData = cachedFacilities ? JSON.parse(cachedFacilities) : {};
                         dataLoaded = true;
                         loadedFromCache = true;
-                        
-                        populatePolos(Object.keys(data.polo));
-                        handleInitialLoad();
+                        bootstrapFromCache = true;
                         console.log('Dati caricati dalla cache');
                     }
                 } catch (e) {
                     console.warn('Errore lettura cache:', e);
                 }
 
-                // 2. Fetch dati aggiornati
-                try {
-                    const roomsResponse = await fetch('data/rooms.json');
-                    const roomsJson = await roomsResponse.json();
+                // Ensure translations ready before touching UI
+                await translationsPromise;
 
-                    let facilitiesJson = {};
-                    try {
-                        const facilitiesResponse = await fetch('data/facilities.json');
-                        facilitiesJson = await facilitiesResponse.json();
-                    } catch (e) {
-                        console.warn('Errore facilities.json:', e);
-                    }
+                if (bootstrapFromCache) {
+                    populatePolos(Object.keys(data.polo));
+                    handleInitialLoad();
+                }
+
+                // 2. Fetch dati aggiornati (already in flight)
+                try {
+                    const { roomsJson, facilitiesJson } = await networkFetchPromise;
 
                     // Calcola short codes sui nuovi dati
                     // Usiamo un trucco per usare la funzione esistente che dipende da 'data' globale
@@ -6290,8 +6341,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     viewer = OpenSeadragon({
                         id: "map",
                         prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/images/",
-                        animationTime: isMobileDevice ? 1.5 : 1.2,
-                        springStiffness: isMobileDevice ? 5.0 : 6.5,
+                        // Parametri più reattivi per pan/zoom fluidi senza intaccare la rotazione
+                        animationTime: isMobileDevice ? 1.1 : 0.9,
+                        springStiffness: isMobileDevice ? 6.5 : 7.5,
+                        // Zoom meno scattoso: passi più piccoli e resa immediata
+                        blendTime: 0,
+                        immediateRender: true,
+                        imageLoaderLimit: 1,
+                        // Rispetta meglio la velocità della rotellina/pinch aumentando la sensibilità per delta alti
+                        pixelsPerWheelLine: 12,
                         showNavigationControl: false,
                         showNavigator: false,
                         defaultZoomLevel: 1,
@@ -6299,8 +6357,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         maxZoomLevel: 20,
                         visibilityRatio: 0,
                         constrainDuringPan: false,
-                        zoomPerScroll: 1.1,
-                        zoomPerClick: 1,
+                        zoomPerScroll: 1.12,
+                        zoomPerClick: 1.18,
                         // Disabilitiamo il canvas per mantenere le SVG nitide (nessuna rasterizzazione)
                         useCanvas: false,
                         smoothTileEdges: false,
