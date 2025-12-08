@@ -994,10 +994,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         /* Stile per l'effetto vetro (blur) */
         .glass-sidebar {
-            background-color: rgba(255, 255, 255, 0.85);
-            /* White 85% */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background-color: #f8fafc;
+            /* Solid light background to avoid blur cost */
             border-right: 1px solid rgba(209, 213, 219, 0.5);
             /* gray-300 50% */
         }
@@ -1195,7 +1193,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             margin-left: auto;
             transition: transform 0.3s ease;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
+            line-height: 1;
             user-select: none;
             flex-shrink: 0;
         }
@@ -1479,6 +1478,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         #open-sidebar-button.pulse-animation {
             animation: sidebar-button-pulse 0.6s ease-in-out 2;
+        }
+
+        /* Respect prefers-reduced-motion to save CPU for sensitive users */
+        @media (prefers-reduced-motion: reduce) {
+            .occupancy-status-bar.loading {
+                background: #e5e7eb;
+                animation: none;
+            }
+
+            #open-sidebar-button.pulse-animation {
+                animation: none;
+            }
         }
 
         #search-container {
@@ -3693,20 +3704,31 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return;
                 }
 
+                const expandIcon = container.querySelector('.occupancy-expand-icon');
+                if (expandIcon) expandIcon.classList.remove('hidden');
+
+                // Helper to format date as YYYY-MM-DD in local time
+                const formatDateLocal = (date) => {
+                    const yyyy = date.getFullYear();
+                    const mm = String(date.getMonth() + 1).padStart(2, '0');
+                    const dd = String(date.getDate()).padStart(2, '0');
+                    return `${yyyy}-${mm}-${dd}`;
+                };
+
                 // 1. Determine current status
-                const todayStr = new Date().toISOString().split('T')[0];
+                const now = new Date();
+                const todayStr = formatDateLocal(now);
                 const todayEntry = data.find(d => d.date === todayStr);
                 
                 let currentStatusText = t('Closed');
                 let colorClass = 'occupied'; // Red for closed
 
                 if (todayEntry) {
-                    const now = new Date();
                     const currentHours = String(now.getHours()).padStart(2, '0');
                     const currentMinutes = String(now.getMinutes()).padStart(2, '0');
                     const currentTime = `${currentHours}:${currentMinutes}`;
-                    const startTime = todayEntry.start_time.substring(0, 5);
-                    const endTime = todayEntry.end_time.substring(0, 5);
+                    const startTime = todayEntry.start_time.trim().substring(0, 5);
+                    const endTime = todayEntry.end_time.trim().substring(0, 5);
 
                     if (currentTime < startTime) {
                         currentStatusText = `${t('opens_at')} ${startTime}`;
@@ -3732,7 +3754,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 for (let i = 0; i < 7; i++) {
                     const d = new Date();
                     d.setDate(d.getDate() + i);
-                    const dateStr = d.toISOString().split('T')[0];
+                    const dateStr = formatDateLocal(d);
                     
                     const dayName = d.toLocaleDateString(currentLanguage === 'it' ? 'it-IT' : 'en-US', { weekday: 'long' });
                     const label = dayName.charAt(0).toUpperCase() + dayName.slice(1);
@@ -3740,7 +3762,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const entry = data.find(e => e.date === dateStr);
                     let hoursText = t('Closed');
                     if (entry) {
-                        hoursText = `${entry.start_time.substring(0, 5)} - ${entry.end_time.substring(0, 5)}`;
+                        hoursText = `${entry.start_time.trim().substring(0, 5)} - ${entry.end_time.trim().substring(0, 5)}`;
                     }
                     
                     const isToday = i === 0;
@@ -3767,12 +3789,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 currentSearchResults.innerHTML = '';
                 // Don't reset the index yet - we'll restore it after rendering if still valid
+                
+                // Use DocumentFragment to minimize reflows
+                const fragment = document.createDocumentFragment();
+
                 if (showSettings) {
-                    renderSettingsBlock(currentSearchResults);
+                    // Create a temporary container for settings to append to fragment
+                    const settingsContainer = document.createElement('div');
+                    renderSettingsBlock(settingsContainer);
+                    while (settingsContainer.firstChild) {
+                        fragment.appendChild(settingsContainer.firstChild);
+                    }
+                    
                     if (results.length > 0) {
                         const divider = document.createElement('div');
                         divider.className = 'border-t border-gray-300/70 my-2';
-                        currentSearchResults.appendChild(divider);
+                        fragment.appendChild(divider);
                     }
                 }
 
@@ -3837,7 +3869,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 currentSearchInput.focus();
                             }, 10);
                         });
-                        currentSearchResults.appendChild(resultElement);
+                        fragment.appendChild(resultElement);
                         return;
                     }
 
@@ -3857,7 +3889,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
                             setTimeout(() => currentSearchInput.focus(), 50);
                         });
-                        currentSearchResults.appendChild(resultElement);
+                        fragment.appendChild(resultElement);
                         return;
                     }
 
@@ -3881,7 +3913,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
                             setTimeout(() => currentSearchInput.focus(), 50);
                         });
-                        currentSearchResults.appendChild(resultElement);
+                        fragment.appendChild(resultElement);
                         return;
                     }
 
@@ -3942,7 +3974,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             availabilityHTML = `
                                 <div class="occupancy-status-bar loading" data-library-nid="${libraryNid}">
                                     <span class="occupancy-text">${t('loading_occupancy')}</span>
-                                    <span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">keyboard_arrow_down</span>
+                                    <span class="occupancy-expand-icon material-symbols-outlined hidden" data-occupancy-id="${occupancyId}">keyboard_arrow_down</span>
                                 </div>
                                 <div class="occupancy-details" id="${occupancyId}">
                                     <div class="occupancy-details-content">
@@ -4111,8 +4143,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                     });
 
-                    currentSearchResults.appendChild(resultElement);
+                    fragment.appendChild(resultElement);
                 });
+
+                currentSearchResults.appendChild(fragment);
 
                 // Restore the previous selection index if it's still valid
                 const items = currentSearchResults.querySelectorAll('.search-result-item');
@@ -6845,7 +6879,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         return;
                     }
                     refreshSearchResultsOccupancy();
-                }, 400);
+                }, 60000);
             }
 
             function stopOccupancyRefreshLoop() {

@@ -524,7 +524,7 @@ curl "https://www.sba.unipi.it/it/opening_hours/instances?from_date=2025-12-05&t
   {
     "nid": 1185,
     "date": "2025-12-05",
-    "start_time": "09:00",
+    "start_time": "\n09:00",
     "end_time": "20:00",
     "notice": null
   },
@@ -537,6 +537,9 @@ curl "https://www.sba.unipi.it/it/opening_hours/instances?from_date=2025-12-05&t
   }
 ]
 ```
+
+> [!WARNING]
+> I campi `start_time` e `end_time` possono contenere caratteri di spaziatura o newline (es. `"\n09:00"`). Si consiglia di effettuare sempre il `.trim()` di questi valori prima dell'utilizzo.
 
 ### Campi della risposta
 
@@ -573,7 +576,8 @@ curl "https://www.sba.unipi.it/it/opening_hours/instances?from_date=2025-12-05&t
 | 1481 | Sistemi logistici (Livorno) |
 
 > [!NOTE]
-> L'API è pubblica, non richiede autenticazione e restituisce dati in formato JSON.
+> L'API è pubblica e non richiede autenticazione.
+> L'API non supporta CORS. Per le richieste dirette da browser (client-side), è necessario utilizzare un proxy CORS (nel progetto viene usato `api.allorigins.win` come fallback).
 > Fonte: [sba.unipi.it/it/biblioteche/orari-di-apertura-delle-sedi](https://www.sba.unipi.it/it/biblioteche/orari-di-apertura-delle-sedi)
 
 <hr>
