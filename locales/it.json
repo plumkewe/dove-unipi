@@ -458,5 +458,9 @@
   "floor_ground": {
     "original": "Piano Terra",
     "translation": "Piano Terra"
+  },
+  "laboratories_title": {
+    "original": "Laboratori",
+    "translation": "Laboratori"
   }
 }

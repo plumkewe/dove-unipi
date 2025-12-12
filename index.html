@@ -839,7 +839,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Forza la larghezza al 100% del viewport */
             margin: 0;
             padding: 0;
-            background-color: #E5E7EB;
+            background-color: var(--color-gray-200);
             /* Assicura che il background sia uniforme (gray-200) */
         }
 
@@ -936,6 +936,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             width: 270px;
             min-width: 270px;
             max-width: 270px;
+            background-color: var(--color-gray-50);
+            border-right: 1px solid var(--border-divider);
         }
 
         /* Sidebar width adjustments based on text size */
@@ -971,17 +973,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             .hover-effect:hover {
-                background-color: #D1D5DB;
+                background-color: var(--color-gray-300);
                 /* gray-300 */
             }
 
             .hover-effect-darker:hover {
-                background-color: rgba(0, 0, 0, 0.1);
+                background-color: var(--overlay-selected);
                 /* 10% black opacity */
             }
 
             .hover-text-effect:hover {
-                color: #1F2937;
+                color: var(--color-gray-800);
                 /* gray-800 */
             }
         }
@@ -989,17 +991,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         /* Reset hover effects on touch devices to prevent sticky hover */
         @media (hover: none) {
             .nav-item:hover {
-                background-color: transparent;
+                background-color: var(--color-transparent);
             }
         }
 
-        /* Stile per l'effetto vetro (blur) */
-        .glass-sidebar {
-            background-color: #f8fafc;
-            /* Solid light background to avoid blur cost */
-            border-right: 1px solid rgba(209, 213, 219, 0.5);
-            /* gray-300 50% */
-        }
+
 
         /* Fix per iOS cursor jumping */
         @supports (-webkit-touch-callout: none) {
@@ -1028,7 +1024,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .search-result-item {
             padding: 10px 12px;
             cursor: pointer;
-            border-top: 1px solid rgba(209, 213, 219, 0.7);
+            border-top: 1px solid var(--border-divider);
             /* gray-300 70% */
             transition: background-color 0.2s ease-in-out;
             overflow: hidden;
@@ -1050,7 +1046,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: transparent;
+            background-color: var(--color-transparent);
             transition: background-color 0.2s ease-in-out;
             pointer-events: none;
         }
@@ -1118,6 +1114,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             --color-study-room: #BC9F8B;
             --color-study-room-bg: rgba(188, 159, 139, 0.2);
+
+
+            /* Dividers / Borders */
+            --border-divider: rgba(209, 213, 219, 0.7);
         }
 
         /* Stile specifico per gli erogatori d'acqua */
@@ -1206,7 +1206,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .occupancy-status-bar.loading {
-            background: linear-gradient(90deg, #d1d5db 25%, #9ca3af 50%, #d1d5db 75%);
+            background: linear-gradient(90deg, var(--color-gray-300) 25%, var(--color-gray-400) 50%, var(--color-gray-300) 75%);
             background-size: 200% 100%;
             animation: shimmer 2.5s infinite;
             color: var(--text-secondary);
@@ -1223,8 +1223,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .occupancy-status-bar.unavailable {
-            background-color: #e5e7eb;
-            color: #6b7280;
+            background-color: var(--color-gray-200);
+            color: var(--color-gray-500);
         }
 
 
@@ -1292,7 +1292,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .nav-item {
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: var(--color-transparent);
         }
 
         .clear-search-button {
@@ -1304,7 +1304,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             align-items: center;
             justify-content: center;
             padding: 0 12px;
-            background: transparent;
+            background: var(--color-transparent);
             border: none;
             cursor: pointer;
             color: var(--text-muted);
@@ -1328,14 +1328,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .clear-search-button:focus-visible {
-            outline: 2px solid #4B5563;
+            outline: 2px solid var(--color-gray-600);
             outline-offset: 2px;
         }
 
         .high-contrast .clear-search-button {
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
             border: none !important;
-            color: black !important;
+            color: var(--color-black) !important;
         }
 
         .high-contrast .clear-search-button:focus-visible {
@@ -1578,7 +1578,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         /* Respect prefers-reduced-motion to save CPU for sensitive users */
         @media (prefers-reduced-motion: reduce) {
             .occupancy-status-bar.loading {
-                background: #e5e7eb;
+                background: var(--color-gray-200);
                 animation: none;
             }
 
@@ -1848,40 +1848,40 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         /* High Contrast Mode */
         .high-contrast {
-            background-color: white !important;
-            color: black !important;
+            background-color: var(--color-white) !important;
+            color: var(--color-black) !important;
         }
 
         .high-contrast * {
-            background-color: white !important;
-            color: black !important;
-            border-color: black !important;
+            background-color: var(--color-white) !important;
+            color: var(--color-black) !important;
+            border-color: var(--color-black) !important;
         }
 
         .high-contrast .water-dispenser-marker,
         .high-contrast .water-dispenser-marker * {
-            background-color: transparent !important;
-            border-color: transparent !important;
+            background-color: var(--color-transparent) !important;
+            border-color: var(--color-transparent) !important;
         }
 
         .high-contrast .study-room-marker,
         .high-contrast .study-room-marker * {
-            background-color: transparent !important;
-            border-color: transparent !important;
+            background-color: var(--color-transparent) !important;
+            border-color: var(--color-transparent) !important;
         }
 
         .high-contrast svg * {
-            fill: black !important;
-            stroke: black !important;
+            fill: var(--color-black) !important;
+            stroke: var(--color-black) !important;
         }
 
         .high-contrast .github-icon * {
-            fill: #1F2937 !important;
+            fill: var(--color-gray-800) !important;
             stroke: none !important;
         }
 
         .high-contrast #mobile-search-container {
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
         }
 
         .high-contrast #share-btn {
@@ -1892,11 +1892,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .high-contrast button,
         .high-contrast .button-group>button,
         .high-contrast a.bg-gray-200 {
-            border: 2px solid black !important;
+            border: 2px solid var(--color-black) !important;
         }
 
         .high-contrast .button-group {
-            border: 2px solid black !important;
+            border: 2px solid var(--color-black) !important;
         }
 
         .high-contrast .button-group>button {
@@ -1904,61 +1904,61 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .high-contrast .button-group>button.active {
-            background-color: black !important;
-            color: white !important;
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .button-group>button.active .material-symbols-outlined {
-            color: white !important;
-            background-color: transparent !important;
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
         }
 
         .high-contrast .button-group>button.active svg * {
-            fill: white !important;
-            stroke: white !important;
-            background-color: transparent !important;
+            fill: var(--color-white) !important;
+            stroke: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
         }
 
         .high-contrast #top-bar {
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
         }
 
         .high-contrast .nav-item.selected {
-            background-color: black !important;
-            color: white !important;
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .nav-item.selected * {
-            background-color: transparent !important;
-            color: white !important;
+            background-color: var(--color-transparent) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .nav-item.selected .material-symbols-outlined {
-            color: white !important;
-            background-color: transparent !important;
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
         }
 
         .high-contrast .nav-item.selected svg * {
-            fill: white !important;
-            stroke: white !important;
-            background-color: transparent !important;
+            fill: var(--color-white) !important;
+            stroke: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
         }
 
         /* Search result item selected in high contrast mode */
         .high-contrast .search-result-item.selected {
-            background-color: black !important;
-            color: white !important;
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .search-result-item.selected * {
-            background-color: transparent !important;
-            color: white !important;
+            background-color: var(--color-transparent) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .search-result-item.selected .title,
         .high-contrast .search-result-item.selected .details {
-            color: white !important;
-            background-color: transparent !important;
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
         }
 
         /* Disable transitions on search result items in high contrast mode */
@@ -1975,113 +1975,113 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         /* Hover effects in high contrast mode */
         @media (hover: hover) {
             .high-contrast .nav-item:hover:not(.selected) {
-                background-color: black !important;
-                color: white !important;
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
             }
 
             .high-contrast .nav-item:hover:not(.selected) * {
-                background-color: transparent !important;
-                color: white !important;
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
             }
 
             .high-contrast .nav-item:hover:not(.selected) .material-symbols-outlined {
-                color: white !important;
-                background-color: transparent !important;
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
             }
 
             .high-contrast .nav-item:hover:not(.selected) svg * {
-                fill: white !important;
-                stroke: white !important;
-                background-color: transparent !important;
+                fill: var(--color-white) !important;
+                stroke: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
             }
 
             /* Disable ::before overlay in high contrast hover */
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected)::before,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected)::before {
-                background-color: transparent !important;
+                background-color: var(--color-transparent) !important;
             }
 
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected),
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) {
-                background-color: black !important;
-                color: white !important;
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
             }
 
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) *,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) * {
-                background-color: transparent !important;
-                color: white !important;
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
             }
 
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) .title,
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) .details,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) .title,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) .details {
-                color: white !important;
-                background-color: transparent !important;
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
             }
 
             /* Preserve toggle switch colors during hover in high contrast mode */
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div {
-                background-color: black !important;
-                box-shadow: inset 0 0 0 1px white !important;
+                background-color: var(--color-black) !important;
+                box-shadow: inset 0 0 0 1px var(--color-white) !important;
             }
 
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div {
-                background-color: white !important;
-                box-shadow: inset 0 0 0 1px black !important;
+                background-color: var(--color-white) !important;
+                box-shadow: inset 0 0 0 1px var(--color-black) !important;
             }
 
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after {
-                background-color: white !important;
-                border-color: white !important;
+                background-color: var(--color-white) !important;
+                border-color: var(--color-white) !important;
             }
 
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div::after,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div::after {
-                background-color: black !important;
-                border-color: black !important;
+                background-color: var(--color-black) !important;
+                border-color: var(--color-black) !important;
             }
 
             .high-contrast a.bg-gray-200:hover,
             .high-contrast button.bg-gray-200:hover {
-                background-color: black !important;
-                color: white !important;
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
             }
 
             .high-contrast a.bg-gray-200:hover *,
             .high-contrast button.bg-gray-200:hover * {
-                background-color: transparent !important;
-                color: white !important;
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
             }
 
             .high-contrast a.bg-gray-200:hover .material-symbols-outlined,
             .high-contrast button.bg-gray-200:hover .material-symbols-outlined {
-                color: white !important;
-                background-color: transparent !important;
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
             }
 
             .high-contrast a[href*="github"]:hover {
-                background-color: black !important;
-                color: white !important;
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
             }
 
             .high-contrast a[href*="github"]:hover * {
-                background-color: transparent !important;
-                color: white !important;
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
             }
 
             .high-contrast a[href*="github"]:hover .github-icon {
-                fill: white !important;
+                fill: var(--color-white) !important;
             }
 
             .high-contrast a[href*="github"]:hover .github-icon * {
-                fill: white !important;
+                fill: var(--color-white) !important;
                 stroke: none !important;
-                background-color: transparent !important;
+                background-color: var(--color-transparent) !important;
             }
         }
 
@@ -2089,7 +2089,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .high-contrast .occupancy-status-bar {
             border: 2px solid currentColor !important;
             font-weight: 700 !important;
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
             color: inherit !important;
         }
 
@@ -2098,7 +2098,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .high-contrast .occupancy-status-bar.occupied,
         .high-contrast .occupancy-status-bar.unavailable {
             background: none !important;
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
             color: inherit !important;
             animation: none !important;
         }
@@ -2109,7 +2109,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.free,
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied,
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable {
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
             color: inherit !important;
             border: 2px solid currentColor !important;
         }
@@ -2121,7 +2121,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied *,
         body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable * {
             color: inherit !important;
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
         }
 
         .high-contrast .occupancy-expand-icon {
@@ -2130,7 +2130,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         .high-contrast .occupancy-details {
             border: none !important;
-            background-color: transparent !important;
+            background-color: var(--color-transparent) !important;
             color: inherit !important;
         }
 
@@ -2145,23 +2145,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         /* Toggle switches in high contrast mode */
         .high-contrast label.relative.inline-flex>div {
-            background-color: black !important;
-            box-shadow: inset 0 0 0 1px white !important;
+            background-color: var(--color-black) !important;
+            box-shadow: inset 0 0 0 1px var(--color-white) !important;
         }
 
         .high-contrast label.relative.inline-flex input:checked+div {
-            background-color: white !important;
-            box-shadow: inset 0 0 0 1px black !important;
+            background-color: var(--color-white) !important;
+            box-shadow: inset 0 0 0 1px var(--color-black) !important;
         }
 
         .high-contrast label.relative.inline-flex>div::after {
-            background-color: white !important;
-            border-color: white !important;
+            background-color: var(--color-white) !important;
+            border-color: var(--color-white) !important;
         }
 
         .high-contrast label.relative.inline-flex input:checked+div::after {
-            background-color: black !important;
-            border-color: black !important;
+            background-color: var(--color-black) !important;
+            border-color: var(--color-black) !important;
         }
 
         /* Text size control buttons */
@@ -2169,14 +2169,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             display: flex;
             align-items: center;
             gap: 0.25rem;
-            background-color: #E5E7EB;
+            background-color: var(--color-gray-200);
             border-radius: 0.5rem;
             padding: 0.25rem;
         }
 
         .text-size-btn {
             padding: 0.375rem 0.5rem;
-            background-color: transparent;
+            background-color: var(--color-transparent);
             border: none;
             border-radius: 0.375rem;
             cursor: pointer;
@@ -2187,7 +2187,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #4B5563;
+            color: var(--color-gray-600);
         }
 
         .text-size-btn:hover:not(:disabled) {
@@ -2200,39 +2200,39 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .text-size-btn.active {
-            background-color: #D1D5DB;
-            color: #1F2937;
+            background-color: var(--color-gray-300);
+            color: var(--color-gray-800);
         }
 
         .high-contrast .text-size-controls {
-            background-color: white !important;
-            border: 2px solid black !important;
+            background-color: var(--color-white) !important;
+            border: 2px solid var(--color-black) !important;
         }
 
         .high-contrast .text-size-btn {
-            background-color: transparent !important;
-            color: black !important;
+            background-color: var(--color-transparent) !important;
+            color: var(--color-black) !important;
             transition: none !important;
         }
 
         .high-contrast .text-size-btn:hover:not(:disabled) {
-            background-color: black !important;
-            color: white !important;
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .text-size-btn:hover:not(:disabled) .material-symbols-outlined {
-            color: white !important;
-            background-color: transparent !important;
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
         }
 
         .high-contrast .text-size-btn.active {
-            background-color: black !important;
-            color: white !important;
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .text-size-btn.active .material-symbols-outlined {
-            color: white !important;
-            background-color: transparent !important;
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
         }
 
         /* Language selector styles */
@@ -2240,14 +2240,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             display: flex;
             align-items: center;
             gap: 0.25rem;
-            background-color: #E5E7EB;
+            background-color: var(--color-gray-200);
             border-radius: 0.5rem;
             padding: 0.25rem;
         }
 
         .language-btn {
             padding: 0.375rem 0.75rem;
-            background-color: transparent;
+            background-color: var(--color-transparent);
             border: none;
             border-radius: 0.375rem;
             cursor: pointer;
@@ -2257,7 +2257,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #4B5563;
+            color: var(--color-gray-600);
             font-size: 14px;
         }
 
@@ -2266,29 +2266,29 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .language-btn.active {
-            background-color: #D1D5DB;
-            color: #1F2937;
+            background-color: var(--color-gray-300);
+            color: var(--color-gray-800);
         }
 
         .high-contrast .language-selector {
-            background-color: white !important;
-            border: 2px solid black !important;
+            background-color: var(--color-white) !important;
+            border: 2px solid var(--color-black) !important;
         }
 
         .high-contrast .language-btn {
-            background-color: transparent !important;
-            color: black !important;
+            background-color: var(--color-transparent) !important;
+            color: var(--color-black) !important;
             transition: none !important;
         }
 
         .high-contrast .language-btn:hover {
-            background-color: black !important;
-            color: white !important;
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
         }
 
         .high-contrast .language-btn.active {
-            background-color: black !important;
-            color: white !important;
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
         }
     </style>
 </head>
@@ -2452,7 +2452,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         <!-- Sidebar -->
         <div id="sidebar"
-            class="glass-sidebar text-gray-900 w-80 fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col"
+            class="text-gray-900 w-80 fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col"
             style="height: 100vh; height: 100dvh; padding-bottom: env(safe-area-inset-bottom, 0px);">
 
             <!-- Intestazione Sidebar -->
@@ -2498,7 +2498,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 <!-- Aule -->
                 <div class="p-2">
                     <h3 id="rooms-title" class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Aule</h3>
-                    <div id="rooms-list" class="mt-2 space-y-1">
+                    <div id="rooms-list" class="mt-2 mb-4 space-y-1">
                         <!-- Le aule verranno inserite qui -->
                     </div>
                 </div>
@@ -3615,6 +3615,28 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const polo = data.polo[poloName];
                     for (const buildingName in polo.edificio) {
                         const building = polo.edificio[buildingName];
+
+                        // Cerca nei dipartimenti definiti a livello di edificio
+                        if (building.dipartimenti && Array.isArray(building.dipartimenti)) {
+                            building.dipartimenti.forEach(dept => {
+                                const deptNameLower = dept.nome.toLowerCase();
+                                const aliasLower = Array.isArray(dept.alias) ? dept.alias.map(a => a.toLowerCase()) : [];
+
+                                const matches = isExactSearch
+                                    ? (deptNameLower === queryLower || aliasLower.some(a => a === queryLower))
+                                    : (deptNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+
+                                if (matches) {
+                                    results.push({
+                                        polo: poloName,
+                                        edificio: buildingName,
+                                        piano: "0", // Default floor for building-level departments
+                                        room: dept
+                                    });
+                                }
+                            });
+                        }
+
                         for (const floorName in building.piano) {
                             const rooms = building.piano[floorName];
                             if (Array.isArray(rooms)) {
@@ -5738,16 +5760,29 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Gestisce entrambe le strutture dati: array di aule o oggetto con chiave 'aule'
                 const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
 
-                const departments = rooms.filter(room => roomHasType(room, 'dipartimento'));
+                // Recupera i dipartimenti definiti a livello di edificio (se presenti)
+                const buildingData = data.polo[selectedPolo].edificio[building];
+                const buildingDepartments = buildingData?.dipartimenti || [];
+
+                // Unisci i dipartimenti del piano con quelli dell'edificio
+                // Filtra le stanze del piano per trovare i dipartimenti, poi aggiungi quelli dell'edificio
+                const floorDepartments = rooms.filter(room => roomHasType(room, 'dipartimento'));
+                const departments = [...floorDepartments, ...buildingDepartments];
                 const libraries = rooms.filter(room => roomHasType(room, 'biblioteca'));
                 const studyRooms = rooms.filter(room => roomHasType(room, 'studio'));
-                // Le aule normali possono includere anche aule studio se hanno altri tipi (es. ["aula", "studio"])
-                // Escludi dipartimenti, biblioteche, e aule con SOLO tipo "studio"
-                const regularRooms = rooms.filter(room =>
+                const laboratories = rooms.filter(room => roomHasType(room, 'laboratorio'));
+
+                // Filter for Sale (Meeting Rooms) and active Aule (Classrooms)
+                // First get everything that is NOT a special type (dept, lib, studio-only, lab)
+                const allRegularRooms = rooms.filter(room =>
                     !roomHasType(room, 'dipartimento') &&
                     !roomHasType(room, 'biblioteca') &&
-                    !hasOnlyStudioType(room)
+                    !hasOnlyStudioType(room) &&
+                    !roomHasType(room, 'laboratorio')
                 );
+
+                const sale = allRegularRooms.filter(room => roomHasType(room, 'sala'));
+                const aule = allRegularRooms.filter(room => !roomHasType(room, 'sala'));
 
                 // Rimuovi eventuali elementi temporanei precedenti
                 const oldDeptHeader = document.getElementById('temp-dept-header');
@@ -5764,6 +5799,118 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (oldStudyHeader) oldStudyHeader.remove();
                 const oldStudyContainer = document.getElementById('temp-study-container');
                 if (oldStudyContainer) oldStudyContainer.remove();
+
+                const oldSaleHeader = document.getElementById('temp-sale-header');
+                if (oldSaleHeader) oldSaleHeader.remove();
+                const oldSaleContainer = document.getElementById('temp-sale-container');
+                if (oldSaleContainer) oldSaleContainer.remove();
+
+                const oldLabHeader = document.getElementById('temp-lab-header');
+                if (oldLabHeader) oldLabHeader.remove();
+                const oldLabContainer = document.getElementById('temp-lab-container');
+                if (oldLabContainer) oldLabContainer.remove();
+
+                // --- Helper Function to Render Room Item ---
+                function createRoomItem(room, iconName = 'door_front') {
+                    const roomContainer = document.createElement('div');
+                    roomContainer.className = 'nav-item-container';
+
+                    const roomElement = document.createElement('a');
+                    roomElement.href = '#';
+                    roomElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg';
+
+                    const roomInfoElement = document.createElement('div');
+                    let detailsCount = 0;
+                    function addInfoRow(condition, icon, text) {
+                        if (!condition) return false;
+                        detailsCount++;
+                        roomInfoElement.innerHTML += `
+                            <div class="flex items-center space-x-2">
+                                <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
+                                <span>${text.replace("%s", `${condition}`)}</span>
+                            </div>
+                        `;
+                        return true;
+                    }
+                    roomInfoElement.className = 'capacity-info hidden pl-10 p-1 text-sm text-gray-600';
+
+                    // Accessibility
+                    addInfoRow(room.capienza, "group", t('room_detail_capacity'));
+                    addInfoRow(room.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
+                    addInfoRow(room.accesso_disabili === false, "not_accessible_forward", t('room_detail_not_accessible'));
+
+                    // For the student
+                    addInfoRow(room.rete, "wifi", t('room_detail_network'));
+                    addInfoRow(room.porte_rete, "lan", t('room_detail_network_ports'));
+                    if (room.numero_prese_elettriche > 0) {
+                        addInfoRow(room.numero_prese_elettriche, "bolt", t('room_detail_power_outlets_count'));
+                    } else {
+                        addInfoRow(room.prese_elettriche, "bolt", t('room_detail_power_outlets'));
+                    }
+
+                    // Both - functionality / lab
+                    if (!addInfoRow(room.numero_pc, "computer", t('room_detail_computers_count')))
+                        addInfoRow(room.presenza_pc, "computer", t('room_detail_computers')); // In case we don't know the amount
+
+                    // For the professor
+                    addInfoRow(room.proiettore, "cast", t('room_detail_projector'));
+                    addInfoRow(room.altoparlanti, "speaker_group", t('room_detail_speakers'));
+                    addInfoRow(room.telecamera, "speed_camera", t('room_detail_camera'));
+                    addInfoRow(room.lavagna, "draw", t('room_detail_blackboard'))
+
+                    // Check if there are any details to show
+                    const hasDetails = detailsCount > 0;
+
+                    // If no details, hide the expand icon
+                    const expandIconStyle = hasDetails ? 'font-size: 20px; line-height: 1; transition: transform 0.2s;' : 'display: none;';
+
+                    roomElement.innerHTML = `
+                        <span class="flex items-center space-x-3">
+                            <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
+                            ${iconName}
+                            </span>
+                            <span>${room.nome}</span>
+                        </span>
+                        <span class="material-symbols-outlined expand-icon" style="${expandIconStyle}">
+                            expand_more
+                        </span>
+                    `;
+
+                    roomElement.addEventListener('click', (e) => {
+                        e.preventDefault();
+
+                        if (isRoomEligibleForShortLink(room)) {
+                            setShortLinkContext({
+                                polo: selectedPolo,
+                                building: selectedBuilding,
+                                floor: selectedFloor,
+                                room
+                            });
+                        } else {
+                            clearShortLinkContext();
+                        }
+
+                        // Centra la mappa sull'aula usando la funzione centralizzata
+                        centerMapOnRoom(room);
+
+                        // Defer heavy UI updates to next frame to allow animation to start smoothly
+                        requestAnimationFrame(() => {
+                            // Toggle delle informazioni dell'aula ONLY if there are details
+                            if (hasDetails) {
+                                roomInfoElement.classList.toggle('hidden');
+                                const expandIcon = roomElement.querySelector('.expand-icon');
+                                if (expandIcon) {
+                                    expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                                }
+                            }
+                        });
+                    });
+
+                    roomContainer.appendChild(roomElement);
+                    roomContainer.appendChild(roomInfoElement);
+                    return roomContainer;
+                }
+                // ------------------------------------------
 
                 // Se ci sono dipartimenti, crea una sezione dedicata PRIMA del titolo "Aule"
                 if (departments.length > 0) {
@@ -5924,7 +6071,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         addInfoRow(lib.capienza, "group", t('room_detail_capacity'));
                         addInfoRow(lib.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
-                        addInfoRow(!lib.accesso_disabili, "not_accessible_forward", t('room_detail_not_accessible'));
+                        addInfoRow(lib.accesso_disabili === false, "not_accessible_forward", t('room_detail_not_accessible'));
                         addInfoRow(lib.rete, "wifi", t('room_detail_network'));
                         addInfoRow(lib.porte_rete, "lan", t('room_detail_network_ports'));
                         if (lib.numero_prese_elettriche > 0) {
@@ -5974,6 +6121,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     roomsListParent.insertBefore(libHeader, libContainer);
                 }
 
+                // Se ci sono SALE, crea una sezione dedicata
+                if (sale.length > 0) {
+                    const saleHeader = document.createElement('h3');
+                    saleHeader.textContent = currentLanguage === 'it' ? 'Sale' : 'Rooms'; // Using 'Rooms' for 'Sale' as translation, or maybe 'Halls'
+                    saleHeader.className = 'text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2';
+                    saleHeader.id = 'temp-sale-header';
+
+                    const saleContainer = document.createElement('div');
+                    saleContainer.id = 'temp-sale-container';
+                    saleContainer.className = 'mb-4';
+
+                    sale.forEach(room => {
+                        // Use meeting_room icon for Sale
+                        const roomItem = createRoomItem(room, 'meeting_room');
+                        saleContainer.appendChild(roomItem);
+                    });
+
+                    roomsListParent.insertBefore(saleContainer, roomsTitleElement);
+                    roomsListParent.insertBefore(saleHeader, saleContainer);
+                }
+
                 // Se ci sono aule studio, crea una sezione dedicata
                 if (studyRooms.length > 0) {
                     const studyHeader = document.createElement('h3');
@@ -5993,22 +6161,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const studyRoomHeader = document.createElement('a');
                         studyRoomHeader.href = '#';
                         studyRoomHeader.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg';
-                        studyRoomHeader.innerHTML = `
-                            <span class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
-                                school
-                                </span>
-                                <span>${studyRoom.nome}</span>
-                            </span>
-                            <span class="material-symbols-outlined expand-icon" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
-                                expand_more
-                            </span>
-                        `;
 
                         // Details (Hidden by default)
                         const roomInfoElement = document.createElement('div');
+                        let detailsCount = 0;
                         function addInfoRow(condition, icon, text) {
                             if (!condition) return false;
+                            detailsCount++;
                             roomInfoElement.innerHTML += `
                                 <div class="flex items-center space-x-2">
                                     <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
@@ -6021,7 +6180,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         addInfoRow(studyRoom.capienza, "group", t('room_detail_capacity'));
                         addInfoRow(studyRoom.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
-                        addInfoRow(!studyRoom.accesso_disabili, "not_accessible_forward", t('room_detail_not_accessible'));
+                        addInfoRow(studyRoom.accesso_disabili === false, "not_accessible_forward", t('room_detail_not_accessible'));
                         addInfoRow(studyRoom.rete, "wifi", t('room_detail_network'));
                         addInfoRow(studyRoom.porte_rete, "lan", t('room_detail_network_ports'));
                         if (studyRoom.numero_prese_elettriche > 0) {
@@ -6035,6 +6194,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         addInfoRow(studyRoom.altoparlanti, "speaker_group", t('room_detail_speakers'));
                         addInfoRow(studyRoom.telecamera, "speed_camera", t('room_detail_camera'));
                         addInfoRow(studyRoom.lavagna, "draw", t('room_detail_blackboard'));
+
+                        // Check if there are any details to show
+                        const hasDetails = detailsCount > 0;
+
+                        // If no details, hide the expand icon
+                        const expandIconStyle = hasDetails ? 'font-size: 20px; line-height: 1; transition: transform 0.2s;' : 'display: none;';
+
+                        // Re-render header with correct icon visibility
+                        studyRoomHeader.innerHTML = `
+                            <span class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
+                                school
+                                </span>
+                                <span>${studyRoom.nome}</span>
+                            </span>
+                            <span class="material-symbols-outlined expand-icon" style="${expandIconStyle}">
+                                expand_more
+                            </span>
+                        `;
 
                         // Click Listener on Header
                         studyRoomHeader.addEventListener('click', (e) => {
@@ -6057,9 +6235,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             // Defer heavy UI updates to next frame to allow animation to start smoothly
                             requestAnimationFrame(() => {
                                 // Toggle delle informazioni dell'aula
-                                roomInfoElement.classList.toggle('hidden');
-                                const expandIcon = studyRoomHeader.querySelector('.expand-icon');
-                                expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                                if (hasDetails) {
+                                    roomInfoElement.classList.toggle('hidden');
+                                    const expandIcon = studyRoomHeader.querySelector('.expand-icon');
+                                    if (expandIcon) {
+                                        expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                                    }
+                                }
                             });
                         });
 
@@ -6072,11 +6254,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     roomsListParent.insertBefore(studyHeader, studyContainer);
                 }
 
-                // Determina il titolo in base al tipo predominante di stanze
-                const hasSale = regularRooms.some(room => roomHasType(room, 'sala'));
+                // Title for regular Aule
                 if (roomsTitleElement) {
-                    if (regularRooms.length > 0) {
-                        roomsTitleElement.textContent = hasSale ? (currentLanguage === 'it' ? 'Sale' : 'Rooms') : t('rooms_title');
+                    if (aule.length > 0) {
+                        roomsTitleElement.textContent = t('rooms_title'); // "Aule"
                         roomsTitleElement.style.display = '';
                     } else {
                         roomsTitleElement.style.display = 'none';
@@ -6087,93 +6268,36 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Svuota la lista delle aule
                 roomsList.innerHTML = '';
 
-                // List regular rooms
-                regularRooms.forEach(room => {
-                    const roomContainer = document.createElement('div');
-                    roomContainer.className = 'nav-item-container';
-
-                    const roomElement = document.createElement('a');
-                    roomElement.href = '#';
-                    roomElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg';
-                    roomElement.innerHTML = `
-                        <span class="flex items-center space-x-3">
-                            <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
-                            door_front
-                            </span>
-                            <span>${room.nome}</span>
-                        </span>
-                        <span class="material-symbols-outlined expand-icon" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
-                            expand_more
-                        </span>
-                    `;
-
-                    const roomInfoElement = document.createElement('div');
-                    function addInfoRow(condition, icon, text) {
-                        if (!condition) return false;
-                        roomInfoElement.innerHTML += `
-                            <div class="flex items-center space-x-2">
-                                <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
-                                <span>${text.replace("%s", `${condition}`)}</span>
-                            </div>
-                        `;
-                        return true;
-                    }
-                    roomInfoElement.className = 'capacity-info hidden pl-10 p-1 text-sm text-gray-600';
-
-                    // Accessibility
-                    addInfoRow(room.capienza, "group", t('room_detail_capacity'));
-                    addInfoRow(room.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
-                    addInfoRow(!room.accesso_disabili, "not_accessible_forward", t('room_detail_not_accessible'));
-
-                    // For the student
-                    addInfoRow(room.rete, "wifi", t('room_detail_network'));
-                    addInfoRow(room.porte_rete, "lan", t('room_detail_network_ports'));
-                    if (room.numero_prese_elettriche > 0) {
-                        addInfoRow(room.numero_prese_elettriche, "bolt", t('room_detail_power_outlets_count'));
-                    } else {
-                        addInfoRow(room.prese_elettriche, "bolt", t('room_detail_power_outlets'));
-                    }
-
-                    // Both - functionality / lab
-                    if (!addInfoRow(room.numero_pc, "computer", t('room_detail_computers_count')))
-                        addInfoRow(room.presenza_pc, "computer", t('room_detail_computers')); // In case we don't know the amount
-
-                    // For the professor
-                    addInfoRow(room.proiettore, "cast", t('room_detail_projector'));
-                    addInfoRow(room.altoparlanti, "speaker_group", t('room_detail_speakers'));
-                    addInfoRow(room.telecamera, "speed_camera", t('room_detail_camera'));
-                    addInfoRow(room.lavagna, "draw", t('room_detail_blackboard'))
-
-                    roomElement.addEventListener('click', (e) => {
-                        e.preventDefault();
-
-                        if (isRoomEligibleForShortLink(room)) {
-                            setShortLinkContext({
-                                polo: selectedPolo,
-                                building: selectedBuilding,
-                                floor: selectedFloor,
-                                room
-                            });
-                        } else {
-                            clearShortLinkContext();
-                        }
-
-                        // Centra la mappa sull'aula usando la funzione centralizzata
-                        centerMapOnRoom(room);
-
-                        // Defer heavy UI updates to next frame to allow animation to start smoothly
-                        requestAnimationFrame(() => {
-                            // Toggle delle informazioni dell'aula
-                            roomInfoElement.classList.toggle('hidden');
-                            const expandIcon = roomElement.querySelector('.expand-icon');
-                            expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-                        });
-                    });
-
-                    roomContainer.appendChild(roomElement);
-                    roomContainer.appendChild(roomInfoElement);
+                // List regular rooms (Aule)
+                aule.forEach(room => {
+                    const roomContainer = createRoomItem(room, 'door_front');
                     roomsList.appendChild(roomContainer);
                 });
+
+                // Se ci sono laboratori, crea una sezione dedicata IN FONDO
+                if (laboratories.length > 0) {
+                    const labHeader = document.createElement('h3');
+                    labHeader.textContent = t('laboratories_title');
+                    labHeader.className = 'text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2';
+                    labHeader.id = 'temp-lab-header';
+
+                    const labContainer = document.createElement('div');
+                    labContainer.id = 'temp-lab-container';
+                    labContainer.className = 'mb-4';
+
+                    laboratories.forEach(lab => {
+                        // Use science icon for Labs
+                        const roomItem = createRoomItem(lab, 'science');
+                        labContainer.appendChild(roomItem);
+                    });
+
+                    // Append after roomsList (in fondo)
+                    // Verifichiamo se roomsList ha un parent, e appendiamo lì.
+                    // Dato che gli altri usano insertBefore su roomsTitleElement, se noi facciamo appendChild su parent,
+                    // dovrebbe finire dopo roomsList (che è l'ultimo elemento statico).
+                    roomsListParent.appendChild(labHeader);
+                    roomsListParent.appendChild(labContainer);
+                }
             }
 
             // Funzione per espandere automaticamente i dettagli dell'aula nella sidebar
@@ -6208,6 +6332,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const studyIcons = studyContainer.querySelectorAll('.expand-icon');
                     studyInfos.forEach(info => info.classList.add('hidden'));
                     studyIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
+                }
+
+                // Chiudi anche i dettagli dei laboratori
+                const labContainer = document.getElementById('temp-lab-container');
+                if (labContainer) {
+                    const labInfos = labContainer.querySelectorAll('.capacity-info');
+                    const labIcons = labContainer.querySelectorAll('.expand-icon');
+                    labInfos.forEach(info => info.classList.add('hidden'));
+                    labIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
                 }
 
                 // Trova e espandi l'aula specifica
@@ -6281,6 +6414,34 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                     setTimeout(() => {
                                         studyRoomHeader.scrollIntoView({
+                                            behavior: 'smooth',
+                                            block: 'center',
+                                            inline: 'nearest'
+                                        });
+                                    }, 100);
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Cerca anche tra i laboratori
+                if (labContainer) {
+                    const labContainerItems = labContainer.querySelectorAll('.nav-item-container');
+                    labContainerItems.forEach((container) => {
+                        const labRoomHeader = container.querySelector('.nav-item');
+                        if (labRoomHeader) {
+                            const roomNameSpan = labRoomHeader.querySelector('span:nth-child(2)');
+                            if (roomNameSpan && roomNameSpan.textContent === roomName) {
+                                const roomInfo = container.querySelector('.capacity-info');
+                                const expandIcon = labRoomHeader.querySelector('.expand-icon');
+
+                                if (roomInfo && expandIcon) {
+                                    roomInfo.classList.remove('hidden');
+                                    expandIcon.style.transform = 'rotate(180deg)';
+
+                                    setTimeout(() => {
+                                        labRoomHeader.scrollIntoView({
                                             behavior: 'smooth',
                                             block: 'center',
                                             inline: 'nearest'

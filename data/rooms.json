@@ -2,10 +2,200 @@
   "polo": {
     "fibonacci": {
       "edificio": {
-        "a": {
+        "a": {      
+          "dipartimenti": [
+            {
+              "id": "fib_dm-a-0",
+              "nome": "Dipartimento di Matematica",
+              "alias": [
+                "DM",
+                "Department of Mathematics"
+              ],
+              "type": "dipartimento",
+              "note": "",
+              "link-mappa": "https://www.dm.unipi.it/mappa/",
+              "link-dipartimento": "https://www.dm.unipi.it/",
+              "hasStatus": false
+            }
+          ],
           "piano": {
-            "0": [],
-            "1": [],
+            "0": [
+              {
+                "id": "fib_studio-a-0",
+                "nome": "Aula Studio",
+                "alias": [
+                  "Studio",
+                  "Studiare",
+                  "Study room"
+                ],
+                "type": "studio",
+                "note": "",
+                "coordinates": {
+                  "x": 362,
+                  "y": 178,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_magna-a-0",
+                "nome": "Aula Magna (DM)",
+                "alias": [
+                  "Magna DM",
+                  "Aula Magna (Dipartimento di Matematica)",
+                  "Aula Magna (Department of Mathematics)"
+                ],
+                "note": "",
+                "capienza": 120,
+                "type": "aula",
+                "coordinates": {
+                  "x": 249,
+                  "y": 146,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_106-a-0",
+                "nome": "PHC",
+                "alias": [
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 568,
+                  "y": 108,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_108-a-0",
+                "nome": "Saletta riunioni",
+                "alias": [
+                  "Stanza 108",
+                  "Saletta riunioni piano terra",
+                  "Sala riunioni piano terra"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 613,
+                  "y": 149,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_110-a-0",
+                "nome": "Centro di Calcolo",
+                "alias": [
+                  "Stanza 110"
+                ],
+                "note": "",
+                "coordinates": {
+                  "x": 568,
+                  "y": 108,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_aula3-a-0",
+                "nome": "Aula 3",
+                "alias": [
+                  "Aula 3 Salvatore Ciompa",
+                  "Salvatore Ciompa"
+                ],
+                "note": "",
+                "type": "aula",
+                "coordinates": {
+                  "x": 535,
+                  "y": 110,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_112-a-0",
+                "nome": "Aula portatili",
+                "alias": [
+                  "Stanza 112"
+                ],
+                "note": "",
+                "capienza": 19,
+                "type": "aula",
+                "coordinates": {
+                  "x": 603,
+                  "y": 175,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_134-a-0",
+                "nome": "Seminario didattico",
+                "alias": [
+                  "Stanza 134"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 602,
+                  "y": 545,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              }
+            ],
+            "1": [
+              {
+                "id": "fib_304-a-1",
+                "nome": "Saletta riunioni",
+                "alias": [
+                  "Stanza 304",
+                  "Sala riunioni"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 622,
+                  "y": 69,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_303-a-1",
+                "nome": "Sala seminari",
+                "alias": [
+                  "Stanza 303"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 629,
+                  "y": 166,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_301-a-1",
+                "nome": "Sala riunioni",
+                "alias": [
+                  "Stanza 301"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 567,
+                  "y": 156,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              }
+            ],
             "2": []
           }
         },
@@ -130,7 +320,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 585,
                   "y": 361,
@@ -148,7 +337,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 626,
                   "y": 362,
@@ -166,7 +354,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 666,
                   "y": 363,
@@ -184,7 +371,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 708,
                   "y": 369,
@@ -202,7 +388,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 584,
                   "y": 237,
@@ -220,7 +405,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 625,
                   "y": 225,
@@ -238,7 +422,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 668,
                   "y": 232,
@@ -256,7 +439,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 709,
                   "y": 232,
@@ -274,7 +456,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 465,
                   "y": 350,
@@ -292,7 +473,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 512,
                   "y": 362,
@@ -310,7 +490,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 462,
                   "y": 231,
@@ -328,7 +507,6 @@
                 ],
                 "type": "laboratorio",
                 "note": "",
-                "accesso_disabili": true,
                 "coordinates": {
                   "x": 506,
                   "y": 241,
@@ -539,7 +717,7 @@
                   "H Lab",
                   "Laboratorio H"
                 ],
-                "type": "laboratorio",
+                "type": "aula",
                 "note": "",
                 "capienza": 40,
                 "proiettore": true,
@@ -561,7 +739,7 @@
                   "I Lab",
                   "Laboratorio I"
                 ],
-                "type": "laboratorio",
+                "type": "aula",
                 "note": "",
                 "capienza": 30,
                 "proiettore": true,
@@ -603,7 +781,7 @@
                   "M Lab",
                   "Laboratorio M"
                 ],
-                "type": "laboratorio",
+                "type": "aula",
                 "note": "",
                 "capienza": 40,
                 "proiettore": true,
@@ -1152,7 +1330,10 @@
                 "id": "fib_di-c-2",
                 "nome": "Dipartimento di Informatica",
                 "alias": [
-                  "DI"
+                  "DI",
+                  "Department of Informatics",
+                  "Department of Computer Science",
+                  "Department of Informatics and Computer Science"
                 ],
                 "type": "dipartimento",
                 "note": "",
