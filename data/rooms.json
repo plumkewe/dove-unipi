@@ -36,6 +36,7 @@
                 "id": "fib_studio-torvalds-b-0",
                 "nome": "Aula Studio Torvalds",
                 "alias": [
+                  "Studio Torvalds",
                   "Studio",
                   "Studiare",
                   "Aula studio",
@@ -58,11 +59,11 @@
                 "id": "fib_studio_moot-b-0",
                 "nome": "Aula Studio Moot",
                 "alias": [
+                  "Studio Moot",
                   "Studio",
                   "Studiare",
                   "Aula studio",
-                  "Study room",
-                  "Studio Moot"
+                  "Study room"
                 ],
                 "type": "studio",
                 "note": "",
@@ -81,11 +82,11 @@
                 "id": "fib_studio_wozniak-b-0",
                 "nome": "Aula Studio Wozniak",
                 "alias": [
+                  "Studio Wozniak",
                   "Studio",
                   "Studiare",
                   "Aula studio",
-                  "Study room",
-                  "Studio Wozniak"
+                  "Study room"
                 ],
                 "type": "studio",
                 "note": "",
@@ -1111,10 +1112,10 @@
               },
               {
                 "id": "fib_bib-b-1",
-                "nome": "Biblioteca di Matematica, Informatica e Fisica",
+                "nome": "Biblioteca MIF",
                 "alias": [
                   "B-MIF",
-                  "Biblioteca MIF",
+                  "Biblioteca di Matematica, Informatica e Fisica",
                   "Library MIF",
                   "Library of Mathematics, Computer Science and Physics",
                   "Library",

@@ -966,7 +966,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         /* Stile per l'hover degli elementi */
         @media (hover: hover) {
             .nav-item:hover {
-                background-color: rgba(0, 0, 0, 0.05);
+                background-color: var(--overlay-hover);
                 /* 5% black opacity */
             }
 
@@ -1057,21 +1057,76 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         @media (hover: hover) {
             body:not(.keyboard-navigation-active) .search-result-item:hover::before {
-                background-color: rgba(0, 0, 0, 0.1);
+                background-color: var(--overlay-selected);
             }
         }
 
         .search-result-item.selected::before {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: var(--overlay-selected);
+        }
+
+        :root {
+            /* =========================
+               Base Palette
+               ========================= */
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-transparent: transparent;
+
+            /* Grays (Tailwind-aligned) */
+            --color-gray-50: #f8fafc;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-600: #4b5563;
+            --color-gray-800: #1f2937;
+
+            /* Status Colors */
+            --color-status-free: #8BACAA;
+            --color-status-occupied: #B04759;
+            --color-status-unavailable-bg: var(--color-gray-200);
+            --color-status-unavailable-text: var(--color-gray-500);
+
+            /* =========================
+               Semantic Variables
+               ========================= */
+            /* Text */
+            --text-primary: var(--color-gray-800);
+            --text-secondary: var(--color-gray-600);
+            --text-muted: var(--color-gray-400);
+            --text-inverse: var(--color-white);
+
+            /* Backgrounds */
+            --bg-main: var(--color-gray-200);
+            --bg-surface: var(--color-gray-200);
+            --bg-surface-hover: var(--color-gray-300);
+            --bg-tooltip: var(--color-gray-300);
+
+            /* Interactive / Overlays */
+            --overlay-hover: rgba(0, 0, 0, 0.05);
+            --overlay-selected: rgba(0, 0, 0, 0.1);
+            --overlay-nav-selected: rgba(0, 0, 0, 0.1);
+
+            /* Elements */
+            --focus-ring: var(--color-gray-600);
+
+            /* Previous Definitions */
+            --color-water-dispenser: #3B82F6;
+            --color-water-dispenser-bg: rgba(59, 130, 246, 0.2);
+            --color-water-dispenser-search-bg: rgb(216, 220, 242);
+
+            --color-study-room: #BC9F8B;
+            --color-study-room-bg: rgba(188, 159, 139, 0.2);
         }
 
         /* Stile specifico per gli erogatori d'acqua */
         .search-result-item.water-dispenser {
-            background-color: rgb(216, 220, 242);
+            background-color: var(--color-water-dispenser-search-bg);
         }
 
         .search-result-item .title {
-            color: #1F2937;
+            color: var(--text-primary);
             /* gray-800 */
             font-weight: 600;
             overflow: hidden;
@@ -1105,7 +1160,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .search-result-item .details {
-            color: #4B5563;
+            color: var(--text-secondary);
             /* gray-600 */
             font-size: 12px;
             overflow: hidden;
@@ -1123,14 +1178,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             body:not(.keyboard-navigation-active) .search-result-item:hover .title,
             body:not(.keyboard-navigation-active) .search-result-item:hover .details {
-                color: #1F2937;
+                color: var(--text-primary);
                 /* gray-800 */
             }
         }
 
         .search-result-item.selected .title,
         .search-result-item.selected .details {
-            color: #1F2937;
+            color: var(--text-primary);
             /* gray-800 */
         }
 
@@ -1154,17 +1209,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             background: linear-gradient(90deg, #d1d5db 25%, #9ca3af 50%, #d1d5db 75%);
             background-size: 200% 100%;
             animation: shimmer 2.5s infinite;
-            color: #4b5563;
+            color: var(--text-secondary);
         }
 
         .occupancy-status-bar.free {
-            background-color: #8BACAA;
-            color: #ffffff;
+            background-color: var(--color-status-free);
+            color: var(--color-white);
         }
 
         .occupancy-status-bar.occupied {
-            background-color: #B04759;
-            color: #ffffff;
+            background-color: var(--color-status-occupied);
+            color: var(--color-white);
         }
 
         .occupancy-status-bar.unavailable {
@@ -1219,7 +1274,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         .occupancy-details-content {
             font-size: 12px;
-            color: #4b5563;
+            color: var(--text-secondary);
             line-height: 1.5;
             word-wrap: break-word;
             overflow-wrap: break-word;
@@ -1227,13 +1282,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .occupancy-details-content strong {
-            color: #1f2937;
+            color: var(--text-primary);
             font-weight: 600;
         }
 
 
         .nav-item.selected {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: var(--overlay-selected);
         }
 
         .nav-item {
@@ -1252,7 +1307,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             background: transparent;
             border: none;
             cursor: pointer;
-            color: #9CA3AF;
+            color: var(--text-muted);
             /* gray-400 */
             transition: color 0.2s ease-in-out;
         }
@@ -1262,7 +1317,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .clear-search-button:hover {
-            color: #4B5563;
+            color: var(--text-secondary);
             /* gray-600 */
         }
 
@@ -1334,7 +1389,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         #map {
             width: 100%;
             height: 100%;
-            background-color: #E5E7EB;
+            background-color: var(--bg-main);
             /* gray-200 */
             z-index: 1;
             /* Mappa al livello più basso */
@@ -1369,23 +1424,60 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Contenuto principale dietro all'interfaccia */
         }
 
-        /* Stili per i marker degli erogatori d'acqua */
         .water-dispenser-marker,
         .study-room-marker {
-            background: none !important;
+            /* background: none !important; */
             border: none !important;
-            pointer-events: none;
-            display: flex;
+            opacity: 1;
+            /* Ensure visibility */
+            display: flex !important;
+            /* Force flex */
             align-items: center;
             justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            /* Fix for potential offset */
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .water-dispenser-marker span,
+        .study-room-marker span {
+            display: block;
+            line-height: 1;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            /* Use variables for colors in JS, or here if we move them from inline */
+        }
+
+        /* New classes for icon colors to replace inline styles */
+        .water-dispenser-marker .material-symbols-outlined {
+            font-size: 24px;
+            color: var(--color-water-dispenser);
+        }
+
+        .study-room-marker .material-symbols-outlined {
+            font-size: 24px;
+            color: var(--color-study-room);
+        }
+
+        .water-dispenser-marker {
+            background-color: var(--color-water-dispenser-bg);
+        }
+
+        .study-room-marker {
+            background-color: var(--color-study-room-bg);
         }
 
         /* Stili per i tooltip */
         .tooltip {
             position: absolute;
-            background-color: #D1D5DB;
+            background-color: var(--bg-surface-hover);
             /* gray-300 */
-            color: #1F2937;
+            color: var(--text-primary);
             /* gray-800 */
             padding: 4px 8px;
             border-radius: 6px;
@@ -1412,9 +1504,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             overflow: hidden;
             border-radius: 0.5rem;
             /* rounded-lg */
-            background-color: #E5E7EB;
+            background-color: var(--bg-main);
             /* bg-gray-200 */
-            border: 1px solid #E5E7EB;
+            border: 1px solid var(--color-gray-200);
             /* border-gray-200 */
         }
 
@@ -1431,13 +1523,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .button-group>button.active {
-            background-color: #D1D5DB;
+            background-color: var(--bg-surface-hover);
             /* gray-300 */
         }
 
         /* Stile per il feedback al click su mobile */
         .mobile-active {
-            background-color: #D1D5DB !important;
+            background-color: var(--color-gray-300) !important;
             /* gray-300 */
             transition: background-color 0.1s ease-in-out;
         }
@@ -1510,14 +1602,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             width: 100%;
             z-index: 50;
             /* Assicura che sia sopra gli altri elementi */
-            background-color: #E5E7EB;
+            background-color: var(--bg-main);
             /* bg-gray-200 */
             border-radius: 0.5rem;
             /* rounded-lg */
             --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
             --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
             box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-            --tw-ring-color: #9CA3AF;
+            --tw-ring-color: var(--text-muted);
             /* ring-gray-400 */
             transition-property: all;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1599,12 +1691,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             #mobile-search-container .search-wrapper-mobile>div {
-                background-color: #E5E7EB;
+                background-color: var(--bg-main);
                 /* bg-gray-200 */
                 --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
                 --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
                 box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-                --tw-ring-color: #9CA3AF;
+                --tw-ring-color: var(--text-muted);
                 /* ring-gray-400 */
                 transition-property: all;
                 transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1663,14 +1755,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 /* Inverte l'ordine: risultati sopra, input sotto */
                 width: 100%;
                 max-width: 360px;
-                background-color: #E5E7EB;
+                background-color: var(--bg-main);
                 /* bg-gray-200 */
                 border-radius: 0.5rem;
                 /* rounded-lg */
                 --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
                 --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
                 box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-                --tw-ring-color: #9CA3AF;
+                --tw-ring-color: var(--text-muted);
                 /* ring-gray-400 */
                 transition: border-radius 0.3s ease-in-out;
                 overflow: hidden;
@@ -2099,7 +2191,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .text-size-btn:hover:not(:disabled) {
-            background-color: rgba(0, 0, 0, 0.05);
+            background-color: var(--overlay-hover);
         }
 
         .text-size-btn:disabled {
@@ -2170,7 +2262,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .language-btn:hover {
-            background-color: rgba(0, 0, 0, 0.05);
+            background-color: var(--overlay-hover);
         }
 
         .language-btn.active {
@@ -3069,7 +3161,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let currentSuggestionIndex = 0;
             let searchPlaceholderInterval = null;
 
-            const SHORT_LINK_ELIGIBLE_TYPES = new Set(['aula', 'dipartimento', 'laboratorio', 'sala', 'biblioteca']);
+            const SHORT_LINK_ELIGIBLE_TYPES = new Set(['aula', 'dipartimento', 'laboratorio', 'sala', 'biblioteca', 'studio']);
 
             function isRoomEligibleForShortLink(room) {
                 if (!room) return false;
@@ -3635,6 +3727,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const dd = String(today.getDate()).padStart(2, '0');
                 const fromDate = `${yyyy}-${mm}-${dd}`;
 
+                // Helper to find live container
+                const getLiveContainer = () => {
+                    const liveStatusBar = document.querySelector(`.occupancy-status-bar[data-library-nid="${nid}"]`);
+                    return liveStatusBar ? liveStatusBar.closest('.search-result-item') : container;
+                };
+
                 // Check cache
                 const cacheKey = `library_schedule_${nid}`;
                 try {
@@ -3643,8 +3741,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const parsed = JSON.parse(cachedData);
                         // Check if cache is from today
                         if (parsed.date === fromDate && parsed.data) {
-                            // console.log('Using cached library schedule');
-                            updateLibraryUI(container, parsed.data);
+                            updateLibraryUI(getLiveContainer(), parsed.data);
                             return;
                         }
                     }
@@ -3678,7 +3775,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         } catch (e) {
                             console.warn('Error saving library cache:', e);
                         }
-                        updateLibraryUI(container, data);
+                        updateLibraryUI(getLiveContainer(), data);
                     })
                     .catch(err => {
                         console.warn("Direct fetch failed, trying proxy...", err);
@@ -3697,11 +3794,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 } catch (e) {
                                     console.warn('Error saving library cache:', e);
                                 }
-                                updateLibraryUI(container, data);
+                                updateLibraryUI(getLiveContainer(), data);
                             })
                             .catch(err2 => {
                                 console.error("Proxy fetch also failed:", err2);
-                                updateLibraryUI(container, null, true);
+                                updateLibraryUI(getLiveContainer(), null, true);
                             });
                     });
             }
@@ -4069,6 +4166,60 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                             occupiedBy: ''
                                         };
                                     }
+
+                                    // FIX: Aggiorna UI immediatamente se l'elemento esiste
+                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${classroomName}"]`);
+                                    if (statusBar) {
+                                        statusBar.classList.remove('loading');
+                                        const statusTextSpan = statusBar.querySelector('.occupancy-text');
+                                        const availabilityData = window.classroomAvaibility[classroomName];
+
+                                        if (availabilityData.code === 0) {
+                                            statusBar.classList.add('free');
+                                            if (statusTextSpan) statusTextSpan.textContent = t('availability_free');
+                                        } else if (availabilityData.code === 1) {
+                                            statusBar.classList.add('occupied');
+                                            if (statusTextSpan) statusTextSpan.textContent = t('availability_occupied');
+
+                                            // Handle details (time range)
+                                            if (availabilityData.startTime && availabilityData.endTime) {
+                                                const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
+
+                                                // Create expand icon if not exists
+                                                if (!statusBar.querySelector('.occupancy-expand-icon')) {
+                                                    const expandIcon = document.createElement('span');
+                                                    expandIcon.className = 'occupancy-expand-icon material-symbols-outlined';
+                                                    expandIcon.setAttribute('data-occupancy-id', occupancyId);
+                                                    expandIcon.textContent = 'keyboard_arrow_down';
+                                                    statusBar.appendChild(expandIcon);
+
+                                                    // Make clickable
+                                                    statusBar.style.cursor = 'pointer';
+                                                    statusBar.addEventListener('click', (e) => {
+                                                        e.stopPropagation();
+                                                        const detailsId = expandIcon.getAttribute('data-occupancy-id');
+                                                        const detailsElement = document.getElementById(detailsId);
+                                                        if (detailsElement) {
+                                                            detailsElement.classList.toggle('expanded');
+                                                            expandIcon.classList.toggle('expanded');
+                                                        }
+                                                    });
+                                                }
+
+                                                // Create details container if not exists
+                                                if (!document.getElementById(occupancyId)) {
+                                                    const detailsDiv = document.createElement('div');
+                                                    detailsDiv.className = 'occupancy-details';
+                                                    detailsDiv.id = occupancyId;
+                                                    detailsDiv.innerHTML = `<div class="occupancy-details-content">${availabilityData.startTime} - ${availabilityData.endTime}</div>`;
+                                                    // Append after status bar
+                                                    statusBar.parentNode.insertBefore(detailsDiv, statusBar.nextSibling);
+                                                }
+                                            }
+                                        } else if (availabilityData.code === 2) {
+                                            statusBar.style.display = 'none';
+                                        }
+                                    }
                                 }).catch(error => {
                                     console.warn(`Failed to get availability for ${classroomName}:`, error);
                                     window.classroomAvaibility[classroomName] = {
@@ -4077,7 +4228,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         endTime: '',
                                         occupiedBy: ''
                                     };
-                                    // Non cachiamo l'errore perché potrebbe essere temporaneo (es. pagina ricaricata, offline)
+                                    // Update UI on error too
+                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${classroomName}"]`);
+                                    if (statusBar) {
+                                        statusBar.classList.remove('loading');
+                                        statusBar.style.display = 'none'; // Hide on error
+                                    }
                                 });
                             }
 
@@ -6474,7 +6630,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                 const element = document.createElement('div');
                                 element.className = 'water-dispenser-marker counter-rotate-marker';
-                                element.innerHTML = `<span class="material-symbols-outlined" style="font-size: 24px; color: #3B82F6;">water_ec</span>`;
+                                element.innerHTML = `<span class="material-symbols-outlined">water_ec</span>`;
 
                                 viewer.addOverlay({
                                     element: element,
@@ -6524,7 +6680,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                 const element = document.createElement('div');
                                 element.className = 'study-room-marker counter-rotate-marker';
-                                element.innerHTML = `<span class="material-symbols-outlined" style="font-size: 24px; color: #BC9F8B;">school</span>`;
+                                element.innerHTML = `<span class="material-symbols-outlined">school</span>`;
+
+                                // Make marker interactive
+                                element.style.pointerEvents = 'auto';
+                                element.style.cursor = 'pointer';
+                                element.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    selectRoom(selectedPolo, selectedBuilding, selectedFloor, room);
+                                    expandRoomDetailsInSidebar(room.nome);
+                                    triggerSidebarButtonAnimation();
+                                });
 
                                 viewer.addOverlay({
                                     element: element,
