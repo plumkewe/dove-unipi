@@ -33,6 +33,74 @@
                 "hasStatus": true
               },
               {
+                "id": "fib_studio-torvalds-b-0",
+                "nome": "Aula Studio Torvalds",
+                "alias": [
+                  "Studio",
+                  "Studiare",
+                  "Aula studio",
+                  "Study room"
+                ],
+                "type": "studio",
+                "note": "",
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 300,
+                  "y": 247,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_studio_moot-b-0",
+                "nome": "Aula Studio Moot",
+                "alias": [
+                  "Studio",
+                  "Studiare",
+                  "Aula studio",
+                  "Study room",
+                  "Studio Moot"
+                ],
+                "type": "studio",
+                "note": "",
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": false,
+                "coordinates": {
+                  "x": 164,
+                  "y": 318,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_studio_wozniak-b-0",
+                "nome": "Aula Studio Wozniak",
+                "alias": [
+                  "Studio",
+                  "Studiare",
+                  "Aula studio",
+                  "Study room",
+                  "Studio Wozniak"
+                ],
+                "type": "studio",
+                "note": "",
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": false,
+                "coordinates": {
+                  "x": 164,
+                  "y": 269,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
                 "id": "fib_x2-b-0",
                 "nome": "Aula X2",
                 "alias": [
@@ -53,10 +121,10 @@
               },
               {
                 "id": "fib_lab1-b-0",
-                "nome": "Laboratorio1",
+                "nome": "Laboratorio 1",
                 "alias": [
                   "Lab 1",
-                  "Laboratorio 1",
+                  "Laboratorio1",
                   "lab1"
                 ],
                 "type": "laboratorio",
@@ -71,10 +139,10 @@
               },
               {
                 "id": "fib_lab2-b-0",
-                "nome": "Laboratorio2",
+                "nome": "Laboratorio 2",
                 "alias": [
                   "Lab 2",
-                  "Laboratorio 2",
+                  "Laboratorio2",
                   "lab2"
                 ],
                 "type": "laboratorio",
@@ -89,10 +157,10 @@
               },
               {
                 "id": "fib_lab3-b-0",
-                "nome": "Laboratorio3",
+                "nome": "Laboratorio 3",
                 "alias": [
                   "Lab 3",
-                  "Laboratorio 3",
+                  "Laboratorio3",
                   "lab3"
                 ],
                 "type": "laboratorio",
@@ -107,10 +175,10 @@
               },
               {
                 "id": "fib_lab4-b-0",
-                "nome": "Laboratorio4",
+                "nome": "Laboratorio 4",
                 "alias": [
                   "Lab 4",
-                  "Laboratorio 4",
+                  "Laboratorio4",
                   "lab4"
                 ],
                 "type": "laboratorio",
@@ -125,10 +193,10 @@
               },
               {
                 "id": "fib_lab5-b-0",
-                "nome": "Laboratorio5",
+                "nome": "Laboratorio 5",
                 "alias": [
                   "Lab 5",
-                  "Laboratorio 5",
+                  "Laboratorio5",
                   "lab5"
                 ],
                 "type": "laboratorio",
@@ -143,10 +211,10 @@
               },
               {
                 "id": "fib_lab6-b-0",
-                "nome": "Laboratorio6",
+                "nome": "Laboratorio 6",
                 "alias": [
                   "Lab 6",
-                  "Laboratorio 6",
+                  "Laboratorio6",
                   "lab6"
                 ],
                 "type": "laboratorio",
@@ -161,10 +229,10 @@
               },
               {
                 "id": "fib_lab7-b-0",
-                "nome": "Laboratorio7",
+                "nome": "Laboratorio 7",
                 "alias": [
                   "Lab 7",
-                  "Laboratorio 7",
+                  "Laboratorio7",
                   "lab7"
                 ],
                 "type": "laboratorio",
@@ -179,10 +247,10 @@
               },
               {
                 "id": "fib_lab8-b-0",
-                "nome": "Laboratorio8",
+                "nome": "Laboratorio 8",
                 "alias": [
                   "Lab 8",
-                  "Laboratorio 8",
+                  "Laboratorio8",
                   "lab8"
                 ],
                 "type": "laboratorio",
@@ -197,10 +265,10 @@
               },
               {
                 "id": "fib_lab9-b-0",
-                "nome": "Laboratorio9",
+                "nome": "Laboratorio 9",
                 "alias": [
                   "Lab 9",
-                  "Laboratorio 9",
+                  "Laboratorio9",
                   "lab9"
                 ],
                 "type": "laboratorio",
@@ -215,10 +283,10 @@
               },
               {
                 "id": "fib_lab10-b-0",
-                "nome": "Laboratorio10",
+                "nome": "Laboratorio 10",
                 "alias": [
                   "Lab 10",
-                  "Laboratorio 10",
+                  "Laboratorio10",
                   "lab10"
                 ],
                 "type": "laboratorio",
@@ -233,10 +301,10 @@
               },
               {
                 "id": "fib_lab11-b-0",
-                "nome": "Laboratorio11",
+                "nome": "Laboratorio 11",
                 "alias": [
                   "Lab 11",
-                  "Laboratorio 11",
+                  "Laboratorio11",
                   "lab11"
                 ],
                 "type": "laboratorio",
@@ -251,10 +319,10 @@
               },
               {
                 "id": "fib_lab12-b-0",
-                "nome": "Laboratorio12",
+                "nome": "Laboratorio 12",
                 "alias": [
                   "Lab 12",
-                  "Laboratorio 12",
+                  "Laboratorio12",
                   "lab12"
                 ],
                 "type": "laboratorio",
@@ -290,9 +358,13 @@
                 "id": "fib_x4-b-0",
                 "nome": "Aula X4",
                 "alias": [
-                  "X4"
+                  "X4",
+                  "Aula studio X4",
+                  "Studio X4",
+                  "Study room",
+                  "Study room X4"
                 ],
-                "type": "aula",
+                "type": ["aula", "studio"],
                 "note": "",
                 "capienza": 6,
                 "proiettore": false,
@@ -910,17 +982,72 @@
                 "id": "fib_q1-lab-b-1",
                 "nome": "Aula Q1-Lab",
                 "alias": [
-                  "Q1-Lab"
+                  "Q1-Lab",
+                  "Lab-Q1",
+                  "Aula studio Q1",
+                  "Studio Q1",
+                  "Study room",
+                  "Study room Q1"
                 ],
-                "type": "aula",
+                "type": ["aula", "studio"],
                 "note": "",
-                "capienza": 10,
+                "capienza": 14,
                 "proiettore": false,
                 "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
                 "accesso_disabili": true,
                 "coordinates": {
                   "x": 360,
                   "y": 258,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sala-studio-b-1",
+                "nome": "Aula Studio Mitnick",
+                "alias": [
+                  "Studio Mitnick",
+                  "Aula studio",
+                  "Studio",
+                  "Study room",
+                  "Aula studio Mitnick"
+                ],
+                "type": "studio",
+                "note": "",
+                "proiettore": false,
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 540,
+                  "y": 233,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sala-studio-ponte-b-1",
+                "nome": "Aula Studio Ponte",
+                "alias": [
+                  "Aula Studio Ponte",
+                  "Studio Ponte",
+                  "Aula studio",
+                  "Study room",
+                  "Study room Ponte"
+                ],
+                "type": "studio",
+                "note": "",
+                "proiettore": false,
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 762,
+                  "y": 369,
                   "zoom": 3
                 },
                 "hasStatus": false
@@ -990,9 +1117,13 @@
                   "Biblioteca MIF",
                   "Library MIF",
                   "Library of Mathematics, Computer Science and Physics",
-                  "Library"
+                  "Library",
+                  "Aula Studio",
+                  "Study Room",
+                  "Study Room MIF",
+                  "Study"
                 ],
-                "type": "biblioteca",
+                "type": ["biblioteca", "studio"],
                 "nid": "1187",
                 "note": "",
                 "capienza": 210,

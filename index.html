@@ -113,7 +113,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link rel="preload" href="assets/fonts/material-symbols-outlined-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/material-symbols-outlined-subset.woff2" as="font" type="font/woff2"
+        crossorigin>
 
     <!-- JSON-LD Structured Data for SEO -->
     <script type="application/ld+json">
@@ -1119,6 +1120,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         @media (hover: hover) {
+
             body:not(.keyboard-navigation-active) .search-result-item:hover .title,
             body:not(.keyboard-navigation-active) .search-result-item:hover .details {
                 color: #1F2937;
@@ -1350,7 +1352,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         /* Ruota le icone dei servizi quando la mappa è girata per mantenerle dritte */
-        #map.map-flipped .water-dispenser-marker .material-symbols-outlined {
+        #map.map-flipped .counter-rotate-marker .material-symbols-outlined {
             transform: rotate(180deg);
         }
 
@@ -1368,7 +1370,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         /* Stili per i marker degli erogatori d'acqua */
-        .water-dispenser-marker {
+        .water-dispenser-marker,
+        .study-room-marker {
             background: none !important;
             border: none !important;
             pointer-events: none;
@@ -1765,6 +1768,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         .high-contrast .water-dispenser-marker,
         .high-contrast .water-dispenser-marker * {
+            background-color: transparent !important;
+            border-color: transparent !important;
+        }
+
+        .high-contrast .study-room-marker,
+        .high-contrast .study-room-marker * {
             background-color: transparent !important;
             border-color: transparent !important;
         }
@@ -2255,7 +2264,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 class="relative bg-gray-200 rounded-lg ring-2 ring-gray-400 transition-all duration-300 overflow-hidden">
                 <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span class="material-symbols-outlined text-gray-500" style="font-size: 24px; line-height: 1;" aria-label="Cerca">search</span>
+                        <span class="material-symbols-outlined text-gray-500" style="font-size: 24px; line-height: 1;"
+                            aria-label="Cerca">search</span>
                     </span>
                     <input type="text" id="search-input" placeholder="Cerca un'aula..."
                         class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
@@ -2329,7 +2339,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         <div id="search-wrapper-mobile">
             <div class="relative">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 z-10 pointer-events-none">
-                    <span class="material-symbols-outlined text-gray-500" style="font-size: 24px; line-height: 1;">search</span>
+                    <span class="material-symbols-outlined text-gray-500"
+                        style="font-size: 24px; line-height: 1;">search</span>
                 </span>
                 <input type="text" id="search-input-mobile" placeholder="Cerca un'aula..."
                     class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
@@ -2767,6 +2778,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const storedDyslexicFont = localStorage.getItem('dyslexicFontEnabled');
             const storedTextSize = localStorage.getItem('textSizeEnabled');
             const storedShowWaterDispensers = localStorage.getItem('showWaterDispensersEnabled');
+            const storedShowStudyRooms = localStorage.getItem('showStudyRoomsEnabled');
             const storedShowClassroomStatus = localStorage.getItem('showClassroomStatusEnabled');
             const storedShowGroundFloor = localStorage.getItem('showGroundFloorEnabled');
 
@@ -2787,6 +2799,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 highContrast: storedHighContrast ? storedHighContrast === 'true' : false,
                 dyslexicFont: storedDyslexicFont ? storedDyslexicFont === 'true' : false,
                 showWaterDispensers: storedShowWaterDispensers ? storedShowWaterDispensers === 'true' : false,
+                showStudyRooms: storedShowStudyRooms ? storedShowStudyRooms === 'true' : false,
                 showClassroomStatus: storedShowClassroomStatus ? storedShowClassroomStatus === 'true' : true, // Default to true
                 showGroundFloor: storedShowGroundFloor ? storedShowGroundFloor === 'true' : true, // Default to true = "Piano Terra"
                 language: storedLanguage
@@ -3031,6 +3044,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let selectedSearchResultIndex = -1;
             let isKeyboardSelection = false;
             let waterDispenserOverlays = []; // Array per gli overlay degli erogatori d'acqua
+            let studyRoomOverlays = []; // Array per gli overlay delle aule studio
             let shortLinkContext = null;
             let viewerInteractionGuardsInstalled = false;
             let programmaticMapChange = false;
@@ -3060,6 +3074,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function isRoomEligibleForShortLink(room) {
                 if (!room) return false;
                 if (!room.type) return true; // fallback per dati incompleti (es. PS1/PS4)
+                if (Array.isArray(room.type)) {
+                    return room.type.some(t => SHORT_LINK_ELIGIBLE_TYPES.has(t));
+                }
                 return SHORT_LINK_ELIGIBLE_TYPES.has(room.type);
             }
 
@@ -3188,7 +3205,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 let resolvedCode = codeOverride && codeOverride.trim();
-                
+
                 if (!resolvedCode) {
                     // Use precalculated code if available (O(1)), otherwise fallback to robust generation (O(N))
                     if (room.calculatedShortCode) {
@@ -3238,7 +3255,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // OpenSeadragon fires zoom events frequently during animation
                     // We only want to clear context if it's a user interaction
                     if (!programmaticMapChange && event.refPoint) {
-                         clearShortLinkContext();
+                        clearShortLinkContext();
                     }
                 });
 
@@ -3314,7 +3331,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Convert Leaflet Y (bottom-up) to OSD Y (top-down)
                 const osdY = contentSize.y - parseFloat(room.coordinates.y);
                 const osdX = parseFloat(room.coordinates.x);
-                
+
                 const imagePoint = new OpenSeadragon.Point(osdX, osdY);
                 const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
 
@@ -3595,7 +3612,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const bStartsWithName = bName.startsWith(queryLower);
                         const aStartsWithAlias = aAliases.some(al => al.startsWith(queryLower));
                         const bStartsWithAlias = bAliases.some(al => al.startsWith(queryLower));
-                        
+
                         const aStartsWith = aStartsWithName || aStartsWithAlias;
                         const bStartsWith = bStartsWithName || bStartsWithAlias;
 
@@ -3617,7 +3634,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const mm = String(today.getMonth() + 1).padStart(2, '0');
                 const dd = String(today.getDate()).padStart(2, '0');
                 const fromDate = `${yyyy}-${mm}-${dd}`;
-                
+
                 // Check cache
                 const cacheKey = `library_schedule_${nid}`;
                 try {
@@ -3693,19 +3710,41 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const statusBar = container.querySelector('.occupancy-status-bar');
                 const statusText = container.querySelector('.occupancy-text');
                 const detailsContent = container.querySelector('.occupancy-details-content');
-                
+
                 if (!statusBar || !statusText || !detailsContent) return;
 
                 statusBar.classList.remove('loading');
 
                 if (isError || !data) {
-                    statusBar.classList.add('unavailable');
-                    statusText.textContent = t('availability_unavailable');
+                    // Hide the entire bar when there's an error or no data (like room status)
+                    statusBar.style.display = 'none';
                     return;
                 }
 
-                const expandIcon = container.querySelector('.occupancy-expand-icon');
-                if (expandIcon) expandIcon.classList.remove('hidden');
+                // Create and add expand icon with click handler (only after data is successfully loaded)
+                const libraryNid = statusBar.getAttribute('data-library-nid');
+                const occupancyId = `library-schedule-${libraryNid}`;
+
+                // Check if icon doesn't already exist (to avoid duplicates on cache hits)
+                let expandIcon = statusBar.querySelector('.occupancy-expand-icon');
+                if (!expandIcon) {
+                    expandIcon = document.createElement('span');
+                    expandIcon.className = 'occupancy-expand-icon material-symbols-outlined';
+                    expandIcon.setAttribute('data-occupancy-id', occupancyId);
+                    expandIcon.textContent = 'keyboard_arrow_down';
+                    statusBar.appendChild(expandIcon);
+
+                    // Add click handler
+                    statusBar.style.cursor = 'pointer';
+                    statusBar.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const detailsElement = document.getElementById(occupancyId);
+                        if (detailsElement) {
+                            detailsElement.classList.toggle('expanded');
+                            expandIcon.classList.toggle('expanded');
+                        }
+                    });
+                }
 
                 // Helper to format date as YYYY-MM-DD in local time
                 const formatDateLocal = (date) => {
@@ -3719,7 +3758,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const now = new Date();
                 const todayStr = formatDateLocal(now);
                 const todayEntry = data.find(d => d.date === todayStr);
-                
+
                 let currentStatusText = t('Closed');
                 let colorClass = 'occupied'; // Red for closed
 
@@ -3741,8 +3780,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         colorClass = 'occupied'; // Red
                     }
                 } else {
-                     currentStatusText = t('Closed');
-                     colorClass = 'occupied';
+                    currentStatusText = t('Closed');
+                    colorClass = 'occupied';
                 }
 
                 statusBar.classList.add(colorClass);
@@ -3750,21 +3789,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // 2. Build weekly schedule HTML
                 let scheduleHTML = '<div class="flex flex-col gap-1">';
-                
+
                 for (let i = 0; i < 7; i++) {
                     const d = new Date();
                     d.setDate(d.getDate() + i);
                     const dateStr = formatDateLocal(d);
-                    
+
                     const dayName = d.toLocaleDateString(currentLanguage === 'it' ? 'it-IT' : 'en-US', { weekday: 'long' });
                     const label = dayName.charAt(0).toUpperCase() + dayName.slice(1);
-                    
+
                     const entry = data.find(e => e.date === dateStr);
                     let hoursText = t('Closed');
                     if (entry) {
                         hoursText = `${entry.start_time.trim().substring(0, 5)} - ${entry.end_time.trim().substring(0, 5)}`;
                     }
-                    
+
                     const isToday = i === 0;
                     const rowStyle = isToday ? 'font-weight: bold;' : '';
 
@@ -3776,7 +3815,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     `;
                 }
                 scheduleHTML += '</div>';
-                
+
                 detailsContent.innerHTML = scheduleHTML;
             }
 
@@ -3789,7 +3828,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 currentSearchResults.innerHTML = '';
                 // Don't reset the index yet - we'll restore it after rendering if still valid
-                
+
                 // Use DocumentFragment to minimize reflows
                 const fragment = document.createDocumentFragment();
 
@@ -3800,7 +3839,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     while (settingsContainer.firstChild) {
                         fragment.appendChild(settingsContainer.firstChild);
                     }
-                    
+
                     if (results.length > 0) {
                         const divider = document.createElement('div');
                         divider.className = 'border-t border-gray-300/70 my-2';
@@ -3951,10 +3990,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     } else {
                         const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
                         const isFacility = result.isFacility || false;
-                        const isLibrary = result.room.type === 'biblioteca';
+                        const isLibrary = Array.isArray(result.room.type) ? result.room.type.includes('biblioteca') : result.room.type === 'biblioteca';
 
                         // Aggiungi classe per gli erogatori d'acqua
-                        if (isFacility && result.room.type === 'erogatore_acqua') {
+                        const isWaterDispenser = Array.isArray(result.room.type) ? result.room.type.includes('erogatore_acqua') : result.room.type === 'erogatore_acqua';
+                        if (isFacility && isWaterDispenser) {
                             resultElement.classList.add('water-dispenser');
                         }
 
@@ -3970,11 +4010,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (isLibrary) {
                             const libraryNid = result.room.nid;
                             const occupancyId = `library-schedule-${libraryNid}`;
-                            
+
                             availabilityHTML = `
                                 <div class="occupancy-status-bar loading" data-library-nid="${libraryNid}">
                                     <span class="occupancy-text">${t('loading_occupancy')}</span>
-                                    <span class="occupancy-expand-icon material-symbols-outlined hidden" data-occupancy-id="${occupancyId}">keyboard_arrow_down</span>
                                 </div>
                                 <div class="occupancy-details" id="${occupancyId}">
                                     <div class="occupancy-details-content">
@@ -4068,22 +4107,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             ${availabilityHTML}
                         `;
 
-                        // Add click handler for occupancy bar
-                        const statusBar = resultElement.querySelector('.occupancy-status-bar');
-                        const expandIcon = resultElement.querySelector('.occupancy-expand-icon');
+                        // Add click handler for occupancy bar (only for regular classrooms, not libraries)
+                        // Libraries handle their own click events in updateLibraryUI
+                        if (!isLibrary) {
+                            const statusBar = resultElement.querySelector('.occupancy-status-bar');
+                            const expandIcon = resultElement.querySelector('.occupancy-expand-icon');
 
-                        if (statusBar && expandIcon) {
-                            // Make the entire bar clickable to expand
-                            statusBar.style.cursor = 'pointer';
-                            statusBar.addEventListener('click', (e) => {
-                                e.stopPropagation();
-                                const detailsId = expandIcon.getAttribute('data-occupancy-id');
-                                const detailsElement = document.getElementById(detailsId);
-                                if (detailsElement) {
-                                    detailsElement.classList.toggle('expanded');
-                                    expandIcon.classList.toggle('expanded');
-                                }
-                            });
+                            if (statusBar && expandIcon) {
+                                // Make the entire bar clickable to expand
+                                statusBar.style.cursor = 'pointer';
+                                statusBar.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    const detailsId = expandIcon.getAttribute('data-occupancy-id');
+                                    const detailsElement = document.getElementById(detailsId);
+                                    if (detailsElement) {
+                                        detailsElement.classList.toggle('expanded');
+                                        expandIcon.classList.toggle('expanded');
+                                    }
+                                });
+                            }
                         }
 
                         if (isLibrary) {
@@ -4096,7 +4138,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 return;
                             }
                             selectRoom(result.polo, result.edificio, result.piano, result.room);
-                                hideSearchResultsPanels();
+                            hideSearchResultsPanels();
                             currentSearchInput.value = result.room.nome;
                             // Sincronizza l'altro input
                             const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
@@ -4159,12 +4201,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 currentSearchResults.classList.remove('hidden');
-                
+
                 // Reset scroll position to top after showing the results panel
                 if (currentSearchResults) {
                     currentSearchResults.scrollTop = 0;
                 }
-                
+
                 manageOccupancyRefreshLoop();
             }
 
@@ -4213,12 +4255,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         onToggle: setWaterDispensersSetting
                     },
                     {
+                        key: 'studyRooms',
+                        label: t('settings_study_rooms'),
+                        description: t('settings_study_rooms_description'),
+                        checked: settingsConfig.showStudyRooms,
+                        onToggle: setStudyRoomsSetting
+                    },
+                    {
                         key: 'highContrast',
                         label: t('settings_high_contrast'),
                         description: t('settings_high_contrast_description'),
                         checked: settingsConfig.highContrast,
-                        onToggle: setHighContrastSetting,
-                        disabled: true
+                        onToggle: setHighContrastSetting
                     },
                     {
                         key: 'dyslexicFont',
@@ -4511,6 +4559,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 syncSettingsToggles();
             }
 
+            function setStudyRoomsSetting(isEnabled) {
+                settingsConfig.showStudyRooms = isEnabled;
+                localStorage.setItem('showStudyRoomsEnabled', isEnabled);
+                if (isEnabled) {
+                    showStudyRoomMarkers();
+                } else {
+                    hideStudyRoomMarkers();
+                }
+                syncSettingsToggles();
+            }
+
             function setClassroomStatusSetting(isEnabled) {
                 settingsConfig.showClassroomStatus = isEnabled;
                 localStorage.setItem('showClassroomStatusEnabled', isEnabled);
@@ -4621,6 +4680,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             break;
                         case 'waterDispensers':
                             input.checked = settingsConfig.showWaterDispensers;
+                            break;
+                        case 'studyRooms':
+                            input.checked = settingsConfig.showStudyRooms;
                             break;
                         case 'highContrast':
                             input.checked = settingsConfig.highContrast;
@@ -4840,7 +4902,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             document.addEventListener('mousemove', (e) => {
                 // Rileva un movimento significativo del mouse (non solo piccole vibrazioni)
                 const hasMoved = Math.abs(e.clientX - lastMouseX) > 10 || Math.abs(e.clientY - lastMouseY) > 10;
-                
+
                 if ((isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) && hasMoved) {
                     // Rimuovi la selezione da tastiera
                     const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
@@ -5011,15 +5073,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const center = viewer.viewport.getCenter();
                         const imagePoint = tiledImage.viewportToImageCoordinates(center);
                         const contentSize = tiledImage.getContentSize();
-                        
+
                         // Convert back to Leaflet Y (bottom-up)
                         const leafletY = contentSize.y - imagePoint.y;
                         const leafletX = imagePoint.x;
-                        
+
                         // Use Image Zoom (magnification) instead of Viewport Zoom for consistency across devices
                         const viewportZoom = viewer.viewport.getZoom();
                         const imageZoom = tiledImage.viewportToImageZoom(viewportZoom);
-                        
+
                         params.set('x', leafletX.toFixed(2));
                         params.set('y', leafletY.toFixed(2));
                         params.set('z', imageZoom.toFixed(2));
@@ -5290,10 +5352,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 Object.keys(data.polo).forEach(poloName => {
                     const allRooms = getAllRoomsInPolo(poloName);
-                    
+
                     // Group by base code
                     const roomsByBaseCode = {};
-                    
+
                     allRooms.forEach(item => {
                         const baseCode = getRoomBaseShortCode(item.room);
                         if (baseCode) {
@@ -5303,7 +5365,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             roomsByBaseCode[baseCode].push(item.room);
                         }
                     });
-                    
+
                     // Assign codes
                     Object.keys(roomsByBaseCode).forEach(baseCode => {
                         const rooms = roomsByBaseCode[baseCode];
@@ -5384,7 +5446,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const currentData = data;
                     data = roomsJson;
                     precalculateShortCodes();
-                    
+
                     try {
                         localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(roomsJson));
                         localStorage.setItem(FACILITIES_CACHE_KEY, JSON.stringify(facilitiesJson));
@@ -5493,6 +5555,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
             }
 
+            // Helper function to check if a room has a specific type (supports string or array)
+            function roomHasType(room, typeToCheck) {
+                if (!room.type) return false;
+                if (Array.isArray(room.type)) {
+                    return room.type.includes(typeToCheck);
+                }
+                return room.type === typeToCheck;
+            }
+
+            // Helper function to check if a room has ONLY studio type (no other types)
+            function hasOnlyStudioType(room) {
+                if (room.type === 'studio') return true;
+                if (Array.isArray(room.type)) {
+                    return room.type.length === 1 && room.type[0] === 'studio';
+                }
+                return false;
+            }
+
             function populateRooms(building, floor) {
                 const roomsTitleElement = document.getElementById('rooms-title');
                 const roomsListParent = roomsList.parentElement;
@@ -5502,9 +5582,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Gestisce entrambe le strutture dati: array di aule o oggetto con chiave 'aule'
                 const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
 
-                const departments = rooms.filter(room => room.type === 'dipartimento');
-                const libraries = rooms.filter(room => room.type === 'biblioteca');
-                const regularRooms = rooms.filter(room => room.type !== 'dipartimento' && room.type !== 'biblioteca');
+                const departments = rooms.filter(room => roomHasType(room, 'dipartimento'));
+                const libraries = rooms.filter(room => roomHasType(room, 'biblioteca'));
+                const studyRooms = rooms.filter(room => roomHasType(room, 'studio'));
+                // Le aule normali possono includere anche aule studio se hanno altri tipi (es. ["aula", "studio"])
+                // Escludi dipartimenti, biblioteche, e aule con SOLO tipo "studio"
+                const regularRooms = rooms.filter(room =>
+                    !roomHasType(room, 'dipartimento') &&
+                    !roomHasType(room, 'biblioteca') &&
+                    !hasOnlyStudioType(room)
+                );
 
                 // Rimuovi eventuali elementi temporanei precedenti
                 const oldDeptHeader = document.getElementById('temp-dept-header');
@@ -5516,6 +5603,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (oldLibHeader) oldLibHeader.remove();
                 const oldLibContainer = document.getElementById('temp-lib-container');
                 if (oldLibContainer) oldLibContainer.remove();
+
+                const oldStudyHeader = document.getElementById('temp-study-header');
+                if (oldStudyHeader) oldStudyHeader.remove();
+                const oldStudyContainer = document.getElementById('temp-study-container');
+                if (oldStudyContainer) oldStudyContainer.remove();
 
                 // Se ci sono dipartimenti, crea una sezione dedicata PRIMA del titolo "Aule"
                 if (departments.length > 0) {
@@ -5533,7 +5625,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // Aggiungi i dipartimenti al contenitore dedicato
                     departments.forEach(dept => {
                         const deptElement = document.createElement('div');
-                        deptElement.className = 'department-item w-full text-left p-2 pl-8';
+                        deptElement.className = 'department-item w-full text-left p-2 pl-6';
                         deptElement.setAttribute('data-name', dept.nome);
                         deptElement.innerHTML = `<span>${dept.nome}</span>`;
 
@@ -5584,8 +5676,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         // 1. Header (Toggle) - Solo nome e icona espansione
                         const libHeader = document.createElement('div');
-                        libHeader.className = 'w-full text-left p-2 pl-8 rounded-lg cursor-pointer transition-colors flex items-center justify-between';
-                        
+                        libHeader.className = 'w-full text-left p-2 pl-6 rounded-lg cursor-pointer transition-colors flex items-center justify-between';
+
                         libHeader.innerHTML = `
                             <span class="font-medium">${lib.nome}</span>
                             <span class="material-symbols-outlined expand-icon" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
@@ -5597,37 +5689,37 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         let buttonContainer = null;
                         if (lib.link_sito) {
                             buttonContainer = document.createElement('div');
-                            buttonContainer.className = 'pl-8 mt-1 mb-2 flex space-x-2';
-                            
+                            buttonContainer.className = 'pl-6 mt-1 mb-2 flex space-x-2';
+
                             const linkBtn = document.createElement('a');
                             linkBtn.href = lib.link_sito;
                             linkBtn.target = '_blank';
                             // Stile identico a quello dei dipartimenti
                             linkBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
                             linkBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">language</span><span>${t('website_button')}</span>`;
-                            
+
                             buttonContainer.appendChild(linkBtn);
 
                             // Bottone Orari
                             const hoursBtn = document.createElement('button');
                             hoursBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
                             hoursBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">schedule</span><span>${t('hours_button')}</span>`;
-                            
+
                             hoursBtn.addEventListener('click', () => {
                                 // Chiudi la sidebar se su mobile
                                 if (isMobile()) {
                                     closeSidebar();
                                 }
-                                
+
                                 // Imposta il valore di ricerca
                                 const searchVal = lib.nome;
                                 searchInput.value = searchVal;
                                 searchInputMobile.value = searchVal;
                                 currentSearchInput = isMobile() ? searchInputMobile : searchInput;
-                                
+
                                 // Triggera la ricerca
                                 performSearch(searchVal);
-                                
+
                                 // Espandi automaticamente gli orari dopo che i risultati sono stati renderizzati
                                 // Usiamo un timeout per dare tempo al DOM di aggiornarsi
                                 setTimeout(() => {
@@ -5642,11 +5734,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                             const expandIcon = result.querySelector('.occupancy-expand-icon');
                                             // Usa querySelector relativo per evitare conflitti di ID duplicati
                                             const detailsElement = result.querySelector('.occupancy-details');
-                                            
+
                                             if (expandIcon && detailsElement && !detailsElement.classList.contains('expanded')) {
                                                 detailsElement.classList.add('expanded');
                                                 expandIcon.classList.add('expanded');
-                                                
+
                                                 // Scorrimento per centrare il risultato
                                                 setTimeout(() => {
                                                     result.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -5656,7 +5748,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     });
                                 }, 100);
                             });
-                            
+
                             buttonContainer.appendChild(hoursBtn);
                         }
 
@@ -5672,7 +5764,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             `;
                             return true;
                         }
-                        roomInfoElement.className = 'capacity-info hidden pl-14 p-1 text-sm text-gray-600 mt-2';
+                        roomInfoElement.className = 'capacity-info hidden pl-10 p-1 text-sm text-gray-600 mt-2';
 
                         addInfoRow(lib.capienza, "group", t('room_detail_capacity'));
                         addInfoRow(lib.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
@@ -5726,8 +5818,106 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     roomsListParent.insertBefore(libHeader, libContainer);
                 }
 
+                // Se ci sono aule studio, crea una sezione dedicata
+                if (studyRooms.length > 0) {
+                    const studyHeader = document.createElement('h3');
+                    studyHeader.textContent = t('studio_rooms_title');
+                    studyHeader.className = 'text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2';
+                    studyHeader.id = 'temp-study-header';
+
+                    const studyContainer = document.createElement('div');
+                    studyContainer.id = 'temp-study-container';
+                    studyContainer.className = 'mb-4';
+
+                    studyRooms.forEach(studyRoom => {
+                        const studyContainerItem = document.createElement('div');
+                        studyContainerItem.className = 'nav-item-container';
+
+                        // Header (Toggle) - Nome e icona espansione
+                        const studyRoomHeader = document.createElement('a');
+                        studyRoomHeader.href = '#';
+                        studyRoomHeader.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg';
+                        studyRoomHeader.innerHTML = `
+                            <span class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
+                                school
+                                </span>
+                                <span>${studyRoom.nome}</span>
+                            </span>
+                            <span class="material-symbols-outlined expand-icon" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
+                                expand_more
+                            </span>
+                        `;
+
+                        // Details (Hidden by default)
+                        const roomInfoElement = document.createElement('div');
+                        function addInfoRow(condition, icon, text) {
+                            if (!condition) return false;
+                            roomInfoElement.innerHTML += `
+                                <div class="flex items-center space-x-2">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
+                                    <span>${text.replace("%s", `${condition}`)}</span>
+                                </div>
+                            `;
+                            return true;
+                        }
+                        roomInfoElement.className = 'capacity-info hidden pl-10 p-1 text-sm text-gray-600';
+
+                        addInfoRow(studyRoom.capienza, "group", t('room_detail_capacity'));
+                        addInfoRow(studyRoom.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
+                        addInfoRow(!studyRoom.accesso_disabili, "not_accessible_forward", t('room_detail_not_accessible'));
+                        addInfoRow(studyRoom.rete, "wifi", t('room_detail_network'));
+                        addInfoRow(studyRoom.porte_rete, "lan", t('room_detail_network_ports'));
+                        if (studyRoom.numero_prese_elettriche > 0) {
+                            addInfoRow(studyRoom.numero_prese_elettriche, "bolt", t('room_detail_power_outlets_count'));
+                        } else {
+                            addInfoRow(studyRoom.prese_elettriche, "bolt", t('room_detail_power_outlets'));
+                        }
+                        if (!addInfoRow(studyRoom.numero_pc, "computer", t('room_detail_computers_count')))
+                            addInfoRow(studyRoom.presenza_pc, "computer", t('room_detail_computers'));
+                        addInfoRow(studyRoom.proiettore, "cast", t('room_detail_projector'));
+                        addInfoRow(studyRoom.altoparlanti, "speaker_group", t('room_detail_speakers'));
+                        addInfoRow(studyRoom.telecamera, "speed_camera", t('room_detail_camera'));
+                        addInfoRow(studyRoom.lavagna, "draw", t('room_detail_blackboard'));
+
+                        // Click Listener on Header
+                        studyRoomHeader.addEventListener('click', (e) => {
+                            e.preventDefault();
+
+                            if (isRoomEligibleForShortLink(studyRoom)) {
+                                setShortLinkContext({
+                                    polo: selectedPolo,
+                                    building: selectedBuilding,
+                                    floor: selectedFloor,
+                                    room: studyRoom
+                                });
+                            } else {
+                                clearShortLinkContext();
+                            }
+
+                            // Centra la mappa sull'aula usando la funzione centralizzata
+                            centerMapOnRoom(studyRoom);
+
+                            // Defer heavy UI updates to next frame to allow animation to start smoothly
+                            requestAnimationFrame(() => {
+                                // Toggle delle informazioni dell'aula
+                                roomInfoElement.classList.toggle('hidden');
+                                const expandIcon = studyRoomHeader.querySelector('.expand-icon');
+                                expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                            });
+                        });
+
+                        studyContainerItem.appendChild(studyRoomHeader);
+                        studyContainerItem.appendChild(roomInfoElement);
+                        studyContainer.appendChild(studyContainerItem);
+                    });
+
+                    roomsListParent.insertBefore(studyContainer, roomsTitleElement);
+                    roomsListParent.insertBefore(studyHeader, studyContainer);
+                }
+
                 // Determina il titolo in base al tipo predominante di stanze
-                const hasSale = regularRooms.some(room => room.type === 'sala');
+                const hasSale = regularRooms.some(room => roomHasType(room, 'sala'));
                 if (roomsTitleElement) {
                     if (regularRooms.length > 0) {
                         roomsTitleElement.textContent = hasSale ? (currentLanguage === 'it' ? 'Sale' : 'Rooms') : t('rooms_title');
@@ -5748,7 +5938,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                     const roomElement = document.createElement('a');
                     roomElement.href = '#';
-                    roomElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-8 rounded-lg';
+                    roomElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg';
                     roomElement.innerHTML = `
                         <span class="flex items-center space-x-3">
                             <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
@@ -5772,7 +5962,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         `;
                         return true;
                     }
-                    roomInfoElement.className = 'capacity-info hidden pl-14 p-1 text-sm text-gray-600';
+                    roomInfoElement.className = 'capacity-info hidden pl-10 p-1 text-sm text-gray-600';
 
                     // Accessibility
                     addInfoRow(room.capienza, "group", t('room_detail_capacity'));
@@ -5855,6 +6045,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     libIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
                 }
 
+                // Chiudi anche i dettagli delle aule studio
+                const studyContainer = document.getElementById('temp-study-container');
+                if (studyContainer) {
+                    const studyInfos = studyContainer.querySelectorAll('.capacity-info');
+                    const studyIcons = studyContainer.querySelectorAll('.expand-icon');
+                    studyInfos.forEach(info => info.classList.add('hidden'));
+                    studyIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
+                }
+
                 // Trova e espandi l'aula specifica
                 const roomElements = roomsList.querySelectorAll('.nav-item');
                 roomElements.forEach((element) => {
@@ -5904,6 +6103,34 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         });
                                     }
                                 }, 100);
+                            }
+                        }
+                    });
+                }
+
+                // Cerca anche tra le aule studio
+                if (studyContainer) {
+                    const studyContainerItems = studyContainer.querySelectorAll('.nav-item-container');
+                    studyContainerItems.forEach((container) => {
+                        const studyRoomHeader = container.querySelector('.nav-item');
+                        if (studyRoomHeader) {
+                            const roomNameSpan = studyRoomHeader.querySelector('span:nth-child(2)');
+                            if (roomNameSpan && roomNameSpan.textContent === roomName) {
+                                const roomInfo = container.querySelector('.capacity-info');
+                                const expandIcon = studyRoomHeader.querySelector('.expand-icon');
+
+                                if (roomInfo && expandIcon) {
+                                    roomInfo.classList.remove('hidden');
+                                    expandIcon.style.transform = 'rotate(180deg)';
+
+                                    setTimeout(() => {
+                                        studyRoomHeader.scrollIntoView({
+                                            behavior: 'smooth',
+                                            block: 'center',
+                                            inline: 'nearest'
+                                        });
+                                    }, 100);
+                                }
                             }
                         }
                     });
@@ -6010,7 +6237,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const key = `${selectedPolo}-${selectedBuilding}`;
                     buildingFlipStates[key] = shouldFlip;
                 }
-                
+
                 // if (viewer && viewer.viewport) {
                 //     viewer.viewport.setRotation(shouldFlip ? 180 : 0);
                 //     viewer.forceRedraw();
@@ -6027,9 +6254,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (!animate) {
                             mapContainer.style.transition = 'none';
                         }
-                        
+
                         mapContainer.classList.toggle('map-flipped', shouldFlip);
-                        
+
                         if (!animate) {
                             // Force reflow
                             void mapContainer.offsetWidth;
@@ -6060,7 +6287,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 flipViewBtn.classList.toggle('hidden', !shouldShow);
                 flipViewBtn.disabled = !shouldShow;
-                
+
                 if (shouldShow) {
                     // Restore state
                     const key = `${selectedPolo}-${building}`;
@@ -6246,9 +6473,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
 
                                 const element = document.createElement('div');
-                                element.className = 'water-dispenser-marker';
+                                element.className = 'water-dispenser-marker counter-rotate-marker';
                                 element.innerHTML = `<span class="material-symbols-outlined" style="font-size: 24px; color: #3B82F6;">water_ec</span>`;
-                                
+
                                 viewer.addOverlay({
                                     element: element,
                                     location: viewportPoint,
@@ -6270,6 +6497,56 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     viewer.removeOverlay(element);
                 });
                 waterDispenserOverlays = [];
+            }
+
+            function showStudyRoomMarkers() {
+                if (!viewer || !data || !selectedPolo || !selectedBuilding || !selectedFloor) return;
+
+                // Rimuovi marker esistenti
+                hideStudyRoomMarkers();
+
+                const tiledImage = viewer.world.getItemAt(0);
+                if (!tiledImage) return;
+                const contentSize = tiledImage.getContentSize();
+
+                try {
+                    const floorData = data.polo[selectedPolo].edificio[selectedBuilding]?.piano[selectedFloor];
+                    const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
+
+                    rooms.forEach(room => {
+                        if (roomHasType(room, 'studio') && room.coordinates) {
+                            const { x, y } = room.coordinates;
+                            if (x != null && y != null) {
+                                const osdY = contentSize.y - parseFloat(y);
+                                const osdX = parseFloat(x);
+                                const imagePoint = new OpenSeadragon.Point(osdX, osdY);
+                                const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
+
+                                const element = document.createElement('div');
+                                element.className = 'study-room-marker counter-rotate-marker';
+                                element.innerHTML = `<span class="material-symbols-outlined" style="font-size: 24px; color: #BC9F8B;">school</span>`;
+
+                                viewer.addOverlay({
+                                    element: element,
+                                    location: viewportPoint,
+                                    placement: 'CENTER'
+                                });
+                                studyRoomOverlays.push(element);
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Errore nel mostrare i marker delle aule studio:', error);
+                }
+            }
+
+            function hideStudyRoomMarkers() {
+                if (!viewer) return;
+
+                studyRoomOverlays.forEach(element => {
+                    viewer.removeOverlay(element);
+                });
+                studyRoomOverlays = [];
             }
 
             function loadSVG(building, floor, viewType = 'top', viewParams = null, roomData = null) {
@@ -6371,7 +6648,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Inizializza o re-inizializza la mappa
                 if (!viewer) {
                     const isMobileDevice = typeof isRealMobileDevice === 'function' ? isRealMobileDevice() : false;
-                    
+
                     viewer = OpenSeadragon({
                         id: "map",
                         prefixUrl: "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/images/",
@@ -6446,7 +6723,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             );
                             const viewportPoint = viewer.viewport.pointFromPixel(invertedPoint);
                             viewer.viewport.zoomBy(zoomFactor, viewportPoint, true);
-                            
+
                             // Handle Pan
                             const delta = e.center.minus(e.lastCenter);
                             const viewportDelta = viewer.viewport.deltaPointsFromPixels(delta);
@@ -6485,13 +6762,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const osdX = parseFloat(roomData.coordinates.x);
                         const imagePoint = new OpenSeadragon.Point(osdX, osdY);
                         const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
-                        
+
                         const zoom = roomData.coordinates.zoom != null ? parseFloat(roomData.coordinates.zoom) : 2;
                         // Use Image Zoom
                         const viewportZoom = tiledImage.imageToViewportZoom(zoom);
 
                         markProgrammaticMapChange();
-                        
+
                         // Use requestAnimationFrame to ensure the map is fully rendered before starting animation
                         // This prevents the "first frame lag" when switching buildings
                         requestAnimationFrame(() => {
@@ -6504,7 +6781,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const osdX = parseFloat(viewParams.x);
                         const imagePoint = new OpenSeadragon.Point(osdX, osdY);
                         const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
-                        
+
                         const zoom = parseFloat(viewParams.z);
                         // Use Image Zoom
                         const viewportZoom = tiledImage.imageToViewportZoom(zoom);
@@ -6522,7 +6799,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                     // Apply rotation if needed
                     // viewer.viewport.setRotation(isMapFlipped ? 180 : 0);
-                    
+
                     const mapContainer = document.getElementById('map');
                     if (mapContainer) {
                         mapContainer.classList.toggle('map-flipped', isMapFlipped);
@@ -6536,6 +6813,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // Mostra gli erogatori d'acqua solo se il setting è attivo E la vista è "top"
                     if (settingsConfig.showWaterDispensers && currentView === 'top') {
                         showWaterDispensers();
+                    }
+
+                    // Mostra le aule studio solo se il setting è attivo E la vista è "top"
+                    if (settingsConfig.showStudyRooms && currentView === 'top') {
+                        showStudyRoomMarkers();
                     }
                 });
             }
@@ -6982,4 +7264,4 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
 </body>
 
-</html> 
+</html>

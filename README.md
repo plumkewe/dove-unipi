@@ -39,6 +39,7 @@
   - [Lingue supportate](#lingue-supportate)
   - [Altri dati](#altri-dati)
     - [Distributori d'acqua](#distributori-dacqua)
+    - [Aule Studio](#aule-studio)
 - [API Orari Biblioteca](#api-orari-biblioteca)
   - [Endpoint](#endpoint)
   - [Parametri](#parametri)
@@ -490,6 +491,16 @@ Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risult
 > Ci servono dati sulla posizione di **distributori d'acqua**, **distributori di caffè**, **distributori di cibo...**
 > Apri una [issue](https://github.com/plumkewe/dove-unipi/issues) oppure inviami un'email a: [lyubomyr.malay@icloud.com](mailto:lyubomyr.malay@icloud.com)  
 > **Grazie per il supporto!**
+
+<hr>
+
+#### Aule Studio
+
+È possibile visualizzare le **aule studio** presenti negli edifici del Polo Fibonacci.
+Questa funzione permette di attivare dei marker specifici sulla mappa per individuare facilmente le zone studio.
+
+Per attivarla, apri la **barra di ricerca**, digita `impostazioni` e attiva l'opzione **"Mostra aule studio (ALFA)"**.
+I marker appariranno sulla mappa indicando la posizione esatta delle aule dedicate allo studio.
 
 ## API Orari Biblioteca
 

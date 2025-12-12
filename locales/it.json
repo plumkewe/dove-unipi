@@ -215,6 +215,10 @@
     "original": "Biblioteca",
     "translation": "BIBLIOTECA"
   },
+  "studio_rooms_title": {
+    "original": "Aule Studio",
+    "translation": "AULE STUDIO"
+  },
   "map_button": {
     "original": "Mappa",
     "translation": "Mappa"
@@ -350,6 +354,14 @@
   "settings_water_dispensers_description": {
     "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
     "translation": "Visualizza la posizione degli erogatori d'acqua sulla mappa"
+  },
+  "settings_study_rooms": {
+    "original": "Mostra aule studio (ALFA)",
+    "translation": "Mostra aule studio (ALFA)"
+  },
+  "settings_study_rooms_description": {
+    "original": "Visualizza la posizione delle aule studio sulla mappa",
+    "translation": "Visualizza la posizione delle aule studio sulla mappa"
   },
   "settings_classroom_status": {
     "original": "Mostra stato aule",

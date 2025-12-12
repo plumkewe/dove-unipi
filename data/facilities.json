@@ -47,7 +47,24 @@
                 }
               }
             ],
-            "1": [],
+            "1": [
+              {
+                "id": "fib_erogatore-b-1-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "coordinates": {
+                  "x": 758,
+                  "y": 248,
+                  "zoom": 3
+                }
+              }
+            ],
             "2": []
           }
         },
