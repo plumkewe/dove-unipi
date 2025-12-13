@@ -1571,15 +1571,17 @@
                   "x": 89,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "126061",
+                "email": "corrado.priami@unipi.it",
+                "tel": "050 2212795",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=126061&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=126061"
               },
               {
                 "id": "2",
                 "room": "278",
-                "nome": [
-                  "Turini Franco",
-                  "Luccio Fabrizio"
-                ],
+                "nome": "Turini Franco",
                 "alias": [
                   "278"
                 ],
@@ -1594,6 +1596,22 @@
               },
               {
                 "id": "3",
+                "room": "278",
+                "nome": "Luccio Fabrizio",
+                "alias": [
+                  "278"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 108,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "4",
                 "room": "279",
                 "nome": "Forti Stefano",
                 "alias": [
@@ -1606,16 +1624,18 @@
                   "x": 127,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "147669",
+                "email": "stefano.forti@unipi.it",
+                "tel": "0502212759",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=147669&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/forti/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=147669"
               },
               {
-                "id": "4",
+                "id": "5",
                 "room": "280",
-                "nome": [
-                  "Bell Jack Charles",
-                  "Miglior Luca",
-                  "Li Malio"
-                ],
+                "nome": "Bell Jack Charles",
                 "alias": [
                   "280"
                 ],
@@ -1626,10 +1646,50 @@
                   "x": 146,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "197689",
+                "email": "jack.bell@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=197689"
               },
               {
-                "id": "5",
+                "id": "6",
+                "room": "280",
+                "nome": "Miglior Luca",
+                "alias": [
+                  "280"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "197158",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=197158"
+              },
+              {
+                "id": "7",
+                "room": "280",
+                "nome": "Li Malio",
+                "alias": [
+                  "280"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "196720",
+                "email": "malio.li@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=196720"
+              },
+              {
+                "id": "8",
                 "room": "281",
                 "nome": "Ferrari Gianluigi",
                 "alias": [
@@ -1645,12 +1705,9 @@
                 }
               },
               {
-                "id": "6",
+                "id": "9",
                 "room": "282",
-                "nome": [
-                  "Galfrè Silvia Giulia",
-                  "Naretto Francesca"
-                ],
+                "nome": "Galfrè Silvia Giulia",
                 "alias": [
                   "282"
                 ],
@@ -1664,12 +1721,28 @@
                 }
               },
               {
-                "id": "7",
-                "room": "283",
-                "nome": [
-                  "Turchi Tommaso",
-                  "Kocian Alexander"
+                "id": "10",
+                "room": "282",
+                "nome": "Naretto Francesca",
+                "alias": [
+                  "282"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 184,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "182530",
+                "email": "francesca.naretto@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=182530"
+              },
+              {
+                "id": "11",
+                "room": "283",
+                "nome": "Turchi Tommaso",
                 "alias": [
                   "283"
                 ],
@@ -1680,10 +1753,33 @@
                   "x": 204,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "182372",
+                "email": "tommaso.turchi@unipi.it",
+                "tel": "050 2212713",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=182372"
               },
               {
-                "id": "8",
+                "id": "12",
+                "room": "283",
+                "nome": "Kocian Alexander",
+                "alias": [
+                  "283"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 204,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "104380",
+                "email": "alexander.kocian@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=104380"
+              },
+              {
+                "id": "13",
                 "room": "285",
                 "nome": "Ricci Laura",
                 "alias": [
@@ -1696,15 +1792,15 @@
                   "x": 302,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "182163",
+                "email": "lauriricci@live.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=182163"
               },
               {
-                "id": "9",
+                "id": "14",
                 "room": "286",
-                "nome": [
-                  "Montanari Ugo",
-                  "Corradini Andrea"
-                ],
+                "nome": "Montanari Ugo",
                 "alias": [
                   "286"
                 ],
@@ -1715,15 +1811,42 @@
                   "x": 322,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5689",
+                "email": "ugo.montanari@unipi.it",
+                "tel": "050 221 2721",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5689&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~ugo",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5689"
               },
               {
-                "id": "10",
-                "room": "287",
-                "nome": [
-                  "Torquati Massimo",
-                  "Mencagli Gabriele"
+                "id": "15",
+                "room": "286",
+                "nome": "Corradini Andrea",
+                "alias": [
+                  "286"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 322,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "4316",
+                "email": "andrea.corradini@unipi.it",
+                "tel": "050 2212786",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4316&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~andrea",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4316"
+              },
+              {
+                "id": "16",
+                "room": "287",
+                "nome": "Torquati Massimo",
                 "alias": [
                   "287"
                 ],
@@ -1734,15 +1857,40 @@
                   "x": 340,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "78079",
+                "email": "massimo.torquati@unipi.it",
+                "tel": "050 2213169",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=78079&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~torquati",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=78079"
               },
               {
-                "id": "11",
-                "room": "288",
-                "nome": [
-                  "Punzi Giulia",
-                  "Pollacci Laura"
+                "id": "17",
+                "room": "287",
+                "nome": "Mencagli Gabriele",
+                "alias": [
+                  "287"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "90776",
+                "email": "gabriele.mencagli@unipi.it",
+                "tel": "050 2213132",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=90776&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/mencagli/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=90776"
+              },
+              {
+                "id": "18",
+                "room": "288",
+                "nome": "Punzi Giulia",
                 "alias": [
                   "288"
                 ],
@@ -1753,10 +1901,33 @@
                   "x": 360,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "195205",
+                "email": "giulia.punzi@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=195205"
               },
               {
-                "id": "12",
+                "id": "19",
+                "room": "288",
+                "nome": "Pollacci Laura",
+                "alias": [
+                  "288"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 360,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "154123",
+                "email": "laura.pollacci@unipi.it",
+                "url": "https://laurapollacci.github.io/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=154123"
+              },
+              {
+                "id": "20",
                 "room": "289",
                 "nome": "Pappalardo Massimo",
                 "alias": [
@@ -1769,10 +1940,17 @@
                   "x": 379,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5936",
+                "email": "massimo.pappalardo@unipi.it",
+                "tel": "050 2212750",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5936&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~a06137/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5936"
               },
               {
-                "id": "13",
+                "id": "21",
                 "room": "290",
                 "nome": "Ghelli Giorgio",
                 "alias": [
@@ -1785,15 +1963,19 @@
                   "x": 398,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4284",
+                "email": "giorgio.ghelli@unipi.it",
+                "tel": "050 221 2780",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4284&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~ghelli",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4284"
               },
               {
-                "id": "14",
+                "id": "22",
                 "room": "291",
-                "nome": [
-                  "Spinnato Francesco",
-                  "Michienzi Andrea"
-                ],
+                "nome": "Spinnato Francesco",
                 "alias": [
                   "291"
                 ],
@@ -1804,10 +1986,32 @@
                   "x": 416,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "195218",
+                "email": "francesco.spinnato@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=195218"
               },
               {
-                "id": "15",
+                "id": "23",
+                "room": "291",
+                "nome": "Michienzi Andrea",
+                "alias": [
+                  "291"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 416,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "166429",
+                "email": "andrea.michienzi@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=166429"
+              },
+              {
+                "id": "24",
                 "room": "292",
                 "nome": "Danelutto Marco",
                 "alias": [
@@ -1820,10 +2024,17 @@
                   "x": 436,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4278",
+                "email": "marco.danelutto@unipi.it",
+                "tel": "050 221 2742",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4278&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~marcod",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4278"
               },
               {
-                "id": "16",
+                "id": "25",
                 "room": "293",
                 "nome": "Carta Antonio",
                 "alias": [
@@ -1836,10 +2047,13 @@
                   "x": 454,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "162682",
+                "email": "antonio.carta@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=162682"
               },
               {
-                "id": "17",
+                "id": "26",
                 "room": "294",
                 "nome": "Manzini Giovanni",
                 "alias": [
@@ -1852,15 +2066,18 @@
                   "x": 474,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "163904",
+                "email": "giovanni.manzini@unipi.it",
+                "tel": "050 2212744",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=163904&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/manzini/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=163904"
               },
               {
-                "id": "18",
+                "id": "27",
                 "room": "295",
-                "nome": [
-                  "Ferragina Paolo",
-                  "Monreale Anna"
-                ],
+                "nome": "Ferragina Paolo",
                 "alias": [
                   "295"
                 ],
@@ -1871,10 +2088,38 @@
                   "x": 492,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4673",
+                "email": "paolo.ferragina@unipi.it",
+                "tel": "050 2212764",
+                "fax": "050 2212726",
+                "url": "http://pages.di.unipi.it/ferragina/index.html",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4673"
               },
               {
-                "id": "19",
+                "id": "28",
+                "room": "295",
+                "nome": "Monreale Anna",
+                "alias": [
+                  "295"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 492,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "78687",
+                "email": "anna.monreale@unipi.it",
+                "tel": "050 2213119",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=78687&template=dettaglio3.tpl",
+                "url": "https://kdd.isti.cnr.it/homes/monreale/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=78687"
+              },
+              {
+                "id": "29",
                 "room": "296a",
                 "nome": "Chessa Stefano",
                 "alias": [
@@ -1887,15 +2132,19 @@
                   "x": 513,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5853",
+                "email": "stefano.chessa@unipi.it",
+                "tel": "050 221 3122",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5853&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/chessa/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5853"
               },
               {
-                "id": "20",
+                "id": "30",
                 "room": "297",
-                "nome": [
-                  "Cau Erica",
-                  "Trenta Alessandro"
-                ],
+                "nome": "Cau Erica",
                 "alias": [
                   "297"
                 ],
@@ -1906,20 +2155,32 @@
                   "x": 611,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "183007",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183007"
               },
               {
-                "id": "21",
-                "room": "298a",
-                "nome": [
-                  "Gaglianese Marco",
-                  "Ricardo Daniel Lopes Almeida",
-                  "Rotundo Mariagiovanna",
-                  "Lari Filippo",
-                  "Guerra Andrea",
-                  "Dalla Noce Niko",
-                  "Gazzella Lorenzo"
+                "id": "31",
+                "room": "297",
+                "nome": "Trenta Alessandro",
+                "alias": [
+                  "297"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 611,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188611",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188611"
+              },
+              {
+                "id": "32",
+                "room": "298a",
+                "nome": "Gaglianese Marco",
                 "alias": [
                   "298a"
                 ],
@@ -1933,17 +2194,137 @@
                 }
               },
               {
-                "id": "22",
-                "room": "298b",
-                "nome": [
-                  "Madeddu Mauro",
-                  "Vaiani Giacomo",
-                  "Danushi Ornela",
-                  "Ottimo Alberto",
-                  "Pugliese Chiara",
-                  "Besozzi Valerio",
-                  "Martinico Silvio"
+                "id": "33",
+                "room": "298a",
+                "nome": "Ricardo Daniel Lopes Almeida",
+                "alias": [
+                  "298a"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "183793",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183793"
+              },
+              {
+                "id": "34",
+                "room": "298a",
+                "nome": "Rotundo Mariagiovanna",
+                "alias": [
+                  "298a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188916",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188916"
+              },
+              {
+                "id": "35",
+                "room": "298a",
+                "nome": "Lari Filippo",
+                "alias": [
+                  "298a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "190073",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=190073"
+              },
+              {
+                "id": "36",
+                "room": "298a",
+                "nome": "Guerra Andrea",
+                "alias": [
+                  "298a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "170135",
+                "email": "a.guerra9@studenti.unipi.it",
+                "tel": "0502212765",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=170135"
+              },
+              {
+                "id": "37",
+                "room": "298a",
+                "nome": "Dalla Noce Niko",
+                "alias": [
+                  "298a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188963",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188963"
+              },
+              {
+                "id": "38",
+                "room": "298a",
+                "nome": "Gazzella Lorenzo",
+                "alias": [
+                  "298a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188999",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188999"
+              },
+              {
+                "id": "39",
+                "room": "298b",
+                "nome": "Madeddu Mauro",
+                "alias": [
+                  "298"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "191308",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=191308"
+              },
+              {
+                "id": "40",
+                "room": "298b",
+                "nome": "Vaiani Giacomo",
                 "alias": [
                   "298"
                 ],
@@ -1957,19 +2338,172 @@
                 }
               },
               {
-                "id": "23",
-                "room": "299",
-                "nome": [
-                  "Dipalma Alessandro",
-                  "Failla Andrea",
-                  "Buzzega Giovanni",
-                  "Antonioli Giacomo",
-                  "Andreani Mila",
-                  "Abramski Katherine Elizabeth",
-                  "Tortola Domenico",
-                  "Turco Calogero",
-                  "Corbucci Luca"
+                "id": "41",
+                "room": "298b",
+                "nome": "Danushi Ornela",
+                "alias": [
+                  "298"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "201916",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=201916"
+              },
+              {
+                "id": "42",
+                "room": "298b",
+                "nome": "Ottimo Alberto",
+                "alias": [
+                  "298"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "215075",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=215075"
+              },
+              {
+                "id": "43",
+                "room": "298b",
+                "nome": "Pugliese Chiara",
+                "alias": [
+                  "298"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "169968",
+                "email": "chiara.pugliese@phd.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169968"
+              },
+              {
+                "id": "44",
+                "room": "298b",
+                "nome": "Besozzi Valerio",
+                "alias": [
+                  "298"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188990",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188990"
+              },
+              {
+                "id": "45",
+                "room": "298b",
+                "nome": "Martinico Silvio",
+                "alias": [
+                  "298"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "189009",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=189009"
+              },
+              {
+                "id": "46",
+                "room": "299",
+                "nome": "Dipalma Alessandro",
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188948",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188948"
+              },
+              {
+                "id": "47",
+                "room": "299",
+                "nome": "Failla Andrea",
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "179078",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179078"
+              },
+              {
+                "id": "48",
+                "room": "299",
+                "nome": "Buzzega Giovanni",
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188931",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188931"
+              },
+              {
+                "id": "49",
+                "room": "299",
+                "nome": "Antonioli Giacomo",
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "188911",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188911"
+              },
+              {
+                "id": "50",
+                "room": "299",
+                "nome": "Andreani Mila",
                 "alias": [
                   "299"
                 ],
@@ -1983,14 +2517,81 @@
                 }
               },
               {
-                "id": "24",
-                "room": "300",
-                "nome": [
-                  "Mikhaylova Daria",
-                  "Gambetta Daniele",
-                  "Grande Elio",
-                  "Aliyev Gurban"
+                "id": "51",
+                "room": "299",
+                "nome": "Abramski Katherine Elizabeth",
+                "alias": [
+                  "299"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "179064",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179064"
+              },
+              {
+                "id": "52",
+                "room": "299",
+                "nome": "Tortola Domenico",
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "173049",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=173049"
+              },
+              {
+                "id": "53",
+                "room": "299",
+                "nome": "Turco Calogero",
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "201414",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=201414"
+              },
+              {
+                "id": "54",
+                "room": "299",
+                "nome": "Corbucci Luca",
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "215044",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=215044"
+              },
+              {
+                "id": "55",
+                "room": "300",
+                "nome": "Mikhaylova Daria",
                 "alias": [
                   "300"
                 ],
@@ -2001,19 +2602,141 @@
                   "x": 686,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "188559",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188559"
               },
               {
-                "id": "25",
-                "room": "301",
-                "nome": [
-                  "Ninniri Matteo",
-                  "Molo Mbasa Joaquim",
-                  "Piccoli Elia",
-                  "Pham Tran Huong Giang",
-                  "Coleman Eric Nuertey",
-                  "Semola Rudy"
+                "id": "56",
+                "room": "300",
+                "nome": "Gambetta Daniele",
+                "alias": [
+                  "300"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "179023",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179023"
+              },
+              {
+                "id": "57",
+                "room": "300",
+                "nome": "Grande Elio",
+                "alias": [
+                  "300"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "183046",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183046"
+              },
+              {
+                "id": "58",
+                "room": "300",
+                "nome": "Aliyev Gurban",
+                "alias": [
+                  "300"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "179012",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179012"
+              },
+              {
+                "id": "59",
+                "room": "301",
+                "nome": "Ninniri Matteo",
+                "alias": [
+                  "301"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "198773",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=198773"
+              },
+              {
+                "id": "60",
+                "room": "301",
+                "nome": "Molo Mbasa Joaquim",
+                "alias": [
+                  "301"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "183499",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183499"
+              },
+              {
+                "id": "61",
+                "room": "301",
+                "nome": "Piccoli Elia",
+                "alias": [
+                  "301"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "179206",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179206"
+              },
+              {
+                "id": "62",
+                "room": "301",
+                "nome": "Pham Tran Huong Giang",
+                "alias": [
+                  "301"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "209503",
+                "email": "giangphamtranhuong@gmail.com",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=209503"
+              },
+              {
+                "id": "63",
+                "room": "301",
+                "nome": "Coleman Eric Nuertey",
                 "alias": [
                   "301"
                 ],
@@ -2027,15 +2750,27 @@
                 }
               },
               {
-                "id": "26",
-                "room": "302",
-                "nome": [
-                  "Morini Virginia",
-                  "Beretta Isacco",
-                  "Cinquini Martina",
-                  "Amendola Maddalena",
-                  "Marchiori Manerba Marta"
+                "id": "64",
+                "room": "301",
+                "nome": "Semola Rudy",
+                "alias": [
+                  "301"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "169917",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169917"
+              },
+              {
+                "id": "65",
+                "room": "302",
+                "nome": "Morini Virginia",
                 "alias": [
                   "302"
                 ],
@@ -2046,47 +2781,142 @@
                   "x": 724,
                   "y": 487,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "204861",
+                "email": "virginia.morini@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=204861"
               },
               {
-                "id": "27",
-                "room": "304",
-                "nome": [
-                  "Miglionico Giustino Claudio",
-                  "Javed Khadija",
-                  "Della Bartola Matteo",
-                  "De Paolis Niccolò",
-                  "De Castelli Fabrizio",
-                  "Bushipaka Praveen",
-                  "Cassese Maria",
-                  "De BIase Paolo",
-                  "Di Cursi Francesco",
-                  "Giovannoni Claudio",
-                  "Mala Chandana Sree",
-                  "Mazzi Claudio",
-                  "Muscato Benedetta",
-                  "Negi Kajal",
-                  "Perri Emanuele Fulvio",
-                  "Popa Victoria",
-                  "Porcedda Riccardo",
-                  "Cardia Andrea",
-                  "Aizdi Leena",
-                  "Rucci Davide",
-                  "Bussi Laura",
-                  "Barandoni Simone",
-                  "Parisini Emanuele",
-                  "Arzilli Domenico",
-                  "Carmisciano Luca",
-                  "Domenichini Diana",
-                  "De Vincenzi Marco",
-                  "Gharb Hamid",
-                  "Lomurno Giuseppe",
-                  "Daole Mattia",
-                  "Paperini Elisa",
-                  "Boffa Antonio",
-                  "Joubbi Sara",
-                  "Kapitako Jeronia"
+                "id": "66",
+                "room": "302",
+                "nome": "Beretta Isacco",
+                "alias": [
+                  "302"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 724,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "172009",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=172009"
+              },
+              {
+                "id": "67",
+                "room": "302",
+                "nome": "Cinquini Martina",
+                "alias": [
+                  "302"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 724,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "204248",
+                "email": "martina.cinquini@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=204248"
+              },
+              {
+                "id": "68",
+                "room": "302",
+                "nome": "Amendola Maddalena",
+                "alias": [
+                  "302"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 724,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "169957",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169957"
+              },
+              {
+                "id": "69",
+                "room": "302",
+                "nome": "Marchiori Manerba Marta",
+                "alias": [
+                  "302"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 724,
+                  "y": 487,
+                  "zoom": 8
+                },
+                "unimap_id": "215107",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=215107"
+              },
+              {
+                "id": "70",
+                "room": "304",
+                "nome": "Miglionico Giustino Claudio",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188766",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188766"
+              },
+              {
+                "id": "71",
+                "room": "304",
+                "nome": "Javed Khadija",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "209252",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=209252"
+              },
+              {
+                "id": "72",
+                "room": "304",
+                "nome": "Della Bartola Matteo",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "215065",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=215065"
+              },
+              {
+                "id": "73",
+                "room": "304",
+                "nome": "De Paolis Niccolò",
                 "alias": [
                   "304"
                 ],
@@ -2100,16 +2930,540 @@
                 }
               },
               {
-                "id": "28",
-                "room": "305",
-                "nome": [
-                  "Mauro Giovanni",
-                  "Atzeni Daniele",
-                  "Iommi Andrea",
-                  "Cappuccio Eleonora",
-                  "Mesina Veronica",
-                  "sammartino vincenzo"
+                "id": "74",
+                "room": "304",
+                "nome": "De Castelli Fabrizio",
+                "alias": [
+                  "304"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "213298",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=213298"
+              },
+              {
+                "id": "75",
+                "room": "304",
+                "nome": "Bushipaka Praveen",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188800",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188800"
+              },
+              {
+                "id": "76",
+                "room": "304",
+                "nome": "Cassese Maria",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188748",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188748"
+              },
+              {
+                "id": "77",
+                "room": "304",
+                "nome": "De BIase Paolo",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188751",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188751"
+              },
+              {
+                "id": "78",
+                "room": "304",
+                "nome": "Di Cursi Francesco",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188860",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188860"
+              },
+              {
+                "id": "79",
+                "room": "304",
+                "nome": "Giovannoni Claudio",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "190086",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=190086"
+              },
+              {
+                "id": "80",
+                "room": "304",
+                "nome": "Mala Chandana Sree",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "187847",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=187847"
+              },
+              {
+                "id": "81",
+                "room": "304",
+                "nome": "Mazzi Claudio",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188642",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188642"
+              },
+              {
+                "id": "82",
+                "room": "304",
+                "nome": "Muscato Benedetta",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188641",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188641"
+              },
+              {
+                "id": "83",
+                "room": "304",
+                "nome": "Negi Kajal",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "190236",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=190236"
+              },
+              {
+                "id": "84",
+                "room": "304",
+                "nome": "Perri Emanuele Fulvio",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "187844",
+                "email": "emanuele.perri@phd.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=187844"
+              },
+              {
+                "id": "85",
+                "room": "304",
+                "nome": "Popa Victoria",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188844",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188844"
+              },
+              {
+                "id": "86",
+                "room": "304",
+                "nome": "Porcedda Riccardo",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "188773",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188773"
+              },
+              {
+                "id": "87",
+                "room": "304",
+                "nome": "Cardia Andrea",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "213238",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=213238"
+              },
+              {
+                "id": "88",
+                "room": "304",
+                "nome": "Aizdi Leena",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "201399",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=201399"
+              },
+              {
+                "id": "89",
+                "room": "304",
+                "nome": "Rucci Davide",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "90",
+                "room": "304",
+                "nome": "Bussi Laura",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "91",
+                "room": "304",
+                "nome": "Barandoni Simone",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "169616",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169616"
+              },
+              {
+                "id": "92",
+                "room": "304",
+                "nome": "Parisini Emanuele",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "172932",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=172932"
+              },
+              {
+                "id": "93",
+                "room": "304",
+                "nome": "Arzilli Domenico",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "94",
+                "room": "304",
+                "nome": "Carmisciano Luca",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "182814",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=182814"
+              },
+              {
+                "id": "95",
+                "room": "304",
+                "nome": "Domenichini Diana",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "179205",
+                "email": "diana.domenichini@phd.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179205"
+              },
+              {
+                "id": "96",
+                "room": "304",
+                "nome": "De Vincenzi Marco",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "179336",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179336"
+              },
+              {
+                "id": "97",
+                "room": "304",
+                "nome": "Gharb Hamid",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "98",
+                "room": "304",
+                "nome": "Lomurno Giuseppe",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "204838",
+                "email": "g.lomurno@studenti.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=204838"
+              },
+              {
+                "id": "99",
+                "room": "304",
+                "nome": "Daole Mattia",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "179325",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179325"
+              },
+              {
+                "id": "100",
+                "room": "304",
+                "nome": "Paperini Elisa",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "183045",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183045"
+              },
+              {
+                "id": "101",
+                "room": "304",
+                "nome": "Boffa Antonio",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "102",
+                "room": "304",
+                "nome": "Joubbi Sara",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                },
+                "unimap_id": "179002",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179002"
+              },
+              {
+                "id": "103",
+                "room": "304",
+                "nome": "Kapitako Jeronia",
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "104",
+                "room": "305",
+                "nome": "Mauro Giovanni",
                 "alias": [
                   "305"
                 ],
@@ -2120,44 +3474,104 @@
                   "x": 773,
                   "y": 420,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "169862",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169862"
               },
               {
-                "id": "29",
-                "room": "306",
-                "nome": [
-                  "Tacchi Jack",
-                  "Gargiulo Francesco",
-                  "Macchiati Valentina",
-                  "Resta Michele",
-                  "Alvarez Jose Manuel",
-                  "Fontana Michele",
-                  "Piras Valentina",
-                  "Figliè Roberto",
-                  "Ymame Yitbarek",
-                  "State Laura",
-                  "Silva De Moraes André Luiz",
-                  "Conradi Hoffmann José Luis",
-                  "Waheed Tauheed",
-                  "Munarini Monique",
-                  "Pelosi Andrea",
-                  "Scandurra Elena",
-                  "Cullen Ben William",
-                  "Nardi Mirko",
-                  "Guidi Gianluca",
-                  "Awais Ch Muhammad",
-                  "Jarouf Abdulah",
-                  "Ramjattan Reshawn",
-                  "Berbardi Paolo",
-                  "Ciaccio Cristiano",
-                  "Sabir Muhammad Waheed",
-                  "Donini Francesco",
-                  "Rehman Khalil Ur",
-                  "Berti Alessandro",
-                  "Tonci Nicolò",
-                  "Galli Filippo",
-                  "Pansanella Valentina"
+                "id": "105",
+                "room": "305",
+                "nome": "Atzeni Daniele",
+                "alias": [
+                  "305"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 420,
+                  "zoom": 8
+                },
+                "unimap_id": "169980",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169980"
+              },
+              {
+                "id": "106",
+                "room": "305",
+                "nome": "Iommi Andrea",
+                "alias": [
+                  "305"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 420,
+                  "zoom": 8
+                },
+                "unimap_id": "198739",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=198739"
+              },
+              {
+                "id": "107",
+                "room": "305",
+                "nome": "Cappuccio Eleonora",
+                "alias": [
+                  "305"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 420,
+                  "zoom": 8
+                },
+                "unimap_id": "169693",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169693"
+              },
+              {
+                "id": "108",
+                "room": "305",
+                "nome": "Mesina Veronica",
+                "alias": [
+                  "305"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 420,
+                  "zoom": 8
+                },
+                "unimap_id": "200070",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=200070"
+              },
+              {
+                "id": "109",
+                "room": "305",
+                "nome": "sammartino vincenzo",
+                "alias": [
+                  "305"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 420,
+                  "zoom": 8
+                },
+                "unimap_id": "199962",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=199962"
+              },
+              {
+                "id": "110",
+                "room": "306",
+                "nome": "Tacchi Jack",
                 "alias": [
                   "306"
                 ],
@@ -2171,17 +3585,541 @@
                 }
               },
               {
-                "id": "30",
-                "room": "308",
-                "nome": [
-                  "Gravina Alessio",
-                  "Angilieri Letizia",
-                  "Tosoni Francesco",
-                  "De Caro Valerio",
-                  "Markin Jonathan Ato",
-                  "Cioffo Cipriano Junior",
-                  "Angileri Letizia"
+                "id": "111",
+                "room": "306",
+                "nome": "Gargiulo Francesco",
+                "alias": [
+                  "306"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "204277",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=204277"
+              },
+              {
+                "id": "112",
+                "room": "306",
+                "nome": "Macchiati Valentina",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "113",
+                "room": "306",
+                "nome": "Resta Michele",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "114",
+                "room": "306",
+                "nome": "Alvarez Jose Manuel",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "115",
+                "room": "306",
+                "nome": "Fontana Michele",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "169791",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=169791"
+              },
+              {
+                "id": "116",
+                "room": "306",
+                "nome": "Piras Valentina",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "183134",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183134"
+              },
+              {
+                "id": "117",
+                "room": "306",
+                "nome": "Figliè Roberto",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "118",
+                "room": "306",
+                "nome": "Ymame Yitbarek",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "119",
+                "room": "306",
+                "nome": "State Laura",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "120",
+                "room": "306",
+                "nome": "Silva De Moraes André Luiz",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "187541",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=187541"
+              },
+              {
+                "id": "121",
+                "room": "306",
+                "nome": "Conradi Hoffmann José Luis",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "122",
+                "room": "306",
+                "nome": "Waheed Tauheed",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "179282",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179282"
+              },
+              {
+                "id": "123",
+                "room": "306",
+                "nome": "Munarini Monique",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "179067",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179067"
+              },
+              {
+                "id": "124",
+                "room": "306",
+                "nome": "Pelosi Andrea",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "184293",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=184293"
+              },
+              {
+                "id": "125",
+                "room": "306",
+                "nome": "Scandurra Elena",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "126",
+                "room": "306",
+                "nome": "Cullen Ben William",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "188925",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188925"
+              },
+              {
+                "id": "127",
+                "room": "306",
+                "nome": "Nardi Mirko",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "128",
+                "room": "306",
+                "nome": "Guidi Gianluca",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "121532",
+                "email": "gianlu.guidi@gmail.com",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=121532"
+              },
+              {
+                "id": "129",
+                "room": "306",
+                "nome": "Awais Ch Muhammad",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "183083",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183083"
+              },
+              {
+                "id": "130",
+                "room": "306",
+                "nome": "Jarouf Abdulah",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "131",
+                "room": "306",
+                "nome": "Ramjattan Reshawn",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "132",
+                "room": "306",
+                "nome": "Berbardi Paolo",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "133",
+                "room": "306",
+                "nome": "Ciaccio Cristiano",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "213293",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=213293"
+              },
+              {
+                "id": "134",
+                "room": "306",
+                "nome": "Sabir Muhammad Waheed",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "173748",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=173748"
+              },
+              {
+                "id": "135",
+                "room": "306",
+                "nome": "Donini Francesco",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "183752",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183752"
+              },
+              {
+                "id": "136",
+                "room": "306",
+                "nome": "Rehman Khalil Ur",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "137",
+                "room": "306",
+                "nome": "Berti Alessandro",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "196603",
+                "email": "alessandro.berti@df.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=196603"
+              },
+              {
+                "id": "138",
+                "room": "306",
+                "nome": "Tonci Nicolò",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "139",
+                "room": "306",
+                "nome": "Galli Filippo",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "140",
+                "room": "306",
+                "nome": "Pansanella Valentina",
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                },
+                "unimap_id": "195335",
+                "email": "valentina.pansanella@gmail.com",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=195335"
+              },
+              {
+                "id": "141",
+                "room": "308",
+                "nome": "Gravina Alessio",
+                "alias": [
+                  "308"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                },
+                "unimap_id": "197836",
+                "email": "alessio.gravina@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=197836"
+              },
+              {
+                "id": "142",
+                "room": "308",
+                "nome": "Angilieri Letizia",
                 "alias": [
                   "308"
                 ],
@@ -2195,12 +4133,98 @@
                 }
               },
               {
-                "id": "31",
-                "room": "310",
-                "nome": [
-                  "Marrucci Monica",
-                  "Tomatis Veronica"
+                "id": "143",
+                "room": "308",
+                "nome": "Tosoni Francesco",
+                "alias": [
+                  "308"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "144",
+                "room": "308",
+                "nome": "De Caro Valerio",
+                "alias": [
+                  "308"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                },
+                "unimap_id": "195922",
+                "email": "valerio.decaro@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=195922"
+              },
+              {
+                "id": "145",
+                "room": "308",
+                "nome": "Markin Jonathan Ato",
+                "alias": [
+                  "308"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "146",
+                "room": "308",
+                "nome": "Cioffo Cipriano Junior",
+                "alias": [
+                  "308"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                },
+                "unimap_id": "206108",
+                "email": "ciprianojunior.cioffo@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=206108"
+              },
+              {
+                "id": "147",
+                "room": "308",
+                "nome": "Angileri Letizia",
+                "alias": [
+                  "308"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                },
+                "unimap_id": "199072",
+                "email": "letizia.angileri@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=199072"
+              },
+              {
+                "id": "148",
+                "room": "310",
+                "nome": "Marrucci Monica",
                 "alias": [
                   "310"
                 ],
@@ -2211,10 +4235,34 @@
                   "x": 725,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "141698",
+                "email": "monica.marrucci@unipi.it",
+                "tel": "050 2212864",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=141698"
               },
               {
-                "id": "32",
+                "id": "149",
+                "room": "310",
+                "nome": "Tomatis Veronica",
+                "alias": [
+                  "310"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 725,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "117605",
+                "email": "veronica.tomatis@unipi.it",
+                "tel": "050-2212778",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=117605"
+              },
+              {
+                "id": "150",
                 "room": "311",
                 "nome": "Galli Massimiliano",
                 "alias": [
@@ -2227,15 +4275,36 @@
                   "x": 705,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "2311",
+                "email": "massimiliano.galli@unipi.it",
+                "tel": "050 2213179",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2311"
               },
               {
-                "id": "33",
+                "id": "151",
                 "room": "312",
-                "nome": [
-                  "Donati Alessia",
-                  "Poli Aurora"
+                "nome": "Donati Alessia",
+                "alias": [
+                  "312"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "177415",
+                "email": "alessia.donati@unipi.it",
+                "tel": "050 2212702",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=177415"
+              },
+              {
+                "id": "152",
+                "room": "312",
+                "nome": "Poli Aurora",
                 "alias": [
                   "312"
                 ],
@@ -2249,7 +4318,7 @@
                 }
               },
               {
-                "id": "34",
+                "id": "153",
                 "room": "313",
                 "nome": "Sovani Camilla",
                 "alias": [
@@ -2262,10 +4331,14 @@
                   "x": 667,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "137157",
+                "email": "camilla.sovani@unipi.it",
+                "tel": "050 2213178",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=137157"
               },
               {
-                "id": "35",
+                "id": "154",
                 "room": "314",
                 "nome": "Pasqualetti Stefania",
                 "alias": [
@@ -2278,10 +4351,14 @@
                   "x": 648,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "2433",
+                "email": "stefania.pasqualetti@unipi.it",
+                "tel": "0502212705",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2433"
               },
               {
-                "id": "36",
+                "id": "155",
                 "room": "315",
                 "nome": "Mannaioni Cristina",
                 "alias": [
@@ -2294,10 +4371,15 @@
                   "x": 630,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "2472",
+                "email": "cristina.mannaioni@unipi.it",
+                "tel": "0502212724",
+                "fax": "050 551369",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2472"
               },
               {
-                "id": "37",
+                "id": "156",
                 "room": "316",
                 "nome": "Cantini Rita",
                 "alias": [
@@ -2310,10 +4392,15 @@
                   "x": 611,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "2759",
+                "email": "rita.cantini@unipi.it",
+                "tel": "050 221 2732",
+                "fax": "050 221 2726",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2759"
               },
               {
-                "id": "38",
+                "id": "157",
                 "room": "318",
                 "nome": "Pedreschi Dino",
                 "alias": [
@@ -2326,15 +4413,19 @@
                   "x": 513,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "6070",
+                "email": "dino.pedreschi@unipi.it",
+                "tel": "050 221 2752",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=6070&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~pedre",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=6070"
               },
               {
-                "id": "39",
+                "id": "158",
                 "room": "319",
-                "nome": [
-                  "Bruni Roberto",
-                  "Gori Roberta"
-                ],
+                "nome": "Bruni Roberto",
                 "alias": [
                   "319"
                 ],
@@ -2345,15 +4436,42 @@
                   "x": 493,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4248",
+                "email": "roberto.bruni@unipi.it",
+                "tel": "050 221 2785",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4248&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~bruni",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4248"
               },
               {
-                "id": "40",
-                "room": "320",
-                "nome": [
-                  "Cisternino Antonio",
-                  "Gervasi Vincenzo"
+                "id": "159",
+                "room": "319",
+                "nome": "Gori Roberta",
+                "alias": [
+                  "319"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 493,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "4249",
+                "email": "roberta.gori@unipi.it",
+                "tel": "050 221 3123",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4249&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~gori",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4249"
+              },
+              {
+                "id": "160",
+                "room": "320",
+                "nome": "Cisternino Antonio",
                 "alias": [
                   "320"
                 ],
@@ -2364,10 +4482,40 @@
                   "x": 474,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4868",
+                "email": "antonio.cisternino@unipi.it",
+                "tel": "050 2213149",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4868&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~cisterni",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4868"
               },
               {
-                "id": "41",
+                "id": "161",
+                "room": "320",
+                "nome": "Gervasi Vincenzo",
+                "alias": [
+                  "320"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "361",
+                "email": "vincenzo.gervasi@unipi.it",
+                "tel": "050 2212773",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=361&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~gervasi",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=361"
+              },
+              {
+                "id": "162",
                 "room": "321",
                 "nome": "Ruggieri Salvatore",
                 "alias": [
@@ -2380,15 +4528,19 @@
                   "x": 455,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "3948",
+                "email": "salvatore.ruggieri@unipi.it",
+                "tel": "050 221 2782",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=3948&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/ruggieri",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=3948"
               },
               {
-                "id": "42",
+                "id": "163",
                 "room": "322",
-                "nome": [
-                  "Guidi Barbara",
-                  "Bernasconi Anna"
-                ],
+                "nome": "Guidi Barbara",
                 "alias": [
                   "322"
                 ],
@@ -2399,15 +4551,40 @@
                   "x": 436,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "118071",
+                "email": "barbara.guidi@unipi.it",
+                "tel": "050 2213808",
+                "url": "https://sites.google.com/site/barbaraguidiwebsite/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=118071"
               },
               {
-                "id": "43",
-                "room": "323",
-                "nome": [
-                  "Novellani Stefano",
-                  "Bigi Giancarlo"
+                "id": "164",
+                "room": "322",
+                "nome": "Bernasconi Anna",
+                "alias": [
+                  "322"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 436,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "5852",
+                "email": "anna.bernasconi@unipi.it",
+                "tel": "050 221 3121",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5852&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~annab",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5852"
+              },
+              {
+                "id": "165",
+                "room": "323",
+                "nome": "Novellani Stefano",
                 "alias": [
                   "323"
                 ],
@@ -2418,15 +4595,38 @@
                   "x": 417,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "210495",
+                "email": "stefano.novellani@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=210495"
               },
               {
-                "id": "44",
-                "room": "324",
-                "nome": [
-                  "Vinciguerra Giorgio",
-                  "Guerrini Veronica"
+                "id": "166",
+                "room": "323",
+                "nome": "Bigi Giancarlo",
+                "alias": [
+                  "323"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 417,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "5645",
+                "email": "giancarlo.bigi@unipi.it",
+                "tel": "050 221 3124",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5645&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~bigig",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5645"
+              },
+              {
+                "id": "167",
+                "room": "324",
+                "nome": "Vinciguerra Giorgio",
                 "alias": [
                   "324"
                 ],
@@ -2437,10 +4637,33 @@
                   "x": 397,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "172064",
+                "email": "giorgio.vinciguerra@unipi.it",
+                "url": "http://pages.di.unipi.it/vinciguerra/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=172064"
               },
               {
-                "id": "45",
+                "id": "168",
+                "room": "324",
+                "nome": "Guerrini Veronica",
+                "alias": [
+                  "324"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 397,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "128801",
+                "email": "veronica.guerrini@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=128801"
+              },
+              {
+                "id": "169",
                 "room": "325",
                 "nome": "Mancarella Paolo",
                 "alias": [
@@ -2453,10 +4676,17 @@
                   "x": 379,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "6054",
+                "email": "paolo.mancarella@unipi.it",
+                "tel": "050 2212710",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=6054&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~paolo",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=6054"
               },
               {
-                "id": "46",
+                "id": "170",
                 "room": "326",
                 "nome": "Gemignani Luca",
                 "alias": [
@@ -2469,10 +4699,17 @@
                   "x": 360,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5608",
+                "email": "luca.gemignani@unipi.it",
+                "tel": "050 2213136",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5608&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/user/lgemignani/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5608"
               },
               {
-                "id": "47",
+                "id": "171",
                 "room": "327",
                 "nome": "Frangioni Antonio",
                 "alias": [
@@ -2485,15 +4722,19 @@
                   "x": 340,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "389",
+                "email": "antonio.frangioni@unipi.it",
+                "tel": "050 221 2789",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=389&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~frangio",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=389"
               },
               {
-                "id": "48",
+                "id": "172",
                 "room": "328",
-                "nome": [
-                  "Frosini Patrizio",
-                  "Ferrucci Luca"
-                ],
+                "nome": "Frosini Patrizio",
                 "alias": [
                   "328"
                 ],
@@ -2504,15 +4745,35 @@
                   "x": 323,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "198939",
+                "email": "patrizio.frosini@unipi.it",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=198939&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=198939"
               },
               {
-                "id": "49",
-                "room": "329a",
-                "nome": [
-                  "Cortinovis Alice",
-                  "Semini Laura"
+                "id": "173",
+                "room": "328",
+                "nome": "Ferrucci Luca",
+                "alias": [
+                  "328"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 323,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "182134",
+                "email": "luca.ferrucci@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=182134"
+              },
+              {
+                "id": "174",
+                "room": "329a",
+                "nome": "Cortinovis Alice",
                 "alias": [
                   "329a"
                 ],
@@ -2523,15 +4784,38 @@
                   "x": 302,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "199480",
+                "email": "alice.cortinovis@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=199480"
               },
               {
-                "id": "50",
-                "room": "330",
-                "nome": [
-                  "Conte Alessio",
-                  "Tortorella Domenico"
+                "id": "175",
+                "room": "329a",
+                "nome": "Semini Laura",
+                "alias": [
+                  "329a"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 302,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "3944",
+                "email": "laura.semini@unipi.it",
+                "tel": "050 221 2783",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=3944&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~semini",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=3944"
+              },
+              {
+                "id": "176",
+                "room": "330",
+                "nome": "Conte Alessio",
                 "alias": [
                   "330"
                 ],
@@ -2542,10 +4826,32 @@
                   "x": 204,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "136624",
+                "email": "alessio.conte@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=136624"
               },
               {
-                "id": "51",
+                "id": "177",
+                "room": "330",
+                "nome": "Tortorella Domenico",
+                "alias": [
+                  "330"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 204,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "195212",
+                "email": "domenico.tortorella@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=195212"
+              },
+              {
+                "id": "178",
                 "room": "331",
                 "nome": "Bacciu Davide",
                 "alias": [
@@ -2558,15 +4864,19 @@
                   "x": 184,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "45846",
+                "email": "davide.bacciu@unipi.it",
+                "tel": "050 2212749",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=45846&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/bacciu/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=45846"
               },
               {
-                "id": "52",
+                "id": "179",
                 "room": "332",
-                "nome": [
-                  "Lanza Giacomo",
-                  "Mencarelli Luca"
-                ],
+                "nome": "Lanza Giacomo",
                 "alias": [
                   "332"
                 ],
@@ -2577,15 +4887,34 @@
                   "x": 166,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "134188",
+                "email": "giacomo.lanza@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=134188"
               },
               {
-                "id": "53",
-                "room": "333",
-                "nome": [
-                  "Di Francesco Maesa Damiano",
-                  "Ceni Andrea"
+                "id": "180",
+                "room": "332",
+                "nome": "Mencarelli Luca",
+                "alias": [
+                  "332"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 166,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "184109",
+                "email": "luca.mencarelli@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=184109"
+              },
+              {
+                "id": "181",
+                "room": "333",
+                "nome": "Di Francesco Maesa Damiano",
                 "alias": [
                   "333"
                 ],
@@ -2596,10 +4925,32 @@
                   "x": 146,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "164219",
+                "email": "damiano.difrancesco@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=164219"
               },
               {
-                "id": "54",
+                "id": "182",
+                "room": "333",
+                "nome": "Ceni Andrea",
+                "alias": [
+                  "333"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "173990",
+                "email": "andrea.ceni@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=173990"
+              },
+              {
+                "id": "183",
                 "room": "334",
                 "nome": "Scutellà Maria Grazia",
                 "alias": [
@@ -2615,7 +4966,7 @@
                 }
               },
               {
-                "id": "55",
+                "id": "184",
                 "room": "335",
                 "nome": "Gadducci Fabio",
                 "alias": [
@@ -2628,16 +4979,18 @@
                   "x": 108,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "3950",
+                "email": "fabio.gadducci@unipi.it",
+                "tel": "050 221 2716",
+                "fax": "050 221 2726",
+                "url": "http://pages.di.unipi.it/gadducci/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=3950"
               },
               {
-                "id": "56",
+                "id": "185",
                 "room": "336",
-                "nome": [
-                  "Quarantiello Luigi",
-                  "Fontanesi Michele",
-                  "Poggiali Alessandro"
-                ],
+                "nome": "Quarantiello Luigi",
                 "alias": [
                   "336"
                 ],
@@ -2648,10 +5001,48 @@
                   "x": 90,
                   "y": 294,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "182934",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=182934"
               },
               {
-                "id": "57",
+                "id": "186",
+                "room": "336",
+                "nome": "Fontanesi Michele",
+                "alias": [
+                  "336"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 90,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "182947",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=182947"
+              },
+              {
+                "id": "187",
+                "room": "336",
+                "nome": "Poggiali Alessandro",
+                "alias": [
+                  "336"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 90,
+                  "y": 294,
+                  "zoom": 8
+                },
+                "unimap_id": "179377",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179377"
+              },
+              {
+                "id": "188",
                 "room": "338",
                 "nome": "Baiardi Fabrizio",
                 "alias": [
@@ -2664,10 +5055,17 @@
                   "x": 43,
                   "y": 326,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4081",
+                "email": "fabrizio.baiardi@unipi.it",
+                "tel": "050 2213137",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4081&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~tonelli/baiardi/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4081"
               },
               {
-                "id": "58",
+                "id": "189",
                 "room": "340",
                 "nome": "Brogi Antonio",
                 "alias": [
@@ -2680,15 +5078,19 @@
                   "x": 43,
                   "y": 362,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5471",
+                "email": "antonio.brogi@unipi.it",
+                "tel": "050 221 2790",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5471&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~brogi",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5471"
               },
               {
-                "id": "59",
+                "id": "190",
                 "room": "341",
-                "nome": [
-                  "Cossu Andrea",
-                  "Bocci Alessandro"
-                ],
+                "nome": "Cossu Andrea",
                 "alias": [
                   "341"
                 ],
@@ -2699,10 +5101,32 @@
                   "x": 43,
                   "y": 381,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "184416",
+                "email": "andrea.cossu@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=184416"
               },
               {
-                "id": "60",
+                "id": "191",
+                "room": "341",
+                "nome": "Bocci Alessandro",
+                "alias": [
+                  "341"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 381,
+                  "zoom": 8
+                },
+                "unimap_id": "192323",
+                "email": "alessandro.bocci@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=192323"
+              },
+              {
+                "id": "192",
                 "room": "342",
                 "nome": "Grossi Roberto",
                 "alias": [
@@ -2715,17 +5139,19 @@
                   "x": 43,
                   "y": 400,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5777",
+                "email": "roberto.grossi@unipi.it",
+                "tel": "050 221 2793",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5777&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~grossi",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5777"
               },
               {
-                "id": "61",
+                "id": "193",
                 "room": "343",
-                "nome": [
-                  "Cascione Alessio",
-                  "Landi Cristiano",
-                  "Bonsignori Valerio",
-                  "Fedele Andrea"
-                ],
+                "nome": "Cascione Alessio",
                 "alias": [
                   "343"
                 ],
@@ -2736,10 +5162,66 @@
                   "x": 43,
                   "y": 419,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "204367",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=204367"
               },
               {
-                "id": "62",
+                "id": "194",
+                "room": "343",
+                "nome": "Landi Cristiano",
+                "alias": [
+                  "343"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 419,
+                  "zoom": 8
+                },
+                "unimap_id": "179009",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179009"
+              },
+              {
+                "id": "195",
+                "room": "343",
+                "nome": "Bonsignori Valerio",
+                "alias": [
+                  "343"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 419,
+                  "zoom": 8
+                },
+                "unimap_id": "171162",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=171162"
+              },
+              {
+                "id": "196",
+                "room": "343",
+                "nome": "Fedele Andrea",
+                "alias": [
+                  "343"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 419,
+                  "zoom": 8
+                },
+                "unimap_id": "179266",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179266"
+              },
+              {
+                "id": "197",
                 "room": "344",
                 "nome": "Micheli Alessio",
                 "alias": [
@@ -2752,15 +5234,19 @@
                   "x": 43,
                   "y": 440,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4976",
+                "email": "alessio.micheli@unipi.it",
+                "tel": "050-2212798",
+                "fax": "050-2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4976&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~micheli/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4976"
               },
               {
-                "id": "63",
+                "id": "198",
                 "room": "345",
-                "nome": [
-                  "Setzu Mattia",
-                  "Podda Marco"
-                ],
+                "nome": "Setzu Mattia",
                 "alias": [
                   "345"
                 ],
@@ -2771,10 +5257,32 @@
                   "x": 43,
                   "y": 459,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "177323",
+                "email": "mattia.setzu@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=177323"
               },
               {
-                "id": "64",
+                "id": "199",
+                "room": "345",
+                "nome": "Podda Marco",
+                "alias": [
+                  "345"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 459,
+                  "zoom": 8
+                },
+                "unimap_id": "163598",
+                "email": "marco.podda@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=163598"
+              },
+              {
+                "id": "200",
                 "room": "346",
                 "nome": "Pelagatti Susanna",
                 "alias": [
@@ -2787,10 +5295,17 @@
                   "x": 128,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4717",
+                "email": "susanna.pelagatti@unipi.it",
+                "tel": "050 221 2772",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4717&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/pelagatti/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4717"
               },
               {
-                "id": "65",
+                "id": "201",
                 "room": "347",
                 "nome": "Mastroeni Giandomenico",
                 "alias": [
@@ -2803,10 +5318,17 @@
                   "x": 146,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4712",
+                "email": "giandomenico.mastroeni@unipi.it",
+                "tel": "050 2212708",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4712&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/user/gmastroeni",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4712"
               },
               {
-                "id": "66",
+                "id": "202",
                 "room": "348",
                 "nome": "Soldani Jacopo",
                 "alias": [
@@ -2819,10 +5341,15 @@
                   "x": 165,
                   "y": 440,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "128445",
+                "email": "jacopo.soldani@unipi.it",
+                "tel": "050 2213135",
+                "url": "http://pages.di.unipi.it/soldani",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=128445"
               },
               {
-                "id": "67",
+                "id": "203",
                 "room": "355",
                 "nome": "Pisanti Nadia",
                 "alias": [
@@ -2835,10 +5362,17 @@
                   "x": 165,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "1077",
+                "email": "nadia.pisanti@unipi.it",
+                "tel": "050 2213152",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=1077&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/pisanti/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=1077"
               },
               {
-                "id": "68",
+                "id": "204",
                 "room": "356",
                 "nome": "Milazzo Paolo",
                 "alias": [
@@ -2851,10 +5385,16 @@
                   "x": 145,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "6405",
+                "email": "paolo.milazzo@unipi.it",
+                "tel": "050 2213144",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=6405&template=dettaglio3.tpl",
+                "url": "https://pages.di.unipi.it/milazzo",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=6405"
               },
               {
-                "id": "69",
+                "id": "205",
                 "room": "357",
                 "nome": "Dazzi Patrizio",
                 "alias": [
@@ -2867,10 +5407,16 @@
                   "x": 127,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "122892",
+                "email": "patrizio.dazzi@unipi.it",
+                "tel": "050 2212769",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=122892&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/dazzi",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=122892"
               },
               {
-                "id": "70",
+                "id": "206",
                 "room": "358",
                 "nome": "Gallicchio Claudio",
                 "alias": [
@@ -2883,10 +5429,15 @@
                   "x": 88,
                   "y": 361,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "77974",
+                "email": "claudio.gallicchio@unipi.it",
+                "tel": "0502212111",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=77974&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=77974"
               },
               {
-                "id": "71",
+                "id": "207",
                 "room": "359",
                 "nome": "Poloni Federico Giovanni",
                 "alias": [
@@ -2899,10 +5450,16 @@
                   "x": 88,
                   "y": 381,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "87866",
+                "email": "federico.poloni@unipi.it",
+                "tel": "050 2213143",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=87866&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~fpoloni/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=87866"
               },
               {
-                "id": "72",
+                "id": "208",
                 "room": "360",
                 "nome": "Rosone Giovanna",
                 "alias": [
@@ -2915,10 +5472,16 @@
                   "x": 88,
                   "y": 400,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "109587",
+                "email": "giovanna.rosone@unipi.it",
+                "tel": "050 2212703",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=109587&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~rosone/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=109587"
               },
               {
-                "id": "73",
+                "id": "209",
                 "room": "361",
                 "nome": "Venturini Rossano",
                 "alias": [
@@ -2931,10 +5494,16 @@
                   "x": 88,
                   "y": 421,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "91121",
+                "email": "rossano.venturini@unipi.it",
+                "tel": "0502212111",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=91121&template=dettaglio3.tpl",
+                "url": "https://pages.di.unipi.it/rossano/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=91121"
               },
               {
-                "id": "74",
+                "id": "210",
                 "room": "362",
                 "nome": "Mazzei Daniele",
                 "alias": [
@@ -2947,10 +5516,15 @@
                   "x": 303,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "63429",
+                "email": "daniele.mazzei@unipi.it",
+                "tel": "050 2212779",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=63429&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=63429"
               },
               {
-                "id": "75",
+                "id": "211",
                 "room": "363",
                 "nome": "Guidotti Riccardo",
                 "alias": [
@@ -2963,10 +5537,16 @@
                   "x": 322,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "128432",
+                "email": "riccardo.guidotti@unipi.it",
+                "tel": "050 2213134",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=128432&template=dettaglio3.tpl",
+                "url": "https://kdd.isti.cnr.it/people/guidotti-riccardo",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=128432"
               },
               {
-                "id": "76",
+                "id": "212",
                 "room": "364",
                 "nome": "Paganelli Federica",
                 "alias": [
@@ -2979,10 +5559,15 @@
                   "x": 340,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "130811",
+                "email": "federica.paganelli@unipi.it",
+                "tel": "050 2212740",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=130811&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=130811"
               },
               {
-                "id": "77",
+                "id": "213",
                 "room": "365",
                 "nome": "Malizia Alessio",
                 "alias": [
@@ -2995,10 +5580,14 @@
                   "x": 380,
                   "y": 421,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "163926",
+                "email": "alessio.malizia@unipi.it",
+                "tel": "050 2213112",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=163926"
               },
               {
-                "id": "78",
+                "id": "214",
                 "room": "366",
                 "nome": "Bonchi Filippo",
                 "alias": [
@@ -3011,10 +5600,15 @@
                   "x": 380,
                   "y": 401,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "123768",
+                "email": "filippo.bonchi@unipi.it",
+                "tel": "0502212111",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=123768&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=123768"
               },
               {
-                "id": "79",
+                "id": "215",
                 "room": "367",
                 "nome": "Benvenuti Silvia",
                 "alias": [
@@ -3027,10 +5621,13 @@
                   "x": 380,
                   "y": 383,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "206577",
+                "email": "silvia.benvenuti@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=206577"
               },
               {
-                "id": "80",
+                "id": "216",
                 "room": "368",
                 "nome": "Pierotti Mariarita",
                 "alias": [
@@ -3043,10 +5640,13 @@
                   "x": 382,
                   "y": 362,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "94009",
+                "email": "mariarita.pierotti@unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=94009"
               },
               {
-                "id": "81",
+                "id": "217",
                 "room": "369",
                 "nome": "Bodei Chiara",
                 "alias": [
@@ -3059,10 +5659,17 @@
                   "x": 340,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5643",
+                "email": "chiara.bodei@unipi.it",
+                "tel": "050 221 2760",
+                "fax": "050 221 2726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5643&template=dettaglio3.tpl",
+                "url": "http://pages.di.unipi.it/bodei/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5643"
               },
               {
-                "id": "82",
+                "id": "218",
                 "room": "370",
                 "nome": "Del Corso Gianna",
                 "alias": [
@@ -3075,10 +5682,17 @@
                   "x": 322,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "5793",
+                "email": "gianna.delcorso@unipi.it",
+                "tel": "050 2213118",
+                "fax": "050 2212726",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5793&template=dettaglio3.tpl",
+                "url": "http://www.di.unipi.it/~delcorso",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5793"
               },
               {
-                "id": "83",
+                "id": "219",
                 "room": "371",
                 "nome": "Levi Francesca",
                 "alias": [
@@ -3091,17 +5705,17 @@
                   "x": 303,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "344",
+                "email": "francesca.levi@unipi.it",
+                "tel": "050 2212770",
+                "url": "http://pages.di.unipi.it/levi/",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=344"
               },
               {
-                "id": "84",
+                "id": "220",
                 "room": "372",
-                "nome": [
-                  "Tolloso Matteo",
-                  "Mannocci Lorenzo",
-                  "Cignoni Giacomo",
-                  "Tessa Benedetta"
-                ],
+                "nome": "Tolloso Matteo",
                 "alias": [
                   "372"
                 ],
@@ -3112,10 +5726,67 @@
                   "x": 281,
                   "y": 353,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "200013",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=200013"
               },
               {
-                "id": "85",
+                "id": "221",
+                "room": "372",
+                "nome": "Mannocci Lorenzo",
+                "alias": [
+                  "372"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 281,
+                  "y": 353,
+                  "zoom": 8
+                },
+                "unimap_id": "204841",
+                "email": "lorenzo.mannocci@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=204841"
+              },
+              {
+                "id": "222",
+                "room": "372",
+                "nome": "Cignoni Giacomo",
+                "alias": [
+                  "372"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 281,
+                  "y": 353,
+                  "zoom": 8
+                },
+                "unimap_id": "198395",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=198395"
+              },
+              {
+                "id": "223",
+                "room": "372",
+                "nome": "Tessa Benedetta",
+                "alias": [
+                  "372"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 281,
+                  "y": 353,
+                  "zoom": 8
+                },
+                "unimap_id": "198740",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=198740"
+              },
+              {
+                "id": "224",
                 "room": "374",
                 "nome": "Farinella Simone",
                 "alias": [
@@ -3128,10 +5799,14 @@
                   "x": 474,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "183826",
+                "email": "simone.farinella@unipi.it",
+                "tel": "0502212726",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=183826"
               },
               {
-                "id": "86",
+                "id": "225",
                 "room": "375",
                 "nome": "Capuano Luigi",
                 "alias": [
@@ -3144,15 +5819,17 @@
                   "x": 492,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "2876",
+                "email": "luigi.capuano@unipi.it",
+                "tel": "050/2213162",
+                "fax": "050/2212726",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2876"
               },
               {
-                "id": "87",
+                "id": "226",
                 "room": "376",
-                "nome": [
-                  "Carpentras Enrico",
-                  "Mongini Rosaria"
-                ],
+                "nome": "Carpentras Enrico",
                 "alias": [
                   "376"
                 ],
@@ -3163,10 +5840,37 @@
                   "x": 520,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "2727",
+                "email": "enrico.carpentras@unipi.it",
+                "tel": "050 2213110",
+                "fax": "050 2212726",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2727"
               },
               {
-                "id": "88",
+                "id": "227",
+                "room": "376",
+                "nome": "Mongini Rosaria",
+                "alias": [
+                  "376"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 520,
+                  "y": 441,
+                  "zoom": 8
+                },
+                "unimap_id": "2795",
+                "email": "rosaria.mongini@unipi.it",
+                "tel": "050 221 2727",
+                "fax": "050 221 2726",
+                "url": "http://www.di.unipi.it/~rosie",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2795"
+              },
+              {
+                "id": "228",
                 "room": "379",
                 "nome": "Salzano Luigi",
                 "alias": [
@@ -3179,10 +5883,15 @@
                   "x": 511,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "4437",
+                "email": "luigi.salzano@unipi.it",
+                "tel": "050 221 2700",
+                "fax": "050 221 2726",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=4437"
               },
               {
-                "id": "89",
+                "id": "229",
                 "room": "380",
                 "nome": "Leporini Barbara",
                 "alias": [
@@ -3195,10 +5904,15 @@
                   "x": 492,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "153742",
+                "email": "barbara.leporini@unipi.it",
+                "tel": "0502213101",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=153742&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=153742"
               },
               {
-                "id": "90",
+                "id": "230",
                 "room": "381",
                 "nome": "Prencipe Giuseppe",
                 "alias": [
@@ -3211,16 +5925,56 @@
                   "x": 474,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "8864",
+                "email": "giuseppe.prencipe@unipi.it",
+                "tel": "0502212111",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=8864&template=dettaglio3.tpl",
+                "url": "http://sbrinz.di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=8864"
               },
               {
-                "id": "91",
+                "id": "231",
                 "room": "382",
-                "nome": [
-                  "Piaggesi Simone",
-                  "Najafi Kalyani Mehdi",
-                  "Lorenzo Simone"
+                "nome": "Piaggesi Simone",
+                "alias": [
+                  "382"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 363,
+                  "zoom": 8
+                },
+                "unimap_id": "184723",
+                "email": "simone.piaggesi@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=184723"
+              },
+              {
+                "id": "232",
+                "room": "382",
+                "nome": "Najafi Kalyani Mehdi",
+                "alias": [
+                  "382"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 363,
+                  "zoom": 8
+                },
+                "unimap_id": "196773",
+                "email": "mehdi.najafi@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=196773"
+              },
+              {
+                "id": "233",
+                "room": "382",
+                "nome": "Lorenzo Simone",
                 "alias": [
                   "382"
                 ],
@@ -3234,13 +5988,48 @@
                 }
               },
               {
-                "id": "92",
+                "id": "234",
                 "room": "383",
-                "nome": [
-                  "Mwaniki Njagi",
-                  "Loporchio Matteo",
-                  "Ponce Mella Francisco Leonardo"
+                "nome": "Mwaniki Njagi",
+                "alias": [
+                  "383"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 382,
+                  "zoom": 8
+                },
+                "unimap_id": "172457",
+                "email": "njagi.mwaniki@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=172457"
+              },
+              {
+                "id": "235",
+                "room": "383",
+                "nome": "Loporchio Matteo",
+                "alias": [
+                  "383"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 382,
+                  "zoom": 8
+                },
+                "unimap_id": "195305",
+                "email": "matteo.loporchio@di.unipi.it",
+                "url": "https://pages.di.unipi.it/loporchio",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=195305"
+              },
+              {
+                "id": "236",
+                "room": "383",
+                "nome": "Ponce Mella Francisco Leonardo",
                 "alias": [
                   "383"
                 ],
@@ -3254,14 +6043,47 @@
                 }
               },
               {
-                "id": "93",
+                "id": "237",
                 "room": "384",
-                "nome": [
-                  "Mastropietro Antonio",
-                  "Shenaj Donald",
-                  "Tran Duy Nghi Benoit",
-                  "Pedrelli Luca"
+                "nome": "Mastropietro Antonio",
+                "alias": [
+                  "384"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 401,
+                  "zoom": 8
+                },
+                "unimap_id": "185178",
+                "email": "antonio.mastropietro@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=185178"
+              },
+              {
+                "id": "238",
+                "room": "384",
+                "nome": "Shenaj Donald",
+                "alias": [
+                  "384"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 401,
+                  "zoom": 8
+                },
+                "unimap_id": "212294",
+                "email": "donald.shenaj@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=212294"
+              },
+              {
+                "id": "239",
+                "room": "384",
+                "nome": "Tran Duy Nghi Benoit",
                 "alias": [
                   "384"
                 ],
@@ -3275,13 +6097,25 @@
                 }
               },
               {
-                "id": "94",
-                "room": "385",
-                "nome": [
-                  "Massa Jacopo",
-                  "Cardia Marco",
-                  "Massidda Riccardo"
+                "id": "240",
+                "room": "384",
+                "nome": "Pedrelli Luca",
+                "alias": [
+                  "384"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 401,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "241",
+                "room": "385",
+                "nome": "Massa Jacopo",
                 "alias": [
                   "385"
                 ],
@@ -3292,15 +6126,56 @@
                   "x": 427,
                   "y": 423,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "199076",
+                "email": "jacopo.massa@di.unipi.it",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=199076&template=dettaglio3.tpl",
+                "url": "https://pages.di.unipi.it/massa",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=199076"
               },
               {
-                "id": "95",
-                "room": "390",
-                "nome": [
-                  "Carfagna Lorenzo",
-                  "Carmona Gabriel"
+                "id": "242",
+                "room": "385",
+                "nome": "Cardia Marco",
+                "alias": [
+                  "385"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 427,
+                  "y": 423,
+                  "zoom": 8
+                },
+                "unimap_id": "201688",
+                "email": "marco.cardia@di.unipi.it",
+                "url": "https://pages.di.unipi.it/cardia",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=201688"
+              },
+              {
+                "id": "243",
+                "room": "385",
+                "nome": "Massidda Riccardo",
+                "alias": [
+                  "385"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 427,
+                  "y": 423,
+                  "zoom": 8
+                },
+                "unimap_id": "204839",
+                "email": "riccardo.massidda@di.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=204839"
+              },
+              {
+                "id": "244",
+                "room": "390",
+                "nome": "Carfagna Lorenzo",
                 "alias": [
                   "390"
                 ],
@@ -3311,15 +6186,32 @@
                   "x": 686,
                   "y": 441,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "189010",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=189010"
               },
               {
-                "id": "96",
-                "room": "391",
-                "nome": [
-                  "Poggianti Camilla",
-                  "Odorisio Mattia"
+                "id": "245",
+                "room": "390",
+                "nome": "Carmona Gabriel",
+                "alias": [
+                  "390"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 441,
+                  "zoom": 8
+                },
+                "unimap_id": "191104",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=191104"
+              },
+              {
+                "id": "246",
+                "room": "391",
+                "nome": "Poggianti Camilla",
                 "alias": [
                   "391"
                 ],
@@ -3333,12 +6225,45 @@
                 }
               },
               {
-                "id": "97",
-                "room": "392",
-                "nome": [
-                  "Bisicchia Giuseppe",
-                  "Tedeschi Gabiele"
+                "id": "247",
+                "room": "391",
+                "nome": "Odorisio Mattia",
+                "alias": [
+                  "391"
                 ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 421,
+                  "zoom": 8
+                },
+                "unimap_id": "188943",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=188943"
+              },
+              {
+                "id": "248",
+                "room": "392",
+                "nome": "Bisicchia Giuseppe",
+                "alias": [
+                  "392"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 400,
+                  "zoom": 8
+                },
+                "unimap_id": "179356",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=179356"
+              },
+              {
+                "id": "249",
+                "room": "392",
+                "nome": "Tedeschi Gabiele",
                 "alias": [
                   "392"
                 ],
@@ -3352,7 +6277,7 @@
                 }
               },
               {
-                "id": "98",
+                "id": "250",
                 "room": "393",
                 "nome": "Pucciarelli Simona",
                 "alias": [
@@ -3365,21 +6290,16 @@
                   "x": 727,
                   "y": 382,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "129348",
+                "email": "simona.pucciarelli@unipi.it",
+                "tel": "0502213105 - 0502210942 - 3316623975 - 3286819699",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=129348"
               },
               {
-                "id": "99",
+                "id": "251",
                 "room": "395",
-                "nome": [
-                  "Barbuti Roberto",
-                  "Deri Luca",
-                  "Maestrini Piero",
-                  "Ambriola Vincenzo",
-                  "Degano Pierpaolo",
-                  "Böerger Egon",
-                  "Romani Francesco",
-                  "Gallo Giorgio"
-                ],
+                "nome": "Barbuti Roberto",
                 "alias": [
                   "395"
                 ],
@@ -3393,7 +6313,127 @@
                 }
               },
               {
-                "id": "100",
+                "id": "252",
+                "room": "395",
+                "nome": "Deri Luca",
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "253",
+                "room": "395",
+                "nome": "Maestrini Piero",
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "254",
+                "room": "395",
+                "nome": "Ambriola Vincenzo",
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                },
+                "unimap_id": "5634",
+                "email": "vincenzo.ambriola@unipi.it",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5634&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5634"
+              },
+              {
+                "id": "255",
+                "room": "395",
+                "nome": "Degano Pierpaolo",
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                },
+                "unimap_id": "5655",
+                "email": "carlapierpa@yahoo.it",
+                "cv_link": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5655&template=dettaglio3.tpl",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=5655"
+              },
+              {
+                "id": "256",
+                "room": "395",
+                "nome": "Böerger Egon",
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "257",
+                "room": "395",
+                "nome": "Romani Francesco",
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "258",
+                "room": "395",
+                "nome": "Gallo Giorgio",
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "259",
                 "room": "396",
                 "nome": "Barsotti Simona",
                 "alias": [
@@ -3406,10 +6446,15 @@
                   "x": 668,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "3469",
+                "email": "simona.barsotti@unipi.it",
+                "tel": "050 2212709",
+                "url": "http://www.unipi.it",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=3469"
               },
               {
-                "id": "101",
+                "id": "260",
                 "room": "397",
                 "nome": "Serafini Ramona",
                 "alias": [
@@ -3422,7 +6467,12 @@
                   "x": 649,
                   "y": 341,
                   "zoom": 8
-                }
+                },
+                "unimap_id": "2655",
+                "email": "ramona.serafini@unipi.it",
+                "tel": "050 2212723",
+                "fax": "050 2212726",
+                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=2655"
               }
             ]
           }

@@ -2748,8 +2748,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (result.room) {
                     const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
 
-                    const personName = result.isPerson ? result.room.nome : null;
-                    selectRoom(result.polo, result.edificio, result.piano, result.room, personName);
+                    selectRoom(result.polo, result.edificio, result.piano, result.room);
                     hideSearchResultsPanels();
                     currentSearchInput.value = result.room.nome;
 
@@ -3491,6 +3490,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             function getRoomBaseShortCode(room) {
                 if (!room) return null;
+                // For persons, use the NAME as the short code (as requested by user)
+                if (room.type === 'persona' && room.nome) {
+                    return normalizeShortCode(room.nome);
+                }
+
                 if (Array.isArray(room.alias)) {
                     const validAlias = room.alias.find(alias => alias && alias.trim().length > 0);
                     if (validAlias) {
@@ -3563,6 +3567,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function generateRobustShortCode(poloName, targetRoom) {
                 const baseCode = getRoomBaseShortCode(targetRoom);
                 if (!baseCode) return null;
+
+                // Optimization removed: Names might collide, so we need to check collisions for everyone.
+                // if (targetRoom.type === 'persona') { ... }
 
                 const allRooms = getAllRoomsInPolo(poloName);
 
@@ -3739,14 +3746,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             // Nuova funzione per selezionare un'aula senza ricaricare la mappa
-            function selectRoom(polo, edificio, piano, room, personName = null) {
+            function selectRoom(polo, edificio, piano, room) {
                 const eligibleForShortLink = isRoomEligibleForShortLink(room);
                 if (eligibleForShortLink) {
                     const contextParams = { polo, building: edificio, floor: piano, room };
-                    // If personName is provided (for persona type), use it as codeOverride
-                    if (personName) {
-                        contextParams.codeOverride = normalizeShortCode(personName);
-                    }
+                    // We no longer need codeOverride for persons, as their ID is their short code now.
                     setShortLinkContext(contextParams);
                 } else {
                     clearShortLinkContext();
@@ -4000,27 +4004,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     }
                                     // 3. Check for People
                                     else if (item.type === 'persona') {
-                                        const personNames = Array.isArray(item.nome) ? item.nome : [item.nome];
-                                        personNames.forEach(singleName => {
-                                            const nameLower = singleName.toLowerCase();
-                                            const matches = isExactSearch ?
-                                                nameLower === queryLower :
-                                                nameLower.includes(queryLower);
+                                        // Simplified: unified.json now guarantees 'nome' is a string, not an array.
+                                        const name = item.nome;
+                                        const nameLower = name.toLowerCase();
+                                        const matches = isExactSearch ?
+                                            nameLower === queryLower :
+                                            nameLower.includes(queryLower);
 
-                                            if (matches) {
-                                                const personView = {
-                                                    ...item,
-                                                    nome: singleName
-                                                };
-                                                peopleMatches.push({
-                                                    polo: poloName,
-                                                    edificio: buildingName,
-                                                    piano: floorName,
-                                                    room: personView,
-                                                    isPerson: true
-                                                });
-                                            }
-                                        });
+                                        if (matches) {
+                                            peopleMatches.push({
+                                                polo: poloName,
+                                                edificio: buildingName,
+                                                piano: floorName,
+                                                room: item,
+                                                isPerson: true
+                                            });
+                                        }
                                     }
                                 });
                             }
@@ -6603,27 +6602,81 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         const personElement = document.createElement('a');
                         personElement.href = '#';
-                        personElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg';
+                        personElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg'; // Reduced padding for people
+
+                        // --- Details Construction ---
+                        const personInfoElement = document.createElement('div');
+                        let detailsCount = 0;
+                        personInfoElement.className = 'capacity-info hidden pl-10 p-2 text-sm text-gray-600 space-y-2'; // Uniform spacing with space-y-2
+
+                        // Helper for uniform rows
+                        function addDetailRow(icon, contentHtml) {
+                            detailsCount++;
+                            personInfoElement.innerHTML += `
+                                <div class="flex items-center space-x-2 overflow-hidden">
+                                     <span class="material-symbols-outlined shrink-0" style="font-size: 16px; width: 16px; text-align: center;">${icon}</span>
+                                     <span class="truncate">${contentHtml}</span>
+                                </div>`;
+                        }
+
+                        // 1. Contact Info (Email, Phone, Fax)
+                        const pData = entry.personData;
+
+                        // Email
+                        if (pData.email) {
+                            addDetailRow('mail', `<a href="mailto:${pData.email}" class="hover:underline" title="${pData.email}">${pData.email}</a>`);
+                        }
+
+                        // Phone
+                        if (pData.tel) {
+                            addDetailRow('call', `<a href="tel:${pData.tel.replace(/\s/g, '')}" class="hover:underline">${pData.tel}</a>`);
+                        }
+
+                        // Fax
+                        if (pData.fax) {
+                            addDetailRow('print', `<span>${pData.fax}</span>`);
+                        }
+
+                        // 2. Links (CV, Website, UniMap) - Now as uniform rows
+                        if (pData.cv_link) {
+                            addDetailRow('history_edu', `<a href="${pData.cv_link}" target="_blank" class="hover:underline">CV</a>`);
+                        }
+
+                        if (pData.url) {
+                            addDetailRow('language', `<a href="${pData.url}" target="_blank" class="hover:underline">Sito Web</a>`);
+                        }
+
+                        if (pData.unimap_url) {
+                            addDetailRow('link', `<a href="${pData.unimap_url}" target="_blank" class="hover:underline">UniMap</a>`);
+                        }
+
+
+                        const hasDetails = detailsCount > 0;
+                        const expandIconStyle = hasDetails ? 'font-size: 20px; line-height: 1; transition: transform 0.2s;' : 'display: none;';
 
                         personElement.innerHTML = `
-                                <span class="flex items-center space-x-3">
-                                    <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
+                                <span class="flex items-center space-x-3 overflow-hidden">
+                                    <span class="material-symbols-outlined shrink-0" style="font-size: 18px; line-height: 1;">
                                     person
                                     </span>
-                                    <span>${entry.name}</span>
+                                    <span class="truncate">${entry.name}</span>
+                                </span>
+                                <span class="material-symbols-outlined expand-icon shrink-0" style="${expandIconStyle}">
+                                    expand_more
                                 </span>
                             `;
 
                         personElement.addEventListener('click', (e) => {
                             e.preventDefault();
 
+                            // Logic for Short Link & Map Selection
                             if (isRoomEligibleForShortLink(entry.personData)) {
                                 setShortLinkContext({
                                     polo: selectedPolo,
                                     building: selectedBuilding,
                                     floor: selectedFloor,
                                     room: entry.personData,
-                                    codeOverride: normalizeShortCode(entry.name)
+                                    codeOverride: normalizeShortCode(entry.name) // Use person name for short code
                                 });
                                 updateURL(true);
                             } else {
@@ -6631,9 +6684,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             }
 
                             centerMapOnRoom(entry.personData);
+
+                            // Toggle Details Logic
+                            requestAnimationFrame(() => {
+                                if (hasDetails) {
+                                    personInfoElement.classList.toggle('hidden');
+                                    const expandIcon = personElement.querySelector('.expand-icon');
+                                    if (expandIcon) {
+                                        expandIcon.style.transform = personInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                                    }
+                                }
+                            });
                         });
 
                         personContainer.appendChild(personElement);
+                        personContainer.appendChild(personInfoElement);
                         peopleContainer.appendChild(personContainer);
                     });
 
@@ -6815,6 +6880,37 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }, 100);
                     }
                 });
+
+                // Cerca anche tra le persone
+                const peopleContainer = document.getElementById('temp-people-container');
+                if (peopleContainer) {
+                    const peopleItems = peopleContainer.querySelectorAll('.nav-item-container');
+                    peopleItems.forEach((container) => {
+                        const personHeader = container.querySelector('.nav-item');
+                        if (personHeader) {
+                            // The person name is in the second span inside the first span
+                            // Structure: outer span (flex) -> icon, name span
+                            const nameSpan = personHeader.querySelector('span.flex > span:nth-child(2)');
+                            if (nameSpan && nameSpan.textContent === roomName) {
+                                const roomInfo = container.querySelector('.capacity-info');
+                                const expandIcon = personHeader.querySelector('.expand-icon');
+
+                                if (roomInfo && expandIcon) {
+                                    roomInfo.classList.remove('hidden');
+                                    expandIcon.style.transform = 'rotate(180deg)';
+
+                                    setTimeout(() => {
+                                        personHeader.scrollIntoView({
+                                            behavior: 'smooth',
+                                            block: 'center',
+                                            inline: 'nearest'
+                                        });
+                                    }, 100);
+                                }
+                            }
+                        }
+                    });
+                }
             }
 
             function selectBuilding(building, floorToSelect = null, viewParams = null, viewToSelect = null, roomData = null) {
