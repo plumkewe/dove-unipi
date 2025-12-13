@@ -1,0 +1,1910 @@
+{
+  "polo": {
+    "fibonacci": {
+      "edificio": {
+        "a": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        },
+        "b": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        },
+        "c": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": [
+              {
+                "id": "1",
+                "room": "277",
+                "nome": "Priami Corrado",
+                "alias": [
+                  "277"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 89,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "2",
+                "room": "278",
+                "nome": [
+                  "Turini Franco",
+                  "Luccio Fabrizio"
+                ],
+                "alias": [
+                  "278"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 108,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "3",
+                "room": "279",
+                "nome": "Forti Stefano",
+                "alias": [
+                  "279"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 127,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "4",
+                "room": "280",
+                "nome": [
+                  "Bell Jack Charles",
+                  "Miglior Luca",
+                  "Li Malio"
+                ],
+                "alias": [
+                  "280"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "5",
+                "room": "281",
+                "nome": "Ferrari Gianluigi",
+                "alias": [
+                  "281"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 166,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "6",
+                "room": "282",
+                "nome": [
+                  "Galfrè Silvia Giulia",
+                  "Naretto Francesca"
+                ],
+                "alias": [
+                  "282"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 184,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "7",
+                "room": "283",
+                "nome": [
+                  "Turchi Tommaso",
+                  "Kocian Alexander"
+                ],
+                "alias": [
+                  "283"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 204,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "8",
+                "room": "285",
+                "nome": "Ricci Laura",
+                "alias": [
+                  "285"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 302,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "9",
+                "room": "286",
+                "nome": [
+                  "Montanari Ugo",
+                  "Corradini Andrea"
+                ],
+                "alias": [
+                  "286"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 322,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "10",
+                "room": "287",
+                "nome": [
+                  "Torquati Massimo",
+                  "Mencagli Gabriele"
+                ],
+                "alias": [
+                  "287"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "11",
+                "room": "288",
+                "nome": [
+                  "Punzi Giulia",
+                  "Pollacci Laura"
+                ],
+                "alias": [
+                  "288"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 360,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "12",
+                "room": "289",
+                "nome": "Pappalardo Massimo",
+                "alias": [
+                  "289"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 379,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "13",
+                "room": "290",
+                "nome": "Ghelli Giorgio",
+                "alias": [
+                  "290"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 398,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "14",
+                "room": "291",
+                "nome": [
+                  "Spinnato Francesco",
+                  "Michienzi Andrea"
+                ],
+                "alias": [
+                  "291"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 416,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "15",
+                "room": "292",
+                "nome": "Danelutto Marco",
+                "alias": [
+                  "292"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 436,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "16",
+                "room": "293",
+                "nome": "Carta Antonio",
+                "alias": [
+                  "293"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 454,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "17",
+                "room": "294",
+                "nome": "Manzini Giovanni",
+                "alias": [
+                  "294"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "18",
+                "room": "295",
+                "nome": [
+                  "Ferragina Paolo",
+                  "Monreale Anna"
+                ],
+                "alias": [
+                  "295"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 492,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "19",
+                "room": "296a",
+                "nome": "Chessa Stefano",
+                "alias": [
+                  "296a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 513,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "20",
+                "room": "297",
+                "nome": [
+                  "Cau Erica",
+                  "Trenta Alessandro"
+                ],
+                "alias": [
+                  "297"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 611,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "21",
+                "room": "298a",
+                "nome": [
+                  "Gaglianese Marco",
+                  "Ricardo Daniel Lopes Almeida",
+                  "Rotundo Mariagiovanna",
+                  "Lari Filippo",
+                  "Guerra Andrea",
+                  "Dalla Noce Niko",
+                  "Gazzella Lorenzo"
+                ],
+                "alias": [
+                  "298a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "22",
+                "room": "298b",
+                "nome": [
+                  "Madeddu Mauro",
+                  "Vaiani Giacomo",
+                  "Danushi Ornela",
+                  "Ottimo Alberto",
+                  "Pugliese Chiara",
+                  "Besozzi Valerio",
+                  "Martinico Silvio"
+                ],
+                "alias": [
+                  "298"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "23",
+                "room": "299",
+                "nome": [
+                  "Dipalma Alessandro",
+                  "Failla Andrea",
+                  "Buzzega Giovanni",
+                  "Antonioli Giacomo",
+                  "Andreani Mila",
+                  "Abramski Katherine Elizabeth",
+                  "Tortola Domenico",
+                  "Turco Calogero",
+                  "Corbucci Luca"
+                ],
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "24",
+                "room": "300",
+                "nome": [
+                  "Mikhaylova Daria",
+                  "Gambetta Daniele",
+                  "Grande Elio",
+                  "Aliyev Gurban"
+                ],
+                "alias": [
+                  "300"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "25",
+                "room": "301",
+                "nome": [
+                  "Ninniri Matteo",
+                  "Molo Mbasa Joaquim",
+                  "Piccoli Elia",
+                  "Pham Tran Huong Giang",
+                  "Coleman Eric Nuertey",
+                  "Semola Rudy"
+                ],
+                "alias": [
+                  "301"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "26",
+                "room": "302",
+                "nome": [
+                  "Morini Virginia",
+                  "Beretta Isacco",
+                  "Cinquini Martina",
+                  "Amendola Maddalena",
+                  "Marchiori Manerba Marta"
+                ],
+                "alias": [
+                  "302"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 724,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "27",
+                "room": "304",
+                "nome": [
+                  "Miglionico Giustino Claudio",
+                  "Javed Khadija",
+                  "Della Bartola Matteo",
+                  "De Paolis Niccolò",
+                  "De Castelli Fabrizio",
+                  "Bushipaka Praveen",
+                  "Cassese Maria",
+                  "De BIase Paolo",
+                  "Di Cursi Francesco",
+                  "Giovannoni Claudio",
+                  "Mala Chandana Sree",
+                  "Mazzi Claudio",
+                  "Muscato Benedetta",
+                  "Negi Kajal",
+                  "Perri Emanuele Fulvio",
+                  "Popa Victoria",
+                  "Porcedda Riccardo",
+                  "Cardia Andrea",
+                  "Aizdi Leena",
+                  "Rucci Davide",
+                  "Bussi Laura",
+                  "Barandoni Simone",
+                  "Parisini Emanuele",
+                  "Arzilli Domenico",
+                  "Carmisciano Luca",
+                  "Domenichini Diana",
+                  "De Vincenzi Marco",
+                  "Gharb Hamid",
+                  "Lomurno Giuseppe",
+                  "Daole Mattia",
+                  "Paperini Elisa",
+                  "Boffa Antonio",
+                  "Joubbi Sara",
+                  "Kapitako Jeronia"
+                ],
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "28",
+                "room": "305",
+                "nome": [
+                  "Mauro Giovanni",
+                  "Atzeni Daniele",
+                  "Iommi Andrea",
+                  "Cappuccio Eleonora",
+                  "Mesina Veronica",
+                  "sammartino vincenzo"
+                ],
+                "alias": [
+                  "305"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 420,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "29",
+                "room": "306",
+                "nome": [
+                  "Tacchi Jack",
+                  "Gargiulo Francesco",
+                  "Macchiati Valentina",
+                  "Resta Michele",
+                  "Alvarez Jose Manuel",
+                  "Fontana Michele",
+                  "Piras Valentina",
+                  "Figliè Roberto",
+                  "Ymame Yitbarek",
+                  "State Laura",
+                  "Silva De Moraes André Luiz",
+                  "Conradi Hoffmann José Luis",
+                  "Waheed Tauheed",
+                  "Munarini Monique",
+                  "Pelosi Andrea",
+                  "Scandurra Elena",
+                  "Cullen Ben William",
+                  "Nardi Mirko",
+                  "Guidi Gianluca",
+                  "Awais Ch Muhammad",
+                  "Jarouf Abdulah",
+                  "Ramjattan Reshawn",
+                  "Berbardi Paolo",
+                  "Ciaccio Cristiano",
+                  "Sabir Muhammad Waheed",
+                  "Donini Francesco",
+                  "Rehman Khalil Ur",
+                  "Berti Alessandro",
+                  "Tonci Nicolò",
+                  "Galli Filippo",
+                  "Pansanella Valentina"
+                ],
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "30",
+                "room": "308",
+                "nome": [
+                  "Gravina Alessio",
+                  "Angilieri Letizia",
+                  "Tosoni Francesco",
+                  "De Caro Valerio",
+                  "Markin Jonathan Ato",
+                  "Cioffo Cipriano Junior",
+                  "Angileri Letizia"
+                ],
+                "alias": [
+                  "308"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "31",
+                "room": "310",
+                "nome": [
+                  "Marrucci Monica",
+                  "Tomatis Veronica"
+                ],
+                "alias": [
+                  "310"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 725,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "32",
+                "room": "311",
+                "nome": "Galli Massimiliano",
+                "alias": [
+                  "311"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "33",
+                "room": "312",
+                "nome": [
+                  "Donati Alessia",
+                  "Poli Aurora"
+                ],
+                "alias": [
+                  "312"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "34",
+                "room": "313",
+                "nome": "Sovani Camilla",
+                "alias": [
+                  "313"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 667,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "35",
+                "room": "314",
+                "nome": "Pasqualetti Stefania",
+                "alias": [
+                  "314"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "36",
+                "room": "315",
+                "nome": "Mannaioni Cristina",
+                "alias": [
+                  "315"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 630,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "37",
+                "room": "316",
+                "nome": "Cantini Rita",
+                "alias": [
+                  "316"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 611,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "38",
+                "room": "318",
+                "nome": "Pedreschi Dino",
+                "alias": [
+                  "318"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 513,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "39",
+                "room": "319",
+                "nome": [
+                  "Bruni Roberto",
+                  "Gori Roberta"
+                ],
+                "alias": [
+                  "319"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 493,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "40",
+                "room": "320",
+                "nome": [
+                  "Cisternino Antonio",
+                  "Gervasi Vincenzo"
+                ],
+                "alias": [
+                  "320"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "41",
+                "room": "321",
+                "nome": "Ruggieri Salvatore",
+                "alias": [
+                  "321"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 455,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "42",
+                "room": "322",
+                "nome": [
+                  "Guidi Barbara",
+                  "Bernasconi Anna"
+                ],
+                "alias": [
+                  "322"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 436,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "43",
+                "room": "323",
+                "nome": [
+                  "Novellani Stefano",
+                  "Bigi Giancarlo"
+                ],
+                "alias": [
+                  "323"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 417,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "44",
+                "room": "324",
+                "nome": [
+                  "Vinciguerra Giorgio",
+                  "Guerrini Veronica"
+                ],
+                "alias": [
+                  "324"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 397,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "45",
+                "room": "325",
+                "nome": "Mancarella Paolo",
+                "alias": [
+                  "325"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 379,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "46",
+                "room": "326",
+                "nome": "Gemignani Luca",
+                "alias": [
+                  "326"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 360,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "47",
+                "room": "327",
+                "nome": "Frangioni Antonio",
+                "alias": [
+                  "327"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "48",
+                "room": "328",
+                "nome": [
+                  "Frosini Patrizio",
+                  "Ferrucci Luca"
+                ],
+                "alias": [
+                  "328"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 323,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "49",
+                "room": "329a",
+                "nome": [
+                  "Cortinovis Alice",
+                  "Semini Laura"
+                ],
+                "alias": [
+                  "329a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 302,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "50",
+                "room": "330",
+                "nome": [
+                  "Conte Alessio",
+                  "Tortorella Domenico"
+                ],
+                "alias": [
+                  "330"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 204,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "51",
+                "room": "331",
+                "nome": "Bacciu Davide",
+                "alias": [
+                  "331"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 184,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "52",
+                "room": "332",
+                "nome": [
+                  "Lanza Giacomo",
+                  "Mencarelli Luca"
+                ],
+                "alias": [
+                  "332"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 166,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "53",
+                "room": "333",
+                "nome": [
+                  "Di Francesco Maesa Damiano",
+                  "Ceni Andrea"
+                ],
+                "alias": [
+                  "333"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "54",
+                "room": "334",
+                "nome": "Scutellà Maria Grazia",
+                "alias": [
+                  "334"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 128,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "55",
+                "room": "335",
+                "nome": "Gadducci Fabio",
+                "alias": [
+                  "335"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 108,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "56",
+                "room": "336",
+                "nome": [
+                  "Quarantiello Luigi",
+                  "Fontanesi Michele",
+                  "Poggiali Alessandro"
+                ],
+                "alias": [
+                  "336"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 90,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "57",
+                "room": "338",
+                "nome": "Baiardi Fabrizio",
+                "alias": [
+                  "338"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 326,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "58",
+                "room": "340",
+                "nome": "Brogi Antonio",
+                "alias": [
+                  "340"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 362,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "59",
+                "room": "341",
+                "nome": [
+                  "Cossu Andrea",
+                  "Bocci Alessandro"
+                ],
+                "alias": [
+                  "341"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 381,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "60",
+                "room": "342",
+                "nome": "Grossi Roberto",
+                "alias": [
+                  "342"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 400,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "61",
+                "room": "343",
+                "nome": [
+                  "Cascione Alessio",
+                  "Landi Cristiano",
+                  "Bonsignori Valerio",
+                  "Fedele Andrea"
+                ],
+                "alias": [
+                  "343"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 419,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "62",
+                "room": "344",
+                "nome": "Micheli Alessio",
+                "alias": [
+                  "344"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 440,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "63",
+                "room": "345",
+                "nome": [
+                  "Setzu Mattia",
+                  "Podda Marco"
+                ],
+                "alias": [
+                  "345"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 459,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "64",
+                "room": "346",
+                "nome": "Pelagatti Susanna",
+                "alias": [
+                  "346"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 128,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "65",
+                "room": "347",
+                "nome": "Mastroeni Giandomenico",
+                "alias": [
+                  "347"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "66",
+                "room": "348",
+                "nome": "Soldani Jacopo",
+                "alias": [
+                  "348"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 165,
+                  "y": 440,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "67",
+                "room": "355",
+                "nome": "Pisanti Nadia",
+                "alias": [
+                  "355"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 165,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "68",
+                "room": "356",
+                "nome": "Milazzo Paolo",
+                "alias": [
+                  "356"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 145,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "69",
+                "room": "357",
+                "nome": "Dazzi Patrizio",
+                "alias": [
+                  "357"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 127,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "70",
+                "room": "358",
+                "nome": "Gallicchio Claudio",
+                "alias": [
+                  "358"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 361,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "71",
+                "room": "359",
+                "nome": "Poloni Federico Giovanni",
+                "alias": [
+                  "359"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 381,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "72",
+                "room": "360",
+                "nome": "Rosone Giovanna",
+                "alias": [
+                  "360"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 400,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "73",
+                "room": "361",
+                "nome": "Venturini Rossano",
+                "alias": [
+                  "361"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 421,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "74",
+                "room": "362",
+                "nome": "Mazzei Daniele",
+                "alias": [
+                  "362"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 303,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "75",
+                "room": "363",
+                "nome": "Guidotti Riccardo",
+                "alias": [
+                  "363"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 322,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "76",
+                "room": "364",
+                "nome": "Paganelli Federica",
+                "alias": [
+                  "364"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "77",
+                "room": "365",
+                "nome": "Malizia Alessio",
+                "alias": [
+                  "365"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 380,
+                  "y": 421,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "78",
+                "room": "366",
+                "nome": "Bonchi Filippo",
+                "alias": [
+                  "366"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 380,
+                  "y": 401,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "79",
+                "room": "367",
+                "nome": "Benvenuti Silvia",
+                "alias": [
+                  "367"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 380,
+                  "y": 383,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "80",
+                "room": "368",
+                "nome": "Pierotti Mariarita",
+                "alias": [
+                  "368"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 382,
+                  "y": 362,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "81",
+                "room": "369",
+                "nome": "Bodei Chiara",
+                "alias": [
+                  "369"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "82",
+                "room": "370",
+                "nome": "Del Corso Gianna",
+                "alias": [
+                  "370"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 322,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "83",
+                "room": "371",
+                "nome": "Levi Francesca",
+                "alias": [
+                  "371"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 303,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "84",
+                "room": "372",
+                "nome": [
+                  "Tolloso Matteo",
+                  "Mannocci Lorenzo",
+                  "Cignoni Giacomo",
+                  "Tessa Benedetta"
+                ],
+                "alias": [
+                  "372"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 281,
+                  "y": 353,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "85",
+                "room": "374",
+                "nome": "Farinella Simone",
+                "alias": [
+                  "374"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "86",
+                "room": "375",
+                "nome": "Capuano Luigi",
+                "alias": [
+                  "375"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 492,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "87",
+                "room": "376",
+                "nome": [
+                  "Carpentras Enrico",
+                  "Mongini Rosaria"
+                ],
+                "alias": [
+                  "376"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 520,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "88",
+                "room": "379",
+                "nome": "Salzano Luigi",
+                "alias": [
+                  "379"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 511,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "89",
+                "room": "380",
+                "nome": "Leporini Barbara",
+                "alias": [
+                  "380"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 492,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "90",
+                "room": "381",
+                "nome": "Prencipe Giuseppe",
+                "alias": [
+                  "381"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "91",
+                "room": "382",
+                "nome": [
+                  "Piaggesi Simone",
+                  "Najafi Kalyani Mehdi",
+                  "Lorenzo Simone"
+                ],
+                "alias": [
+                  "382"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 363,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "92",
+                "room": "383",
+                "nome": [
+                  "Mwaniki Njagi",
+                  "Loporchio Matteo",
+                  "Ponce Mella Francisco Leonardo"
+                ],
+                "alias": [
+                  "383"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 382,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "93",
+                "room": "384",
+                "nome": [
+                  "Mastropietro Antonio",
+                  "Shenaj Donald",
+                  "Tran Duy Nghi Benoit",
+                  "Pedrelli Luca"
+                ],
+                "alias": [
+                  "384"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 401,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "94",
+                "room": "385",
+                "nome": [
+                  "Massa Jacopo",
+                  "Cardia Marco",
+                  "Massidda Riccardo"
+                ],
+                "alias": [
+                  "385"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 427,
+                  "y": 423,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "95",
+                "room": "390",
+                "nome": [
+                  "Carfagna Lorenzo",
+                  "Carmona Gabriel"
+                ],
+                "alias": [
+                  "390"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "96",
+                "room": "391",
+                "nome": [
+                  "Poggianti Camilla",
+                  "Odorisio Mattia"
+                ],
+                "alias": [
+                  "391"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 421,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "97",
+                "room": "392",
+                "nome": [
+                  "Bisicchia Giuseppe",
+                  "Tedeschi Gabiele"
+                ],
+                "alias": [
+                  "392"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 400,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "98",
+                "room": "393",
+                "nome": "Pucciarelli Simona",
+                "alias": [
+                  "393"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 382,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "99",
+                "room": "395",
+                "nome": [
+                  "Barbuti Roberto",
+                  "Deri Luca",
+                  "Maestrini Piero",
+                  "Ambriola Vincenzo",
+                  "Degano Pierpaolo",
+                  "Böerger Egon",
+                  "Romani Francesco",
+                  "Gallo Giorgio"
+                ],
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "100",
+                "room": "396",
+                "nome": "Barsotti Simona",
+                "alias": [
+                  "396"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "101",
+                "room": "397",
+                "nome": "Serafini Ramona",
+                "alias": [
+                  "397"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 649,
+                  "y": 341,
+                  "zoom": 8
+                }
+              }
+            ],
+            "-1": []
+          }
+        },
+        "d": {
+          "piano": {
+            "0": []
+          }
+        },
+        "e": {
+          "piano": {
+            "0": [],
+            "1": [],
+            "2": []
+          }
+        }
+      }
+    }
+  }
+}

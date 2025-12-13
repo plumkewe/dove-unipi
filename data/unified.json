@@ -1,0 +1,3635 @@
+{
+  "polo": {
+    "fibonacci": {
+      "edificio": {
+        "a": {
+          "dipartimenti": [
+            {
+              "id": "fib_dm-a-0",
+              "nome": "Dipartimento di Matematica",
+              "alias": [
+                "DM",
+                "Department of Mathematics"
+              ],
+              "type": "dipartimento",
+              "note": "",
+              "link-mappa": "https://www.dm.unipi.it/mappa/",
+              "link-dipartimento": "https://www.dm.unipi.it/",
+              "hasStatus": false
+            }
+          ],
+          "piano": {
+            "0": [
+              {
+                "id": "fib_studio-a-0",
+                "nome": "Aula Studio",
+                "alias": [
+                  "Studio",
+                  "Studiare",
+                  "Study room"
+                ],
+                "type": "studio",
+                "note": "",
+                "coordinates": {
+                  "x": 362,
+                  "y": 178,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_magna-a-0",
+                "nome": "Aula Magna (DM)",
+                "alias": [
+                  "Magna DM",
+                  "Aula Magna (Dipartimento di Matematica)",
+                  "Aula Magna (Department of Mathematics)"
+                ],
+                "note": "",
+                "capienza": 120,
+                "type": "aula",
+                "coordinates": {
+                  "x": 249,
+                  "y": 146,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_1-a-0",
+                "nome": "Aula 1",
+                "alias": [
+                  "Aula 1",
+                  "Aula 1 Aldo Andreotti",
+                  "Aldo Andreotti"
+                ],
+                "note": "",
+                "capienza": 19,
+                "type": "aula",
+                "coordinates": {
+                  "x": 284,
+                  "y": 79,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_2-a-0",
+                "nome": "Aula 2",
+                "alias": [
+                  "Aula 2",
+                  "Aula 2 Guido Stampacchia",
+                  "Guido Stampacchia"
+                ],
+                "note": "",
+                "capienza": 16,
+                "type": "aula",
+                "coordinates": {
+                  "x": 463,
+                  "y": 78,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_4-a-0",
+                "nome": "Aula 4",
+                "alias": [
+                  "Aula 4"
+                ],
+                "note": "",
+                "capienza": 25,
+                "type": "aula",
+                "coordinates": {
+                  "x": 522,
+                  "y": 185,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_106-a-0",
+                "nome": "PHC",
+                "alias": [],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 568,
+                  "y": 108,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_108-a-0",
+                "nome": "Saletta riunioni",
+                "alias": [
+                  "Stanza 108",
+                  "Saletta riunioni piano terra",
+                  "Sala riunioni piano terra"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 613,
+                  "y": 149,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_110-a-0",
+                "nome": "Centro di Calcolo",
+                "alias": [
+                  "Stanza 110"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 568,
+                  "y": 108,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_aula3-a-0",
+                "nome": "Aula 3",
+                "alias": [
+                  "Aula 3",
+                  "Aula 3 Salvatore Ciompa",
+                  "Salvatore Ciompa"
+                ],
+                "note": "",
+                "capienza": 12,
+                "type": "aula",
+                "coordinates": {
+                  "x": 535,
+                  "y": 110,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_112-a-0",
+                "nome": "Aula portatili",
+                "alias": [
+                  "Stanza 112"
+                ],
+                "note": "",
+                "capienza": 19,
+                "type": "aula",
+                "coordinates": {
+                  "x": 603,
+                  "y": 175,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_134-a-0",
+                "nome": "Seminario didattico",
+                "alias": [
+                  "Stanza 134"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 602,
+                  "y": 545,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_erogatore-a-0-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "link": "https://sostenibile.unipi.it",
+                "coordinates": {
+                  "x": 503,
+                  "y": 153,
+                  "zoom": 3
+                }
+              }
+            ],
+            "1": [
+              {
+                "id": "fib_304-a-1",
+                "nome": "Saletta riunioni",
+                "alias": [
+                  "Stanza 304",
+                  "Sala riunioni"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 622,
+                  "y": 69,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_303-a-1",
+                "nome": "Sala seminari",
+                "alias": [
+                  "Stanza 303"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 629,
+                  "y": 166,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_301-a-1",
+                "nome": "Sala riunioni",
+                "alias": [
+                  "Stanza 301"
+                ],
+                "note": "",
+                "type": "sala",
+                "coordinates": {
+                  "x": 567,
+                  "y": 156,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              }
+            ],
+            "2": []
+          }
+        },
+        "b": {
+          "rotate": true,
+          "piano": {
+            "0": [
+              {
+                "id": "fib_x1-b-0",
+                "nome": "Aula X1",
+                "alias": [
+                  "X1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 52,
+                  "y": 379,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_studio-torvalds-b-0",
+                "nome": "Aula Studio Torvalds",
+                "alias": [
+                  "Studio Torvalds",
+                  "Studio",
+                  "Studiare",
+                  "Aula studio",
+                  "Study room"
+                ],
+                "type": "studio",
+                "note": "",
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 300,
+                  "y": 247,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_studio_moot-b-0",
+                "nome": "Aula Studio Moot",
+                "alias": [
+                  "Studio Moot",
+                  "Studio",
+                  "Studiare",
+                  "Aula studio",
+                  "Study room"
+                ],
+                "type": "studio",
+                "note": "",
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": false,
+                "coordinates": {
+                  "x": 164,
+                  "y": 318,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_studio_wozniak-b-0",
+                "nome": "Aula Studio Wozniak",
+                "alias": [
+                  "Studio Wozniak",
+                  "Studio",
+                  "Studiare",
+                  "Aula studio",
+                  "Study room"
+                ],
+                "type": "studio",
+                "note": "",
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": false,
+                "coordinates": {
+                  "x": 164,
+                  "y": 269,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_x2-b-0",
+                "nome": "Aula X2",
+                "alias": [
+                  "X2"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 54,
+                  "y": 358,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_lab1-b-0",
+                "nome": "Laboratorio 1",
+                "alias": [
+                  "Lab 1",
+                  "Laboratorio1",
+                  "lab1"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 585,
+                  "y": 361,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab2-b-0",
+                "nome": "Laboratorio 2",
+                "alias": [
+                  "Lab 2",
+                  "Laboratorio2",
+                  "lab2"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 626,
+                  "y": 362,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab3-b-0",
+                "nome": "Laboratorio 3",
+                "alias": [
+                  "Lab 3",
+                  "Laboratorio3",
+                  "lab3"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 666,
+                  "y": 363,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab4-b-0",
+                "nome": "Laboratorio 4",
+                "alias": [
+                  "Lab 4",
+                  "Laboratorio4",
+                  "lab4"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 708,
+                  "y": 369,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab5-b-0",
+                "nome": "Laboratorio 5",
+                "alias": [
+                  "Lab 5",
+                  "Laboratorio5",
+                  "lab5"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 584,
+                  "y": 237,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab6-b-0",
+                "nome": "Laboratorio 6",
+                "alias": [
+                  "Lab 6",
+                  "Laboratorio6",
+                  "lab6"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 625,
+                  "y": 225,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab7-b-0",
+                "nome": "Laboratorio 7",
+                "alias": [
+                  "Lab 7",
+                  "Laboratorio7",
+                  "lab7"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 668,
+                  "y": 232,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab8-b-0",
+                "nome": "Laboratorio 8",
+                "alias": [
+                  "Lab 8",
+                  "Laboratorio8",
+                  "lab8"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 709,
+                  "y": 232,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab9-b-0",
+                "nome": "Laboratorio 9",
+                "alias": [
+                  "Lab 9",
+                  "Laboratorio9",
+                  "lab9"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 465,
+                  "y": 350,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab10-b-0",
+                "nome": "Laboratorio 10",
+                "alias": [
+                  "Lab 10",
+                  "Laboratorio10",
+                  "lab10"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 512,
+                  "y": 362,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab11-b-0",
+                "nome": "Laboratorio 11",
+                "alias": [
+                  "Lab 11",
+                  "Laboratorio11",
+                  "lab11"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 462,
+                  "y": 231,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_lab12-b-0",
+                "nome": "Laboratorio 12",
+                "alias": [
+                  "Lab 12",
+                  "Laboratorio12",
+                  "lab12"
+                ],
+                "type": "laboratorio",
+                "note": "",
+                "coordinates": {
+                  "x": 506,
+                  "y": 241,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_x3-b-0",
+                "nome": "Aula X3",
+                "alias": [
+                  "X3"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 54,
+                  "y": 334,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_x4-b-0",
+                "nome": "Aula X4",
+                "alias": [
+                  "X4",
+                  "Aula studio X4",
+                  "Studio X4",
+                  "Study room",
+                  "Study room X4"
+                ],
+                "type": [
+                  "aula",
+                  "studio"
+                ],
+                "note": "",
+                "capienza": 6,
+                "proiettore": false,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 61,
+                  "y": 314,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_x5-b-0",
+                "nome": "Aula X5",
+                "alias": [
+                  "X5"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 50,
+                  "y": 246,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_x6-b-0",
+                "nome": "Aula X6",
+                "alias": [
+                  "X6"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 16,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 60,
+                  "y": 223,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_x7-b-0",
+                "nome": "Aula X7",
+                "alias": [
+                  "X7"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 24,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 104,
+                  "y": 229,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_a-b-0",
+                "nome": "Aula A",
+                "alias": [
+                  "A"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 217,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 136,
+                  "y": 357,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_b-b-0",
+                "nome": "Aula B",
+                "alias": [
+                  "B"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 135,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 179,
+                  "y": 356,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_c-b-0",
+                "nome": "Aula C",
+                "alias": [
+                  "C"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 135,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 217,
+                  "y": 354,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_d-b-0",
+                "nome": "Aula D",
+                "alias": [
+                  "D"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 215,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 257,
+                  "y": 356,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_e-b-0",
+                "nome": "Aula E",
+                "alias": [
+                  "E"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 217,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 301,
+                  "y": 355,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_h-lab-b-0",
+                "nome": "Aula H-Lab",
+                "alias": [
+                  "H-Lab",
+                  "HLab",
+                  "H Lab",
+                  "Laboratorio H"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 136,
+                  "y": 249,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_i-lab-b-0",
+                "nome": "Aula I-Lab",
+                "alias": [
+                  "I-Lab",
+                  "ILab",
+                  "I Lab",
+                  "Laboratorio I"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 30,
+                "proiettore": true,
+                "lavagna": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 178,
+                  "y": 242,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_l-b-0",
+                "nome": "Aula L",
+                "alias": [
+                  "L"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 87,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 219,
+                  "y": 240,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_m-lab-b-0",
+                "nome": "Aula M-Lab",
+                "alias": [
+                  "M-Lab",
+                  "MLab",
+                  "M Lab",
+                  "Laboratorio M"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 40,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 256,
+                  "y": 242,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_f-b-0",
+                "nome": "Aula F",
+                "alias": [
+                  "F"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 112,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 381,
+                  "y": 359,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_g-b-0",
+                "nome": "Aula G",
+                "alias": [
+                  "G"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 199,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 420,
+                  "y": 357,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_n-b-0",
+                "nome": "Aula N",
+                "alias": [
+                  "N"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 72,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 380,
+                  "y": 236,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_o-b-0",
+                "nome": "Aula O",
+                "alias": [
+                  "O"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 36,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 413,
+                  "y": 235,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_p-b-0",
+                "nome": "Aula P",
+                "alias": [
+                  "P"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 36,
+                "proiettore": false,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 433,
+                  "y": 232,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_erogatore-b-0-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "coordinates": {
+                  "x": 358,
+                  "y": 259,
+                  "zoom": 3
+                }
+              }
+            ],
+            "1": [
+              {
+                "id": "fib_a1-b-1",
+                "nome": "Aula A1",
+                "alias": [
+                  "A1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 137,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 113,
+                  "y": 303,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_b1-b-1",
+                "nome": "Aula B1",
+                "alias": [
+                  "B1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 109,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 158,
+                  "y": 312,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_c1-b-1",
+                "nome": "Aula C1",
+                "alias": [
+                  "C1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 109,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 198,
+                  "y": 311,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_d1-b-1",
+                "nome": "Aula D1",
+                "alias": [
+                  "D1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 137,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 242,
+                  "y": 307,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_e1-b-1",
+                "nome": "Aula E1",
+                "alias": [
+                  "E1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 137,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 285,
+                  "y": 304,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_i1-b-1",
+                "nome": "Aula I1",
+                "alias": [
+                  "I1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 61,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 137,
+                  "y": 176,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_l1-b-1",
+                "nome": "Aula L1",
+                "alias": [
+                  "L1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 69,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 164,
+                  "y": 177,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_m1-b-1",
+                "nome": "Aula M1",
+                "alias": [
+                  "M1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 69,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 193,
+                  "y": 177,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_n1-b-1",
+                "nome": "Aula N1",
+                "alias": [
+                  "N1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 61,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 222,
+                  "y": 175,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_o1-b-1",
+                "nome": "Aula O1",
+                "alias": [
+                  "O1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 60,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 250,
+                  "y": 176,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_p1-b-1",
+                "nome": "Aula P1",
+                "alias": [
+                  "P1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 123,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 287,
+                  "y": 176,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_f1-b-1",
+                "nome": "Aula F1",
+                "alias": [
+                  "F1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 68,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 372,
+                  "y": 318,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_g1-b-1",
+                "nome": "Aula G1",
+                "alias": [
+                  "G1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 61,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 415,
+                  "y": 317,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_v1-b-1",
+                "nome": "Aula V1",
+                "alias": [
+                  "V1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 47,
+                "proiettore": true,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 461,
+                  "y": 317,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_q1-lab-b-1",
+                "nome": "Aula Q1-Lab",
+                "alias": [
+                  "Q1-Lab",
+                  "Lab-Q1",
+                  "Aula studio Q1",
+                  "Studio Q1",
+                  "Study room",
+                  "Study room Q1"
+                ],
+                "type": [
+                  "aula",
+                  "studio"
+                ],
+                "note": "",
+                "capienza": 14,
+                "proiettore": false,
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 360,
+                  "y": 258,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sala-studio-b-1",
+                "nome": "Aula Studio Mitnick",
+                "alias": [
+                  "Studio Mitnick",
+                  "Aula studio",
+                  "Studio",
+                  "Study room",
+                  "Aula studio Mitnick"
+                ],
+                "type": "studio",
+                "note": "",
+                "proiettore": false,
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 540,
+                  "y": 233,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sala-studio-ponte-b-1",
+                "nome": "Aula Studio Ponte",
+                "alias": [
+                  "Aula Studio Ponte",
+                  "Studio Ponte",
+                  "Aula studio",
+                  "Study room",
+                  "Study room Ponte"
+                ],
+                "type": "studio",
+                "note": "",
+                "proiettore": false,
+                "rete": true,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 762,
+                  "y": 369,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_r1-b-1",
+                "nome": "Aula R1",
+                "alias": [
+                  "R1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 30,
+                "proiettore": false,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 386,
+                  "y": 259,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_s1-b-1",
+                "nome": "Aula S1",
+                "alias": [
+                  "S1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 405,
+                  "y": 261,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_t1-b-1",
+                "nome": "Aula T1",
+                "alias": [
+                  "T1"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 25,
+                "proiettore": false,
+                "rete": true,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 429,
+                  "y": 260,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_bib-b-1",
+                "nome": "Biblioteca MIF",
+                "alias": [
+                  "B-MIF",
+                  "Biblioteca di Matematica, Informatica e Fisica",
+                  "Library MIF",
+                  "Library of Mathematics, Computer Science and Physics",
+                  "Library",
+                  "Aula Studio",
+                  "Study Room",
+                  "Study Room MIF",
+                  "Study"
+                ],
+                "type": [
+                  "biblioteca",
+                  "studio"
+                ],
+                "nid": "1187",
+                "note": "",
+                "capienza": 210,
+                "prese_elettriche": true,
+                "link_sito": "https://www.sba.unipi.it/it/biblioteche/polo-3/matematica-informatica-fisica",
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 431,
+                  "y": 190,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_erogatore-b-1-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "coordinates": {
+                  "x": 758,
+                  "y": 248,
+                  "zoom": 3
+                }
+              }
+            ],
+            "2": []
+          }
+        },
+        "c": {
+          "piano": {
+            "-1": [],
+            "0": [
+              {
+                "id": "fib_df-c-0",
+                "nome": "Dipartimento di Fisica",
+                "alias": [
+                  "DF",
+                  "Department of Physics"
+                ],
+                "type": "dipartimento",
+                "note": "",
+                "link-mappa": "https://www.pi.infn.it/?page_id=11732",
+                "link-dipartimento": "https://www.df.unipi.it/",
+                "hasStatus": false
+              }
+            ],
+            "1": [],
+            "2": [
+              {
+                "id": "fib_di-c-2",
+                "nome": "Dipartimento di Informatica",
+                "alias": [
+                  "DI",
+                  "Department of Informatics",
+                  "Department of Computer Science",
+                  "Department of Informatics and Computer Science"
+                ],
+                "type": "dipartimento",
+                "note": "",
+                "link-mappa": "https://di.unipi.it/mappa-dipartimento/",
+                "link-dipartimento": "https://di.unipi.it/",
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sro-c-2",
+                "nome": "Sala riunioni OVEST",
+                "alias": [],
+                "type": "sala",
+                "note": "",
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 49,
+                  "y": 294,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sre-c-2",
+                "nome": "Sala riunioni EST",
+                "alias": [],
+                "type": "sala",
+                "note": "",
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 48,
+                  "y": 488,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sd-c-2",
+                "nome": "Sala DEMO",
+                "alias": [],
+                "type": "sala",
+                "note": "",
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 764,
+                  "y": 488,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sg-c-2",
+                "nome": "Sala GERACE",
+                "alias": [
+                  "Sala convegni GERANCE"
+                ],
+                "type": "sala",
+                "note": "",
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 601,
+                  "y": 395,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sse-c-2",
+                "nome": "Seminari EST",
+                "alias": [
+                  "Sala seminari EST"
+                ],
+                "type": "sala",
+                "note": "",
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 201,
+                  "y": 411,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_sse-c-2",
+                "nome": "Seminari OVEST",
+                "alias": [
+                  "Sala seminari OVEST"
+                ],
+                "type": "sala",
+                "note": "",
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 206,
+                  "y": 371,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "1",
+                "room": "277",
+                "nome": "Priami Corrado",
+                "alias": [
+                  "277"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 89,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "2",
+                "room": "278",
+                "nome": [
+                  "Turini Franco",
+                  "Luccio Fabrizio"
+                ],
+                "alias": [
+                  "278"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 108,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "3",
+                "room": "279",
+                "nome": "Forti Stefano",
+                "alias": [
+                  "279"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 127,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "4",
+                "room": "280",
+                "nome": [
+                  "Bell Jack Charles",
+                  "Miglior Luca",
+                  "Li Malio"
+                ],
+                "alias": [
+                  "280"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "5",
+                "room": "281",
+                "nome": "Ferrari Gianluigi",
+                "alias": [
+                  "281"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 166,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "6",
+                "room": "282",
+                "nome": [
+                  "Galfrè Silvia Giulia",
+                  "Naretto Francesca"
+                ],
+                "alias": [
+                  "282"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 184,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "7",
+                "room": "283",
+                "nome": [
+                  "Turchi Tommaso",
+                  "Kocian Alexander"
+                ],
+                "alias": [
+                  "283"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 204,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "8",
+                "room": "285",
+                "nome": "Ricci Laura",
+                "alias": [
+                  "285"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 302,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "9",
+                "room": "286",
+                "nome": [
+                  "Montanari Ugo",
+                  "Corradini Andrea"
+                ],
+                "alias": [
+                  "286"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 322,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "10",
+                "room": "287",
+                "nome": [
+                  "Torquati Massimo",
+                  "Mencagli Gabriele"
+                ],
+                "alias": [
+                  "287"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "11",
+                "room": "288",
+                "nome": [
+                  "Punzi Giulia",
+                  "Pollacci Laura"
+                ],
+                "alias": [
+                  "288"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 360,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "12",
+                "room": "289",
+                "nome": "Pappalardo Massimo",
+                "alias": [
+                  "289"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 379,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "13",
+                "room": "290",
+                "nome": "Ghelli Giorgio",
+                "alias": [
+                  "290"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 398,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "14",
+                "room": "291",
+                "nome": [
+                  "Spinnato Francesco",
+                  "Michienzi Andrea"
+                ],
+                "alias": [
+                  "291"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 416,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "15",
+                "room": "292",
+                "nome": "Danelutto Marco",
+                "alias": [
+                  "292"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 436,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "16",
+                "room": "293",
+                "nome": "Carta Antonio",
+                "alias": [
+                  "293"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 454,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "17",
+                "room": "294",
+                "nome": "Manzini Giovanni",
+                "alias": [
+                  "294"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "18",
+                "room": "295",
+                "nome": [
+                  "Ferragina Paolo",
+                  "Monreale Anna"
+                ],
+                "alias": [
+                  "295"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 492,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "19",
+                "room": "296a",
+                "nome": "Chessa Stefano",
+                "alias": [
+                  "296a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 513,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "20",
+                "room": "297",
+                "nome": [
+                  "Cau Erica",
+                  "Trenta Alessandro"
+                ],
+                "alias": [
+                  "297"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 611,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "21",
+                "room": "298a",
+                "nome": [
+                  "Gaglianese Marco",
+                  "Ricardo Daniel Lopes Almeida",
+                  "Rotundo Mariagiovanna",
+                  "Lari Filippo",
+                  "Guerra Andrea",
+                  "Dalla Noce Niko",
+                  "Gazzella Lorenzo"
+                ],
+                "alias": [
+                  "298a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 629,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "22",
+                "room": "298b",
+                "nome": [
+                  "Madeddu Mauro",
+                  "Vaiani Giacomo",
+                  "Danushi Ornela",
+                  "Ottimo Alberto",
+                  "Pugliese Chiara",
+                  "Besozzi Valerio",
+                  "Martinico Silvio"
+                ],
+                "alias": [
+                  "298"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "23",
+                "room": "299",
+                "nome": [
+                  "Dipalma Alessandro",
+                  "Failla Andrea",
+                  "Buzzega Giovanni",
+                  "Antonioli Giacomo",
+                  "Andreani Mila",
+                  "Abramski Katherine Elizabeth",
+                  "Tortola Domenico",
+                  "Turco Calogero",
+                  "Corbucci Luca"
+                ],
+                "alias": [
+                  "299"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "24",
+                "room": "300",
+                "nome": [
+                  "Mikhaylova Daria",
+                  "Gambetta Daniele",
+                  "Grande Elio",
+                  "Aliyev Gurban"
+                ],
+                "alias": [
+                  "300"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "25",
+                "room": "301",
+                "nome": [
+                  "Ninniri Matteo",
+                  "Molo Mbasa Joaquim",
+                  "Piccoli Elia",
+                  "Pham Tran Huong Giang",
+                  "Coleman Eric Nuertey",
+                  "Semola Rudy"
+                ],
+                "alias": [
+                  "301"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "26",
+                "room": "302",
+                "nome": [
+                  "Morini Virginia",
+                  "Beretta Isacco",
+                  "Cinquini Martina",
+                  "Amendola Maddalena",
+                  "Marchiori Manerba Marta"
+                ],
+                "alias": [
+                  "302"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 724,
+                  "y": 487,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "27",
+                "room": "304",
+                "nome": [
+                  "Miglionico Giustino Claudio",
+                  "Javed Khadija",
+                  "Della Bartola Matteo",
+                  "De Paolis Niccolò",
+                  "De Castelli Fabrizio",
+                  "Bushipaka Praveen",
+                  "Cassese Maria",
+                  "De BIase Paolo",
+                  "Di Cursi Francesco",
+                  "Giovannoni Claudio",
+                  "Mala Chandana Sree",
+                  "Mazzi Claudio",
+                  "Muscato Benedetta",
+                  "Negi Kajal",
+                  "Perri Emanuele Fulvio",
+                  "Popa Victoria",
+                  "Porcedda Riccardo",
+                  "Cardia Andrea",
+                  "Aizdi Leena",
+                  "Rucci Davide",
+                  "Bussi Laura",
+                  "Barandoni Simone",
+                  "Parisini Emanuele",
+                  "Arzilli Domenico",
+                  "Carmisciano Luca",
+                  "Domenichini Diana",
+                  "De Vincenzi Marco",
+                  "Gharb Hamid",
+                  "Lomurno Giuseppe",
+                  "Daole Mattia",
+                  "Paperini Elisa",
+                  "Boffa Antonio",
+                  "Joubbi Sara",
+                  "Kapitako Jeronia"
+                ],
+                "alias": [
+                  "304"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 449,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "28",
+                "room": "305",
+                "nome": [
+                  "Mauro Giovanni",
+                  "Atzeni Daniele",
+                  "Iommi Andrea",
+                  "Cappuccio Eleonora",
+                  "Mesina Veronica",
+                  "sammartino vincenzo"
+                ],
+                "alias": [
+                  "305"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 420,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "29",
+                "room": "306",
+                "nome": [
+                  "Tacchi Jack",
+                  "Gargiulo Francesco",
+                  "Macchiati Valentina",
+                  "Resta Michele",
+                  "Alvarez Jose Manuel",
+                  "Fontana Michele",
+                  "Piras Valentina",
+                  "Figliè Roberto",
+                  "Ymame Yitbarek",
+                  "State Laura",
+                  "Silva De Moraes André Luiz",
+                  "Conradi Hoffmann José Luis",
+                  "Waheed Tauheed",
+                  "Munarini Monique",
+                  "Pelosi Andrea",
+                  "Scandurra Elena",
+                  "Cullen Ben William",
+                  "Nardi Mirko",
+                  "Guidi Gianluca",
+                  "Awais Ch Muhammad",
+                  "Jarouf Abdulah",
+                  "Ramjattan Reshawn",
+                  "Berbardi Paolo",
+                  "Ciaccio Cristiano",
+                  "Sabir Muhammad Waheed",
+                  "Donini Francesco",
+                  "Rehman Khalil Ur",
+                  "Berti Alessandro",
+                  "Tonci Nicolò",
+                  "Galli Filippo",
+                  "Pansanella Valentina"
+                ],
+                "alias": [
+                  "306"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 391,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "30",
+                "room": "308",
+                "nome": [
+                  "Gravina Alessio",
+                  "Angilieri Letizia",
+                  "Tosoni Francesco",
+                  "De Caro Valerio",
+                  "Markin Jonathan Ato",
+                  "Cioffo Cipriano Junior",
+                  "Angileri Letizia"
+                ],
+                "alias": [
+                  "308"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 773,
+                  "y": 308,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "31",
+                "room": "310",
+                "nome": [
+                  "Marrucci Monica",
+                  "Tomatis Veronica"
+                ],
+                "alias": [
+                  "310"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 725,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "32",
+                "room": "311",
+                "nome": "Galli Massimiliano",
+                "alias": [
+                  "311"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 705,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "33",
+                "room": "312",
+                "nome": [
+                  "Donati Alessia",
+                  "Poli Aurora"
+                ],
+                "alias": [
+                  "312"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "34",
+                "room": "313",
+                "nome": "Sovani Camilla",
+                "alias": [
+                  "313"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 667,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "35",
+                "room": "314",
+                "nome": "Pasqualetti Stefania",
+                "alias": [
+                  "314"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 648,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "36",
+                "room": "315",
+                "nome": "Mannaioni Cristina",
+                "alias": [
+                  "315"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 630,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "37",
+                "room": "316",
+                "nome": "Cantini Rita",
+                "alias": [
+                  "316"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 611,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "38",
+                "room": "318",
+                "nome": "Pedreschi Dino",
+                "alias": [
+                  "318"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 513,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "39",
+                "room": "319",
+                "nome": [
+                  "Bruni Roberto",
+                  "Gori Roberta"
+                ],
+                "alias": [
+                  "319"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 493,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "40",
+                "room": "320",
+                "nome": [
+                  "Cisternino Antonio",
+                  "Gervasi Vincenzo"
+                ],
+                "alias": [
+                  "320"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "41",
+                "room": "321",
+                "nome": "Ruggieri Salvatore",
+                "alias": [
+                  "321"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 455,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "42",
+                "room": "322",
+                "nome": [
+                  "Guidi Barbara",
+                  "Bernasconi Anna"
+                ],
+                "alias": [
+                  "322"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 436,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "43",
+                "room": "323",
+                "nome": [
+                  "Novellani Stefano",
+                  "Bigi Giancarlo"
+                ],
+                "alias": [
+                  "323"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 417,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "44",
+                "room": "324",
+                "nome": [
+                  "Vinciguerra Giorgio",
+                  "Guerrini Veronica"
+                ],
+                "alias": [
+                  "324"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 397,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "45",
+                "room": "325",
+                "nome": "Mancarella Paolo",
+                "alias": [
+                  "325"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 379,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "46",
+                "room": "326",
+                "nome": "Gemignani Luca",
+                "alias": [
+                  "326"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 360,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "47",
+                "room": "327",
+                "nome": "Frangioni Antonio",
+                "alias": [
+                  "327"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "48",
+                "room": "328",
+                "nome": [
+                  "Frosini Patrizio",
+                  "Ferrucci Luca"
+                ],
+                "alias": [
+                  "328"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 323,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "49",
+                "room": "329a",
+                "nome": [
+                  "Cortinovis Alice",
+                  "Semini Laura"
+                ],
+                "alias": [
+                  "329a"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 302,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "50",
+                "room": "330",
+                "nome": [
+                  "Conte Alessio",
+                  "Tortorella Domenico"
+                ],
+                "alias": [
+                  "330"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 204,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "51",
+                "room": "331",
+                "nome": "Bacciu Davide",
+                "alias": [
+                  "331"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 184,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "52",
+                "room": "332",
+                "nome": [
+                  "Lanza Giacomo",
+                  "Mencarelli Luca"
+                ],
+                "alias": [
+                  "332"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 166,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "53",
+                "room": "333",
+                "nome": [
+                  "Di Francesco Maesa Damiano",
+                  "Ceni Andrea"
+                ],
+                "alias": [
+                  "333"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "54",
+                "room": "334",
+                "nome": "Scutellà Maria Grazia",
+                "alias": [
+                  "334"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 128,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "55",
+                "room": "335",
+                "nome": "Gadducci Fabio",
+                "alias": [
+                  "335"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 108,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "56",
+                "room": "336",
+                "nome": [
+                  "Quarantiello Luigi",
+                  "Fontanesi Michele",
+                  "Poggiali Alessandro"
+                ],
+                "alias": [
+                  "336"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 90,
+                  "y": 294,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "57",
+                "room": "338",
+                "nome": "Baiardi Fabrizio",
+                "alias": [
+                  "338"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 326,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "58",
+                "room": "340",
+                "nome": "Brogi Antonio",
+                "alias": [
+                  "340"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 362,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "59",
+                "room": "341",
+                "nome": [
+                  "Cossu Andrea",
+                  "Bocci Alessandro"
+                ],
+                "alias": [
+                  "341"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 381,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "60",
+                "room": "342",
+                "nome": "Grossi Roberto",
+                "alias": [
+                  "342"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 400,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "61",
+                "room": "343",
+                "nome": [
+                  "Cascione Alessio",
+                  "Landi Cristiano",
+                  "Bonsignori Valerio",
+                  "Fedele Andrea"
+                ],
+                "alias": [
+                  "343"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 419,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "62",
+                "room": "344",
+                "nome": "Micheli Alessio",
+                "alias": [
+                  "344"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 440,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "63",
+                "room": "345",
+                "nome": [
+                  "Setzu Mattia",
+                  "Podda Marco"
+                ],
+                "alias": [
+                  "345"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 43,
+                  "y": 459,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "64",
+                "room": "346",
+                "nome": "Pelagatti Susanna",
+                "alias": [
+                  "346"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 128,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "65",
+                "room": "347",
+                "nome": "Mastroeni Giandomenico",
+                "alias": [
+                  "347"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 146,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "66",
+                "room": "348",
+                "nome": "Soldani Jacopo",
+                "alias": [
+                  "348"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 165,
+                  "y": 440,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "67",
+                "room": "355",
+                "nome": "Pisanti Nadia",
+                "alias": [
+                  "355"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 165,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "68",
+                "room": "356",
+                "nome": "Milazzo Paolo",
+                "alias": [
+                  "356"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 145,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "69",
+                "room": "357",
+                "nome": "Dazzi Patrizio",
+                "alias": [
+                  "357"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 127,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "70",
+                "room": "358",
+                "nome": "Gallicchio Claudio",
+                "alias": [
+                  "358"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 361,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "71",
+                "room": "359",
+                "nome": "Poloni Federico Giovanni",
+                "alias": [
+                  "359"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 381,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "72",
+                "room": "360",
+                "nome": "Rosone Giovanna",
+                "alias": [
+                  "360"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 400,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "73",
+                "room": "361",
+                "nome": "Venturini Rossano",
+                "alias": [
+                  "361"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 88,
+                  "y": 421,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "74",
+                "room": "362",
+                "nome": "Mazzei Daniele",
+                "alias": [
+                  "362"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 303,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "75",
+                "room": "363",
+                "nome": "Guidotti Riccardo",
+                "alias": [
+                  "363"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 322,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "76",
+                "room": "364",
+                "nome": "Paganelli Federica",
+                "alias": [
+                  "364"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "77",
+                "room": "365",
+                "nome": "Malizia Alessio",
+                "alias": [
+                  "365"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 380,
+                  "y": 421,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "78",
+                "room": "366",
+                "nome": "Bonchi Filippo",
+                "alias": [
+                  "366"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 380,
+                  "y": 401,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "79",
+                "room": "367",
+                "nome": "Benvenuti Silvia",
+                "alias": [
+                  "367"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 380,
+                  "y": 383,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "80",
+                "room": "368",
+                "nome": "Pierotti Mariarita",
+                "alias": [
+                  "368"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 382,
+                  "y": 362,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "81",
+                "room": "369",
+                "nome": "Bodei Chiara",
+                "alias": [
+                  "369"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 340,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "82",
+                "room": "370",
+                "nome": "Del Corso Gianna",
+                "alias": [
+                  "370"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 322,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "83",
+                "room": "371",
+                "nome": "Levi Francesca",
+                "alias": [
+                  "371"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 303,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "84",
+                "room": "372",
+                "nome": [
+                  "Tolloso Matteo",
+                  "Mannocci Lorenzo",
+                  "Cignoni Giacomo",
+                  "Tessa Benedetta"
+                ],
+                "alias": [
+                  "372"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 281,
+                  "y": 353,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "85",
+                "room": "374",
+                "nome": "Farinella Simone",
+                "alias": [
+                  "374"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "86",
+                "room": "375",
+                "nome": "Capuano Luigi",
+                "alias": [
+                  "375"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 492,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "87",
+                "room": "376",
+                "nome": [
+                  "Carpentras Enrico",
+                  "Mongini Rosaria"
+                ],
+                "alias": [
+                  "376"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 520,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "88",
+                "room": "379",
+                "nome": "Salzano Luigi",
+                "alias": [
+                  "379"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 511,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "89",
+                "room": "380",
+                "nome": "Leporini Barbara",
+                "alias": [
+                  "380"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 492,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "90",
+                "room": "381",
+                "nome": "Prencipe Giuseppe",
+                "alias": [
+                  "381"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 474,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "91",
+                "room": "382",
+                "nome": [
+                  "Piaggesi Simone",
+                  "Najafi Kalyani Mehdi",
+                  "Lorenzo Simone"
+                ],
+                "alias": [
+                  "382"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 363,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "92",
+                "room": "383",
+                "nome": [
+                  "Mwaniki Njagi",
+                  "Loporchio Matteo",
+                  "Ponce Mella Francisco Leonardo"
+                ],
+                "alias": [
+                  "383"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 382,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "93",
+                "room": "384",
+                "nome": [
+                  "Mastropietro Antonio",
+                  "Shenaj Donald",
+                  "Tran Duy Nghi Benoit",
+                  "Pedrelli Luca"
+                ],
+                "alias": [
+                  "384"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 428,
+                  "y": 401,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "94",
+                "room": "385",
+                "nome": [
+                  "Massa Jacopo",
+                  "Cardia Marco",
+                  "Massidda Riccardo"
+                ],
+                "alias": [
+                  "385"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 427,
+                  "y": 423,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "95",
+                "room": "390",
+                "nome": [
+                  "Carfagna Lorenzo",
+                  "Carmona Gabriel"
+                ],
+                "alias": [
+                  "390"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 686,
+                  "y": 441,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "96",
+                "room": "391",
+                "nome": [
+                  "Poggianti Camilla",
+                  "Odorisio Mattia"
+                ],
+                "alias": [
+                  "391"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 421,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "97",
+                "room": "392",
+                "nome": [
+                  "Bisicchia Giuseppe",
+                  "Tedeschi Gabiele"
+                ],
+                "alias": [
+                  "392"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 400,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "98",
+                "room": "393",
+                "nome": "Pucciarelli Simona",
+                "alias": [
+                  "393"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 727,
+                  "y": 382,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "99",
+                "room": "395",
+                "nome": [
+                  "Barbuti Roberto",
+                  "Deri Luca",
+                  "Maestrini Piero",
+                  "Ambriola Vincenzo",
+                  "Degano Pierpaolo",
+                  "Böerger Egon",
+                  "Romani Francesco",
+                  "Gallo Giorgio"
+                ],
+                "alias": [
+                  "395"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 687,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "100",
+                "room": "396",
+                "nome": "Barsotti Simona",
+                "alias": [
+                  "396"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 668,
+                  "y": 341,
+                  "zoom": 8
+                }
+              },
+              {
+                "id": "101",
+                "room": "397",
+                "nome": "Serafini Ramona",
+                "alias": [
+                  "397"
+                ],
+                "type": "persona",
+                "note": "",
+                "hasStatus": false,
+                "coordinates": {
+                  "x": 649,
+                  "y": 341,
+                  "zoom": 8
+                }
+              }
+            ]
+          }
+        },
+        "d": {
+          "piano": {
+            "0": [
+              {
+                "id": "fib_d2-d-0",
+                "nome": "Aula D2",
+                "alias": [
+                  "D2",
+                  "Informatica",
+                  "Corso B",
+                  "Matricole",
+                  "Matricole Informatica"
+                ],
+                "capienza": 206,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "porte_rete": false,
+                "proiettore": true,
+                "lavagna": true,
+                "type": "aula",
+                "note": "",
+                "rete": false,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 380,
+                  "y": 296,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_d3-d-0",
+                "nome": "Aula D3",
+                "alias": [
+                  "D3",
+                  "Informatica",
+                  "Matricole",
+                  "Matricole Informatica"
+                ],
+                "capienza": 182,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "porte_rete": true,
+                "proiettore": true,
+                "lavagna": true,
+                "type": "aula",
+                "note": "",
+                "rete": false,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 546,
+                  "y": 295,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_d4-d-0",
+                "nome": "Aula D4",
+                "alias": [
+                  "D4",
+                  "Informatica"
+                ],
+                "capienza": 168,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 0,
+                "porte_rete": true,
+                "proiettore": true,
+                "lavagna": true,
+                "type": "aula",
+                "note": "",
+                "rete": false,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 297,
+                  "y": 294,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_d5-d-0",
+                "nome": "Aula D5",
+                "alias": [
+                  "D5",
+                  "Informatica",
+                  "Matricole",
+                  "Matricole Informatica"
+                ],
+                "capienza": 216,
+                "presenza_pc": false,
+                "numero_pc": 0,
+                "prese_elettriche": true,
+                "numero_prese_elettriche": 5,
+                "porte_rete": true,
+                "proiettore": true,
+                "lavagna": true,
+                "type": "aula",
+                "note": "",
+                "rete": false,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 463,
+                  "y": 295,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_erogatore-d-0-1",
+                "nome": "Erogatore Acqua",
+                "alias": [
+                  "Fontanella",
+                  "Purificatore acqua",
+                  "Dispenser acqua"
+                ],
+                "type": "erogatore_acqua",
+                "note": "",
+                "coordinates": {
+                  "x": 252,
+                  "y": 279,
+                  "zoom": 3
+                }
+              }
+            ]
+          }
+        },
+        "e": {
+          "piano": {
+            "0": [
+              {
+                "id": "fib_ps1-e-0",
+                "nome": "Aula PS1",
+                "alias": [
+                  "PS1"
+                ],
+                "note": "",
+                "type": "aula",
+                "capienza": 112,
+                "proiettore": true,
+                "rete": false,
+                "accesso_disabili": true,
+                "autoparlanti": true,
+                "coordinates": {
+                  "x": 303,
+                  "y": 320,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              }
+            ],
+            "1": [
+              {
+                "id": "fib_magna-e-1",
+                "nome": "Aula Magna",
+                "alias": [
+                  "Magna",
+                  "Pontecorvo"
+                ],
+                "note": "",
+                "type": "aula",
+                "capienza": 224,
+                "proiettore": true,
+                "rete": false,
+                "accesso_disabili": true,
+                "coordinates": {
+                  "x": 521,
+                  "y": 211,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              },
+              {
+                "id": "fib_ps4-e-1",
+                "nome": "Aula PS4",
+                "alias": [
+                  "PS4"
+                ],
+                "type": "aula",
+                "note": "",
+                "capienza": 48,
+                "proiettore": true,
+                "rete": false,
+                "accesso_disabili": true,
+                "autoparlanti": true,
+                "coordinates": {
+                  "x": 255,
+                  "y": 339,
+                  "zoom": 3
+                },
+                "hasStatus": true
+              }
+            ],
+            "2": []
+          }
+        }
+      }
+    }
+  }
+}

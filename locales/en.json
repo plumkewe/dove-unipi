@@ -462,5 +462,21 @@
   "laboratories_title": {
     "original": "Laboratori",
     "translation": "Laboratories"
+  },
+  "people_title": {
+    "original": "People",
+    "translation": "People"
+  },
+  "room": {
+    "original": "Room",
+    "translation": "Room"
+  },
+  "showing_limited_results": {
+    "original": "Mostrando i primi %s risultati di %s totali",
+    "translation": "Showing first %s results of %s total"
+  },
+  "load_more_results": {
+    "original": "Carica altri",
+    "translation": "Load More"
   }
 }

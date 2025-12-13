@@ -56,6 +56,58 @@
                 "hasStatus": false
               },
               {
+                "id": "fib_1-a-0",
+                "nome": "Aula 1",
+                "alias": [
+                  "Aula 1",
+                  "Aula 1 Aldo Andreotti",
+                  "Aldo Andreotti"
+                ],
+                "note": "",
+                "capienza": 19,
+                "type": "aula",
+                "coordinates": {
+                  "x": 284,
+                  "y": 79,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_2-a-0",
+                "nome": "Aula 2",
+                "alias": [
+                  "Aula 2",
+                  "Aula 2 Guido Stampacchia",
+                  "Guido Stampacchia"
+                ],
+                "note": "",
+                "capienza": 16,
+                "type": "aula",
+                "coordinates": {
+                  "x": 463,
+                  "y": 78,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
+                "id": "fib_4-a-0",
+                "nome": "Aula 4",
+                "alias": [
+                  "Aula 4"
+                ],
+                "note": "",
+                "capienza": 25,
+                "type": "aula",
+                "coordinates": {
+                  "x": 522,
+                  "y": 185,
+                  "zoom": 3
+                },
+                "hasStatus": false
+              },
+              {
                 "id": "fib_106-a-0",
                 "nome": "PHC",
                 "alias": [
@@ -93,6 +145,7 @@
                   "Stanza 110"
                 ],
                 "note": "",
+                "type": "sala",
                 "coordinates": {
                   "x": 568,
                   "y": 108,
@@ -104,10 +157,12 @@
                 "id": "fib_aula3-a-0",
                 "nome": "Aula 3",
                 "alias": [
+                  "Aula 3",
                   "Aula 3 Salvatore Ciompa",
                   "Salvatore Ciompa"
                 ],
                 "note": "",
+                "capienza": 12,
                 "type": "aula",
                 "coordinates": {
                   "x": 535,
@@ -1323,7 +1378,21 @@
         "c": {
           "piano": {
             "-1": [],
-            "0": [],
+            "0": [
+              {
+                "id": "fib_df-c-0",
+                "nome": "Dipartimento di Fisica",
+                "alias": [
+                  "DF",
+                  "Department of Physics"
+                ],
+                "type": "dipartimento",
+                "note": "",
+                "link-mappa": "https://www.pi.infn.it/?page_id=11732",
+                "link-dipartimento": "https://www.df.unipi.it/",
+                "hasStatus": false
+              }
+            ],
             "1": [],
             "2": [
               {

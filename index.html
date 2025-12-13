@@ -105,8 +105,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <!-- Preload critical CSS -->
     <link rel="preload" href="assets/css/output.css" as="style">
     <!-- Preload data to shorten critical path -->
-    <link rel="preload" href="data/rooms.json" as="fetch" crossorigin="anonymous">
-    <link rel="preload" href="data/facilities.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/unified.json" as="fetch" crossorigin="anonymous">
 
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
@@ -2600,6 +2599,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
         }
 
+
+
         function markDomReady() {
             domReady = true;
             checkAndInit();
@@ -2625,6 +2626,296 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let keyboardViewportAdjustmentActive = false;
             let viewportResizeRaf = null;
             let visualViewportListenersAttached = false;
+
+            // Setup global delegated listeners
+            setupDelegatedListeners();
+            setupSidebarDelegation();
+
+            function setupDelegatedListeners() {
+                // Search Results Delegation
+                const searchResultsContainer = document.getElementById('search-results');
+                const searchResultsMobileContainer = document.getElementById('search-results-mobile');
+
+                const handleSearchResultInteraction = (e) => {
+                    const resultItem = e.target.closest('.search-result-item');
+                    // Ignora se non siamo su un item o se stiamo interagendo con impostazioni (che hanno i loro listener)
+                    if (!resultItem || resultItem.closest('.load-more-container') || resultItem.querySelector('input[type="checkbox"]')) return;
+
+                    const globalIndex = parseInt(resultItem.dataset.index, 10);
+                    if (isNaN(globalIndex)) return;
+
+                    // Retrieve result from global array
+                    const result = allSearchResults[globalIndex];
+                    if (!result) return;
+
+                    if (e.type === 'click') {
+                        handleSearchResultClick(e, resultItem, result);
+                    } else if (e.type === 'mouseover') {
+                        handleSearchResultMouseEnter(e, resultItem, globalIndex);
+                    } else if (e.type === 'mouseout') {
+                        handleSearchResultMouseLeave(e, resultItem, globalIndex);
+                    }
+                };
+
+                const attachDelegation = (container) => {
+                    if (!container) return;
+                    container.addEventListener('click', handleSearchResultInteraction);
+                    container.addEventListener('mouseover', handleSearchResultInteraction);
+                    container.addEventListener('mouseout', handleSearchResultInteraction);
+                };
+
+                attachDelegation(searchResultsContainer);
+                attachDelegation(searchResultsMobileContainer);
+            }
+
+            function handleSearchResultClick(e, element, result) {
+                // Check if we clicked on specific children that should NOT trigger the main action
+                if (e.target.closest('.occupancy-status-bar') || e.target.closest('.occupancy-expand-icon')) {
+                    return;
+                }
+
+                // Logic for Suggestion
+                if (result.suggestion) {
+                    const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                    const otherSearchInput = isMobile() ? searchInput : searchInputMobile;
+
+                    let newValue = '';
+                    if (result.type === 'settings') {
+                        newValue = currentLanguage === 'it' ? 'Impostazioni' : 'Settings';
+                    } else if (result.type === 'share_suggestion') {
+                        newValue = currentLanguage === 'it' ? 'Condividi' : 'Share';
+                    } else if (result.type === 'feedback_suggestion') {
+                        newValue = 'Feedback';
+                    } else if (result.type === 'bot_suggestion') {
+                        newValue = 'Bot';
+                    }
+
+                    currentSearchInput.value = newValue;
+                    if (otherSearchInput) otherSearchInput.value = newValue;
+                    updateClearButtonsVisibility();
+
+                    setTimeout(() => {
+                        searchRooms(newValue);
+                        currentSearchInput.focus();
+                    }, 10);
+                    return;
+                }
+
+                // Logic for Bot
+                if (result.type === 'bot') {
+                    window.open(result.url, '_blank');
+                    const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                    setTimeout(() => currentSearchInput.focus(), 50);
+                    return;
+                }
+
+                // Logic for Feedback
+                if (result.type === 'feedback') {
+                    if (result.action === 'email') {
+                        window.open('mailto:lyubomyr.malay@icloud.com?subject=' + encodeURIComponent('FEEDBACK DOVE?UNIPI'), '_blank');
+                    } else if (result.action === 'github') {
+                        window.open('https://github.com/plumkewe/dove-unipi/issues/new', '_blank');
+                    }
+                    const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                    setTimeout(() => currentSearchInput.focus(), 50);
+                    return;
+                }
+
+                // Logic for Share
+                if (result.type === 'share') {
+                    navigator.clipboard.writeText(result.url).then(() => {
+                        element.classList.add('selected');
+                        const iconElement = element.querySelector('[data-copy-icon]');
+                        if (iconElement) {
+                            const originalIcon = iconElement.textContent;
+                            iconElement.textContent = 'check';
+                            setTimeout(() => {
+                                iconElement.textContent = originalIcon;
+                            }, 2500);
+                        }
+                        setTimeout(() => {
+                            element.classList.remove('selected');
+                        }, 2500);
+                    }).catch(err => {
+                        console.error('Errore nella copia del link: ', err);
+                    });
+                    const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                    setTimeout(() => currentSearchInput.focus(), 50);
+                    return;
+                }
+
+                // Logic for Room/Person
+                if (result.room) {
+                    const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+
+                    const personName = result.isPerson ? result.room.nome : null;
+                    selectRoom(result.polo, result.edificio, result.piano, result.room, personName);
+                    hideSearchResultsPanels();
+                    currentSearchInput.value = result.room.nome;
+
+                    const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
+                    otherInput.value = result.room.nome;
+                    updateClearButtonsVisibility();
+
+                    setTimeout(() => {
+                        expandRoomDetailsInSidebar(result.room.nome);
+                    }, 100);
+
+                    triggerSidebarButtonAnimation();
+
+                    if (isMobile()) {
+                        closeSidebar();
+                    }
+                }
+            }
+
+            function handleSearchResultMouseEnter(e, element, globalIndex) {
+                if (isTouchDevice()) return;
+                if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
+                    return;
+                }
+                updateSelectedSearchResult(globalIndex);
+            }
+
+            function handleSearchResultMouseLeave(e, element, globalIndex) {
+                if (isTouchDevice()) return;
+                if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
+                    return;
+                }
+                if (selectedSearchResultIndex === globalIndex) {
+                    element.classList.remove('selected');
+                    selectedSearchResultIndex = -1;
+                }
+            }
+
+
+            function setupSidebarDelegation() {
+                const sidebarContent = document.getElementById('rooms-list').parentElement; // Using parent to catch everything
+                if (!sidebarContent) return;
+
+                sidebarContent.addEventListener('click', (e) => {
+                    // 1. Handle Expand/Collapse of Rooms/Libraries
+                    // Look for the header element or the expand icon
+                    // We need to target the row that contains the room info
+
+                    const roomHeader = e.target.closest('[data-room-name]');
+                    const scheduleBtn = e.target.closest('[data-action="show-schedule"]');
+
+                    if (scheduleBtn) {
+                        const libName = scheduleBtn.dataset.libName;
+                        handleLibraryScheduleClick(libName);
+                        return;
+                    }
+
+                    if (roomHeader) {
+                        e.preventDefault();
+                        const roomName = roomHeader.dataset.roomName;
+
+                        // Let's store these in the element
+                        const polo = roomHeader.dataset.polo;
+                        const building = roomHeader.dataset.building;
+                        const floor = roomHeader.dataset.floor;
+
+                        // We need the room object for `isRoomEligibleForShortLink` and `centerMapOnRoom`.
+                        // Re-fetching it from `data` is safe.
+
+                        const roomData = findRoomData(polo, building, floor, roomName);
+                        if (!roomData) return;
+
+                        handleRoomItemClick(e, roomHeader, roomData, polo, building, floor);
+                    }
+                });
+            }
+
+            function findRoomData(polo, building, floor, roomName) {
+                if (!data.polo[polo] || !data.polo[polo].edificio[building]) return null;
+                const floorData = data.polo[polo].edificio[building].piano[floor];
+                if (!floorData) return null;
+
+                const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
+                return rooms.find(r => r.nome === roomName);
+            }
+
+            function handleLibraryScheduleClick(libName) {
+                // Chiudi la sidebar se su mobile
+                if (isMobile()) {
+                    closeSidebar();
+                }
+
+                // Imposta il valore di ricerca
+                const searchVal = libName;
+                searchInput.value = searchVal;
+                searchInputMobile.value = searchVal;
+                // currentSearchInput = isMobile() ? searchInputMobile : searchInput; // Updated by searchRooms usually? No, manually.
+
+                // Triggera la ricerca
+                searchRooms(searchVal); // This calls performSearch internally if needed or just filters? 
+                // Wait, original code called `performSearch(searchVal)` but `searchRooms` is the main entry?
+                // Let's use `searchRooms` which is safe.
+
+                // Espandi automaticamente gli orari dopo che i risultati sono stati renderizzati
+                setTimeout(() => {
+                    const container = isMobile() ? document.getElementById('search-results-mobile') : document.getElementById('search-results');
+                    if (!container) return;
+
+                    const results = container.querySelectorAll('.search-result-item');
+                    results.forEach(result => {
+                        const title = result.querySelector('.title');
+                        // Need strict match or partial? Original used textContent check
+                        if (title && title.textContent === libName) {
+                            const expandIcon = result.querySelector('.occupancy-expand-icon');
+                            const detailsElement = result.querySelector('.occupancy-details');
+
+                            if (expandIcon && detailsElement && !detailsElement.classList.contains('expanded')) {
+                                detailsElement.classList.add('expanded');
+                                expandIcon.classList.add('expanded');
+
+                                setTimeout(() => {
+                                    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }, 100);
+                            }
+                        }
+                    });
+                }, 100);
+            }
+
+            function handleRoomItemClick(e, roomElement, room, polo, building, floor) {
+                // Logic from original click listener
+                if (isRoomEligibleForShortLink(room)) {
+                    setShortLinkContext({
+                        polo: polo,
+                        building: building,
+                        floor: floor,
+                        room
+                    });
+                    updateURL(true); // Added updateURL as seen in library handler, good for consistency
+                } else {
+                    clearShortLinkContext();
+                }
+
+                centerMapOnRoom(room);
+
+                requestAnimationFrame(() => {
+                    // Toggle details
+                    // We need to find the sibling `roomInfoElement` (capacity-info)
+                    // It is usually the next sibling of `roomElement` (which is the .nav-item a tag)
+                    // The structure is:
+                    // div.nav-item-container
+                    //   a.nav-item [clicked]
+                    //   div.capacity-info
+
+                    const roomContainer = roomElement.parentNode;
+                    const roomInfoElement = roomContainer.querySelector('.capacity-info');
+
+                    if (roomInfoElement && roomInfoElement.innerHTML.trim() !== '') {
+                        roomInfoElement.classList.toggle('hidden');
+                        const expandIcon = roomElement.querySelector('.expand-icon');
+                        if (expandIcon) {
+                            expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                        }
+                    }
+                });
+            }
 
             // Funzione per gestire il ridimensionamento della viewport (quando si apre la tastiera)
             function handleViewportResize() {
@@ -3127,7 +3418,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const API_BASE_URL = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net';
 
             let data = {};
-            let facilitiesData = {};
             let selectedPolo = '';
             let selectedBuilding = '';
             let selectedFloor = '0';
@@ -3137,12 +3427,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let isKeyboardSelection = false;
             let waterDispenserOverlays = []; // Array per gli overlay degli erogatori d'acqua
             let studyRoomOverlays = []; // Array per gli overlay delle aule studio
+            const markerRoomDataMap = new Map(); // Map per memorizzare i dati delle stanze associate ai marker (per event delegation)
             let shortLinkContext = null;
             let viewerInteractionGuardsInstalled = false;
             let programmaticMapChange = false;
             let programmaticMapChangeResetTimeout = null;
             let isMapFlipped = false;
             const buildingFlipStates = {}; // Store flip state per building
+            let allSearchResults = []; // Store all search results for incremental loading
+            let currentResultsShown = 0; // Track how many results are currently displayed
 
             // Sistema di lazy loading e caching per le mappe SVG
             const svgCache = new Map();
@@ -3161,7 +3454,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let currentSuggestionIndex = 0;
             let searchPlaceholderInterval = null;
 
-            const SHORT_LINK_ELIGIBLE_TYPES = new Set(['aula', 'dipartimento', 'laboratorio', 'sala', 'biblioteca', 'studio']);
+            const SHORT_LINK_ELIGIBLE_TYPES = new Set(['aula', 'dipartimento', 'laboratorio', 'sala', 'biblioteca', 'studio', 'persona']);
 
             function isRoomEligibleForShortLink(room) {
                 if (!room) return false;
@@ -3240,11 +3533,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             ? floorData
                             : (floorData?.aule ? Object.values(floorData.aule) : []);
 
+                        // Filter out non-room items (dispensers) to prevent errors and irrelevant short codes
+                        // Keep 'persona' type so people can be found via short links
+                        const filteredRooms = rooms.filter(r => r.type !== 'erogatore_acqua');
+
                         // Sort rooms by name to ensure deterministic order
-                        const sortedRooms = [...rooms].sort((a, b) => {
+                        const sortedRooms = [...filteredRooms].sort((a, b) => {
                             const nameA = a.nome || '';
                             const nameB = b.nome || '';
-                            return nameA.localeCompare(nameB);
+                            const strA = typeof nameA === 'string' ? nameA : String(nameA);
+                            const strB = typeof nameB === 'string' ? nameB : String(nameB);
+                            return strA.localeCompare(strB);
                         });
 
                         for (const room of sortedRooms) {
@@ -3440,10 +3739,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             // Nuova funzione per selezionare un'aula senza ricaricare la mappa
-            function selectRoom(polo, edificio, piano, room) {
+            function selectRoom(polo, edificio, piano, room, personName = null) {
                 const eligibleForShortLink = isRoomEligibleForShortLink(room);
                 if (eligibleForShortLink) {
-                    setShortLinkContext({ polo, building: edificio, floor: piano, room });
+                    const contextParams = { polo, building: edificio, floor: piano, room };
+                    // If personName is provided (for persona type), use it as codeOverride
+                    if (personName) {
+                        contextParams.codeOverride = normalizeShortCode(personName);
+                    }
+                    setShortLinkContext(contextParams);
                 } else {
                     clearShortLinkContext();
                 }
@@ -3461,6 +3765,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         selectView('top', true, null, room);
                     } else {
                         centerMapOnRoom(room);
+                        if (eligibleForShortLink) {
+                            updateURL(true);
+                        }
                     }
                 } else {
                     // Cambio di piano necessario, ricarica la mappa in vista top con le coordinate dell'aula
@@ -3534,6 +3841,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const matchesBotQuery = queryLower.includes('bot') || queryLower.includes('telegram');
                 const capacityFilter = parseCapacityQuery(query);
                 const results = [];
+                const peopleMatches = [];
 
                 // Suggerimenti di autocompletamento per parole chiave speciali
                 const specialKeywords = [
@@ -3638,76 +3946,83 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
 
                         for (const floorName in building.piano) {
-                            const rooms = building.piano[floorName];
-                            if (Array.isArray(rooms)) {
-                                rooms.forEach(room => {
-                                    if (capacityFilter) {
-                                        if (matchesCapacity(room.capienza, capacityFilter)) {
-                                            results.push({
-                                                polo: poloName,
-                                                edificio: buildingName,
-                                                piano: floorName,
-                                                room: room
-                                            });
+                            const items = building.piano[floorName];
+                            if (Array.isArray(items)) {
+                                items.forEach(item => {
+                                    // 1. Check for Rooms (Aule, Studi, etc)
+                                    if (!['persona', 'erogatore_acqua'].includes(item.type)) {
+                                        if (capacityFilter) {
+                                            if (matchesCapacity(item.capienza, capacityFilter)) {
+                                                results.push({
+                                                    polo: poloName,
+                                                    edificio: buildingName,
+                                                    piano: floorName,
+                                                    room: item
+                                                });
+                                            }
+                                            return;
                                         }
-                                        return;
-                                    }
 
-                                    const roomNameLower = room.nome.toLowerCase();
-                                    const aliasLower = Array.isArray(room.alias) ? room.alias.map(a => a.toLowerCase()) : [];
+                                        const itemNameLower = item.nome.toLowerCase();
+                                        const aliasLower = Array.isArray(item.alias) ? item.alias.map(a => a.toLowerCase()) : [];
 
-                                    // Use exact match when search is in quotes, otherwise use partial match
-                                    const matches = isExactSearch
-                                        ? (roomNameLower === queryLower || aliasLower.some(a => a === queryLower))
-                                        : (roomNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
-
-                                    if (matches) {
-                                        results.push({
-                                            polo: poloName,
-                                            edificio: buildingName,
-                                            piano: floorName,
-                                            room: room
-                                        });
-                                    }
-                                });
-                            }
-                        }
-                    }
-                }
-
-                // Cerca negli erogatori d'acqua se la funzionalità è attiva
-                if (settingsConfig.showWaterDispensers && facilitiesData.polo) {
-                    for (const poloName in facilitiesData.polo) {
-                        const polo = facilitiesData.polo[poloName];
-                        if (!polo.edificio) continue;
-
-                        for (const buildingName in polo.edificio) {
-                            const building = polo.edificio[buildingName];
-                            if (!building.piano) continue;
-
-                            for (const floorName in building.piano) {
-                                const dispensers = building.piano[floorName];
-                                if (Array.isArray(dispensers)) {
-                                    dispensers.forEach(dispenser => {
-                                        const dispenserNameLower = dispenser.nome.toLowerCase();
-                                        const aliasLower = Array.isArray(dispenser.alias) ? dispenser.alias.map(a => a.toLowerCase()) : [];
-
-                                        // Use exact match when search is in quotes, otherwise use partial match
                                         const matches = isExactSearch
-                                            ? (dispenserNameLower === queryLower || aliasLower.some(a => a === queryLower))
-                                            : (dispenserNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower))
+                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
 
                                         if (matches) {
                                             results.push({
                                                 polo: poloName,
                                                 edificio: buildingName,
                                                 piano: floorName,
-                                                room: dispenser,
+                                                room: item
+                                            });
+                                        }
+                                    }
+                                    // 2. Check for Facilities (Erogatori)
+                                    else if (item.type === 'erogatore_acqua' && settingsConfig.showWaterDispensers) {
+                                        const itemNameLower = item.nome.toLowerCase();
+                                        const aliasLower = Array.isArray(item.alias) ? item.alias.map(a => a.toLowerCase()) : [];
+
+                                        const matches = isExactSearch
+                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower))
+                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+
+                                        if (matches) {
+                                            results.push({
+                                                polo: poloName,
+                                                edificio: buildingName,
+                                                piano: floorName,
+                                                room: item,
                                                 isFacility: true
                                             });
                                         }
-                                    });
-                                }
+                                    }
+                                    // 3. Check for People
+                                    else if (item.type === 'persona') {
+                                        const personNames = Array.isArray(item.nome) ? item.nome : [item.nome];
+                                        personNames.forEach(singleName => {
+                                            const nameLower = singleName.toLowerCase();
+                                            const matches = isExactSearch ?
+                                                nameLower === queryLower :
+                                                nameLower.includes(queryLower);
+
+                                            if (matches) {
+                                                const personView = {
+                                                    ...item,
+                                                    nome: singleName
+                                                };
+                                                peopleMatches.push({
+                                                    polo: poloName,
+                                                    edificio: buildingName,
+                                                    piano: floorName,
+                                                    room: personView,
+                                                    isPerson: true
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         }
                     }
@@ -3737,6 +4052,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // 2. Se entrambi iniziano (o nessuno inizia), ordina alfabeticamente per nome
                         return aName.localeCompare(bName);
                     });
+                }
+
+                // Ordina i risultati delle persone e aggiungili in fondo
+                if (peopleMatches.length > 0) {
+                    peopleMatches.sort((a, b) => {
+                        const aName = a.room.nome.toLowerCase();
+                        const bName = b.room.nome.toLowerCase();
+
+                        // Controlla se il nome inizia con la query
+                        const aStartsWith = aName.startsWith(queryLower);
+                        const bStartsWith = bName.startsWith(queryLower);
+
+                        // 1. Priorità massima: inizia con la query
+                        if (aStartsWith && !bStartsWith) return -1;
+                        if (!aStartsWith && bStartsWith) return 1;
+
+                        // 2. Alfabeticamente
+                        return aName.localeCompare(bName);
+                    });
+
+                    results.push(...peopleMatches);
                 }
 
                 displaySearchResults(results, matchesSettingsQuery);
@@ -3938,20 +4274,30 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 detailsContent.innerHTML = scheduleHTML;
             }
 
-            function displaySearchResults(results, showSettings = false) {
+            function displaySearchResults(results, showSettings = false, loadMore = false) {
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
 
                 // Store the current index to preserve it after re-render
                 const previousIndex = selectedSearchResultIndex;
 
-                currentSearchResults.innerHTML = '';
-                // Don't reset the index yet - we'll restore it after rendering if still valid
+                // If not loading more, reset the state and clear results
+                if (!loadMore) {
+                    allSearchResults = results;
+                    currentResultsShown = 0;
+                    currentSearchResults.innerHTML = '';
+                } else {
+                    // When loading more, remove the old notification/load more button
+                    const oldNotification = currentSearchResults.querySelector('.load-more-container');
+                    if (oldNotification) {
+                        oldNotification.remove();
+                    }
+                }
 
                 // Use DocumentFragment to minimize reflows
                 const fragment = document.createDocumentFragment();
 
-                if (showSettings) {
+                if (showSettings && !loadMore) {
                     // Create a temporary container for settings to append to fragment
                     const settingsContainer = document.createElement('div');
                     renderSettingsBlock(settingsContainer);
@@ -3966,7 +4312,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 }
 
-                if (!showSettings && results.length === 0) {
+                if (!showSettings && allSearchResults.length === 0 && !loadMore) {
                     currentSearchResults.innerHTML = `
                         <div class="search-result-item">
                             <div class="flex items-center justify-between">
@@ -3985,9 +4331,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return;
                 }
 
-                results.forEach((result, index) => {
+                // Limit initial results to prevent DOM blocking
+                const MAX_INITIAL_RESULTS = 21;
+                const totalResults = allSearchResults.length;
+                const startIndex = loadMore ? currentResultsShown : 0;
+                const endIndex = Math.min(startIndex + MAX_INITIAL_RESULTS, totalResults);
+                const resultsToShow = allSearchResults.slice(startIndex, endIndex);
+                currentResultsShown = endIndex;
+
+                resultsToShow.forEach((result, localIndex) => {
+                    const globalIndex = startIndex + localIndex; // Calculate global index for event handlers
                     const resultElement = document.createElement('div');
                     resultElement.className = 'search-result-item';
+                    resultElement.dataset.index = globalIndex;
+
 
                     // Gestione suggerimenti di autocompletamento
                     if (result.suggestion) {
@@ -4000,33 +4357,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">keyboard_return</span>
                             </div>
                         `;
-                        resultElement.addEventListener('click', () => {
-                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
-                            const otherSearchInput = isMobile() ? searchInput : searchInputMobile;
-
-                            let newValue = '';
-                            if (result.type === 'settings') {
-                                newValue = currentLanguage === 'it' ? 'Impostazioni' : 'Settings';
-                            } else if (result.type === 'share_suggestion') {
-                                newValue = currentLanguage === 'it' ? 'Condividi' : 'Share';
-                            } else if (result.type === 'feedback_suggestion') {
-                                newValue = 'Feedback';
-                            } else if (result.type === 'bot_suggestion') {
-                                newValue = 'Bot';
-                            }
-
-                            // Aggiorna entrambi gli input
-                            currentSearchInput.value = newValue;
-                            if (otherSearchInput) otherSearchInput.value = newValue;
-                            updateClearButtonsVisibility();
-
-                            // Usa setTimeout per permettere l'aggiornamento dell'input prima di cercare
-                            setTimeout(() => {
-                                searchRooms(newValue);
-                                // Keep focus on input to allow arrow key navigation
-                                currentSearchInput.focus();
-                            }, 10);
-                        });
                         fragment.appendChild(resultElement);
                         return;
                     }
@@ -4041,12 +4371,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">smart_toy</span>
                             </div>
                         `;
-                        resultElement.addEventListener('click', () => {
-                            window.open(result.url, '_blank');
-                            // Keep focus on input to allow arrow key navigation
-                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
-                            setTimeout(() => currentSearchInput.focus(), 50);
-                        });
                         fragment.appendChild(resultElement);
                         return;
                     }
@@ -4061,16 +4385,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">${result.action === 'email' ? 'mail' : 'bug_report'}</span>
                             </div>
                         `;
-                        resultElement.addEventListener('click', () => {
-                            if (result.action === 'email') {
-                                window.open('mailto:lyubomyr.malay@icloud.com?subject=' + encodeURIComponent('FEEDBACK DOVE?UNIPI'), '_blank');
-                            } else if (result.action === 'github') {
-                                window.open('https://github.com/plumkewe/dove-unipi/issues/new', '_blank');
-                            }
-                            // Keep focus on input to allow arrow key navigation
-                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
-                            setTimeout(() => currentSearchInput.focus(), 50);
-                        });
                         fragment.appendChild(resultElement);
                         return;
                     }
@@ -4085,27 +4399,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 <span class="material-symbols-outlined" data-copy-icon style="font-size: 20px; line-height: 1;">content_copy</span>
                             </div>
                         `;
-                        resultElement.addEventListener('click', () => {
-                            navigator.clipboard.writeText(result.url).then(() => {
-                                resultElement.classList.add('selected');
-                                const iconElement = resultElement.querySelector('[data-copy-icon]');
-                                if (iconElement) {
-                                    const originalIcon = iconElement.textContent;
-                                    iconElement.textContent = 'check';
-                                    setTimeout(() => {
-                                        iconElement.textContent = originalIcon;
-                                    }, 2500);
-                                }
-                                setTimeout(() => {
-                                    resultElement.classList.remove('selected');
-                                }, 2500);
-                            }).catch(err => {
-                                console.error('Errore nella copia del link: ', err);
-                            });
-                            // Keep focus on input to allow arrow key navigation
-                            const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
-                            setTimeout(() => currentSearchInput.focus(), 50);
-                        });
                     } else {
                         const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
                         const isFacility = result.isFacility || false;
@@ -4275,12 +4568,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                         // Fine occupazione corrente delle aule
 
+                        const roomDetails = result.isPerson ?
+                            ` <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span> ${t('room')} ${result.room.room}` :
+                            '';
+
                         resultElement.innerHTML = `
                             <div class="title">${result.room.nome}</div>
                             <div class="details">
                                 Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
                                 ${t('building')} ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
-                                ${result.piano === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + result.piano}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
+                                ${result.piano === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + result.piano}${roomDetails}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
                             </div>
                             ${availabilityHTML}
                         `;
@@ -4310,61 +4607,47 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             fetchLibrarySchedule(result.room.nid, resultElement);
                         }
 
-                        resultElement.addEventListener('click', (e) => {
-                            // Don't navigate if clicking on status bar or expand icon
-                            if (e.target.closest('.occupancy-status-bar') || e.target.closest('.occupancy-expand-icon')) {
-                                return;
-                            }
-                            selectRoom(result.polo, result.edificio, result.piano, result.room);
-                            hideSearchResultsPanels();
-                            currentSearchInput.value = result.room.nome;
-                            // Sincronizza l'altro input
-                            const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
-                            otherInput.value = result.room.nome;
-                            updateClearButtonsVisibility();
-
-                            // Espandi automaticamente i dettagli dell'aula nella sidebar
-                            // Usa un timeout per assicurarsi che la lista delle aule sia stata popolata
-                            setTimeout(() => {
-                                expandRoomDetailsInSidebar(result.room.nome);
-                            }, 100);
-
-                            // Anima il bottone della sidebar per invogliare l'utente ad aprirla
-                            triggerSidebarButtonAnimation();
-
-                            if (isMobile()) {
-                                closeSidebar();
-                            }
-                        });
+                        if (isLibrary) {
+                            fetchLibrarySchedule(result.room.nid, resultElement);
+                        }
                     }
 
-                    resultElement.addEventListener('mouseenter', () => {
-                        // Ignora su dispositivi touch per evitare selezione indesiderata al tocco (es. espandendo status bar)
-                        if (isTouchDevice()) return;
 
-                        // Ignora completamente il mouse quando si sta usando la navigazione da tastiera
-                        if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
-                            return;
-                        }
-                        updateSelectedSearchResult(index);
-                    });
-
-                    resultElement.addEventListener('mouseleave', () => {
-                        // Ignora su dispositivi touch
-                        if (isTouchDevice()) return;
-
-                        // Ignora completamente il mouse quando si sta usando la navigazione da tastiera
-                        if (isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) {
-                            return;
-                        }
-                        if (selectedSearchResultIndex === index) {
-                            resultElement.classList.remove('selected');
-                            selectedSearchResultIndex = -1;
-                        }
-                    });
 
                     fragment.appendChild(resultElement);
                 });
+
+                // Add notification and load more button if results were limited
+                if (currentResultsShown < totalResults) {
+                    const loadMoreContainer = document.createElement('div');
+                    loadMoreContainer.className = 'search-result-item load-more-container';
+                    loadMoreContainer.style.opacity = '0.9';
+                    loadMoreContainer.innerHTML = `
+                        <div class="details" style="font-style: italic;">
+                            ${t('showing_limited_results').replace('%s', currentResultsShown).replace('%s', totalResults)} · 
+                            <span class="load-more-link" style="cursor: pointer; text-decoration: underline;">
+                                ${t('load_more_results')}
+                            </span>
+                        </div>
+                    `;
+
+                    // Add click handler for load more link
+                    const loadMoreLink = loadMoreContainer.querySelector('.load-more-link');
+                    loadMoreLink.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        displaySearchResults(allSearchResults, false, true);
+                    });
+
+                    // Add hover effect
+                    loadMoreLink.addEventListener('mouseenter', () => {
+                        loadMoreLink.style.opacity = '0.7';
+                    });
+                    loadMoreLink.addEventListener('mouseleave', () => {
+                        loadMoreLink.style.opacity = '1';
+                    });
+
+                    fragment.appendChild(loadMoreContainer);
+                }
 
                 currentSearchResults.appendChild(fragment);
 
@@ -4380,8 +4663,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 currentSearchResults.classList.remove('hidden');
 
-                // Reset scroll position to top after showing the results panel
-                if (currentSearchResults) {
+                // Reset scroll position to top after showing the results panel (but not when loading more)
+                if (currentSearchResults && !loadMore) {
                     currentSearchResults.scrollTop = 0;
                 }
 
@@ -4931,6 +5214,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     if (e.key === 'ArrowDown') {
                         isKeyboardSelection = true;
                         document.body.classList.add('keyboard-navigation-active');
+                        // Attiva il listener mousemove solo ora
+                        document.addEventListener('mousemove', handleMouseMoveDuringKeyboardNav);
                         e.preventDefault();
                         const newIndex = (selectedSearchResultIndex + 1) % items.length;
                         updateSelectedSearchResult(newIndex);
@@ -4945,6 +5230,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     } else if (e.key === 'ArrowUp') {
                         isKeyboardSelection = true;
                         document.body.classList.add('keyboard-navigation-active');
+                        // Attiva il listener mousemove solo ora
+                        document.addEventListener('mousemove', handleMouseMoveDuringKeyboardNav);
                         e.preventDefault();
                         const newIndex = (selectedSearchResultIndex - 1 + items.length) % items.length;
                         updateSelectedSearchResult(newIndex);
@@ -4959,6 +5246,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                         isKeyboardSelection = true;
                         document.body.classList.add('keyboard-navigation-active');
+                        // Attiva il listener mousemove solo ora
+                        document.addEventListener('mousemove', handleMouseMoveDuringKeyboardNav);
                         // Handle horizontal navigation within multi-button settings
                         if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
                             const currentItem = items[selectedSearchResultIndex];
@@ -5077,11 +5366,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Riabilita l'hover del mouse quando l'utente muove il mouse dopo la navigazione da tastiera
             let lastMouseX = 0;
             let lastMouseY = 0;
-            document.addEventListener('mousemove', (e) => {
+            // Funzione per gestire il reset della navigazione da tastiera al movimento del mouse
+            function handleMouseMoveDuringKeyboardNav(e) {
                 // Rileva un movimento significativo del mouse (non solo piccole vibrazioni)
                 const hasMoved = Math.abs(e.clientX - lastMouseX) > 10 || Math.abs(e.clientY - lastMouseY) > 10;
 
-                if ((isKeyboardSelection || document.body.classList.contains('keyboard-navigation-active')) && hasMoved) {
+                if (hasMoved) {
                     // Rimuovi la selezione da tastiera
                     const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                     const items = currentSearchResults.querySelectorAll('.search-result-item');
@@ -5091,10 +5381,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     selectedSearchResultIndex = -1;
                     isKeyboardSelection = false;
                     document.body.classList.remove('keyboard-navigation-active');
+
+                    // Importante: rimuovi il listener una volta che il mouse è stato usato
+                    document.removeEventListener('mousemove', handleMouseMoveDuringKeyboardNav);
                 }
                 lastMouseX = e.clientX;
                 lastMouseY = e.clientY;
-            });
+            }
+
+            // Nota: Il listener 'mousemove' globale continuo è stato rimosso per performance.
+            // Viene attaccato solo quando si attiva la navigazione da tastiera.
 
             // Aggiungi listener per le scorciatoie da tastiera
             document.addEventListener('keydown', (e) => {
@@ -5283,19 +5579,53 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const normalizedInput = normalizeShortCode(code);
                 if (!normalizedInput) return null;
 
+                const allRooms = getAllRoomsInPolo(poloName);
+
+                // First, try to find a person by normalized name
+                // This handles the new person-based short links (e.g., ?c=priamicorrado)
+                for (const item of allRooms) {
+                    const room = item.room;
+
+                    // Check if this is a persona type
+                    const isPersona = Array.isArray(room.type)
+                        ? room.type.includes('persona')
+                        : room.type === 'persona';
+
+                    if (isPersona) {
+                        const namesField = room.nome;
+                        let personNames = [];
+
+                        if (Array.isArray(namesField)) {
+                            personNames = namesField;
+                        } else if (typeof namesField === 'string') {
+                            personNames = [namesField];
+                        }
+
+                        // Check if any of the person names match the normalized input
+                        for (const name of personNames) {
+                            if (normalizeShortCode(name) === normalizedInput) {
+                                // Found a match! Return this room with the specific person name
+                                return {
+                                    ...item,
+                                    matchedPersonName: name
+                                };
+                            }
+                        }
+                    }
+                }
+
+                // If no person match found, fall back to room-based search
                 // Parse code to separate base and index
                 // Format: name or name-2, name-3, etc.
                 let baseCode = normalizedInput;
                 let targetIndex = 0;
 
                 // Check for suffix -N where N is a number
-                const match = normalizedInput.match(/^(.*)-(\d+)$/);
+                const match = normalizedInput.match(/^(.*)-(\\d+)$/);
                 if (match) {
                     baseCode = match[1];
                     targetIndex = parseInt(match[2], 10) - 1; // Convert 2 -> index 1
                 }
-
-                const allRooms = getAllRoomsInPolo(poloName);
 
                 // Find all rooms matching the base code
                 const matchingRooms = allRooms.filter(item => {
@@ -5380,9 +5710,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             codeOverride: roomParam
                         });
 
-                        // Popola automaticamente il campo di ricerca con il nome dell'aula
-                        const roomName = roomFromShortLink.room.nome || roomParam;
-                        const searchQuery = `${roomName}`;
+                        // Popola automaticamente il campo di ricerca con il nome della persona o dell'aula
+                        // Use the matched person name if available (for persona type), otherwise use room name
+                        const displayName = roomFromShortLink.matchedPersonName || roomFromShortLink.room.nome || roomParam;
+                        const searchQuery = `${displayName}`;
 
                         if (searchInput) searchInput.value = searchQuery;
                         if (searchInputMobile) searchInputMobile.value = searchQuery;
@@ -5569,35 +5900,29 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const translationsPromise = ensureTranslationsLoaded();
                 if (dataLoaded) return;
 
-                const DATA_CACHE_KEY = 'dove_unipi_rooms_data_v1';
-                const FACILITIES_CACHE_KEY = 'dove_unipi_facilities_data_v1';
+                const UNIFIED_CACHE_KEY = 'dove_unipi_unified_data_v1';
                 let loadedFromCache = false;
                 let bootstrapFromCache = false;
 
                 // Kick off network fetch immediately (runs in parallel with translations)
                 const networkFetchPromise = (async () => {
-                    const roomsResponse = await fetch('data/rooms.json');
-                    const roomsJson = await roomsResponse.json();
-
-                    let facilitiesJson = {};
-                    try {
-                        const facilitiesResponse = await fetch('data/facilities.json');
-                        facilitiesJson = await facilitiesResponse.json();
-                    } catch (e) {
-                        console.warn('Errore facilities.json:', e);
+                    const response = await fetch('data/unified.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
-
-                    return { roomsJson, facilitiesJson };
+                    const unifiedJson = await response.json();
+                    return unifiedJson;
                 })();
 
                 // 1. Tentativo caricamento da cache
                 try {
-                    const cachedRooms = localStorage.getItem(DATA_CACHE_KEY);
-                    const cachedFacilities = localStorage.getItem(FACILITIES_CACHE_KEY);
+                    const cachedUnified = localStorage.getItem(UNIFIED_CACHE_KEY);
 
-                    if (cachedRooms) {
-                        data = JSON.parse(cachedRooms);
-                        facilitiesData = cachedFacilities ? JSON.parse(cachedFacilities) : {};
+                    if (cachedUnified) {
+                        const parsed = JSON.parse(cachedUnified);
+
+                        data = parsed;
+
                         dataLoaded = true;
                         loadedFromCache = true;
                         bootstrapFromCache = true;
@@ -5617,34 +5942,36 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // 2. Fetch dati aggiornati (already in flight)
                 try {
-                    const { roomsJson, facilitiesJson } = await networkFetchPromise;
+                    const unifiedJson = await networkFetchPromise;
 
                     // Calcola short codes sui nuovi dati
                     // Usiamo un trucco per usare la funzione esistente che dipende da 'data' globale
                     const currentData = data;
-                    data = roomsJson;
+                    data = unifiedJson;
                     precalculateShortCodes();
 
                     try {
-                        localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(roomsJson));
-                        localStorage.setItem(FACILITIES_CACHE_KEY, JSON.stringify(facilitiesJson));
+                        localStorage.setItem(UNIFIED_CACHE_KEY, JSON.stringify(unifiedJson));
                     } catch (e) {
                         console.warn('Quota storage superata:', e);
                     }
 
                     if (!loadedFromCache) {
-                        facilitiesData = facilitiesJson;
                         dataLoaded = true;
                         populatePolos(Object.keys(data.polo));
                         handleInitialLoad();
                     } else {
                         data = currentData; // Ripristina per coerenza UI sessione corrente
+                        // Aggiorniamo comunque i dati in memoria per le navigazioni future senza reload
                         console.log('Cache aggiornata');
                     }
                 } catch (error) {
                     console.error('Failed to load rooms data:', error);
                 }
             }
+
+            // Global variable for peopleData moved to top
+
 
             // Avvia il caricamento
             loadDataAndInitialize();
@@ -5773,12 +6100,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const laboratories = rooms.filter(room => roomHasType(room, 'laboratorio'));
 
                 // Filter for Sale (Meeting Rooms) and active Aule (Classrooms)
-                // First get everything that is NOT a special type (dept, lib, studio-only, lab)
+                // First get everything that is NOT a special type (dept, lib, studio-only, lab, person, dispenser)
                 const allRegularRooms = rooms.filter(room =>
                     !roomHasType(room, 'dipartimento') &&
                     !roomHasType(room, 'biblioteca') &&
                     !hasOnlyStudioType(room) &&
-                    !roomHasType(room, 'laboratorio')
+                    !roomHasType(room, 'laboratorio') &&
+                    !roomHasType(room, 'persona') &&
+                    !roomHasType(room, 'erogatore_acqua')
                 );
 
                 const sale = allRegularRooms.filter(room => roomHasType(room, 'sala'));
@@ -5809,6 +6138,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (oldLabHeader) oldLabHeader.remove();
                 const oldLabContainer = document.getElementById('temp-lab-container');
                 if (oldLabContainer) oldLabContainer.remove();
+
+                const oldPeopleHeader = document.getElementById('temp-people-header');
+                if (oldPeopleHeader) oldPeopleHeader.remove();
+                const oldPeopleContainer = document.getElementById('temp-people-container');
+                if (oldPeopleContainer) oldPeopleContainer.remove();
+
 
                 // --- Helper Function to Render Room Item ---
                 function createRoomItem(room, iconName = 'door_front') {
@@ -5864,47 +6199,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // If no details, hide the expand icon
                     const expandIconStyle = hasDetails ? 'font-size: 20px; line-height: 1; transition: transform 0.2s;' : 'display: none;';
 
+                    // Store data attributes for delegation
+                    roomElement.dataset.roomName = room.nome;
+                    // We need current context (polo, building, floor)
+                    // These are available in populateRooms closure
+                    roomElement.dataset.polo = selectedPolo;
+                    roomElement.dataset.building = building;
+                    roomElement.dataset.floor = floor;
+
                     roomElement.innerHTML = `
-                        <span class="flex items-center space-x-3">
+                        <span class="flex items-center space-x-3 pointer-events-none">
                             <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
                             ${iconName}
                             </span>
                             <span>${room.nome}</span>
                         </span>
-                        <span class="material-symbols-outlined expand-icon" style="${expandIconStyle}">
+                        <span class="material-symbols-outlined expand-icon pointer-events-none" style="${expandIconStyle}">
                             expand_more
                         </span>
                     `;
 
-                    roomElement.addEventListener('click', (e) => {
-                        e.preventDefault();
-
-                        if (isRoomEligibleForShortLink(room)) {
-                            setShortLinkContext({
-                                polo: selectedPolo,
-                                building: selectedBuilding,
-                                floor: selectedFloor,
-                                room
-                            });
-                        } else {
-                            clearShortLinkContext();
-                        }
-
-                        // Centra la mappa sull'aula usando la funzione centralizzata
-                        centerMapOnRoom(room);
-
-                        // Defer heavy UI updates to next frame to allow animation to start smoothly
-                        requestAnimationFrame(() => {
-                            // Toggle delle informazioni dell'aula ONLY if there are details
-                            if (hasDetails) {
-                                roomInfoElement.classList.toggle('hidden');
-                                const expandIcon = roomElement.querySelector('.expand-icon');
-                                if (expandIcon) {
-                                    expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-                                }
-                            }
-                        });
-                    });
+                    // REMOVED ADDEVENTLISTENER
 
                     roomContainer.appendChild(roomElement);
                     roomContainer.appendChild(roomInfoElement);
@@ -5981,9 +6296,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const libHeader = document.createElement('div');
                         libHeader.className = 'w-full text-left p-2 pl-6 rounded-lg cursor-pointer transition-colors flex items-center justify-between';
 
+                        // Add data attributes for delegation
+                        libHeader.dataset.roomName = lib.nome;
+                        libHeader.dataset.polo = selectedPolo;
+                        libHeader.dataset.building = building;
+                        libHeader.dataset.floor = floor;
+
                         libHeader.innerHTML = `
-                            <span class="font-medium">${lib.nome}</span>
-                            <span class="material-symbols-outlined expand-icon" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
+                            <span class="font-medium pointer-events-none">${lib.nome}</span>
+                            <span class="material-symbols-outlined expand-icon pointer-events-none" style="font-size: 20px; line-height: 1; transition: transform 0.2s;">
                                 expand_more
                             </span>
                         `;
@@ -6006,51 +6327,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             // Bottone Orari
                             const hoursBtn = document.createElement('button');
                             hoursBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
-                            hoursBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">schedule</span><span>${t('hours_button')}</span>`;
+                            hoursBtn.innerHTML = `<span class="material-symbols-outlined pointer-events-none" style="font-size: 16px;">schedule</span><span class="pointer-events-none">${t('hours_button')}</span>`;
 
-                            hoursBtn.addEventListener('click', () => {
-                                // Chiudi la sidebar se su mobile
-                                if (isMobile()) {
-                                    closeSidebar();
-                                }
+                            // Add data attribute for delegation
+                            hoursBtn.dataset.action = 'show-schedule';
+                            hoursBtn.dataset.libName = lib.nome;
 
-                                // Imposta il valore di ricerca
-                                const searchVal = lib.nome;
-                                searchInput.value = searchVal;
-                                searchInputMobile.value = searchVal;
-                                currentSearchInput = isMobile() ? searchInputMobile : searchInput;
-
-                                // Triggera la ricerca
-                                performSearch(searchVal);
-
-                                // Espandi automaticamente gli orari dopo che i risultati sono stati renderizzati
-                                // Usiamo un timeout per dare tempo al DOM di aggiornarsi
-                                setTimeout(() => {
-                                    // Seleziona il container corretto in base alla vista
-                                    const container = isMobile() ? document.getElementById('search-results-mobile') : document.getElementById('search-results');
-                                    if (!container) return;
-
-                                    const results = container.querySelectorAll('.search-result-item');
-                                    results.forEach(result => {
-                                        const title = result.querySelector('.title');
-                                        if (title && title.textContent === lib.nome) {
-                                            const expandIcon = result.querySelector('.occupancy-expand-icon');
-                                            // Usa querySelector relativo per evitare conflitti di ID duplicati
-                                            const detailsElement = result.querySelector('.occupancy-details');
-
-                                            if (expandIcon && detailsElement && !detailsElement.classList.contains('expanded')) {
-                                                detailsElement.classList.add('expanded');
-                                                expandIcon.classList.add('expanded');
-
-                                                // Scorrimento per centrare il risultato
-                                                setTimeout(() => {
-                                                    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                                }, 100);
-                                            }
-                                        }
-                                    });
-                                }, 100);
-                            });
+                            // REMOVED ADDEVENTLISTENER
 
                             buttonContainer.appendChild(hoursBtn);
                         }
@@ -6086,28 +6369,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         addInfoRow(lib.telecamera, "speed_camera", t('room_detail_camera'));
                         addInfoRow(lib.lavagna, "draw", t('room_detail_blackboard'));
 
-                        // Click Listener on Header
-                        libHeader.addEventListener('click', (e) => {
-                            e.preventDefault();
 
-                            if (isRoomEligibleForShortLink(lib)) {
-                                setShortLinkContext({
-                                    polo: selectedPolo,
-                                    building: selectedBuilding,
-                                    floor: selectedFloor,
-                                    room: lib
-                                });
-                                updateURL(true);
-                            } else {
-                                clearShortLinkContext();
-                            }
-
-                            centerMapOnRoom(lib);
-
-                            roomInfoElement.classList.toggle('hidden');
-                            const expandIcon = libHeader.querySelector('.expand-icon');
-                            expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-                        });
 
                         libContainerItem.appendChild(libHeader);
                         if (buttonContainer) {
@@ -6297,6 +6559,86 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // dovrebbe finire dopo roomsList (che è l'ultimo elemento statico).
                     roomsListParent.appendChild(labHeader);
                     roomsListParent.appendChild(labContainer);
+                }
+
+                // Get people data for this floor
+                const peopleList = (data?.polo?.[selectedPolo]?.edificio?.[selectedBuilding]?.piano?.[floor] || [])
+                    .filter(item => item.type === 'persona');
+
+                if (peopleList.length > 0) {
+                    const peopleHeader = document.createElement('h3');
+                    peopleHeader.textContent = t('people_title');
+                    peopleHeader.className = 'text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2';
+                    peopleHeader.id = 'temp-people-header';
+
+                    const peopleContainer = document.createElement('div');
+                    peopleContainer.id = 'temp-people-container';
+                    peopleContainer.className = 'mb-4';
+
+                    // Collect all individual entries (name + person object ref)
+                    let allPeopleEntries = [];
+                    peopleList.forEach(person => {
+                        let names = [];
+                        if (Array.isArray(person.nome)) {
+                            names = person.nome;
+                        } else if (typeof person.nome === 'string') {
+                            names = person.nome.split(',').map(n => n.trim());
+                        }
+
+                        names.forEach(name => {
+                            allPeopleEntries.push({
+                                name: name,
+                                personData: person
+                            });
+                        });
+                    });
+
+                    // Sort alphabetically by name
+                    allPeopleEntries.sort((a, b) => a.name.localeCompare(b.name));
+
+                    // Render sorted list
+                    allPeopleEntries.forEach(entry => {
+                        const personContainer = document.createElement('div');
+                        personContainer.className = 'nav-item-container';
+
+                        const personElement = document.createElement('a');
+                        personElement.href = '#';
+                        personElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg';
+
+                        personElement.innerHTML = `
+                                <span class="flex items-center space-x-3">
+                                    <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
+                                    person
+                                    </span>
+                                    <span>${entry.name}</span>
+                                </span>
+                            `;
+
+                        personElement.addEventListener('click', (e) => {
+                            e.preventDefault();
+
+                            if (isRoomEligibleForShortLink(entry.personData)) {
+                                setShortLinkContext({
+                                    polo: selectedPolo,
+                                    building: selectedBuilding,
+                                    floor: selectedFloor,
+                                    room: entry.personData,
+                                    codeOverride: normalizeShortCode(entry.name)
+                                });
+                                updateURL(true);
+                            } else {
+                                clearShortLinkContext();
+                            }
+
+                            centerMapOnRoom(entry.personData);
+                        });
+
+                        personContainer.appendChild(personElement);
+                        peopleContainer.appendChild(personContainer);
+                    });
+
+                    roomsListParent.appendChild(peopleHeader);
+                    roomsListParent.appendChild(peopleContainer);
                 }
             }
 
@@ -6528,9 +6870,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 currentView = viewType;
 
-                // Nascondi i marker degli erogatori d'acqua quando si passa alla vista prospettica
+                // Nascondi i marker degli erogatori d'acqua e aule studio quando si passa alla vista prospettica
                 if (viewType === 'perspective') {
                     hideWaterDispensers();
+                    hideStudyRoomMarkers();
                 }
 
                 if (selectedFloor !== "?")
@@ -6767,7 +7110,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Funzioni per gestire i marker degli erogatori d'acqua
             function showWaterDispensers() {
-                if (!viewer || !facilitiesData || !selectedPolo || !selectedBuilding || !selectedFloor) return;
+                if (!viewer || !data || !selectedPolo || !selectedBuilding || !selectedFloor) return;
 
                 // Rimuovi marker esistenti
                 hideWaterDispensers();
@@ -6777,7 +7120,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const contentSize = tiledImage.getContentSize();
 
                 try {
-                    const facilities = facilitiesData.polo?.[selectedPolo]?.edificio?.[selectedBuilding]?.piano?.[selectedFloor];
+                    const facilities = data.polo?.[selectedPolo]?.edificio?.[selectedBuilding]?.piano?.[selectedFloor];
                     if (!facilities || !Array.isArray(facilities)) return;
 
                     facilities.forEach(facility => {
@@ -6819,6 +7162,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function showStudyRoomMarkers() {
                 if (!viewer || !data || !selectedPolo || !selectedBuilding || !selectedFloor) return;
 
+                // Non mostrare in vista prospettica
+                if (currentView === 'perspective') return;
+
                 // Rimuovi marker esistenti
                 hideStudyRoomMarkers();
 
@@ -6843,15 +7189,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 element.className = 'study-room-marker counter-rotate-marker';
                                 element.innerHTML = `<span class="material-symbols-outlined">school</span>`;
 
-                                // Make marker interactive
+                                // Make marker interactive and add data attributes for event delegation
                                 element.style.pointerEvents = 'auto';
                                 element.style.cursor = 'pointer';
-                                element.addEventListener('click', (e) => {
-                                    e.stopPropagation();
-                                    selectRoom(selectedPolo, selectedBuilding, selectedFloor, room);
-                                    expandRoomDetailsInSidebar(room.nome);
-                                    triggerSidebarButtonAnimation();
-                                });
+
+                                // Create unique marker ID and store room data
+                                const markerId = `study-room-${selectedPolo}-${selectedBuilding}-${selectedFloor}-${room.nome}`;
+                                element.setAttribute('data-marker-type', 'study-room');
+                                element.setAttribute('data-marker-id', markerId);
+                                element.setAttribute('data-polo', selectedPolo);
+                                element.setAttribute('data-building', selectedBuilding);
+                                element.setAttribute('data-floor', selectedFloor);
+                                element.setAttribute('data-room-name', room.nome);
+
+                                // Store room data for retrieval in event handler
+                                markerRoomDataMap.set(markerId, room);
 
                                 viewer.addOverlay({
                                     element: element,
@@ -6871,6 +7223,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (!viewer) return;
 
                 studyRoomOverlays.forEach(element => {
+                    // Clean up marker data from Map
+                    const markerId = element.getAttribute('data-marker-id');
+                    if (markerId) {
+                        markerRoomDataMap.delete(markerId);
+                    }
                     viewer.removeOverlay(element);
                 });
                 studyRoomOverlays = [];
@@ -7065,6 +7422,39 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             event.data.alt = altText;
                         }
                     });
+
+                    // Event delegation: single click handler for all map markers
+                    const mapContainer = document.getElementById('map');
+                    if (mapContainer && !mapContainer.hasAttribute('data-marker-delegation-installed')) {
+                        mapContainer.setAttribute('data-marker-delegation-installed', 'true');
+                        mapContainer.addEventListener('click', (e) => {
+                            // Find the closest marker element
+                            const marker = e.target.closest('[data-marker-type]');
+                            if (!marker) return;
+
+                            const markerType = marker.getAttribute('data-marker-type');
+
+                            if (markerType === 'study-room') {
+                                e.stopPropagation();
+
+                                // Retrieve room data from Map
+                                const markerId = marker.getAttribute('data-marker-id');
+                                const room = markerRoomDataMap.get(markerId);
+
+                                if (room) {
+                                    const polo = marker.getAttribute('data-polo');
+                                    const building = marker.getAttribute('data-building');
+                                    const floor = marker.getAttribute('data-floor');
+                                    const roomName = marker.getAttribute('data-room-name');
+
+                                    selectRoom(polo, building, floor, room);
+                                    expandRoomDetailsInSidebar(roomName);
+                                    triggerSidebarButtonAnimation();
+                                }
+                            }
+                            // Future marker types can be added here (e.g., water-dispenser)
+                        });
+                    }
 
                     registerViewerInteractionGuards();
                 }
@@ -7334,7 +7724,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 : (floorData?.aule ? Object.values(floorData.aule) : []);
 
                             rooms.forEach(room => {
-                                if (room?.nome && room.hasStatus !== false) {
+                                const isRoom = !room.type || ['aula', 'studio', 'sala', 'laboratorio'].includes(room.type);
+                                if (isRoom && room?.nome && room.hasStatus !== false) {
                                     allRooms.push(room.nome);
                                 }
                             });

@@ -40,6 +40,7 @@
   - [Altri dati](#altri-dati)
     - [Distributori d'acqua](#distributori-dacqua)
     - [Aule Studio](#aule-studio)
+    - [Persone](#persone)
 - [API Orari Biblioteca](#api-orari-biblioteca)
   - [Endpoint](#endpoint)
   - [Parametri](#parametri)
@@ -106,11 +107,15 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 │   │   └── logo.svg
 │   └── screenshots/
 ├── data/
-│   ├── rooms.json      <- file importante per far funzionare tutto
+│   ├── unified.json      <- file importante per far funzionare tutto
+│   ├── rooms.json
+│   ├── people.json
 │   └── facilities.json 
 ├── locales             <- cartella per le traduzioni 
 │   └── en.json
 │   └── it.json
+├── scripts/            <- cartella per lo script
+│   └── populate_people.py
 ├── index.html
 └── polo/ <- dove aggiungere altri poli
     └── fibonacci/
@@ -225,12 +230,18 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
 ```mermaid
 graph LR
     A[Planimetrie UniPi] -->|Conversione DWG/SVG| B[Mappe Edifici]
-    I[API] --> C[University Planner]
-    C -->|Dati Aule| D[rooms.json]
-    G[Contributori] -->|Raccolta Dati| H[facilities.json]
-    G -->|Raccolta Dati| D
-    D --> E[Applicazione Web]
-    H --> E
+    
+    I[University Planner] -->|Scraping + API| C[Dati Aule]
+    C --> D[unified.json]
+    
+    L[Mappa Dipartimento] -->|Scraping| M[populate_people.py]
+    M -->|Anagrafica Persone| D
+    
+    G[Contributori] -->|Raccolta Dati| D
+    
+    N[API SBA] -->|Orari Biblioteca| E[Applicazione Web]
+    
+    D --> E
     B --> E
     E --> F[Interfaccia Utente]
 ```
@@ -241,7 +252,7 @@ graph LR
 graph TB
     Start[Utente apre l'app] --> DetectLang[Rileva lingua<br/>browser o preferenze salvate]
     DetectLang --> LoadTranslations[Carica traduzioni<br/>IT/EN]
-    LoadTranslations --> LoadData[Carica dati<br/>edifici e aule]
+    LoadTranslations --> LoadData[Carica dati<br/>edifici, aule e persone]
     
     LoadData --> CheckURL{Link con<br/>parametri?}
     CheckURL -->|"Sì (Full/Short)"| UseURL[Apri polo, edificio,<br/>piano e posizione<br/>dal link]
@@ -250,15 +261,16 @@ graph TB
     UseURL --> ShowMap[Mostra mappa<br/>interattiva]
     UseDefault --> ShowMap
     
-    ShowMap --> BuildSidebar[Costruisci menu<br/>laterale con edifici,<br/>piani e aule]
+    ShowMap --> BuildSidebar[Costruisci menu<br/>laterale con edifici,<br/>piani, aule e persone]
     BuildSidebar --> Ready[App pronta<br/>per l'uso]
     
     Ready --> UserAction{Cosa fa<br/>l'utente?}
     
     %% Ricerca aula
-    UserAction -->|Cerca aula| SearchBar[Digita nella<br/>barra di ricerca]
+    UserAction -->|Cerca| SearchBar[Digita nella<br/>barra di ricerca]
     SearchBar --> SearchType{Tipo di<br/>ricerca?}
     SearchType -->|Nome/Alias| FindByName[Trova aula<br/>per nome]
+    SearchType -->|Persone| FindPerson[Trova persona<br/>per nome]
     SearchType -->|Capienza es: >200| FindByCapacity[Trova aule per<br/>capienza]
     SearchType -->|Impostazioni| OpenSettings[Apri pannello<br/>impostazioni]
     SearchType -->|Condividi| OpenShare[Mostra opzioni<br/>condivisione]
@@ -266,6 +278,7 @@ graph TB
     SearchType -->|Distributori| FindWater[Trova distributori<br/>acqua]
     
     FindByName --> ShowResults[Mostra risultati]
+    FindPerson --> ShowResults
     FindByCapacity --> ShowResults
     FindWater --> ShowResults
     OpenFeedback --> ShowResults
@@ -278,7 +291,7 @@ graph TB
     CheckFloor -->|No| ChangeFloor[Cambia piano<br/>e zoom sull'aula]
     
     %% Navigazione manuale
-    UserAction -->|Naviga menu| ClickSidebar[Clicca su edificio,<br/>piano o aula]
+    UserAction -->|Naviga menu| ClickSidebar[Clicca su edificio,<br/>piano, aula o persona]
     ClickSidebar --> UpdateMap[Aggiorna mappa]
     UpdateMap --> ShowMap
     
@@ -298,7 +311,7 @@ graph TB
     LoadTop --> ShowMap
     
     %% Impostazioni
-    OpenSettings --> SettingsPanel[Pannello impostazioni:<br/>• Lingua IT/EN<br/>• Contrasto alto<br/>• Font dislessia<br/>• Dimensione testo<br/>• Controlli extra<br/>• Opzioni condivisione<br/>• Erogatori acqua]
+    OpenSettings --> SettingsPanel[Pannello impostazioni:<br/>• Lingua IT/EN<br/>• Contrasto alto<br/>• Font dislessia<br/>• Dimensione testo<br/>• Controlli extra<br/>• Opzioni condivisione<br/>• Erogatori acqua<br/>• Aule Studio]
     SettingsPanel --> SaveSettings[Salva preferenze]
     SaveSettings --> ApplySettings[Applica modifiche]
     ApplySettings --> Ready
@@ -502,6 +515,17 @@ Questa funzione permette di attivare dei marker specifici sulla mappa per indivi
 Per attivarla, apri la **barra di ricerca**, digita `impostazioni` e attiva l'opzione **"Mostra aule studio (ALFA)"**.
 I marker appariranno sulla mappa indicando la posizione esatta delle aule dedicate allo studio.
 
+<hr>
+
+#### Persone
+
+È possibile cercare le persone tramite la barra di ricerca o visualizzarle nella lista dedicata nella sidebar. 
+
+I dati vengono recuperati automaticamente dalla [Mappa del Dipartimento di Informatica](https://di.unipi.it/mappa-dipartimento/) tramite uno script Python che estrae le associazioni tra persone e stanze.
+
+L'aggiornamento dei dati avviene automaticamente **ogni mese** (il primo giorno del mese) tramite una GitHub Action che esegue lo script di sincronizzazione.
+
+
 ## API Orari Biblioteca
 
 <p align="right">(<a href="#indice">indice</a>)</p>
@@ -631,7 +655,11 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E 
 
 <p align="center">
   <a>
-    <img src="https://simpleicons.org/icons/render.svg" alt="Render" width="32" height="32">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/render/white">
+      <source media="(prefers-color-scheme: light)" srcset="https://cdn.simpleicons.org/render/black">
+      <img alt="Render" src="https://cdn.simpleicons.org/render/black" width="32" height="32">
+    </picture>
   </a>
 </p>
 
