@@ -1113,6 +1113,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             --color-study-room: #BC9F8B;
             --color-study-room-bg: rgba(188, 159, 139, 0.2);
+            --color-person: #A7AAE1;
+            --color-person-bg: rgba(167, 170, 225, 0.2);
 
 
             /* Dividers / Borders */
@@ -1424,7 +1426,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .water-dispenser-marker,
-        .study-room-marker {
+        .study-room-marker,
+        .person-marker {
             /* background: none !important; */
             border: none !important;
             opacity: 1;
@@ -1443,7 +1446,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .water-dispenser-marker span,
-        .study-room-marker span {
+        .study-room-marker span,
+        .person-marker span {
             display: block;
             line-height: 1;
             width: 24px;
@@ -1463,12 +1467,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             color: var(--color-study-room);
         }
 
+        .person-marker .material-symbols-outlined {
+            font-size: 24px;
+            color: var(--color-person);
+        }
+
         .water-dispenser-marker {
             background-color: var(--color-water-dispenser-bg);
         }
 
         .study-room-marker {
             background-color: var(--color-study-room-bg);
+        }
+
+        .person-marker {
+            background-color: var(--color-person-bg);
         }
 
         /* Stili per i tooltip */
@@ -2358,7 +2371,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         <span class="material-symbols-outlined text-gray-500" style="font-size: 24px; line-height: 1;"
                             aria-label="Cerca">search</span>
                     </span>
-                    <input type="text" id="search-input" placeholder="Cerca un'aula..."
+                    <input type="text" id="search-input" placeholder="Cerca un'aula, cognome o numero..."
                         class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
                         autocomplete="off">
                     <button type="button" id="clear-search-btn" class="clear-search-button hidden"
@@ -2433,7 +2446,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     <span class="material-symbols-outlined text-gray-500"
                         style="font-size: 24px; line-height: 1;">search</span>
                 </span>
-                <input type="text" id="search-input-mobile" placeholder="Cerca un'aula..."
+                <input type="text" id="search-input-mobile" placeholder="Cerca un'aula, cognome o numero..."
                     class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
                     autocomplete="off">
                 <button type="button" id="clear-search-btn-mobile" class="clear-search-button hidden"
@@ -2880,32 +2893,40 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             function handleRoomItemClick(e, roomElement, room, polo, building, floor) {
                 // Logic from original click listener
+
+                // Determina se stiamo chiudendo i dettagli (se sono già visibili)
+                const roomContainer = roomElement.parentNode;
+                const roomInfoElement = roomContainer.querySelector('.capacity-info');
+                const isClosing = roomInfoElement && !roomInfoElement.classList.contains('hidden');
+
                 if (isRoomEligibleForShortLink(room)) {
-                    setShortLinkContext({
-                        polo: polo,
-                        building: building,
-                        floor: floor,
-                        room
-                    });
-                    updateURL(true); // Added updateURL as seen in library handler, good for consistency
+                    if (!isClosing) {
+                        setShortLinkContext({
+                            polo: polo,
+                            building: building,
+                            floor: floor,
+                            room
+                        });
+                        updateURL(true);
+                    } else {
+                        // When closing, we specifically do NOT want to update the URL or clear context
+                        // because that triggers a map reset/zoom which the user wants to avoid.
+                        // clearShortLinkContext();
+                        // updateURL(true);
+                    }
                 } else {
-                    clearShortLinkContext();
+                    if (!isClosing) {
+                        clearShortLinkContext();
+                    }
                 }
 
-                centerMapOnRoom(room);
+                // Center map ONLY if we are OPENING details (not closing)
+                if (!isClosing) {
+                    centerMapOnRoom(room);
+                }
 
                 requestAnimationFrame(() => {
                     // Toggle details
-                    // We need to find the sibling `roomInfoElement` (capacity-info)
-                    // It is usually the next sibling of `roomElement` (which is the .nav-item a tag)
-                    // The structure is:
-                    // div.nav-item-container
-                    //   a.nav-item [clicked]
-                    //   div.capacity-info
-
-                    const roomContainer = roomElement.parentNode;
-                    const roomInfoElement = roomContainer.querySelector('.capacity-info');
-
                     if (roomInfoElement && roomInfoElement.innerHTML.trim() !== '') {
                         roomInfoElement.classList.toggle('hidden');
                         const expandIcon = roomElement.querySelector('.expand-icon');
@@ -3426,6 +3447,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let isKeyboardSelection = false;
             let waterDispenserOverlays = []; // Array per gli overlay degli erogatori d'acqua
             let studyRoomOverlays = []; // Array per gli overlay delle aule studio
+            let personOverlays = []; // Array per gli overlay delle persone
             const markerRoomDataMap = new Map(); // Map per memorizzare i dati delle stanze associate ai marker (per event delegation)
             let shortLinkContext = null;
             let viewerInteractionGuardsInstalled = false;
@@ -3443,7 +3465,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Suggerimenti per la ricerca (verranno aggiornati dopo il caricamento delle traduzioni)
             let searchSuggestions = [
-                "Cerca un'aula...",
+                "Cerca un'aula, cognome o numero...",
                 "Prova: Impostazioni",
                 "Prova: Aula D2",
                 "Prova: >200",
@@ -3772,6 +3794,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (eligibleForShortLink) {
                             updateURL(true);
                         }
+                        // Show person marker if this is a person
+                        if (room && room.type === 'persona') {
+                            showPersonMarkers(room.nome);
+                        }
                     }
                 } else {
                     // Cambio di piano necessario, ricarica la mappa in vista top con le coordinate dell'aula
@@ -3969,10 +3995,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                         const itemNameLower = item.nome.toLowerCase();
                                         const aliasLower = Array.isArray(item.alias) ? item.alias.map(a => a.toLowerCase()) : [];
+                                        const roomLower = item.room ? item.room.toLowerCase() : '';
 
                                         const matches = isExactSearch
-                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower))
-                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower) || roomLower === queryLower)
+                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)) || roomLower.includes(queryLower));
 
                                         if (matches) {
                                             results.push({
@@ -3987,10 +4014,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     else if (item.type === 'erogatore_acqua' && settingsConfig.showWaterDispensers) {
                                         const itemNameLower = item.nome.toLowerCase();
                                         const aliasLower = Array.isArray(item.alias) ? item.alias.map(a => a.toLowerCase()) : [];
+                                        const roomLower = item.room ? item.room.toLowerCase() : '';
 
                                         const matches = isExactSearch
-                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower))
-                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower) || roomLower === queryLower)
+                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)) || roomLower.includes(queryLower));
 
                                         if (matches) {
                                             results.push({
@@ -4007,9 +4035,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         // Simplified: unified.json now guarantees 'nome' is a string, not an array.
                                         const name = item.nome;
                                         const nameLower = name.toLowerCase();
+                                        const roomLower = item.room ? item.room.toLowerCase() : '';
                                         const matches = isExactSearch ?
-                                            nameLower === queryLower :
-                                            nameLower.includes(queryLower);
+                                            (nameLower === queryLower || roomLower === queryLower) :
+                                            (nameLower.includes(queryLower) || roomLower.includes(queryLower));
 
                                         if (matches) {
                                             peopleMatches.push({
@@ -6168,6 +6197,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                     roomInfoElement.className = 'capacity-info hidden pl-10 p-1 text-sm text-gray-600';
 
+                    // Room number (first detail, especially important for people)
+                    addInfoRow(room.room, "meeting_room", t('room_number'));
+
                     // Accessibility
                     addInfoRow(room.capienza, "group", t('room_detail_capacity'));
                     addInfoRow(room.accesso_disabili, "accessible_forward", t('room_detail_accessible'));
@@ -6619,8 +6651,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 </div>`;
                         }
 
-                        // 1. Contact Info (Email, Phone, Fax)
+                        // 1. Contact Info (Email, Tel, Fax)
                         const pData = entry.personData;
+
+                        // Room number first (most important for locating the person)
+                        if (pData.room) {
+                            addDetailRow('meeting_room', `<span>${t('room_number').replace('%s', pData.room)}</span>`);
+                        }
 
                         // Email
                         if (pData.email) {
@@ -6669,29 +6706,50 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         personElement.addEventListener('click', (e) => {
                             e.preventDefault();
 
+                            // Determine if we are closing (if details are already visible)
+                            const isClosing = personInfoElement && !personInfoElement.classList.contains('hidden');
+
                             // Logic for Short Link & Map Selection
                             if (isRoomEligibleForShortLink(entry.personData)) {
-                                setShortLinkContext({
-                                    polo: selectedPolo,
-                                    building: selectedBuilding,
-                                    floor: selectedFloor,
-                                    room: entry.personData,
-                                    codeOverride: normalizeShortCode(entry.name) // Use person name for short code
-                                });
-                                updateURL(true);
+                                if (!isClosing) {
+                                    setShortLinkContext({
+                                        polo: selectedPolo,
+                                        building: selectedBuilding,
+                                        floor: selectedFloor,
+                                        room: entry.personData,
+                                        codeOverride: normalizeShortCode(entry.name) // Use person name for short code
+                                    });
+                                    updateURL(true);
+                                }
+                                // If closing, do not update URL to avoid map reset
                             } else {
-                                clearShortLinkContext();
+                                if (!isClosing) {
+                                    clearShortLinkContext();
+                                }
                             }
 
-                            centerMapOnRoom(entry.personData);
+                            // Center map ONLY if we are OPENING details (not closing)
+                            if (!isClosing) {
+                                centerMapOnRoom(entry.personData);
+                            }
 
                             // Toggle Details Logic
                             requestAnimationFrame(() => {
                                 if (hasDetails) {
+                                    const isCurrentlyHidden = personInfoElement.classList.contains('hidden');
                                     personInfoElement.classList.toggle('hidden');
                                     const expandIcon = personElement.querySelector('.expand-icon');
                                     if (expandIcon) {
                                         expandIcon.style.transform = personInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                                    }
+
+                                    // Show marker when opening details, hide when closing
+                                    if (isCurrentlyHidden) {
+                                        // Details are being opened
+                                        showPersonMarkers(entry.name);
+                                    } else {
+                                        // Details are being closed
+                                        hidePersonMarkers();
                                     }
                                 }
                             });
@@ -6872,11 +6930,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 block: 'center',
                                 inline: 'nearest'
                             });
-                            // Aggiungi un feedback visivo (opzionale, es. highlight temporaneo)
-                            element.classList.add('bg-yellow-100');
-                            setTimeout(() => {
-                                element.classList.remove('bg-yellow-100');
-                            }, 2000);
                         }, 100);
                     }
                 });
@@ -6943,8 +6996,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             function selectFloor(floor, viewParams = null, viewToSelect = null, roomData = null) {
                 selectedFloor = floor;
 
-                const view = viewToSelect === 'perspective' ? 'perspective' : 'top';
-                selectView(view, true, viewParams, roomData);
+                // Controlla quali viste sono disponibili per questo piano
+                checkAvailableViews(selectedBuilding, floor).then(({ hasPerspective, hasTopView }) => {
+                    // Aggiorna visibilità bottoni in base alle viste disponibili
+                    updateViewButtonsVisibility(hasPerspective, hasTopView);
+
+                    // Determina quale vista usare
+                    let view = viewToSelect === 'perspective' ? 'perspective' : 'top';
+
+                    // Se la vista richiesta non è disponibile, usa quella disponibile
+                    if (view === 'perspective' && !hasPerspective && hasTopView) {
+                        view = 'top';
+                    } else if (view === 'top' && !hasTopView && hasPerspective) {
+                        view = 'perspective';
+                    }
+
+                    selectView(view, true, viewParams, roomData);
+                });
+
                 populateRooms(selectedBuilding, selectedFloor);
 
                 // Aggiorna lo stile dei bottoni dei piani
@@ -6970,6 +7039,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (viewType === 'perspective') {
                     hideWaterDispensers();
                     hideStudyRoomMarkers();
+                    hidePersonMarkers();
                 }
 
                 if (selectedFloor !== "?")
@@ -7107,6 +7177,50 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 while (cacheAccessOrder.length > MAX_CACHE_SIZE) {
                     const oldestKey = cacheAccessOrder.shift();
                     svgCache.delete(oldestKey);
+                }
+            }
+
+            // Funzione per controllare quali viste sono disponibili per un edificio/piano
+            async function checkAvailableViews(building, floor) {
+                const perspectivePath = `polo/${selectedPolo}/edificio/${building}/piano/${floor}.svg`;
+                const topViewPath = `polo/${selectedPolo}/edificio/${building}/piano/${floor}-top.svg`;
+
+                // Controlla entrambi i file in parallelo
+                const [hasPerspective, hasTopView] = await Promise.all([
+                    fetch(perspectivePath, { method: 'HEAD' })
+                        .then(response => response.ok)
+                        .catch(() => false),
+                    fetch(topViewPath, { method: 'HEAD' })
+                        .then(response => response.ok)
+                        .catch(() => false)
+                ]);
+
+                return { hasPerspective, hasTopView };
+            }
+
+            // Funzione per aggiornare la visibilità dei bottoni vista
+            function updateViewButtonsVisibility(hasPerspective, hasTopView) {
+                // Abilita/disabilita bottone vista prospettica
+                if (hasPerspective) {
+                    perspectiveViewBtn.disabled = false;
+                    perspectiveViewBtn.style.display = '';
+                } else {
+                    perspectiveViewBtn.style.display = 'none';
+                }
+
+                // Abilita/disabilita bottone vista dall'alto
+                if (hasTopView) {
+                    topViewBtn.disabled = false;
+                    topViewBtn.style.display = '';
+                } else {
+                    topViewBtn.style.display = 'none';
+                }
+
+                // Se solo una vista è disponibile, forza quella vista
+                if (hasTopView && !hasPerspective && currentView === 'perspective') {
+                    selectView('top', true);
+                } else if (hasPerspective && !hasTopView && currentView === 'top') {
+                    selectView('perspective', true);
                 }
             }
 
@@ -7329,6 +7443,88 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 studyRoomOverlays = [];
             }
 
+            // Funzioni per gestire i marker delle persone
+            function showPersonMarkers(targetPersonName = null) {
+                if (!viewer || !data || !selectedPolo || !selectedBuilding || !selectedFloor) return;
+
+                // Non mostrare in vista prospettica
+                if (currentView === 'perspective') return;
+
+                // Se non è specificata una persona, non mostrare nulla
+                if (!targetPersonName) return;
+
+                // Rimuovi marker esistenti
+                hidePersonMarkers();
+
+                const tiledImage = viewer.world.getItemAt(0);
+                if (!tiledImage) return;
+                const contentSize = tiledImage.getContentSize();
+
+                try {
+                    const floorData = data.polo[selectedPolo].edificio[selectedBuilding]?.piano[selectedFloor];
+                    const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
+
+                    rooms.forEach(room => {
+                        if (room.type === 'persona' && room.coordinates) {
+                            // Mostra solo il marker della persona selezionata
+                            if (room.nome !== targetPersonName) return;
+
+                            const { x, y } = room.coordinates;
+                            if (x != null && y != null) {
+                                const osdY = contentSize.y - parseFloat(y);
+                                const osdX = parseFloat(x);
+                                const imagePoint = new OpenSeadragon.Point(osdX, osdY);
+                                const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
+
+                                const element = document.createElement('div');
+                                element.className = 'person-marker counter-rotate-marker';
+                                element.innerHTML = `<span class="material-symbols-outlined">person</span>`;
+
+                                // Make marker interactive and add data attributes for event delegation
+                                element.style.pointerEvents = 'auto';
+                                element.style.cursor = 'pointer';
+
+                                // Create unique marker ID and store room data
+                                const markerId = `person-${selectedPolo}-${selectedBuilding}-${selectedFloor}-${room.nome}`;
+                                element.setAttribute('data-marker-type', 'person');
+                                element.setAttribute('data-marker-id', markerId);
+                                element.setAttribute('data-polo', selectedPolo);
+                                element.setAttribute('data-building', selectedBuilding);
+                                element.setAttribute('data-floor', selectedFloor);
+                                element.setAttribute('data-room-name', room.nome);
+
+                                // Store room data for retrieval in event handler
+                                markerRoomDataMap.set(markerId, room);
+
+                                viewer.addOverlay({
+                                    element: element,
+                                    location: viewportPoint,
+                                    placement: 'CENTER'
+                                });
+                                personOverlays.push(element);
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Errore nel mostrare i marker delle persone:', error);
+                }
+            }
+
+            function hidePersonMarkers() {
+                if (!viewer) return;
+
+                personOverlays.forEach(element => {
+                    // Clean up marker data from Map
+                    const markerId = element.getAttribute('data-marker-id');
+                    if (markerId) {
+                        markerRoomDataMap.delete(markerId);
+                    }
+                    viewer.removeOverlay(element);
+                });
+                personOverlays = [];
+            }
+
+
             function loadSVG(building, floor, viewType = 'top', viewParams = null, roomData = null) {
                 // Controlla se la vista top è disponibile
                 checkForTopView(building, floor);
@@ -7547,6 +7743,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     expandRoomDetailsInSidebar(roomName);
                                     triggerSidebarButtonAnimation();
                                 }
+                            } else if (markerType === 'person') {
+                                e.stopPropagation();
+
+                                // Retrieve room data from Map
+                                const markerId = marker.getAttribute('data-marker-id');
+                                const room = markerRoomDataMap.get(markerId);
+
+                                if (room) {
+                                    const polo = marker.getAttribute('data-polo');
+                                    const building = marker.getAttribute('data-building');
+                                    const floor = marker.getAttribute('data-floor');
+                                    const roomName = marker.getAttribute('data-room-name');
+
+                                    selectRoom(polo, building, floor, room);
+                                    expandRoomDetailsInSidebar(roomName);
+                                    triggerSidebarButtonAnimation();
+                                }
                             }
                             // Future marker types can be added here (e.g., water-dispenser)
                         });
@@ -7631,6 +7844,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // Mostra le aule studio solo se il setting è attivo E la vista è "top"
                     if (settingsConfig.showStudyRooms && currentView === 'top') {
                         showStudyRoomMarkers();
+                    }
+
+                    // Show person markers if roomData is a person and we're in top view
+                    if (roomData && roomData.type === 'persona' && currentView === 'top') {
+                        showPersonMarkers(roomData.nome);
                     }
                 });
             }

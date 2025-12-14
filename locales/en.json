@@ -20,8 +20,8 @@
     "translation": "DOVE?UNIPI - Polo Fibonacci"
   },
   "search_placeholder": {
-    "original": "Cerca un'aula...",
-    "translation": "Search for a classroom..."
+    "original": "Search for a room, surname or number...",
+    "translation": "Search for a room, surname or number..."
   },
   "search_no_results": {
     "original": "Nessun risultato trovato",
@@ -470,6 +470,10 @@
   "room": {
     "original": "Room",
     "translation": "Room"
+  },
+  "room_number": {
+    "original": "Stanza: %s",
+    "translation": "Room: %s"
   },
   "showing_limited_results": {
     "original": "Mostrando i primi %s risultati di %s totali",
