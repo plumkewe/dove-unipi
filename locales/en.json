@@ -19,9 +19,17 @@
     "original": "DOVE?UNIPI - Polo Fibonacci",
     "translation": "DOVE?UNIPI - Polo Fibonacci"
   },
-  "search_placeholder": {
-    "original": "Search for a room, surname or number...",
-    "translation": "Search for a room, surname or number..."
+  "search_classroom": {
+    "original": "Cerca un'aula...",
+    "translation": "Search for a room..."
+  },
+  "search_surname": {
+    "original": "Cerca un cognome...",
+    "translation": "Search for a surname..."
+  },
+  "search_number": {
+    "original": "Cerca un numero...",
+    "translation": "Search for a number..."
   },
   "search_no_results": {
     "original": "Nessun risultato trovato",

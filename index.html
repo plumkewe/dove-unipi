@@ -2371,7 +2371,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         <span class="material-symbols-outlined text-gray-500" style="font-size: 24px; line-height: 1;"
                             aria-label="Cerca">search</span>
                     </span>
-                    <input type="text" id="search-input" placeholder="Cerca un'aula, cognome o numero..."
+                    <input type="text" id="search-input" placeholder="Cerca un'aula..."
                         class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
                         autocomplete="off">
                     <button type="button" id="clear-search-btn" class="clear-search-button hidden"
@@ -2446,7 +2446,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     <span class="material-symbols-outlined text-gray-500"
                         style="font-size: 24px; line-height: 1;">search</span>
                 </span>
-                <input type="text" id="search-input-mobile" placeholder="Cerca un'aula, cognome o numero..."
+                <input type="text" id="search-input-mobile" placeholder="Cerca un'aula..."
                     class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
                     autocomplete="off">
                 <button type="button" id="clear-search-btn-mobile" class="clear-search-button hidden"
@@ -3263,8 +3263,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 // Update search placeholders (con controllo se esistono)
-                if (searchInput) searchInput.placeholder = t('search_placeholder');
-                if (searchInputMobile) searchInputMobile.placeholder = t('search_placeholder');
+                if (searchInput) searchInput.placeholder = t('search_classroom');
+                if (searchInputMobile) searchInputMobile.placeholder = t('search_classroom');
 
                 // Update tooltips (con controllo se esistono)
                 if (openSidebarBtn) openSidebarBtn.setAttribute('data-tooltip', t('sidebar_open'));
@@ -3339,14 +3339,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 // Update search suggestions
-                searchSuggestions[0] = t('search_placeholder');
-                searchSuggestions[1] = t('search_suggestion_settings');
-                searchSuggestions[2] = t('search_suggestion_classroom');
-                searchSuggestions[3] = t('search_suggestion_capacity');
-                searchSuggestions[4] = t('search_suggestion_department');
-                searchSuggestions[5] = t('search_suggestion_share');
-                searchSuggestions[6] = t('search_suggestion_feedback');
-                searchSuggestions[7] = t('search_suggestion_bot');
+                searchSuggestions[0] = t('search_classroom');
+                searchSuggestions[1] = t('search_surname');
+                searchSuggestions[2] = t('search_number');
+                searchSuggestions[3] = t('search_suggestion_settings');
+                searchSuggestions[4] = t('search_suggestion_classroom');
+                searchSuggestions[5] = t('search_suggestion_capacity');
+                searchSuggestions[6] = t('search_suggestion_department');
+                searchSuggestions[7] = t('search_suggestion_share');
 
                 // Riavvia il ciclo dei suggerimenti con le nuove traduzioni
                 currentSuggestionIndex = 0;
@@ -3465,7 +3465,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Suggerimenti per la ricerca (verranno aggiornati dopo il caricamento delle traduzioni)
             let searchSuggestions = [
-                "Cerca un'aula, cognome o numero...",
+                "Cerca un'aula...",
+                "Cerca un cognome...",
+                "Cerca un numero...",
                 "Prova: Impostazioni",
                 "Prova: Aula D2",
                 "Prova: >200",
@@ -6511,19 +6513,31 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         studyRoomHeader.addEventListener('click', (e) => {
                             e.preventDefault();
 
+                            // Determine if we are closing (if details are already visible)
+                            const isClosing = roomInfoElement && !roomInfoElement.classList.contains('hidden');
+
+                            // Logic for Short Link & Map Selection
                             if (isRoomEligibleForShortLink(studyRoom)) {
-                                setShortLinkContext({
-                                    polo: selectedPolo,
-                                    building: selectedBuilding,
-                                    floor: selectedFloor,
-                                    room: studyRoom
-                                });
+                                if (!isClosing) {
+                                    setShortLinkContext({
+                                        polo: selectedPolo,
+                                        building: selectedBuilding,
+                                        floor: selectedFloor,
+                                        room: studyRoom
+                                    });
+                                    updateURL(true);
+                                }
+                                // If closing, do not update URL to avoid map reset
                             } else {
-                                clearShortLinkContext();
+                                if (!isClosing) {
+                                    clearShortLinkContext();
+                                }
                             }
 
-                            // Centra la mappa sull'aula usando la funzione centralizzata
-                            centerMapOnRoom(studyRoom);
+                            // Center map ONLY if we are OPENING details (not closing)
+                            if (!isClosing) {
+                                centerMapOnRoom(studyRoom);
+                            }
 
                             // Defer heavy UI updates to next frame to allow animation to start smoothly
                             requestAnimationFrame(() => {
