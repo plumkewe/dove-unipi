@@ -930,45 +930,46 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         #sidebar {
-            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, min-width 0.3s ease-in-out, max-width 0.3s ease-in-out;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.5s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             /* Default width will be overridden by specific classes below */
-            width: 270px;
-            min-width: 270px;
-            max-width: 270px;
-            background-color: var(--color-gray-50);
+            width: 290px;
+            min-width: 290px;
+            max-width: 290px;
+            background-color: #f9f9f9;
             border-right: 1px solid var(--border-divider);
+            color: #0d0d0d;
         }
 
         /* Sidebar width adjustments based on text size */
         body.text-small #sidebar {
+            width: 210px;
+            min-width: 210px;
+            max-width: 210px;
+        }
+
+        body.text-normal #sidebar {
+            width: 225px;
+            min-width: 225px;
+            max-width: 225px;
+        }
+
+        body.text-large #sidebar {
             width: 250px;
             min-width: 250px;
             max-width: 250px;
         }
 
-        body.text-normal #sidebar {
-            width: 270px;
-            min-width: 270px;
-            max-width: 270px;
-        }
-
-        body.text-large #sidebar {
-            width: 300px;
-            min-width: 300px;
-            max-width: 300px;
-        }
-
         body.text-xlarge #sidebar {
-            width: 330px;
-            min-width: 330px;
-            max-width: 330px;
+            width: 260px;
+            min-width: 260px;
+            max-width: 260px;
         }
 
         /* Stile per l'hover degli elementi */
         @media (hover: hover) {
             .nav-item:hover {
-                background-color: var(--overlay-hover);
-                /* 5% black opacity */
+                background-color: #eaeaea;
+                /* sidebar hover */
             }
 
             .hover-effect:hover {
@@ -1101,7 +1102,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Interactive / Overlays */
             --overlay-hover: rgba(0, 0, 0, 0.05);
             --overlay-selected: rgba(0, 0, 0, 0.1);
-            --overlay-nav-selected: rgba(0, 0, 0, 0.1);
+            --overlay-nav-selected: #eaeaea;
 
             /* Elements */
             --focus-ring: var(--color-gray-600);
@@ -1211,6 +1212,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             background-size: 200% 100%;
             animation: shimmer 2.5s infinite;
             color: var(--text-secondary);
+            will-change: background-position;
+            /* Optimize animation */
         }
 
         .occupancy-status-bar.free {
@@ -1289,7 +1292,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
 
         .nav-item.selected {
-            background-color: var(--overlay-selected);
+            background-color: var(--overlay-nav-selected);
         }
 
         .nav-item {
@@ -1443,6 +1446,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            will-change: transform;
+            /* Hint browser to optimize compositing */
+            contain: layout style paint;
+            /* Isolate rendering */
+            transform: translateZ(0);
+            /* Promote to own layer */
         }
 
         .water-dispenser-marker span,
@@ -1499,8 +1508,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-            z-index: 1000;
-            /* Aumentato per essere sopra tutto */
+            z-index: 10000;
+            /* Aumentato per essere sopra tutto (inclusa sidebar z-9999) */
             pointer-events: none;
             /* Evita che il tooltip intercetti i click */
         }
@@ -1568,6 +1577,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Aggiunto per coerenza */
         }
 
+        #open-sidebar-button:hover {
+            cursor: e-resize;
+        }
+
+        #close-sidebar-button:hover {
+            cursor: w-resize;
+        }
+
         /* Animazione per invogliare l'apertura della sidebar */
         @keyframes sidebar-button-pulse {
             0% {
@@ -1620,7 +1637,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* rounded-lg */
             --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
             --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
             --tw-ring-color: var(--text-muted);
             /* ring-gray-400 */
             transition-property: all;
@@ -1707,7 +1724,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 /* bg-gray-200 */
                 --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
                 --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
                 --tw-ring-color: var(--text-muted);
                 /* ring-gray-400 */
                 transition-property: all;
@@ -1773,7 +1790,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 /* rounded-lg */
                 --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
                 --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
                 --tw-ring-color: var(--text-muted);
                 /* ring-gray-400 */
                 transition: border-radius 0.3s ease-in-out;
@@ -1782,16 +1799,54 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 /* Previene lo scroll orizzontale sul wrapper */
             }
 
-            /* Footer posizionato sotto la ricerca mobile */
-            body>div.fixed.bottom-4 {
-                bottom: 0.75rem !important;
-                /* Ridotto per stare sotto la barra di ricerca */
-            }
+            /* Nuovi stili per mobile richiesti: footer e ricerca attaccati in basso */
+            @media (max-width: 767px) {
+                #app-footer {
+                    width: 100% !important;
+                    bottom: 0 !important;
+                    left: 0 !important;
+                    transform: none !important;
+                    border-radius: 0 !important;
+                    border: none !important;
+                    /* Rimuovo bordo per seamless look se necessario, o lo tengo sottile */
+                    border-top: none !important;
+                    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px)) !important;
+                    background-color: var(--bg-main) !important;
+                    z-index: 50 !important;
+                    display: flex;
+                    justify-content: center;
+                }
 
-            /* Barra di ricerca mobile spostata più in alto */
-            #mobile-search-container {
-                bottom: 3.5rem !important;
-                /* Spostata più in alto per lasciare spazio al footer sotto */
+                #mobile-search-container {
+                    bottom: 0 !important;
+                    /* Esteso fino in fondo */
+                    padding: 1rem !important;
+                    /* Ripristino padding per staccarlo dai bordi */
+                    padding-bottom: calc(2.4rem + env(safe-area-inset-bottom, 0px)) !important;
+                    /* Padding ottimizzato per visibilità e vicinanza */
+                    width: 100% !important;
+                    z-index: 49 !important;
+
+                    /* Sfondo sfumato che va verso l'alto */
+                    background: linear-gradient(to top,
+                            #e5e7eb 0%,
+                            #e5e7eb 70%,
+                            rgba(229, 231, 235, 0) 100%) !important;
+                    pointer-events: none;
+                    /* Permette di cliccare la mappa sotto la parte trasparente */
+                }
+
+                #mobile-search-container>* {
+                    pointer-events: auto;
+                    /* Riabilita click sulla barra di ricerca */
+                }
+
+                /* NESSUN reset per #search-wrapper-mobile così mantiene lo stile a card */
+
+                #mobile-search-container #search-results-mobile {
+                    /* Assicuro che i risultati abbiano uno sfondo solido */
+                    background-color: var(--bg-main) !important;
+                }
             }
         }
 
@@ -2463,28 +2518,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <div id="app-container" class="relative min-h-screen">
 
         <!-- Sidebar -->
-        <div id="sidebar"
-            class="text-gray-900 w-80 fixed inset-y-0 left-0 transform -translate-x-full z-50 flex flex-col"
-            style="height: 100vh; height: 100dvh; padding-bottom: env(safe-area-inset-bottom, 0px);">
+        <div id="sidebar" class="w-72 fixed inset-y-0 left-0 transform -translate-x-full z-[60] flex flex-col"
+            style="height: 100vh; height: 100dvh; z-index: 9999 !important; padding-bottom: env(safe-area-inset-bottom, 0px);">
 
-            <!-- Intestazione Sidebar -->
-            <div class="flex items-center justify-between p-4 h-16">
-                <div class="text-2xl font-bold tracking-wider">
-                    DOVE?
-                </div>
-                <!-- Bottone Chiudi (Desktop & Mobile) -->
-                <button id="close-sidebar-button" class="block p-1 rounded-lg hover-effect-darker"
-                    data-tooltip="Chiudi sidebar" data-shortcut="enter">
-                    <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
-                        aria-label="Chiudi menu">
-                        left_panel_close
-                    </span>
-                </button>
-            </div>
+            <!-- Bottone Chiudi (Desktop & Mobile) -->
+            <button id="close-sidebar-button"
+                class="absolute top-4 right-4 z-10 block p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                data-tooltip="Chiudi sidebar" data-shortcut="enter">
+                <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
+                    aria-label="Chiudi menu">
+                    left_panel_close
+                </span>
+            </button>
 
             <!-- Menu di Navigazione -->
             <nav id="navigation-menu" class="p-4 space-y-1 overflow-y-auto"
-                style="flex: 1 1 0%; min-height: 0; max-height: calc(100vh - 8rem - env(safe-area-inset-bottom, 0px));">
+                style="flex: 1 1 0%; min-height: 0; max-height: calc(100vh - 4rem - env(safe-area-inset-bottom, 0px));">
+                <div style="height: 50px;"></div>
                 <div id="polos-list" class="space-y-1">
                     <!-- I bottoni dei poli verranno inseriti qui -->
                 </div>
@@ -2529,6 +2579,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     <span id="github-link-text">Repository GitHub</span>
                 </a>
             </div>
+
+            <style>
+                /* Sidebar specific overrides */
+                #sidebar .text-gray-500 {
+                    color: #8f8f8f !important;
+                }
+
+                #sidebar .text-gray-900 {
+                    color: #0d0d0d !important;
+                }
+            </style>
         </div>
 
         <!-- Contenuto Principale -->
@@ -2552,7 +2613,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     </div>
 
     <!-- Footer -->
-    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 px-3 py-1 rounded-lg bg-gray-200 border border-gray-200">
+    <div id="app-footer"
+        class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 px-3 py-1 rounded-lg bg-gray-200 border border-gray-200">
         <span class="text-sm text-gray-600 whitespace-nowrap">
             Fatto con
             <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;"
@@ -2763,14 +2825,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                     selectRoom(result.polo, result.edificio, result.piano, result.room);
                     hideSearchResultsPanels();
-                    currentSearchInput.value = result.room.nome;
+                    
+                    // Use ricerca field for consistent display
+                    const displayName = result.room.ricerca || result.room.nome;
+
+                    currentSearchInput.value = displayName;
 
                     const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
-                    otherInput.value = result.room.nome;
+                    otherInput.value = displayName;
                     updateClearButtonsVisibility();
 
                     setTimeout(() => {
-                        expandRoomDetailsInSidebar(result.room.nome);
+                        expandRoomDetailsInSidebar(result.room);
                     }, 100);
 
                     triggerSidebarButtonAnimation();
@@ -3201,8 +3267,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 sharePath: storedSharePath ? storedSharePath === 'true' : true,
                 highContrast: storedHighContrast ? storedHighContrast === 'true' : false,
                 dyslexicFont: storedDyslexicFont ? storedDyslexicFont === 'true' : false,
-                showWaterDispensers: storedShowWaterDispensers ? storedShowWaterDispensers === 'true' : false,
-                showStudyRooms: storedShowStudyRooms ? storedShowStudyRooms === 'true' : false,
+                showWaterDispensers: storedShowWaterDispensers ? storedShowWaterDispensers === 'true' : true,
+                showStudyRooms: storedShowStudyRooms ? storedShowStudyRooms === 'true' : true,
                 showClassroomStatus: storedShowClassroomStatus ? storedShowClassroomStatus === 'true' : true, // Default to true
                 showGroundFloor: storedShowGroundFloor ? storedShowGroundFloor === 'true' : true, // Default to true = "Piano Terra"
                 language: storedLanguage
@@ -3514,9 +3580,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             function getRoomBaseShortCode(room) {
                 if (!room) return null;
-                // For persons, use the NAME as the short code (as requested by user)
-                if (room.type === 'persona' && room.nome) {
-                    return normalizeShortCode(room.nome);
+                // For persons, use the RICERCA field (Cognome Nome) as the short code
+                if (room.type === 'persona' && room.ricerca) {
+                    return normalizeShortCode(room.ricerca);
                 }
 
                 if (Array.isArray(room.alias)) {
@@ -3798,7 +3864,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         }
                         // Show person marker if this is a person
                         if (room && room.type === 'persona') {
-                            showPersonMarkers(room.nome);
+                            showPersonMarkers(room.ricerca);
                         }
                     }
                 } else {
@@ -3959,12 +4025,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // Cerca nei dipartimenti definiti a livello di edificio
                         if (building.dipartimenti && Array.isArray(building.dipartimenti)) {
                             building.dipartimenti.forEach(dept => {
-                                const deptNameLower = dept.nome.toLowerCase();
+                                const ricercaLower = (dept.ricerca || '').toLowerCase();
                                 const aliasLower = Array.isArray(dept.alias) ? dept.alias.map(a => a.toLowerCase()) : [];
 
                                 const matches = isExactSearch
-                                    ? (deptNameLower === queryLower || aliasLower.some(a => a === queryLower))
-                                    : (deptNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+                                    ? (ricercaLower === queryLower || aliasLower.some(a => a === queryLower))
+                                    : (ricercaLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
 
                                 if (matches) {
                                     results.push({
@@ -3995,13 +4061,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                             return;
                                         }
 
-                                        const itemNameLower = item.nome.toLowerCase();
+                                        const ricercaLower = (item.ricerca || '').toLowerCase();
                                         const aliasLower = Array.isArray(item.alias) ? item.alias.map(a => a.toLowerCase()) : [];
-                                        const roomLower = item.room ? item.room.toLowerCase() : '';
 
                                         const matches = isExactSearch
-                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower) || roomLower === queryLower)
-                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)) || roomLower.includes(queryLower));
+                                            ? (ricercaLower === queryLower || aliasLower.some(a => a === queryLower))
+                                            : (ricercaLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
 
                                         if (matches) {
                                             results.push({
@@ -4014,13 +4079,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     }
                                     // 2. Check for Facilities (Erogatori)
                                     else if (item.type === 'erogatore_acqua' && settingsConfig.showWaterDispensers) {
-                                        const itemNameLower = item.nome.toLowerCase();
+                                        const ricercaLower = (item.ricerca || '').toLowerCase();
                                         const aliasLower = Array.isArray(item.alias) ? item.alias.map(a => a.toLowerCase()) : [];
-                                        const roomLower = item.room ? item.room.toLowerCase() : '';
 
                                         const matches = isExactSearch
-                                            ? (itemNameLower === queryLower || aliasLower.some(a => a === queryLower) || roomLower === queryLower)
-                                            : (itemNameLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)) || roomLower.includes(queryLower));
+                                            ? (ricercaLower === queryLower || aliasLower.some(a => a === queryLower))
+                                            : (ricercaLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
 
                                         if (matches) {
                                             results.push({
@@ -4034,13 +4098,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     }
                                     // 3. Check for People
                                     else if (item.type === 'persona') {
-                                        // Simplified: unified.json now guarantees 'nome' is a string, not an array.
-                                        const name = item.nome;
-                                        const nameLower = name.toLowerCase();
-                                        const roomLower = item.room ? item.room.toLowerCase() : '';
-                                        const matches = isExactSearch ?
-                                            (nameLower === queryLower || roomLower === queryLower) :
-                                            (nameLower.includes(queryLower) || roomLower.includes(queryLower));
+                                        const ricercaLower = (item.ricerca || '').toLowerCase();
+                                        const aliasLower = Array.isArray(item.alias) ? item.alias.map(a => a.toLowerCase()) : [];
+                                        
+                                        const matches = isExactSearch
+                                            ? (ricercaLower === queryLower || aliasLower.some(a => a === queryLower))
+                                            : (ricercaLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
 
                                         if (matches) {
                                             peopleMatches.push({
@@ -4061,45 +4124,38 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Ordina i risultati in modo logico: priorità a quelli che iniziano con la query
                 if (results.length > 0 && !capacityFilter) {
                     results.sort((a, b) => {
-                        const aName = a.room?.nome?.toLowerCase() || '';
-                        const bName = b.room?.nome?.toLowerCase() || '';
-                        const aAliases = Array.isArray(a.room?.alias) ? a.room.alias.map(al => al.toLowerCase()) : [];
-                        const bAliases = Array.isArray(b.room?.alias) ? b.room.alias.map(al => al.toLowerCase()) : [];
+                        const aRicerca = (a.room?.ricerca || '').toLowerCase();
+                        const bRicerca = (b.room?.ricerca || '').toLowerCase();
 
-                        // Controlla se il nome o un alias inizia con la query
-                        const aStartsWithName = aName.startsWith(queryLower);
-                        const bStartsWithName = bName.startsWith(queryLower);
-                        const aStartsWithAlias = aAliases.some(al => al.startsWith(queryLower));
-                        const bStartsWithAlias = bAliases.some(al => al.startsWith(queryLower));
-
-                        const aStartsWith = aStartsWithName || aStartsWithAlias;
-                        const bStartsWith = bStartsWithName || bStartsWithAlias;
+                        // Controlla se la ricerca inizia con la query
+                        const aStartsWith = aRicerca.startsWith(queryLower);
+                        const bStartsWith = bRicerca.startsWith(queryLower);
 
                         // 1. Priorità massima: inizia con la query
                         if (aStartsWith && !bStartsWith) return -1;
                         if (!aStartsWith && bStartsWith) return 1;
 
-                        // 2. Se entrambi iniziano (o nessuno inizia), ordina alfabeticamente per nome
-                        return aName.localeCompare(bName);
+                        // 2. Se entrambi iniziano (o nessuno inizia), ordina alfabeticamente per ricerca
+                        return aRicerca.localeCompare(bRicerca);
                     });
                 }
 
                 // Ordina i risultati delle persone e aggiungili in fondo
                 if (peopleMatches.length > 0) {
                     peopleMatches.sort((a, b) => {
-                        const aName = a.room.nome.toLowerCase();
-                        const bName = b.room.nome.toLowerCase();
+                        const aRicerca = (a.room.ricerca || '').toLowerCase();
+                        const bRicerca = (b.room.ricerca || '').toLowerCase();
 
-                        // Controlla se il nome inizia con la query
-                        const aStartsWith = aName.startsWith(queryLower);
-                        const bStartsWith = bName.startsWith(queryLower);
+                        // Controlla se la ricerca inizia con la query
+                        const aStartsWith = aRicerca.startsWith(queryLower);
+                        const bStartsWith = bRicerca.startsWith(queryLower);
 
                         // 1. Priorità massima: inizia con la query
                         if (aStartsWith && !bStartsWith) return -1;
                         if (!aStartsWith && bStartsWith) return 1;
 
                         // 2. Alfabeticamente
-                        return aName.localeCompare(bName);
+                        return aRicerca.localeCompare(bRicerca);
                     });
 
                     results.push(...peopleMatches);
@@ -4597,17 +4653,28 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             ` : '';
                         }
                         // Fine occupazione corrente delle aule
-
-                        const roomDetails = result.isPerson ?
+                        
+                        // Prepare details variables
+                        const roomDetails = (result.isPerson && result.room.room) ?
                             ` <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span> ${t('room')} ${result.room.room}` :
                             '';
+                            
+                        // Person Category (Role)
+                        let categoryDetails = '';
+                        if (result.isPerson) {
+                            const cats = result.room.categoria || result.room.carica;
+                            if (cats) {
+                                const catString = Array.isArray(cats) ? cats.join(', ') : cats;
+                                categoryDetails = `<div>${catString}</div>`;
+                            }
+                        }
 
                         resultElement.innerHTML = `
-                            <div class="title">${result.room.nome}</div>
+                            <div class="title">${result.room.ricerca || result.room.nome}</div>
                             <div class="details">
                                 Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
                                 ${t('building')} ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
-                                ${result.piano === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + result.piano}${roomDetails}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
+                                ${result.piano === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + result.piano}${roomDetails}${categoryDetails}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
                             </div>
                             ${availabilityHTML}
                         `;
@@ -5651,7 +5718,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 let targetIndex = 0;
 
                 // Check for suffix -N where N is a number
-                const match = normalizedInput.match(/^(.*)-(\\d+)$/);
+                const match = normalizedInput.match(/^(.*)-(\d+)$/);
                 if (match) {
                     baseCode = match[1];
                     targetIndex = parseInt(match[2], 10) - 1; // Convert 2 -> index 1
@@ -5741,8 +5808,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         });
 
                         // Popola automaticamente il campo di ricerca con il nome della persona o dell'aula
-                        // Use the matched person name if available (for persona type), otherwise use room name
-                        const displayName = roomFromShortLink.matchedPersonName || roomFromShortLink.room.nome || roomParam;
+                        // Use ricerca field for consistent display
+                        const displayName = roomFromShortLink.room.ricerca || roomFromShortLink.matchedPersonName || roomFromShortLink.room.nome || roomParam;
                         const searchQuery = `${displayName}`;
 
                         if (searchInput) searchInput.value = searchQuery;
@@ -5766,7 +5833,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Espandi automaticamente i dettagli dell'aula nella sidebar se proveniamo da un link breve
                 if (roomFromShortLink) {
                     setTimeout(() => {
-                        expandRoomDetailsInSidebar(roomFromShortLink.room.nome);
+                        expandRoomDetailsInSidebar(roomFromShortLink.room);
                     }, 200);
 
                     // Anima il bottone della sidebar per invogliare l'utente ad aprirla
@@ -6012,9 +6079,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const button = document.createElement('button');
                     button.className = 'nav-item flex items-center space-x-3 p-2 rounded-lg w-full';
                     button.innerHTML = `
-                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;" aria-label="Polo">
-                        school
-                        </span>
                         <span>Polo ${polo.charAt(0).toUpperCase() + polo.slice(1)}</span>
                     `;
                     button.addEventListener('click', () => {
@@ -6056,9 +6120,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const button = document.createElement('button');
                     button.className = 'nav-item w-full text-left flex items-center space-x-3 p-2 pl-6 rounded-lg';
                     button.innerHTML = `
-                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
-                        corporate_fare
-                        </span>
                         <span>${t('building')} ${building.toUpperCase()}</span>
                     `;
                     button.addEventListener('click', () => {
@@ -6077,9 +6138,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     button.className = 'nav-item w-full text-left flex items-center space-x-3 p-2 pl-6 rounded-lg';
                     button.dataset.floor = floor;
                     button.innerHTML = `
-                        <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">
-                        layers
-                        </span>
                         <span>${floor === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + floor}</span>
                     `;
                     button.addEventListener('click', () => {
@@ -6240,11 +6298,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     roomElement.dataset.building = building;
                     roomElement.dataset.floor = floor;
 
+                    // Optimization: Add ID for O(1) lookup
+                    if (room.id) {
+                        roomElement.id = `sidebar-item-${room.id}`;
+                    }
+
                     roomElement.innerHTML = `
                         <span class="flex items-center space-x-3 pointer-events-none">
-                            <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
-                            ${iconName}
-                            </span>
                             <span>${room.nome}</span>
                         </span>
                         <span class="material-symbols-outlined expand-icon pointer-events-none" style="${expandIconStyle}">
@@ -6499,9 +6559,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         // Re-render header with correct icon visibility
                         studyRoomHeader.innerHTML = `
                             <span class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined" style="font-size: 18px; line-height: 1;">
-                                school
-                                </span>
                                 <span>${studyRoom.nome}</span>
                             </span>
                             <span class="material-symbols-outlined expand-icon" style="${expandIconStyle}">
@@ -6639,7 +6696,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     });
 
                     // Sort alphabetically by name
-                    allPeopleEntries.sort((a, b) => a.name.localeCompare(b.name));
+                    // Sort alphabetically by Surname (Cognome) then Name (Nome)
+                    allPeopleEntries.sort((a, b) => {
+                        const surnameA = (a.personData.cognome || "").toLowerCase();
+                        const surnameB = (b.personData.cognome || "").toLowerCase();
+                        if (surnameA < surnameB) return -1;
+                        if (surnameA > surnameB) return 1;
+                        
+                        // If surnames are equal (or missing), sort by name
+                        return a.name.localeCompare(b.name);
+                    });
 
                     // Render sorted list
                     allPeopleEntries.forEach(entry => {
@@ -6649,6 +6715,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const personElement = document.createElement('a');
                         personElement.href = '#';
                         personElement.className = 'nav-item w-full text-left flex items-center justify-between space-x-3 p-2 pl-6 rounded-lg'; // Reduced padding for people
+
+                        // Optimization: Add ID for O(1) lookup
+                        if (entry.personData.id) {
+                            personElement.id = `sidebar-item-${entry.personData.id}`;
+                        }
 
                         // --- Details Construction ---
                         const personInfoElement = document.createElement('div');
@@ -6665,8 +6736,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 </div>`;
                         }
 
-                        // 1. Contact Info (Email, Tel, Fax)
+                        // 1. Category / Role (Carica/Categoria) - FIRST
                         const pData = entry.personData;
+                        const category = pData.carica || pData.categoria; // Check both potential keys
+                        
+                        if (category) {
+                           let categories = [];
+                           if (Array.isArray(category)) {
+                               categories = category;
+                           } else if (typeof category === 'string') {
+                               // Handle comma-separated string if it's not an array
+                               categories = category.split(',').map(c => c.trim());
+                           }
+
+                           categories.forEach(cat => {
+                               // Display each category on a new line with a label icon
+                               addDetailRow('label', `<span class="font-medium text-gray-700">${cat}</span>`);
+                           });
+                        }
+
+                        // 2. Contact Info (Email, Tel, Fax)
+                        const pDataRef = entry.personData; // kept for compatibility if needed, but pData is defined above
 
                         // Room number first (most important for locating the person)
                         if (pData.room) {
@@ -6705,17 +6795,31 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const hasDetails = detailsCount > 0;
                         const expandIconStyle = hasDetails ? 'font-size: 20px; line-height: 1; transition: transform 0.2s;' : 'display: none;';
 
+                        // Use Cognome if available, otherwise fallback to full name string
+                        const surname = pData.cognome ? pData.cognome : "";
+                        const firstName = pData.nome && typeof pData.nome === 'string' ? pData.nome : entry.name.replace(surname, "").trim(); 
+                        
+                        // If we have a structured surname/name, display them nicely
+                        let nameHtml = "";
+                        if (surname) {
+                            nameHtml = `
+                            <div class="flex flex-col">
+                                <span class="leading-tight">${surname}</span>
+                                <span class="text-sm text-gray-600 leading-tight">${firstName}</span>
+                            </div>`;
+                        } else {
+                            // Fallback for unexpected data structure
+                             nameHtml = `<span>${entry.name}</span>`;
+                        }
+
                         personElement.innerHTML = `
-                                <span class="flex items-center space-x-3 overflow-hidden">
-                                    <span class="material-symbols-outlined shrink-0" style="font-size: 18px; line-height: 1;">
-                                    person
-                                    </span>
-                                    <span class="truncate">${entry.name}</span>
-                                </span>
-                                <span class="material-symbols-outlined expand-icon shrink-0" style="${expandIconStyle}">
-                                    expand_more
-                                </span>
-                            `;
+                            <span class="flex items-center space-x-3 pointer-events-none">
+                                ${nameHtml}
+                            </span>
+                            <span class="material-symbols-outlined expand-icon pointer-events-none" style="${expandIconStyle}">
+                                expand_more
+                            </span>
+                        `;
 
                         personElement.addEventListener('click', (e) => {
                             e.preventDefault();
@@ -6731,7 +6835,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         building: selectedBuilding,
                                         floor: selectedFloor,
                                         room: entry.personData,
-                                        codeOverride: normalizeShortCode(entry.name) // Use person name for short code
+                                        codeOverride: normalizeShortCode(entry.personData.ricerca) // Use person ricerca for short code
                                     });
                                     updateURL(true);
                                 }
@@ -6760,7 +6864,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     // Show marker when opening details, hide when closing
                                     if (isCurrentlyHidden) {
                                         // Details are being opened
-                                        showPersonMarkers(entry.name);
+                                        showPersonMarkers(entry.personData.ricerca);
                                     } else {
                                         // Details are being closed
                                         hidePersonMarkers();
@@ -6780,203 +6884,90 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             // Funzione per espandere automaticamente i dettagli dell'aula nella sidebar
-            function expandRoomDetailsInSidebar(roomName) {
-                if (!roomName) return;
+            function expandRoomDetailsInSidebar(identifier) {
+                if (!identifier) return;
 
-                // Chiudi tutti i dettagli aperti precedentemente
+                // Close all previously open details
                 const allRoomInfos = roomsList.querySelectorAll('.capacity-info');
                 const allExpandIcons = roomsList.querySelectorAll('.expand-icon');
 
-                allRoomInfos.forEach(info => {
-                    info.classList.add('hidden');
-                });
+                allRoomInfos.forEach(info => info.classList.add('hidden'));
+                allExpandIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
 
-                allExpandIcons.forEach(icon => {
-                    icon.style.transform = 'rotate(0deg)';
-                });
-
-                // Chiudi anche i dettagli delle biblioteche
-                const libContainer = document.getElementById('temp-lib-container');
-                if (libContainer) {
-                    const libInfos = libContainer.querySelectorAll('.capacity-info');
-                    const libIcons = libContainer.querySelectorAll('.expand-icon');
-                    libInfos.forEach(info => info.classList.add('hidden'));
-                    libIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
-                }
-
-                // Chiudi anche i dettagli delle aule studio
-                const studyContainer = document.getElementById('temp-study-container');
-                if (studyContainer) {
-                    const studyInfos = studyContainer.querySelectorAll('.capacity-info');
-                    const studyIcons = studyContainer.querySelectorAll('.expand-icon');
-                    studyInfos.forEach(info => info.classList.add('hidden'));
-                    studyIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
-                }
-
-                // Chiudi anche i dettagli dei laboratori
-                const labContainer = document.getElementById('temp-lab-container');
-                if (labContainer) {
-                    const labInfos = labContainer.querySelectorAll('.capacity-info');
-                    const labIcons = labContainer.querySelectorAll('.expand-icon');
-                    labInfos.forEach(info => info.classList.add('hidden'));
-                    labIcons.forEach(icon => icon.style.transform = 'rotate(0deg)');
-                }
-
-                // Trova e espandi l'aula specifica
-                const roomElements = roomsList.querySelectorAll('.nav-item');
-                roomElements.forEach((element) => {
-                    const roomNameSpan = element.querySelector('span:nth-child(2)');
-                    if (roomNameSpan && roomNameSpan.textContent === roomName) {
-                        // Trova il prossimo elemento sibling che è il dettaglio
-                        const roomContainer = element.parentElement;
-                        const roomInfo = roomContainer.querySelector('.capacity-info');
-                        const expandIcon = element.querySelector('.expand-icon');
-
-                        if (roomInfo && expandIcon) {
-                            roomInfo.classList.remove('hidden');
-                            expandIcon.style.transform = 'rotate(180deg)';
-
-                            // Scrolla la sidebar fino alla posizione dell'aula
-                            setTimeout(() => {
-                                element.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'center',
-                                    inline: 'nearest'
-                                });
-                            }, 100);
-                        }
+                // Close details in temp containers (Libraries, Study Rooms, Labs, People)
+                ['temp-lib-container', 'temp-study-container', 'temp-lab-container', 'temp-people-container'].forEach(containerId => {
+                    const container = document.getElementById(containerId);
+                    if (container) {
+                        const infos = container.querySelectorAll('.capacity-info');
+                        const icons = container.querySelectorAll('.expand-icon');
+                        infos.forEach(info => info.classList.add('hidden'));
+                        icons.forEach(icon => icon.style.transform = 'rotate(0deg)');
                     }
                 });
 
-                // Cerca anche tra le biblioteche
-                if (libContainer) {
-                    const libContainerItems = libContainer.querySelectorAll('.nav-item-container');
-                    libContainerItems.forEach((container) => {
-                        const roomNameSpan = container.querySelector('.font-medium');
-                        if (roomNameSpan && roomNameSpan.textContent === roomName) {
-                            const roomInfo = container.querySelector('.capacity-info');
-                            const expandIcon = container.querySelector('.expand-icon');
-                            const libHeader = container.querySelector('div[class*="cursor-pointer"]');
+                // Optimization: Try Direct ID Lookup First
+                let targetElement = document.getElementById(`sidebar-item-${identifier}`);
 
-                            if (roomInfo && expandIcon) {
-                                roomInfo.classList.remove('hidden');
-                                expandIcon.style.transform = 'rotate(180deg)';
-
-                                setTimeout(() => {
-                                    if (libHeader) {
-                                        libHeader.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'center',
-                                            inline: 'nearest'
-                                        });
-                                    }
-                                }, 100);
-                            }
-                        }
-                    });
+                // If the identifier passed is the room name (legacy/fallback), it won't be found by ID directly.
+                // Or if it's an object with an ID.
+                if (!targetElement && typeof identifier === 'object' && identifier.id) {
+                    targetElement = document.getElementById(`sidebar-item-${identifier.id}`);
                 }
 
-                // Cerca anche tra le aule studio
-                if (studyContainer) {
-                    const studyContainerItems = studyContainer.querySelectorAll('.nav-item-container');
-                    studyContainerItems.forEach((container) => {
-                        const studyRoomHeader = container.querySelector('.nav-item');
-                        if (studyRoomHeader) {
-                            const roomNameSpan = studyRoomHeader.querySelector('span:nth-child(2)');
-                            if (roomNameSpan && roomNameSpan.textContent === roomName) {
-                                const roomInfo = container.querySelector('.capacity-info');
-                                const expandIcon = studyRoomHeader.querySelector('.expand-icon');
-
-                                if (roomInfo && expandIcon) {
-                                    roomInfo.classList.remove('hidden');
-                                    expandIcon.style.transform = 'rotate(180deg)';
-
-                                    setTimeout(() => {
-                                        studyRoomHeader.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'center',
-                                            inline: 'nearest'
-                                        });
-                                    }, 100);
-                                }
-                            }
-                        }
-                    });
+                if (targetElement) {
+                    expandElementDetails(targetElement);
+                    return; // Done! O(1) success.
                 }
 
-                // Cerca anche tra i laboratori
-                if (labContainer) {
-                    const labContainerItems = labContainer.querySelectorAll('.nav-item-container');
-                    labContainerItems.forEach((container) => {
-                        const labRoomHeader = container.querySelector('.nav-item');
-                        if (labRoomHeader) {
-                            const roomNameSpan = labRoomHeader.querySelector('span:nth-child(2)');
-                            if (roomNameSpan && roomNameSpan.textContent === roomName) {
-                                const roomInfo = container.querySelector('.capacity-info');
-                                const expandIcon = labRoomHeader.querySelector('.expand-icon');
+                // FALLBACK: Name-based lookup (Legacy / non-ID items)
+                // Only needed if identifier is a string (name) and strict ID lookup failed.
+                const roomName = typeof identifier === 'string' ? identifier : identifier.nome;
+                if (!roomName) return;
 
-                                if (roomInfo && expandIcon) {
-                                    roomInfo.classList.remove('hidden');
-                                    expandIcon.style.transform = 'rotate(180deg)';
+                // Helper to match text content robustly
+                const matchesName = (element, name) => {
+                    const textSpan = element.querySelector('span.flex > span');
+                    // Check strict equality first, then loose for safety
+                    return textSpan && (textSpan.textContent.trim() === name || textSpan.textContent.trim().toLowerCase() === name.toLowerCase());
+                };
 
-                                    setTimeout(() => {
-                                        labRoomHeader.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'center',
-                                            inline: 'nearest'
-                                        });
-                                    }, 100);
-                                }
-                            }
-                        }
-                    });
-                }
+                // Search in all potential lists
+                const allNavItems = roomsList.parentElement.querySelectorAll('.nav-item'); // This grabs items from Study, Lab, People too if they are descended from the wrapper
+                // Wait, roomsList.parentElement contains everything populated by populateRooms.
 
-                // Cerca anche tra i dipartimenti (che hanno una struttura diversa)
-                const deptElements = roomsList.parentElement.querySelectorAll('.department-item');
-                deptElements.forEach((element) => {
-                    const deptName = element.getAttribute('data-name');
-                    if (deptName === roomName) {
-                        // Scrolla la sidebar fino alla posizione del dipartimento
-                        setTimeout(() => {
-                            element.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'center',
-                                inline: 'nearest'
-                            });
-                        }, 100);
+                // Iterate to find by name
+                for (const element of allNavItems) {
+                    if (matchesName(element, roomName) ||
+                        // Check Department data-name
+                        (element.classList.contains('department-item') && element.getAttribute('data-name') === roomName)) {
+
+                        expandElementDetails(element);
+                        return;
                     }
-                });
+                }
+            }
 
-                // Cerca anche tra le persone
-                const peopleContainer = document.getElementById('temp-people-container');
-                if (peopleContainer) {
-                    const peopleItems = peopleContainer.querySelectorAll('.nav-item-container');
-                    peopleItems.forEach((container) => {
-                        const personHeader = container.querySelector('.nav-item');
-                        if (personHeader) {
-                            // The person name is in the second span inside the first span
-                            // Structure: outer span (flex) -> icon, name span
-                            const nameSpan = personHeader.querySelector('span.flex > span:nth-child(2)');
-                            if (nameSpan && nameSpan.textContent === roomName) {
-                                const roomInfo = container.querySelector('.capacity-info');
-                                const expandIcon = personHeader.querySelector('.expand-icon');
+            // Helper function to handle the UI expansion of a found element
+            function expandElementDetails(element) {
+                const container = element.closest('.nav-item-container') || element.parentElement; // Handle both structures
+                if (!container) return;
 
-                                if (roomInfo && expandIcon) {
-                                    roomInfo.classList.remove('hidden');
-                                    expandIcon.style.transform = 'rotate(180deg)';
+                const roomInfo = container.querySelector('.capacity-info');
+                const expandIcon = element.querySelector('.expand-icon');
 
-                                    setTimeout(() => {
-                                        personHeader.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'center',
-                                            inline: 'nearest'
-                                        });
-                                    }, 100);
-                                }
-                            }
-                        }
-                    });
+                if (roomInfo) {
+                    roomInfo.classList.remove('hidden');
+                    if (expandIcon) {
+                        expandIcon.style.transform = 'rotate(180deg)';
+                    }
+
+                    setTimeout(() => {
+                        element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                            inline: 'nearest'
+                        });
+                    }, 100);
                 }
             }
 
@@ -7332,12 +7323,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             }
 
+            // State tracking to prevent redundant marker updates
+            let currentWaterDispenserContext = null;
+            let currentStudyRoomContext = null;
+            let currentPersonMarkerContext = null;
+
             // Funzioni per gestire i marker degli erogatori d'acqua
             function showWaterDispensers() {
                 if (!viewer || !data || !selectedPolo || !selectedBuilding || !selectedFloor) return;
 
+                const newContext = `${selectedPolo}-${selectedBuilding}-${selectedFloor}`;
+                if (currentWaterDispenserContext === newContext && waterDispenserOverlays.length > 0) {
+                    return;
+                }
+
                 // Rimuovi marker esistenti
                 hideWaterDispensers();
+                currentWaterDispenserContext = newContext;
 
                 const tiledImage = viewer.world.getItemAt(0);
                 if (!tiledImage) return;
@@ -7375,6 +7377,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             function hideWaterDispensers() {
+                currentWaterDispenserContext = null;
                 if (!viewer) return;
 
                 waterDispenserOverlays.forEach(element => {
@@ -7389,8 +7392,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Non mostrare in vista prospettica
                 if (currentView === 'perspective') return;
 
+                const newContext = `${selectedPolo}-${selectedBuilding}-${selectedFloor}`;
+                if (currentStudyRoomContext === newContext && studyRoomOverlays.length > 0) {
+                    return;
+                }
+
                 // Rimuovi marker esistenti
                 hideStudyRoomMarkers();
+                currentStudyRoomContext = newContext;
 
                 const tiledImage = viewer.world.getItemAt(0);
                 if (!tiledImage) return;
@@ -7444,6 +7453,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             function hideStudyRoomMarkers() {
+                currentStudyRoomContext = null;
                 if (!viewer) return;
 
                 studyRoomOverlays.forEach(element => {
@@ -7467,8 +7477,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Se non è specificata una persona, non mostrare nulla
                 if (!targetPersonName) return;
 
+                const newContext = `${selectedPolo}-${selectedBuilding}-${selectedFloor}-${targetPersonName}`;
+                if (currentPersonMarkerContext === newContext && personOverlays.length > 0) {
+                    return;
+                }
+
                 // Rimuovi marker esistenti
                 hidePersonMarkers();
+                currentPersonMarkerContext = newContext;
 
                 const tiledImage = viewer.world.getItemAt(0);
                 if (!tiledImage) return;
@@ -7481,7 +7497,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     rooms.forEach(room => {
                         if (room.type === 'persona' && room.coordinates) {
                             // Mostra solo il marker della persona selezionata
-                            if (room.nome !== targetPersonName) return;
+                            if (room.ricerca !== targetPersonName) return;
 
                             const { x, y } = room.coordinates;
                             if (x != null && y != null) {
@@ -7499,13 +7515,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 element.style.cursor = 'pointer';
 
                                 // Create unique marker ID and store room data
-                                const markerId = `person-${selectedPolo}-${selectedBuilding}-${selectedFloor}-${room.nome}`;
+                                const markerId = `person-${selectedPolo}-${selectedBuilding}-${selectedFloor}-${room.ricerca}`;
                                 element.setAttribute('data-marker-type', 'person');
                                 element.setAttribute('data-marker-id', markerId);
                                 element.setAttribute('data-polo', selectedPolo);
                                 element.setAttribute('data-building', selectedBuilding);
                                 element.setAttribute('data-floor', selectedFloor);
-                                element.setAttribute('data-room-name', room.nome);
+                                element.setAttribute('data-room-name', room.ricerca);
 
                                 // Store room data for retrieval in event handler
                                 markerRoomDataMap.set(markerId, room);
@@ -7525,6 +7541,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             function hidePersonMarkers() {
+                currentPersonMarkerContext = null;
                 if (!viewer) return;
 
                 personOverlays.forEach(element => {
@@ -7782,6 +7799,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     registerViewerInteractionGuards();
                 }
 
+                // Reimposta lo stato dei marker prima di ricaricare
+                // Questo è fondamentale quando si ricarica lo stesso piano:
+                // viewer.open() pulisce i visual, ma noi dobbiamo pulire anche lo stato logico
+                // (currentWaterDispenserContext, etc) altrimenti le funzioni show* penseranno
+                // che i marker siano già lì e non faranno nulla.
+                hideWaterDispensers();
+                hideStudyRoomMarkers();
+                hidePersonMarkers();
+
                 // Open the image
                 viewer.open({
                     type: 'image',
@@ -7862,7 +7888,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                     // Show person markers if roomData is a person and we're in top view
                     if (roomData && roomData.type === 'persona' && currentView === 'top') {
-                        showPersonMarkers(roomData.nome);
+                        showPersonMarkers(roomData.ricerca);
                     }
                 });
             }
@@ -8042,62 +8068,80 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return;
                 }
 
-                // Collect all rooms first
-                const allRooms = [];
-                Object.entries(data.polo).forEach(([poloName, polo]) => {
-                    Object.entries(polo.edificio || {}).forEach(([buildingName, building]) => {
-                        Object.entries(building.piano || {}).forEach(([floorName, floorData]) => {
-                            const rooms = Array.isArray(floorData)
-                                ? floorData
-                                : (floorData?.aule ? Object.values(floorData.aule) : []);
+                if (pendingApiRequests.has('batch_population')) {
+                    return; // Avoid concurrent batch updates
+                }
 
-                            rooms.forEach(room => {
-                                const isRoom = !room.type || ['aula', 'studio', 'sala', 'laboratorio'].includes(room.type);
-                                if (isRoom && room?.nome && room.hasStatus !== false) {
-                                    allRooms.push(room.nome);
-                                }
+                // Identify polos to fetch data for (optimize for selectedPolo or fetch all)
+                const polosToFetch = selectedPolo ? [selectedPolo] : Object.keys(data.polo);
+
+                pendingApiRequests.set('batch_population', true);
+
+                Promise.all(polosToFetch.map(async (poloName) => {
+                    // Capitalize for API: "fibonacci" -> "Fibonacci"
+                    const displayPoloName = poloName.charAt(0).toUpperCase() + poloName.slice(1);
+
+                    try {
+                        const payload = await getSchedulesPayloadGivenPole(displayPoloName);
+                        if (!payload || !payload.schedules) return;
+
+                        // Map local room names to availability based on "Fib X" keys
+                        const poloData = data.polo[poloName];
+                        if (!poloData) return;
+
+                        Object.values(poloData.edificio || {}).forEach(building => {
+                            Object.values(building.piano || {}).forEach(floorData => {
+                                const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
+
+                                rooms.forEach(room => {
+                                    // Only care about rooms that have status
+                                    if (room.hasStatus === false) return;
+                                    if (!room.nome) return;
+                                    if (room.type && !['aula', 'studio', 'sala', 'laboratorio'].includes(room.type)) return;
+
+                                    // Generate key expected in API response ("Aula A" -> "Fib A")
+                                    const apiKey = room.nome.replace(/^Aula\s+/i, 'Fib ');
+
+                                    // Direct lookup in payload
+                                    const scheduleValue = payload.schedules[apiKey];
+
+                                    // Update global state
+                                    if (scheduleValue === undefined) {
+                                        // Not found in API -> Unavailable
+                                        window.classroomAvaibility[room.nome] = {
+                                            code: 2,
+                                            startTime: '', endTime: '', occupiedBy: ''
+                                        };
+                                    } else if (scheduleValue === "" || scheduleValue === null) {
+                                        // Free
+                                        window.classroomAvaibility[room.nome] = {
+                                            code: 0,
+                                            startTime: '', endTime: '', occupiedBy: ''
+                                        };
+                                    } else {
+                                        // Occupied
+                                        const parts = scheduleValue.split("|");
+                                        const timeRange = parts[0] || '';
+                                        const [start, end] = timeRange.split(' - ');
+
+                                        window.classroomAvaibility[room.nome] = {
+                                            code: 1,
+                                            startTime: start || '',
+                                            endTime: end || '',
+                                            occupiedBy: parts.slice(1).join('|') || ''
+                                        };
+                                    }
+                                });
                             });
                         });
-                    });
-                });
 
-                // Fetch all classroom availability data in parallel for much faster loading
-                Promise.all(
-                    allRooms.map(roomName =>
-                        getClassroomAvailability(roomName)
-                            .then(availability => ({ roomName, availability }))
-                            .catch(error => {
-                                console.warn(`Failed to get availability for ${roomName}:`, error);
-                                return { roomName, availability: { 2: t('availability_unavailable') } };
-                            })
-                    )
-                ).then(results => {
-                    results.forEach(({ roomName, availability }) => {
-                        const code = Number(Object.keys(availability)[0]);
-                        const value = availability[code];
-
-                        // code 1 = occupata, 0 = libera, 2 = informazioni non disponibili
-                        if (code === 1 && value) {
-                            // Parse occupied schedule: "HH:MM - HH:MM|Course|Degree|Teacher"
-                            const scheduleStrArray = value.split("|");
-                            const timeRange = scheduleStrArray[0] || '';
-                            const timeParts = timeRange.split(' - ');
-                            window.classroomAvaibility[roomName] = {
-                                code: 1,
-                                startTime: timeParts[0] || '',
-                                endTime: timeParts[1] || '',
-                                occupiedBy: scheduleStrArray.slice(1).join('|') || ''
-                            };
-                        } else {
-                            // Free or unavailable
-                            window.classroomAvaibility[roomName] = {
-                                code: code,
-                                startTime: '',
-                                endTime: '',
-                                occupiedBy: ''
-                            };
-                        }
-                    });
+                    } catch (err) {
+                        console.warn("Batch availability fetch failed for", poloName, err);
+                    }
+                })).finally(() => {
+                    pendingApiRequests.delete('batch_population');
+                    // Trigger UI refresh 
+                    refreshSearchResultsOccupancy();
                 });
             }
 

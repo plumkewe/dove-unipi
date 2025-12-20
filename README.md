@@ -145,14 +145,14 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
         └── mini-map.svg <- mini mappa (non si usa)
 ```
 
-## rooms.json
+## unified.json
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
 
 È il "database" dell'applicazione.
 
-Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita dinamicamente leggendo questo file. Per aggiornare i contenuti, basta modificare rooms.json senza toccare il codice.
+Contiene tutti i dati su edifici, piani, aule, persone e facility, e l'interfaccia viene costruita dinamicamente leggendo questo file. Per aggiornare i contenuti, basta modificare unified.json senza toccare il codice.
 
 ```json
 {
@@ -181,6 +181,14 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
                   "Matricole",
                   "Matricole Informatica"
                 ],
+                "type": "aula",
+                "note": "",
+                "coordinates": {
+                  "x": 463,
+                  "y": 295,
+                  "zoom": 3
+                },
+                "hasStatus": true, <- serve per evitare le chiamate API e mostrare animazione di ricerca di un'aula che non ha lo status
                 "capienza": 216,
                 "presenza_pc": false,
                 "numero_pc": 0,
@@ -189,16 +197,9 @@ Contiene tutti i dati su edifici, piani e aule, e l'interfaccia viene costruita 
                 "porte_rete": true,
                 "proiettore": true,
                 "lavagna": true,
-                "type": "aula",
-                "note": "",
                 "rete": false,
                 "accesso_disabili": true,
-                "coordinates": {
-                  "x": 463,
-                  "y": 295,
-                  "zoom": 2
-                },
-                "hasStatus": true <- serve per evitare le chiamate API e mostrare animazione di cerca di un'aula che non ha lo status
+                "ricerca": "Aula D5"
               },
               {
                 "..."
@@ -645,9 +646,27 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E 
 
 <table>
   <tr>
-    <td align="center" valign="middle"><img src="assets/screenshots/tg-bot1.JPEG" alt="Screenshot Telegram Bot 1"></td>
-    <td align="center" valign="middle"><img src="assets/screenshots/tg-bot2.JPEG" alt="Screenshot Telegram Bot 2"></td>
-    <td align="center" valign="middle"><img src="assets/screenshots/tg-bot3.JPEG" alt="Screenshot Telegram Bot 3"></td>
+    <td align="center" valign="middle">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/tg-bot1.JPEG">
+        <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/tg-bot1-w.JPEG">
+        <img src="assets/screenshots/tg-bot1.JPEG" alt="Screenshot Telegram Bot 1">
+      </picture>
+    </td>
+    <td align="center" valign="middle">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/tg-bot2.JPEG">
+        <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/tg-bot2-w.JPEG">
+        <img src="assets/screenshots/tg-bot2.JPEG" alt="Screenshot Telegram Bot 2">
+      </picture>
+    </td>
+    <td align="center" valign="middle">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/tg-bot3.JPEG">
+        <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/tg-bot3-w.JPEG">
+        <img src="assets/screenshots/tg-bot3.JPEG" alt="Screenshot Telegram Bot 3">
+      </picture>
+    </td>
   </tr>
 </table>
 
