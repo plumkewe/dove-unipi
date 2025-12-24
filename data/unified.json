@@ -3583,6 +3583,20 @@
                         ],
                         "1": [
                             {
+                                "id": "fib_df-c-0",
+                                "nome": "Dipartimento di Fisica",
+                                "alias": [
+                                    "DF",
+                                    "Department of Physics"
+                                ],
+                                "type": "dipartimento",
+                                "note": "",
+                                "hasStatus": false,
+                                "link-mappa": "https://www.pi.infn.it/?page_id=11732",
+                                "link-dipartimento": "https://www.df.unipi.it/",
+                                "ricerca": "Dipartimento di Fisica"
+                            },
+                            {
                                 "id": "fib_a1-b-1",
                                 "nome": "Aula A1",
                                 "alias": [
@@ -4335,20 +4349,6 @@
                     "piano": {
                         "-1": [],
                         "0": [
-                            {
-                                "id": "fib_df-c-0",
-                                "nome": "Dipartimento di Fisica",
-                                "alias": [
-                                    "DF",
-                                    "Department of Physics"
-                                ],
-                                "type": "dipartimento",
-                                "note": "",
-                                "hasStatus": false,
-                                "link-mappa": "https://www.pi.infn.it/?page_id=11732",
-                                "link-dipartimento": "https://www.df.unipi.it/",
-                                "ricerca": "Dipartimento di Fisica"
-                            }
                         ],
                         "1": [],
                         "2": [

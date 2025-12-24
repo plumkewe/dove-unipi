@@ -50,6 +50,7 @@
   - [Altre biblioteche disponibili](#altre-biblioteche-disponibili)
 - [API Aule](#api-aule)
 - [Telegram Bot](#telegram-bot)
+- [Data Sources](#data-source)
 - [Problemi noti](#problemi-noti)
   
 
@@ -516,6 +517,9 @@ Questa funzione permette di attivare dei marker specifici sulla mappa per indivi
 Per attivarla, apri la **barra di ricerca**, digita `impostazioni` e attiva l'opzione **"Mostra aule studio (ALFA)"**.
 I marker appariranno sulla mappa indicando la posizione esatta delle aule dedicate allo studio.
 
+> [!NOTE]
+> Se siete interessati alle aule studio esterne, potete consultare [Fantamappa](https://www.google.com/maps/d/viewer?mid=1q4ousVeGWQnZX-5K3i_SYE3bBsky2tkv), realizzata da [Sinistraper](https://www.sinistraper.org/fantamappa/).
+
 <hr>
 
 #### Persone
@@ -681,6 +685,59 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E 
     </picture>
   </a>
 </p>
+
+## Data Sources
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">Tipologia Dati</th>
+      <th align="left">Fonte Principale</th>
+      <th align="left">Dettagli / Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Planimetrie</strong></td>
+      <td>Università di Pisa (Ufficio Sicurezza e Ambiente)</td>
+      <td>File <code>.dwg</code> forniti dall'ateneo, convertiti e ottimizzati in <code>.svg</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Dati Aule</strong></td>
+      <td>University Planner</td>
+      <td><a href="https://universityplanner.unipi.it/" target="_blank">Portale UP</a></td>
+    </tr>
+    <tr>
+      <td><strong>Status Aule</strong></td>
+      <td>API Aule (Scraper)</td>
+      <td><a href="https://github.com/JuliusNixi/unipi-free-classrooms-now" target="_blank">Repo GitHub</a> (scraping di aule.webhost1.unipi.it)</td>
+    </tr>
+    <tr>
+      <td><strong>Status Biblioteche</strong></td>
+      <td>SBA API via Proxy</td>
+      <td><a href="https://www.sba.unipi.it/it/biblioteche/orari-di-apertura-delle-sedi" target="_blank">Orari Sedi SBA</a></td>
+    </tr>
+    <tr>
+      <td><strong>Personale</strong></td>
+      <td>UniMap & Dipartimenti</td>
+      <td>
+        <a href="https://unimap.unipi.it/" target="_blank">UniMap</a>, 
+        <a href="https://di.unipi.it/persone/" target="_blank">Informatica</a>, 
+        <a href="https://www.dm.unipi.it/elenco-del-personale/" target="_blank">Matematica</a>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Uffici Docenti</strong></td>
+      <td>Mappe Dipartimentali</td>
+      <td>
+        <a href="https://di.unipi.it/mappa-dipartimento/" target="_blank">Mappa DI</a>, 
+        <a href="https://www.dm.unipi.it/mappa/" target="_blank">Mappa DM</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Problemi noti
 

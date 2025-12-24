@@ -6077,16 +6077,144 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 polosList.innerHTML = '';
                 polos.forEach(polo => {
                     const button = document.createElement('button');
-                    button.className = 'nav-item flex items-center space-x-3 p-2 rounded-lg w-full';
-                    button.innerHTML = `
-                        <span>Polo ${polo.charAt(0).toUpperCase() + polo.slice(1)}</span>
-                    `;
+                    button.className = 'nav-item flex flex-col items-start p-2 rounded-lg w-full';
+                    
+                    // Add polo title
+                    const titleSpan = document.createElement('span');
+                    titleSpan.textContent = `Polo ${polo.charAt(0).toUpperCase() + polo.slice(1)}`;
+                    titleSpan.className = 'mb-2'; // Margin bottom for spacing
+                    button.appendChild(titleSpan);
+                    
+                    // Create container for mini-map SVG
+                    const miniMapContainer = document.createElement('div');
+                    miniMapContainer.className = 'w-full mini-map-container';
+                    miniMapContainer.style.maxHeight = '120px';
+                    miniMapContainer.dataset.polo = polo;
+                    
+                    // Try to load the mini-map SVG
+                    const miniMapPath = `polo/${polo}/mini-map.svg`;
+                    fetch(miniMapPath)
+                        .then(response => {
+                            if (!response.ok) throw new Error('SVG not found');
+                            return response.text();
+                        })
+                        .then(svgText => {
+                            miniMapContainer.innerHTML = svgText;
+                            const svg = miniMapContainer.querySelector('svg');
+                            if (svg) {
+                                svg.style.width = '100%';
+                                svg.style.height = 'auto';
+                                svg.style.maxHeight = '120px';
+                                svg.classList.add('mini-map-svg');
+                                svg.dataset.polo = polo;
+                                
+                                // Update state for this polo if it's currently selected
+                                if (polo === selectedPolo) {
+                                    updateMiniMapState();
+                                }
+                            }
+                        })
+                        .catch(() => {
+                            // If SVG doesn't exist, remove the container
+                            miniMapContainer.remove();
+                        });
+                    
+                    button.appendChild(miniMapContainer);
+                    
                     button.addEventListener('click', () => {
                         clearShortLinkContext();
                         selectPolo(polo);
                     });
                     polosList.appendChild(button);
                 });
+            }
+            
+            // Efficiently handles mini-map rotation with caching
+            function setMiniMapRotation(polo, shouldFlip) {
+                const svg = document.querySelector(`.mini-map-svg[data-polo="${polo}"]`);
+                if (!svg) return;
+
+                // Cache rotation data on the element to avoid repeated regex parsing
+                if (!svg._rotationData) {
+                    const group = svg.querySelector('g[transform*="rotate"]');
+                    if (!group) return;
+                    
+                    const match = group.getAttribute('transform').match(/rotate\(([-\d.]+),\s*([-\d.]+),\s*([-\d.]+)\)/);
+                    if (!match) return;
+
+                    // Cache text elements that need counter-rotation
+                    const texts = Array.from(svg.querySelectorAll('text[transform*="rotate"]')).map(t => {
+                        const tm = t.getAttribute('transform').match(/rotate\(([-\d.]+),\s*([-\d.]+),\s*([-\d.]+)\)/);
+                        return tm ? { el: t, base: parseFloat(tm[1]), cx: tm[2], cy: tm[3] } : null;
+                    }).filter(Boolean);
+
+                    svg._rotationData = {
+                        group,
+                        base: parseFloat(match[1]),
+                        cx: match[2],
+                        cy: match[3],
+                        texts
+                    };
+                }
+
+                const { group, base, cx, cy, texts } = svg._rotationData;
+                
+                // Logic: flipped = 0deg, normal = base rotation
+                const targetRot = shouldFlip ? 0 : base;
+                group.setAttribute('transform', `rotate(${targetRot}, ${cx}, ${cy})`);
+
+                // Update texts
+                texts.forEach(t => {
+                    const tRot = shouldFlip ? 0 : t.base;
+                    t.el.setAttribute('transform', `rotate(${tRot}, ${t.cx}, ${t.cy})`);
+                });
+            }
+
+            // Highlights the selected building in the mini-map and dims others
+            function setMiniMapHighlight(polo, building) {
+                const svg = document.querySelector(`.mini-map-svg[data-polo="${polo}"]`);
+                if (!svg) return;
+
+                // Find all building groups (ids starting with Edificio_)
+                const groups = svg.querySelectorAll('g[id^="Edificio_"]');
+                
+                groups.forEach(group => {
+                    const id = group.id; // e.g., "Edificio_A"
+                    // Extract letter: "Edificio_A" -> "a"
+                    const buildingLetter = id.replace(/^Edificio_/i, '').toLowerCase();
+                    
+                    // Logic: 
+                    // If no building is selected, show all (or keep previous state? - usually safe to show all)
+                    // If building is selected, highlight it and dim others
+                    const isSelected = !building || buildingLetter === building.toLowerCase();
+                    
+                    if (isSelected) {
+                        group.style.opacity = '1';
+                        // Add transition for smooth effect
+                        group.style.transition = 'opacity 0.3s ease';
+                    } else {
+                        // Not selected -> dimmed
+                        group.style.opacity = '0.3';
+                        group.style.transition = 'opacity 0.3s ease';
+                    }
+                });
+            }
+
+            // Centralized state manager
+            function updateMiniMapState() {
+                if (!selectedPolo) return;
+                
+                const building = selectedBuilding;
+                // Check if rotation is actually active/supported for current view
+                const supportsRotation = building && 
+                                        data.polo[selectedPolo]?.edificio[building]?.rotate;
+                
+                const shouldBeFlipped = supportsRotation && isMapFlipped;
+                
+                setMiniMapRotation(selectedPolo, shouldBeFlipped);
+                
+                // Highlight the selected building
+                setMiniMapHighlight(selectedPolo, building);
             }
 
             function selectPolo(polo, buildingToSelect = null, floorToSelect = null, viewParams = null, viewToSelect = null, roomData = null) {
@@ -6096,7 +6224,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // Aggiorna lo stile dei bottoni dei poli
                 Array.from(polosList.children).forEach(child => {
-                    const poloName = child.querySelector('span:last-child').textContent.split(' ')[1].toLowerCase();
+                    const poloName = child.querySelector('span').textContent.split(' ')[1].toLowerCase();
                     if (poloName === polo) {
                         child.classList.add('selected');
                     } else {
@@ -6415,8 +6543,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             linkBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
                             linkBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">language</span><span>${t('website_button')}</span>`;
 
-                            buttonContainer.appendChild(linkBtn);
-
                             // Bottone Orari
                             const hoursBtn = document.createElement('button');
                             hoursBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
@@ -6429,6 +6555,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             // REMOVED ADDEVENTLISTENER
 
                             buttonContainer.appendChild(hoursBtn);
+                            buttonContainer.appendChild(linkBtn);
                         }
 
                         // 3. Details (Hidden by default)
@@ -7099,6 +7226,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             });
                         }
                     }
+                    
+                    // Update mini-map rotation in sidebar for current polo
+                    updateMiniMapState();
                 };
 
                 if (delayVisuals > 0) {
@@ -7127,11 +7257,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     if (isMapFlipped !== savedState) {
                         setMapFlipState(savedState, false, 300);
                     }
+                    // Sync mini-map even if state didn't change (e.g. initial load)
+                    updateMiniMapState();
                 } else {
                     // If rotation not supported, ensure it is not flipped
                     if (isMapFlipped) {
                         setMapFlipState(false, false, 300, false);
                     }
+                    // Also reset mini-map to normal orientation
+                    updateMiniMapState();
                 }
             }
 
