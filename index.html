@@ -935,7 +935,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             width: 290px;
             min-width: 290px;
             max-width: 290px;
-            background-color: #f9f9f9;
+            background-color: var(--bg-main);
             border-right: 1px solid var(--border-divider);
             color: #0d0d0d;
         }
@@ -968,8 +968,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         /* Stile per l'hover degli elementi */
         @media (hover: hover) {
             .nav-item:hover {
-                background-color: #eaeaea;
-                /* sidebar hover */
+                background-color: var(--bg-surface-hover);
+                /* Aligned with normal buttons */
             }
 
             .hover-effect:hover {
@@ -985,6 +985,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             .hover-text-effect:hover {
                 color: var(--color-gray-800);
                 /* gray-800 */
+            }
+
+            /* Hover effect for library and department buttons (not in high-contrast mode) */
+            body:not(.high-contrast) a.bg-gray-300:hover,
+            body:not(.high-contrast) button.bg-gray-300:hover {
+                background-color: var(--color-gray-350) !important;
             }
         }
 
@@ -1073,6 +1079,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             --color-gray-50: #f8fafc;
             --color-gray-200: #e5e7eb;
             --color-gray-300: #d1d5db;
+            --color-gray-350: #b7bcc5; /* Custom gray for hover states */
             --color-gray-400: #9ca3af;
             --color-gray-500: #6b7280;
             --color-gray-600: #4b5563;
@@ -1292,7 +1299,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
 
         .nav-item.selected {
-            background-color: var(--overlay-nav-selected);
+            background-color: var(--overlay-selected);
         }
 
         .nav-item {
@@ -1962,6 +1969,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             border: 2px solid var(--color-black) !important;
         }
 
+        /* No border for library/department buttons */
+        .high-contrast a.bg-gray-300,
+        .high-contrast button.bg-gray-300 {
+            border: none !important;
+        }
+
         .high-contrast .button-group {
             border: 2px solid var(--color-black) !important;
         }
@@ -2099,6 +2112,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div {
                 background-color: var(--color-white) !important;
                 box-shadow: inset 0 0 0 1px var(--color-black) !important;
+            }
+
+            /* Hover effects for library/department buttons in high contrast mode */
+            .high-contrast a.bg-gray-300:hover,
+            .high-contrast button.bg-gray-300:hover {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast a.bg-gray-300:hover *,
+            .high-contrast button.bg-gray-300:hover * {
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
             }
 
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after,
@@ -2583,7 +2609,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             <style>
                 /* Sidebar specific overrides */
                 #sidebar .text-gray-500 {
-                    color: #8f8f8f !important;
+                    color: var(--text-muted) !important;
                 }
 
                 #sidebar .text-gray-900 {
@@ -6192,10 +6218,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         group.style.opacity = '1';
                         // Add transition for smooth effect
                         group.style.transition = 'opacity 0.3s ease';
+                        // Add class for high contrast styling
+                        group.classList.add('mini-map-building-selected');
                     } else {
                         // Not selected -> dimmed
                         group.style.opacity = '0.3';
                         group.style.transition = 'opacity 0.3s ease';
+                        // Remove class for high contrast styling
+                        group.classList.remove('mini-map-building-selected');
                     }
                 });
             }
@@ -6475,7 +6505,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             const mapBtn = document.createElement('a');
                             mapBtn.href = dept['link-mappa'];
                             mapBtn.target = '_blank';
-                            mapBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors';
+                            mapBtn.className = 'flex items-center space-x-2 p-2 bg-gray-300 rounded-lg hover:bg-[#b7bcc5] transition-colors';
                             mapBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">map</span><span>${t('map_button')}</span>`;
                             buttonsContainer.appendChild(mapBtn);
                         }
@@ -6484,7 +6514,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             const deptBtn = document.createElement('a');
                             deptBtn.href = dept['link-dipartimento'];
                             deptBtn.target = '_blank';
-                            deptBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors';
+                            deptBtn.className = 'flex items-center space-x-2 p-2 bg-gray-300 rounded-lg hover:bg-[#b7bcc5] transition-colors';
                             deptBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">language</span><span>${t('website_button')}</span>`;
                             buttonsContainer.appendChild(deptBtn);
                         }
@@ -6540,12 +6570,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             linkBtn.href = lib.link_sito;
                             linkBtn.target = '_blank';
                             // Stile identico a quello dei dipartimenti
-                            linkBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
+                            linkBtn.className = 'flex items-center space-x-2 p-2 bg-gray-300 rounded-lg hover:bg-[#b7bcc5] transition-colors inline-flex text-gray-900';
                             linkBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size: 16px;">language</span><span>${t('website_button')}</span>`;
 
                             // Bottone Orari
                             const hoursBtn = document.createElement('button');
-                            hoursBtn.className = 'flex items-center space-x-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors inline-flex text-gray-900';
+                            hoursBtn.className = 'flex items-center space-x-2 p-2 bg-gray-300 rounded-lg hover:bg-[#b7bcc5] transition-colors inline-flex text-gray-900';
                             hoursBtn.innerHTML = `<span class="material-symbols-outlined pointer-events-none" style="font-size: 16px;">schedule</span><span class="pointer-events-none">${t('hours_button')}</span>`;
 
                             // Add data attribute for delegation

@@ -50,7 +50,7 @@
   - [Altre biblioteche disponibili](#altre-biblioteche-disponibili)
 - [API Aule](#api-aule)
 - [Telegram Bot](#telegram-bot)
-- [Data Sources](#data-source)
+- [Data Sources](#data-sources)
 - [Problemi noti](#problemi-noti)
   
 
