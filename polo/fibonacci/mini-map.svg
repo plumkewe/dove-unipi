@@ -4,7 +4,7 @@
 
     <g id="Edificio_A">
       <path d="M110,140 L240,140 L240,180 L160,180 L160,300 L110,300 Z" fill="#407F5F" stroke="none" />
-      <rect x="170" y="124" width="40" height="15" fill="#407F5F" />
+      <rect x="170" y="126" width="40" height="15" fill="#407F5F" />
       <text x="200" y="160" font-family="Arial, sans-serif" font-size="40" fill="#ffffff" font-weight="bold" 
             text-anchor="middle" dominant-baseline="central" 
             transform="rotate(180, 195, 160)">A</text>
