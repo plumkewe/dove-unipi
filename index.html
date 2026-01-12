@@ -47,6 +47,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" href="assets/logo/icon.png">
     <meta name="description" id="meta-description"
         content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.">
     <meta name="author" content="Lyubomyr Malay">
@@ -1949,6 +1950,23 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             stroke: var(--color-black) !important;
         }
 
+        /* Mini-map labels: default white, selected building stays black */
+        .high-contrast .mini-map-svg text {
+            fill: var(--color-white) !important;
+            stroke: none !important;
+        }
+
+        .high-contrast .mini-map-svg .mini-map-building-selected text {
+            fill: var(--color-black) !important;
+        }
+
+        /* Higher specificity to force selected label to black */
+        .high-contrast .mini-map-svg g.mini-map-building-selected > text,
+        .high-contrast .mini-map-svg g.mini-map-building-selected text {
+            fill: var(--color-black) !important;
+            stroke: none !important;
+        }
+
         .high-contrast .github-icon * {
             fill: var(--color-gray-800) !important;
             stroke: none !important;
@@ -1961,6 +1979,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         .high-contrast #share-btn {
             width: 52px !important;
             height: 52px !important;
+        }
+
+        /* Mini-map: dim only shapes, keep labels readable */
+        .mini-map-building-dimmed path,
+        .mini-map-building-dimmed rect,
+        .mini-map-building-dimmed polygon {
+            opacity: 0.35;
+        }
+
+        .mini-map-svg text {
+            opacity: 1 !important;
         }
 
         .high-contrast button,
@@ -3533,6 +3562,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let selectedPolo = '';
             let selectedBuilding = '';
             let selectedFloor = '0';
+            let lastLoadedBuilding = null;
+            let lastLoadedFloor = null;
             let currentView = 'top'; // 'perspective' o 'top'
             let viewer = null; // Istanza OpenSeadragon
             let selectedSearchResultIndex = -1;
@@ -5870,12 +5901,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Funzione per chiudere la sidebar (logica unificata)
             function closeSidebar() {
                 sidebar.classList.add('-translate-x-full');
+                hideTooltip();
+                if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur();
+                }
             }
 
 
             // Funzione per aprire la sidebar (logica unificata)
             function openSidebar() {
                 sidebar.classList.remove('-translate-x-full');
+                hideTooltip();
+                if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur();
+                }
             }
 
             // Funzione per animare il bottone della sidebar come feedback visivo
@@ -6215,17 +6254,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const isSelected = !building || buildingLetter === building.toLowerCase();
                     
                     if (isSelected) {
-                        group.style.opacity = '1';
-                        // Add transition for smooth effect
-                        group.style.transition = 'opacity 0.3s ease';
-                        // Add class for high contrast styling
+                        group.classList.remove('mini-map-building-dimmed');
                         group.classList.add('mini-map-building-selected');
-                    } else {
-                        // Not selected -> dimmed
-                        group.style.opacity = '0.3';
                         group.style.transition = 'opacity 0.3s ease';
-                        // Remove class for high contrast styling
+                    } else {
+                        group.classList.add('mini-map-building-dimmed');
                         group.classList.remove('mini-map-building-selected');
+                        group.style.transition = 'opacity 0.3s ease';
                     }
                 });
             }
@@ -7156,6 +7191,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             function selectFloor(floor, viewParams = null, viewToSelect = null, roomData = null) {
+                const shouldReload = selectedBuilding !== lastLoadedBuilding || floor !== lastLoadedFloor;
                 selectedFloor = floor;
 
                 // Controlla quali viste sono disponibili per questo piano
@@ -7173,7 +7209,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         view = 'perspective';
                     }
 
-                    selectView(view, true, viewParams, roomData);
+                    selectView(view, shouldReload, viewParams, roomData);
                 });
 
                 populateRooms(selectedBuilding, selectedFloor);
@@ -7736,6 +7772,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                     // Usa i dati dalla cache
                     setTimeout(() => {
+                        lastLoadedBuilding = building;
+                        lastLoadedFloor = floor;
                         renderCachedSVG(cachedData, viewParams, roomData);
                         // Precarica piani adiacenti in background
                         preloadAdjacentFloors(building, floor);
@@ -7797,6 +7835,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                             svgCache.set(cacheKey, cacheData);
                             manageCacheSize(cacheKey);
+
+                            lastLoadedBuilding = building;
+                            lastLoadedFloor = floor;
 
                             // Renderizza
                             renderCachedSVG(cacheData, viewParams, roomData);
