@@ -554,7 +554,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     },
     {
       "pagina_info": "Edificio C - Piano 1 (Livello 3)",
-      "url_esempio": "https.://plumkewe.github.io/dove-unipi/?p=fibonacci&b=c&f=1",
+      "url_esempio": "https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=c&f=1",
       "markup": {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -740,7 +740,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     },
     {
       "pagina_info": "Edificio E - Piano 1 (Livello 3)",
-      "url_esempio": "https.://plumkewe.github.io/dove-unipi/?p=fibonacci&b=e&f=1",
+      "url_esempio": "https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=e&f=1",
       "markup": {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -773,7 +773,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     },
     {
       "pagina_info": "Edificio E - Piano 2 (Livello 3)",
-      "url_esempio": "https.://plumkewe.github.io/dove-unipi/?p=fibonacci&b=e&f=2",
+      "url_esempio": "https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=e&f=2",
       "markup": {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -3188,7 +3188,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const tooltipElement = document.getElementById('tooltip');
 
             function getShortcutModifiers() {
-                const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                const isMac = /Mac/i.test(navigator.userAgent);
                 if (isMac) {
                     return '⌃⌥';
                 }
@@ -3206,7 +3206,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 const shortcutKey = target.getAttribute('data-shortcut');
                 if (shortcutKey) {
-                    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                    const isMac = /Mac/i.test(navigator.userAgent);
                     let modifiers = '';
                     let keyDisplay = shortcutKey.toUpperCase();
 
@@ -3309,6 +3309,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const storedShowStudyRooms = localStorage.getItem('showStudyRoomsEnabled');
             const storedShowClassroomStatus = localStorage.getItem('showClassroomStatusEnabled');
             const storedShowGroundFloor = localStorage.getItem('showGroundFloorEnabled');
+            const storedCopyLinkOnSelect = localStorage.getItem('copyLinkOnSelectEnabled');
 
             // Detect browser language automatically
             function detectBrowserLanguage() {
@@ -3330,6 +3331,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 showStudyRooms: storedShowStudyRooms ? storedShowStudyRooms === 'true' : true,
                 showClassroomStatus: storedShowClassroomStatus ? storedShowClassroomStatus === 'true' : true, // Default to true
                 showGroundFloor: storedShowGroundFloor ? storedShowGroundFloor === 'true' : true, // Default to true = "Piano Terra"
+                copyLinkOnSelect: storedCopyLinkOnSelect ? storedCopyLinkOnSelect === 'true' : false,
                 language: storedLanguage
             };
 
@@ -3561,6 +3563,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // CONFIGURAZIONE API
             // ============================================
             const API_BASE_URL = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net';
+
+            // Configurazione Lingue Supportate
+            const SUPPORTED_LANGUAGES = [
+                { code: 'it', label: 'IT', title: 'Italiano' },
+                { code: 'en', label: 'EN', title: 'English' },
+                { code: 'pi', label: 'PI', title: 'Vernacolo Pisano' }
+            ];
 
             let data = {};
             let selectedPolo = '';
@@ -3931,6 +3940,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 } else {
                     // Cambio di piano necessario, ricarica la mappa in vista top con le coordinate dell'aula
                     selectPolo(polo, edificio, piano, null, 'top', room);
+                }
+
+                if (settingsConfig.copyLinkOnSelect && eligibleForShortLink) {
+                    setTimeout(() => {
+                        navigator.clipboard.writeText(window.location.href).then(() => {
+                            const sb = document.getElementById('share-btn');
+                            if (sb && typeof isTouchDevice === 'function' && !isTouchDevice()) {
+                                const originalTooltip = sb.getAttribute('data-tooltip');
+                                sb.setAttribute('data-tooltip', t('share_link_copied'));
+                                showTooltip({
+                                    currentTarget: sb
+                                });
+                                setTimeout(() => {
+                                    sb.setAttribute('data-tooltip', originalTooltip);
+                                    hideTooltip();
+                                }, 2000);
+                            }
+                        }).catch(err => {
+                            console.error('Auto-copy failed:', err);
+                        });
+                    }, 50);
                 }
             }
 
@@ -4581,7 +4611,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 </div>
                             `;
                         } else if (settingsConfig.showClassroomStatus && !isFacility && shouldCheckStatus) {
-                            const availabilitySource = window.classroomAvaibility || {};
+                            const availabilitySource = window.classroomAvailability || {};
                             const classroomName = result.room?.nome || '';
                             const availabilityData = classroomName && availabilitySource[classroomName];
 
@@ -4614,14 +4644,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                     if (code === 1 && value) {
                                         const scheduleStrArray = value.split("|");
-                                        window.classroomAvaibility[classroomName] = {
+                                        window.classroomAvailability[classroomName] = {
                                             code: 1,
                                             startTime: scheduleStrArray[0] || '',
                                             endTime: scheduleStrArray[1] || '',
                                             occupiedBy: scheduleStrArray[2] || ''
                                         };
                                     } else {
-                                        window.classroomAvaibility[classroomName] = {
+                                        window.classroomAvailability[classroomName] = {
                                             code: code,
                                             startTime: '',
                                             endTime: '',
@@ -4634,7 +4664,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     if (statusBar) {
                                         statusBar.classList.remove('loading');
                                         const statusTextSpan = statusBar.querySelector('.occupancy-text');
-                                        const availabilityData = window.classroomAvaibility[classroomName];
+                                        const availabilityData = window.classroomAvailability[classroomName];
 
                                         if (availabilityData.code === 0) {
                                             statusBar.classList.add('free');
@@ -4684,7 +4714,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     }
                                 }).catch(error => {
                                     console.warn(`Failed to get availability for ${classroomName}:`, error);
-                                    window.classroomAvaibility[classroomName] = {
+                                    window.classroomAvailability[classroomName] = {
                                         code: 2,
                                         startTime: '',
                                         endTime: '',
@@ -4893,6 +4923,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         description: t('settings_dyslexic_font_description'),
                         checked: settingsConfig.dyslexicFont,
                         onToggle: setDyslexicFontSetting
+                    },
+                    {
+                        key: 'copyLinkOnSelect',
+                        label: t('settings_copy_link_on_select'),
+                        description: t('settings_copy_link_on_select_description'),
+                        checked: settingsConfig.copyLinkOnSelect,
+                        onToggle: setCopyLinkOnSelectSetting
                     }
                 ];
 
@@ -5084,18 +5121,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const controlsContainer = document.createElement('div');
                 controlsContainer.className = 'language-selector flex-shrink-0 self-end';
 
-                const languages = [
-                    { code: 'it', label: 'IT' },
-                    { code: 'en', label: 'EN' }
-                ];
-
                 const buttons = [];
 
-                languages.forEach(lang => {
+                SUPPORTED_LANGUAGES.forEach(lang => {
                     const btn = document.createElement('button');
                     btn.className = 'language-btn';
                     btn.textContent = lang.label;
-                    btn.title = lang.code === 'it' ? 'Italiano' : 'English';
+                    btn.title = lang.title;
                     btn.dataset.lang = lang.code;
 
                     if (currentLanguage === lang.code) {
@@ -5164,6 +5196,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 } else {
                     document.body.classList.remove('dyslexic-font');
                 }
+                syncSettingsToggles();
+            }
+
+            function setCopyLinkOnSelectSetting(isEnabled) {
+                settingsConfig.copyLinkOnSelect = isEnabled;
+                localStorage.setItem('copyLinkOnSelectEnabled', isEnabled);
                 syncSettingsToggles();
             }
 
@@ -5438,9 +5476,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     } else if (e.key === 'Enter') {
                         e.preventDefault();
 
-                        // Se c'è un solo risultato, selezionalo automaticamente
-                        if (items.length === 1) {
-                            const itemElement = items[0];
+                        const clickResultItem = (itemElement) => {
                             const isSpecialResult = itemElement.querySelector('.material-symbols-outlined[data-copy-icon]') ||
                                 itemElement.textContent.includes('Feedback') ||
                                 itemElement.textContent.includes('Bot') ||
@@ -5450,6 +5486,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             if (!isSpecialResult) {
                                 inputElement.blur();
                             }
+                        };
+
+                        // Se c'è un solo risultato, selezionalo automaticamente
+                        if (items.length === 1) {
+                            clickResultItem(items[0]);
                         } else if (selectedSearchResultIndex > -1 && items[selectedSearchResultIndex]) {
                             // Se c'è un elemento selezionato con le frecce, cliccalo
                             const itemElement = items[selectedSearchResultIndex];
@@ -5463,15 +5504,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 return;
                             }
 
-                            const isSpecialResult = itemElement.querySelector('.material-symbols-outlined[data-copy-icon]') ||
-                                itemElement.textContent.includes('Feedback') ||
-                                itemElement.textContent.includes('Bot') ||
-                                itemElement.querySelector('input[data-settings-toggle]');
-                            itemElement.click();
-                            // Only blur if it's not a special result (feedback, bot, share, settings)
-                            if (!isSpecialResult) {
-                                inputElement.blur();
-                            }
+                            clickResultItem(itemElement);
                         } else {
                             // Altrimenti, se c'è un suggerimento visibile (primo elemento), completalo automaticamente
                             const firstItem = items[0];
@@ -5553,7 +5586,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // Aggiungi listener per le scorciatoie da tastiera
             document.addEventListener('keydown', (e) => {
                 // Scorciatoia per aprire/chiudere la sidebar (Cmd+Enter su Mac, Ctrl+Enter su Windows)
-                const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                const isMac = /Mac/i.test(navigator.userAgent);
                 const isCmdOrCtrl = isMac ? e.metaKey : e.ctrlKey;
 
                 if (isCmdOrCtrl && e.key === 'Enter') {
@@ -8123,7 +8156,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             });
 
             // Occupazione corrente delle aule
-            window.classroomAvaibility = window.classroomAvaibility || {};
+            window.classroomAvailability = window.classroomAvailability || {};
 
             // Cache per le richieste API in corso per evitare duplicati
             const pendingApiRequests = new Map();
@@ -8317,13 +8350,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     // Update global state
                                     if (scheduleValue === undefined) {
                                         // Not found in API -> Unavailable
-                                        window.classroomAvaibility[room.nome] = {
+                                        window.classroomAvailability[room.nome] = {
                                             code: 2,
                                             startTime: '', endTime: '', occupiedBy: ''
                                         };
                                     } else if (scheduleValue === "" || scheduleValue === null) {
                                         // Free
-                                        window.classroomAvaibility[room.nome] = {
+                                        window.classroomAvailability[room.nome] = {
                                             code: 0,
                                             startTime: '', endTime: '', occupiedBy: ''
                                         };
@@ -8333,7 +8366,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         const timeRange = parts[0] || '';
                                         const [start, end] = timeRange.split(' - ');
 
-                                        window.classroomAvaibility[room.nome] = {
+                                        window.classroomAvailability[room.nome] = {
                                             code: 1,
                                             startTime: start || '',
                                             endTime: end || '',
@@ -8364,8 +8397,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 // Se già in cache, restituisci immediatamente
-                if (window.classroomAvaibility[classroom]) {
-                    const cached = window.classroomAvaibility[classroom];
+                if (window.classroomAvailability[classroom]) {
+                    const cached = window.classroomAvailability[classroom];
                     if (cached.code === 0) {
                         return { 0: freeLabel };
                     } else if (cached.code === 1) {
@@ -8492,7 +8525,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         return;
                     }
 
-                    const availabilityData = classroomName && window.classroomAvaibility[classroomName];
+                    const availabilityData = classroomName && window.classroomAvailability[classroomName];
 
                     if (availabilityData && statusBar.classList.contains('loading')) {
                         // Remove loading state

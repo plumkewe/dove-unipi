@@ -4066,6 +4066,24 @@
                                 "ricerca": "Erogatore Acqua"
                             },
                             {
+                                "id": "fib_erogatore-b-1-2",
+                                "nome": "Erogatore Acqua",
+                                "alias": [
+                                    "Fontanella",
+                                    "Purificatore acqua",
+                                    "Dispenser acqua"
+                                ],
+                                "type": "erogatore_acqua",
+                                "note": "",
+                                "coordinates": {
+                                    "x": 177,
+                                    "y": 262,
+                                    "zoom": 3
+                                },
+                                "link": "https://sostenibile.unipi.it",
+                                "ricerca": "Erogatore Acqua"
+                            },
+                            {
                                 "id": "374",
                                 "nome": "Marco",
                                 "cognome": "Romito",

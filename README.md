@@ -24,7 +24,7 @@
 - [Contributori](#contributori)
 - [Perché?](#perché)
 - [Struttura del progetto](#struttura-del-progetto)
-- [rooms.json](#roomsjson)
+- [unified.json](#unifiedjson)
 - [Flowchart](#flowchart)
   - [Flusso Dati](#flusso-dati)
   - [Architettura del Progetto](#architettura-del-progetto)
@@ -108,13 +108,11 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 │   │   └── logo.svg
 │   └── screenshots/
 ├── data/
-│   ├── unified.json      <- file importante per far funzionare tutto
-│   ├── rooms.json
-│   ├── people.json
-│   └── facilities.json 
-├── locales             <- cartella per le traduzioni 
+│   └── unified.json      <- file importante per far funzionare tutto
+├── locales               <- cartella per le traduzioni 
 │   └── en.json
 │   └── it.json
+│   └── pi.json (toscano)
 ├── scripts/            <- cartella per lo script
 │   └── populate_people.py
 ├── index.html
@@ -480,7 +478,7 @@ Aprendo quel link, oltre all’aula verranno mostrati anche i dati relativi alla
 
 ### Lingue supportate
 
-Attualmente sono supportate due lingue: **italiano** e **inglese.**
+Attualmente sono supportate due lingue: **italiano**, **inglese**, **toscano**.
 
 In futuro verranno aggiunte altre **lingue!**
 

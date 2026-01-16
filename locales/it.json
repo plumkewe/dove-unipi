@@ -139,6 +139,14 @@
     "original": "Usa il font OpenDyslexic per migliorare la leggibilità",
     "translation": "Usa il font OpenDyslexic per migliorare la leggibilità"
   },
+  "settings_copy_link_on_select": {
+    "original": "Copia link alla selezione",
+    "translation": "Copia link alla selezione"
+  },
+  "settings_copy_link_on_select_description": {
+    "original": "Copia automaticamente il link dell'aula quando viene selezionata",
+    "translation": "Copia automaticamente il link dell'aula quando viene selezionata"
+  },
   "settings_text_size": {
     "original": "Dimensione testo",
     "translation": "Dimensione testo"

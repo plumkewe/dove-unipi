@@ -1,502 +1,502 @@
 {
   "app_title": {
     "original": "DOVE?",
-    "translation": "DOVE?"
+    "translation": "INDOV'È?"
   },
   "meta_description": {
     "original": "Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.",
-    "translation": "Easily navigate between buildings, floors and classrooms at Polo Fibonacci, University of Pisa."
+    "translation": "Rapezzati alla svelta tra i palazzi, i piani e l'aule der Polo Fibonacci dell'Università di Pisa."
   },
   "meta_og_title": {
     "original": "DOVE?UNIPI - Polo Fibonacci",
-    "translation": "DOVE?UNIPI - Polo Fibonacci"
+    "translation": "INDOVE?UNIPI - Polo Fibonacci"
   },
   "meta_og_description": {
     "original": "Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.",
-    "translation": "Easily navigate between buildings, floors and classrooms at Polo Fibonacci, University of Pisa."
+    "translation": "Rapezzati alla svelta tra i palazzi, i piani e l'aule der Polo Fibonacci dell'Università di Pisa."
   },
   "page_title": {
     "original": "DOVE?UNIPI - Polo Fibonacci",
-    "translation": "DOVE?UNIPI - Polo Fibonacci"
+    "translation": "INDOVE?UNIPI - Polo Fibonacci"
   },
   "search_classroom": {
     "original": "Cerca un'aula...",
-    "translation": "Search for a room..."
+    "translation": "Cerca un'aula..."
   },
   "search_surname": {
     "original": "Cerca un cognome...",
-    "translation": "Search for a surname..."
+    "translation": "Cerca ir cognome..."
   },
   "search_number": {
     "original": "Cerca un numero...",
-    "translation": "Search for a number..."
+    "translation": "Cerca ir numero..."
   },
   "search_no_results": {
     "original": "Nessun risultato trovato",
-    "translation": "No results found"
+    "translation": "Un s'è trovato nulla"
   },
   "sidebar_open": {
     "original": "Apri sidebar",
-    "translation": "Open sidebar"
+    "translation": "Apri ir menù"
   },
   "sidebar_close": {
     "original": "Chiudi sidebar",
-    "translation": "Close sidebar"
+    "translation": "Chiudi tutto"
   },
   "buildings_title": {
     "original": "Edifici",
-    "translation": "Buildings"
+    "translation": "Palazzi"
   },
   "floors_title": {
     "original": "Piani",
-    "translation": "Floors"
+    "translation": "Piani"
   },
   "rooms_title": {
     "original": "Aule",
-    "translation": "Classrooms"
+    "translation": "Aule"
   },
   "departments_title": {
     "original": "Dipartimenti",
-    "translation": "Departments"
+    "translation": "Dipartimenti"
   },
   "zoom_in": {
     "original": "Ingrandisci",
-    "translation": "Zoom in"
+    "translation": "Fallo grosso"
   },
   "zoom_out": {
     "original": "Riduci",
-    "translation": "Zoom out"
+    "translation": "Fallo piccino"
   },
   "zoom_reset": {
     "original": "Centra visuale",
-    "translation": "Centre view"
+    "translation": "Torna ar centro"
   },
   "share_button": {
     "original": "Copia link",
-    "translation": "Copy link"
+    "translation": "Copia ir link"
   },
   "share_success": {
     "original": "Link copiato negli appunti!",
-    "translation": "Link copied to clipboard!"
+    "translation": "Link copiato, vai tranquillo!"
   },
   "share_error": {
     "original": "Errore nella copia del link",
-    "translation": "Error copying link"
+    "translation": "Boia, un s'è riuscito a copià ir link"
   },
   "view_perspective": {
     "original": "Vista Prospettica",
-    "translation": "Perspective view"
+    "translation": "Vista di sbieco"
   },
   "view_top": {
     "original": "Vista dall'alto",
-    "translation": "Top view"
+    "translation": "Vista d'in cima"
   },
   "view_flip": {
     "original": "Ribalta mappa",
-    "translation": "Flip map"
+    "translation": "Girala sossopra"
   },
   "settings_title": {
     "original": "Impostazioni",
-    "translation": "Settings"
+    "translation": "Impostazioni"
   },
   "settings_share_path": {
     "original": "Condividi polo/edificio/piano",
-    "translation": "Share campus/building/floor"
+    "translation": "Manda a giro polo/palazzo/piano"
   },
   "settings_share_path_description": {
     "original": "Include queste informazioni nel link condiviso",
-    "translation": "Include this information in the shared link"
+    "translation": "Ce lo mette ner link da mandà a giro"
   },
   "settings_share_coordinates": {
     "original": "Condividi coordinate mappa",
-    "translation": "Share map coordinates"
+    "translation": "Manda le coordinate"
   },
   "settings_share_coordinates_description": {
     "original": "Aggiunge posizione e zoom del viewer al link",
-    "translation": "Adds position and zoom of the viewer to the link"
+    "translation": "Ci mette la posizione precisa ner link"
   },
   "settings_extra_controls": {
     "original": "Controlli extra",
-    "translation": "Extra controls"
+    "translation": "Pulsanti in più"
   },
   "settings_extra_controls_description": {
     "original": "Mostra pulsante condividi e controlli zoom",
-    "translation": "Show share button and zoom controls"
+    "translation": "Fa vedè i tasti pe' lo zoom e pe' condivide"
   },
   "settings_high_contrast": {
     "original": "Alto contrasto",
-    "translation": "High contrast"
+    "translation": "Arto contrasto"
   },
   "settings_high_contrast_description": {
     "original": "Aumenta il contrasto per una migliore leggibilità",
-    "translation": "Increase contrast for better readability"
+    "translation": "Aumenta ir contrasto sennò un si legge nulla"
   },
   "settings_dyslexic_font": {
     "original": "Font per dislessia",
-    "translation": "Dyslexia-friendly font"
+    "translation": "Font pe' dislessia"
   },
   "settings_dyslexic_font_description": {
     "original": "Usa il font OpenDyslexic per migliorare la leggibilità",
-    "translation": "Use OpenDyslexic font to improve readability"
+    "translation": "Usa ir font OpenDyslexic che si legge meglio"
   },
   "settings_copy_link_on_select": {
     "original": "Copia link alla selezione",
-    "translation": "Copy link on selection"
+    "translation": "Copia link quando clicchi"
   },
   "settings_copy_link_on_select_description": {
     "original": "Copia automaticamente il link dell'aula quando viene selezionata",
-    "translation": "Automatically copy room link when selected"
+    "translation": "Copia da solo ir link dell'aula appena la tocchi"
   },
   "settings_text_size": {
     "original": "Dimensione testo",
-    "translation": "Text size"
+    "translation": "Grandezza delle scritte"
   },
   "settings_text_size_description": {
     "original": "Regola la dimensione del testo della pagina",
-    "translation": "Adjust the page text size"
+    "translation": "Cambia quanto son grosse le scritte"
   },
   "text_size_decrease": {
     "original": "Riduci dimensione testo",
-    "translation": "Decrease text size"
+    "translation": "Scritte più piccine"
   },
   "text_size_increase": {
     "original": "Aumenta dimensione testo",
-    "translation": "Increase text size"
+    "translation": "Scritte più grosse"
   },
   "capacity": {
     "original": "Capienza",
-    "translation": "Capacity"
+    "translation": "Quanti c'entran"
   },
   "building": {
     "original": "Edificio",
-    "translation": "Building"
+    "translation": "Palazzo"
   },
   "floor": {
     "original": "Piano",
-    "translation": "Floor"
+    "translation": "Piano"
   },
   "campus": {
     "original": "Polo",
-    "translation": "Campus"
+    "translation": "Polo"
   },
   "made_with": {
     "original": "Fatto con",
-    "translation": "Made with"
+    "translation": "Fatto co'"
   },
   "made_and": {
     "original": "e",
-    "translation": "and"
+    "translation": "e"
   },
   "made_by": {
     "original": "da",
-    "translation": "by"
+    "translation": "da"
   },
   "github_link": {
     "original": "Visualizza su GitHub",
-    "translation": "View on GitHub"
+    "translation": "Guarda su GitHub"
   },
   "keyboard_shortcut_copy": {
     "original": "Copia link di condivisione",
-    "translation": "Copy share link"
+    "translation": "Copia ir link pe' mandallo a giro"
   },
   "keyboard_shortcut_center": {
     "original": "Centra visuale",
-    "translation": "Centre view"
+    "translation": "Mettiti n'mezzo"
   },
   "share_aria_label": {
     "original": "Condividi",
-    "translation": "Share"
+    "translation": "Manda a giro"
   },
   "share_link_copied": {
     "original": "Link copiato!",
-    "translation": "Link copied!"
+    "translation": "Link copiato!"
   },
   "share_error_short": {
     "original": "Errore!",
-    "translation": "Error!"
+    "translation": "Boia, errore!"
   },
   "no_buildings_message": {
     "original": "Nessun edificio in questo polo.",
-    "translation": "No buildings in this campus."
+    "translation": "Un ci sono palazzi in codesto polo."
   },
   "no_rooms_found": {
     "original": "Nessuna aula trovata",
-    "translation": "No classrooms found"
+    "translation": "Un s'è trovato l'aule"
   },
   "department_singular": {
     "original": "Dipartimento",
-    "translation": "Department"
+    "translation": "Dipartimento"
   },
   "library_title": {
     "original": "Biblioteca",
-    "translation": "LIBRARY"
+    "translation": "BIBLIOTECA"
   },
   "studio_rooms_title": {
     "original": "Aule Studio",
-    "translation": "STUDY ROOMS"
+    "translation": "AULE PE' STUDIÀ"
   },
   "map_button": {
     "original": "Mappa",
-    "translation": "Map"
+    "translation": "Mappa"
   },
   "website_button": {
     "original": "Sito",
-    "translation": "Site"
+    "translation": "Sito"
   },
   "hours_button": {
     "original": "Orari",
-    "translation": "Hours"
+    "translation": "Orari"
   },
   "opens_at": {
     "original": "Apre alle",
-    "translation": "Opens at"
+    "translation": "S'apre alle"
   },
   "closes_at": {
     "original": "Chiude alle",
-    "translation": "Closes at"
+    "translation": "Si chiude alle"
   },
   "Closed": {
-    "original": "Chiuso",
-    "translation": "Closed"
+    "original": "Chiusa",
+    "translation": "È chiuso"
   },
   "search_suggestion_settings": {
     "original": "Prova: Impostazioni",
-    "translation": "Try: Settings"
+    "translation": "Prova: Impostazioni"
   },
   "search_suggestion_classroom": {
     "original": "Prova: Aula D2",
-    "translation": "Try: Aula D2"
+    "translation": "Prova: Aula D2"
   },
   "search_suggestion_capacity": {
     "original": "Prova: >200",
-    "translation": "Try: >200"
+    "translation": "Prova: >200"
   },
   "search_suggestion_department": {
     "original": "Prova: Dipartimento",
-    "translation": "Try: Dipartimento"
+    "translation": "Prova: Dipartimento"
   },
   "search_suggestion_share": {
     "original": "Prova: Condividi",
-    "translation": "Try: Share"
+    "translation": "Prova: Manda a giro"
   },
   "search_suggestion_feedback": {
-    "original": "Try: Feedback",
-    "translation": "Try: Feedback"
+    "original": "Prova: Feedback",
+    "translation": "Prova: Feedback"
   },
   "search_suggestion_bot": {
-    "original": "Try: Bot",
-    "translation": "Try: Bot"
+    "original": "Prova: Bot",
+    "translation": "Prova: Bot"
   },
   "back_button": {
     "original": "Indietro",
-    "translation": "Back"
+    "translation": "Torna indietro"
   },
   "settings_language": {
     "original": "Lingua",
-    "translation": "Language"
+    "translation": "Come si parla"
   },
   "settings_language_description": {
     "original": "Seleziona lingua dell'interfaccia",
-    "translation": "Select interface language"
+    "translation": "Scegli come deve parlà l'app"
   },
   "language_italian": {
     "original": "Italiano",
-    "translation": "Italian"
+    "translation": "Italiano"
   },
   "language_english": {
     "original": "Inglese",
-    "translation": "English"
+    "translation": "Inglese"
   },
   "github_repository": {
     "original": "Repository GitHub",
-    "translation": "GitHub Repository"
+    "translation": "Repository GitHub"
   },
   "room_detail_capacity": {
     "original": "Capienza: %s",
-    "translation": "Capacity: %s"
+    "translation": "C'entran: %s"
   },
   "room_detail_accessible": {
     "original": "Accesso Disabili",
-    "translation": "Wheelchair Accessible"
+    "translation": "Si passa bene (Disabili)"
   },
   "room_detail_not_accessible": {
     "original": "Mancato Accesso Disabili",
-    "translation": "Not Wheelchair Accessible"
+    "translation": "Un si passa (No disabili)"
   },
   "room_detail_network": {
     "original": "Accesso di Rete",
-    "translation": "Network Access"
+    "translation": "C'è la rete"
   },
   "room_detail_network_ports": {
     "original": "Porte di Rete",
-    "translation": "Network Ports"
+    "translation": "Attacchi di rete"
   },
   "room_detail_power_outlets": {
-    "original": "Sockets",
-    "translation": "Sockets"
+    "original": "Prese",
+    "translation": "Prese"
   },
   "room_detail_power_outlets_count": {
-    "original": "Sockets: %s",
-    "translation": "Sockets: %s"
+    "original": "Prese: %s",
+    "translation": "Prese: %s"
   },
   "room_detail_computers_count": {
     "original": "Computer Presenti: %s",
-    "translation": "Computers Available: %s"
+    "translation": "Computer che ci sono: %s"
   },
   "room_detail_computers": {
     "original": "Computer Presenti",
-    "translation": "Computers Available"
+    "translation": "Computer che ci sono"
   },
   "room_detail_projector": {
     "original": "Proiettore",
-    "translation": "Projector"
+    "translation": "Proiettore"
   },
   "room_detail_speakers": {
     "original": "Altoparlanti",
-    "translation": "Speakers"
+    "translation": "Casse"
   },
   "room_detail_camera": {
     "original": "Telecamera fissa",
-    "translation": "Fixed Camera"
+    "translation": "Telecamera fissa"
   },
   "room_detail_blackboard": {
-    "original": "Blackboard",
-    "translation": "Blackboard"
+    "original": "Lavagna",
+    "translation": "Lavagna"
   },
   "settings_water_dispensers": {
     "original": "Mostra erogatori d'acqua (ALFA)",
-    "translation": "Show water dispensers (ALPHA)"
+    "translation": "Mostra l'acqua da bere (ALFA)"
   },
   "settings_water_dispensers_description": {
     "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
-    "translation": "Display water dispenser locations on the map"
+    "translation": "Ti fa vedè indove prendere l'acqua sulla mappa"
   },
   "settings_study_rooms": {
     "original": "Mostra aule studio (ALFA)",
-    "translation": "Show study rooms (ALPHA)"
+    "translation": "Mostra aule pe' studià (ALFA)"
   },
   "settings_study_rooms_description": {
     "original": "Visualizza la posizione delle aule studio sulla mappa",
-    "translation": "Display study room locations on the map"
+    "translation": "Ti fa vedè indove studià sulla mappa"
   },
   "settings_classroom_status": {
     "original": "Mostra stato aule",
-    "translation": "Show classroom status"
+    "translation": "Fa vedè se c'è gente"
   },
   "settings_classroom_status_description": {
     "original": "Mostra l'occupazione ed effettua chiamate API",
-    "translation": "Show occupancy status and make API calls"
+    "translation": "Guarda se son piene (chiama le API)"
   },
   "settings_show_ground_floor": {
     "original": "Mostra \"Piano Terra\"",
-    "translation": "Show \"Ground Floor\""
+    "translation": "Scrivi \"Piano Terra\""
   },
   "settings_show_ground_floor_description": {
     "original": "Se disattivato mostra \"Piano 0\" invece di \"Piano Terra\"",
-    "translation": "If disabled shows \"Floor 0\" instead of \"Ground Floor\""
+    "translation": "Se lo levi viene fori \"Piano 0\" invece di \"Piano Terra\""
   },
   "no_results_feedback": {
     "original": "Non trovi ciò che ti aspettavi? Mandami un'email:",
-    "translation": "Can't find what you were looking for? Send me an email:"
+    "translation": "Un trovi quello che volevi? Mandami un'email:"
   },
   "feedback_email_title": {
     "original": "Invia feedback via email",
-    "translation": "Send feedback via email"
+    "translation": "Manda feedback via email"
   },
   "feedback_email_details": {
     "original": "Apri il client email per mandare un messaggio",
-    "translation": "Open email client to send a message"
+    "translation": "Apri la posta pe' mandà un messaggio"
   },
   "feedback_github_title": {
     "original": "Apri una issue su GitHub",
-    "translation": "Open a GitHub issue"
+    "translation": "Apri una issue su GitHub"
   },
   "feedback_github_details": {
     "original": "Segnala un bug o richiedi una funzionalità",
-    "translation": "Report a bug or request a feature"
+    "translation": "Dimmi se c'è un baco o chiedi roba nova"
   },
   "share_page_title": {
     "original": "Condividi pagina",
-    "translation": "Share page"
+    "translation": "Manda a giro la pagina"
   },
   "share_page_details": {
     "original": "Copia https://plumkewe.github.io/dove-unipi/ negli appunti",
-    "translation": "Copy https://plumkewe.github.io/dove-unipi/ to clipboard"
+    "translation": "Copia https://plumkewe.github.io/dove-unipi/ e portatelo via"
   },
   "share_github_title": {
     "original": "Condividi GitHub",
-    "translation": "Share GitHub"
+    "translation": "Manda a giro GitHub"
   },
   "share_github_details": {
     "original": "Copia https://github.com/plumkewe/dove-unipi negli appunti",
-    "translation": "Copy https://github.com/plumkewe/dove-unipi to clipboard"
+    "translation": "Copia https://github.com/plumkewe/dove-unipi e portatelo via"
   },
   "search_suggestion_settings_hint": {
     "original": "Premi invio per visualizzare le impostazioni",
-    "translation": "Press enter to view settings"
+    "translation": "Pigia invio pe' vedè le impostazioni"
   },
   "search_suggestion_share_hint": {
     "original": "Premi invio per condividere link",
-    "translation": "Press enter to share links"
+    "translation": "Pigia invio pe' mandà a giro ir link"
   },
   "search_suggestion_feedback_hint": {
     "original": "Premi invio per inviare feedback",
-    "translation": "Press enter to send feedback"
+    "translation": "Pigia invio pe' mandà ir feedback"
   },
   "search_suggestion_bot_hint": {
-    "original": "Press enter to open Telegram bot",
-    "translation": "Press enter to open Telegram bot"
+    "original": "Premi invio per aprire il bot Telegram",
+    "translation": "Pigia invio pe' aprì ir bot di Telegram"
   },
   "bot_title": {
-    "original": "Telegram Bot",
-    "translation": "Telegram Bot"
+    "original": "Bot Telegram",
+    "translation": "Bot Telegram"
   },
   "bot_details": {
-    "original": "Open @doveunipibot on Telegram",
-    "translation": "Open @doveunipibot on Telegram"
+    "original": "Apri @doveunipibot su Telegram",
+    "translation": "Apri @doveunipibot su Telegram"
   },
   "loading_occupancy": {
     "original": "Caricamento...",
-    "translation": "Loading..."
+    "translation": "S'è drieto a caricà..."
   },
   "availability_free": {
     "original": "Libera",
-    "translation": "Free"
+    "translation": "Libera"
   },
   "availability_occupied": {
     "original": "Occupata",
-    "translation": "Occupied"
+    "translation": "Piena murata"
   },
   "availability_unavailable": {
     "original": "Dati non disponibili",
-    "translation": "Data unavailable"
+    "translation": "Un si sa nulla"
   },
   "floor_ground": {
     "original": "Piano Terra",
-    "translation": "Ground Floor"
+    "translation": "Piano Terra"
   },
   "laboratories_title": {
     "original": "Laboratori",
-    "translation": "Laboratories"
+    "translation": "Laboratori"
   },
   "people_title": {
-    "original": "People",
-    "translation": "People"
+    "original": "Persone",
+    "translation": "Gente"
   },
   "room": {
-    "original": "Room",
-    "translation": "Room"
+    "original": "Stanza",
+    "translation": "Stanza"
   },
   "room_number": {
     "original": "Stanza: %s",
-    "translation": "Room: %s"
+    "translation": "Stanza: %s"
   },
   "showing_limited_results": {
     "original": "Mostrando i primi %s risultati di %s totali",
-    "translation": "Showing first %s results of %s total"
+    "translation": "Ti fo vedè i primi %s risultati di %s in tutto"
   },
   "load_more_results": {
     "original": "Carica altri",
-    "translation": "Load More"
+    "translation": "Caricane artri"
   }
 }
