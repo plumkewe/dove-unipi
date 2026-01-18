@@ -2577,7 +2577,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <div id="app-container" class="relative min-h-screen">
 
         <!-- Sidebar -->
-        <div id="sidebar" class="w-72 fixed inset-y-0 left-0 transform -translate-x-full z-[60] flex flex-col"
+        <div id="sidebar" class="w-72 fixed inset-y-0 left-0 transform -translate-x-full z-[60] flex flex-col overflow-x-hidden"
             style="height: 100vh; height: 100dvh; z-index: 9999 !important; padding-bottom: env(safe-area-inset-bottom, 0px);">
 
             <!-- Bottone Chiudi (Desktop & Mobile) -->
@@ -2591,7 +2591,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             </button>
 
             <!-- Menu di Navigazione -->
-            <nav id="navigation-menu" class="p-4 space-y-1 overflow-y-auto"
+            <nav id="navigation-menu" class="p-4 space-y-1 overflow-y-auto overflow-x-hidden"
                 style="flex: 1 1 0%; min-height: 0; max-height: calc(100vh - 4rem - env(safe-area-inset-bottom, 0px));">
                 <div style="height: 50px;"></div>
                 <div id="polos-list" class="space-y-1">
@@ -6959,9 +6959,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         function addDetailRow(icon, contentHtml) {
                             detailsCount++;
                             personInfoElement.innerHTML += `
-                                <div class="flex items-start space-x-2">
+                                <div class="flex items-start space-x-2 min-w-0 w-full overflow-hidden">
                                      <span class="material-symbols-outlined shrink-0 mt-0.5" style="font-size: 16px; width: 16px; text-align: center;">${icon}</span>
-                                     <span>${contentHtml}</span>
+                                     <span class="truncate block min-w-0 flex-1">${contentHtml}</span>
                                 </div>`;
                         }
 
@@ -6994,7 +6994,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         // Email
                         if (pData.email) {
-                            addDetailRow('mail', `<a href="mailto:${pData.email}" class="hover:underline" title="${pData.email}">${pData.email}</a>`);
+                            addDetailRow('mail', `<a href="mailto:${pData.email}" class="hover:underline truncate block" title="${pData.email}">${pData.email}</a>`);
                         }
 
                         // Phone
