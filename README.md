@@ -52,6 +52,8 @@
 - [Telegram Bot](#telegram-bot)
 - [Data Sources](#data-sources)
 - [Problemi noti](#problemi-noti)
+- [Progetti simili](#progetti-simili)
+  - [Bot ingegneria in movimento](#bot-ingegneria-in-movimento)
   
 
 ## Contributori
@@ -141,7 +143,7 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
         │   │   └── ...
         │   └── e/
         │       └── ...
-        └── mini-map.svg <- mini mappa (non si usa)
+        └── mini-map.svg <- mini mappa
 ```
 
 ## unified.json
@@ -379,7 +381,7 @@ graph TB
 
 ### Ricerca intelligente 
 
-Effettua una ricerca non solo sul nome dell’aula ma anche sui suoi **alias**. Una volta selezionata, l’aula verrà automaticamente zoomata sulla sua posizione (ovviamente, se le coordinate sono presenti nel file rooms.json).
+È possibile cercare **aule, persone, erogatori d'acqua, aule studio** e altro. La ricerca viene effettuata non solo sul nome ma anche sui relativi **alias** (eg. numero della stanza). Una volta selezionato un elemento, la mappa verrà automaticamente zoomata sulla sua posizione (se le coordinate sono presenti nel file `unified.json`).
 
 Supporta inoltre **filtri avanzati**: ad esempio, scrivendo `> 200` verranno mostrate le aule con capienza superiore a 200.  
 Sono supportati gli operatori: `<`, `>`, `==`, `=`, `>=`, `<=`, `" "`.
@@ -495,8 +497,6 @@ In futuro verranno aggiunte altre **lingue!**
 
 È disponibile in **versione alfa** la possibilità di visualizzare i **distributori d'acqua** presenti negli edifici del Polo Fibonacci.
 
-Per attivarla, apri la **barra di ricerca**, digita `impostazioni` e assicurati che l'opzione **"Mostra erogatori d'acqua (ALFA)"** sia attiva.
-
 Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risultati saranno evidenziati con un **colore blu**, come omaggio al progetto [**CoSA** dell'Università di Pisa ↗](https://sostenibile.unipi.it)
 
 > [!NOTE]
@@ -512,7 +512,6 @@ Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risult
 È possibile visualizzare le **aule studio** presenti negli edifici del Polo Fibonacci.
 Questa funzione permette di attivare dei marker specifici sulla mappa per individuare facilmente le zone studio.
 
-Per attivarla, apri la **barra di ricerca**, digita `impostazioni` e attiva l'opzione **"Mostra aule studio (ALFA)"**.
 I marker appariranno sulla mappa indicando la posizione esatta delle aule dedicate allo studio.
 
 > [!NOTE]
@@ -524,9 +523,7 @@ I marker appariranno sulla mappa indicando la posizione esatta delle aule dedica
 
 È possibile cercare le persone tramite la barra di ricerca o visualizzarle nella lista dedicata nella sidebar. 
 
-I dati vengono recuperati automaticamente dalla [Mappa del Dipartimento di Informatica](https://di.unipi.it/mappa-dipartimento/) tramite uno script Python che estrae le associazioni tra persone e stanze.
-
-L'aggiornamento dei dati avviene automaticamente **ogni mese** (il primo giorno del mese) tramite una GitHub Action che esegue lo script di sincronizzazione.
+I dati vengono recuperati dai siti dei dipartimenti di [Informatica](https://di.unipi.it/) e [Matematica](https://www.dm.unipi.it/) e arricchiti con le informazioni provenienti da [UniMap](https://unimap.unipi.it/).
 
 
 ## API Orari Biblioteca
@@ -742,3 +739,11 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
 - [ ] **Mappe non aggiornate:** I nomi di alcune aule sulle planimetrie SVG/DWG non corrispondono a quelli reali.
+
+## Progetti simili 
+
+<p align="right">(<a href="#indice">indice</a>)</p>
+
+### Bot ingegneria in movimento 
+
+**Link:** https://t.me/inginmovbot

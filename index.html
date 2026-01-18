@@ -4427,7 +4427,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     d.setDate(d.getDate() + i);
                     const dateStr = formatDateLocal(d);
 
-                    const dayName = d.toLocaleDateString(currentLanguage === 'it' ? 'it-IT' : 'en-US', { weekday: 'long' });
+                    const dayName = d.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'it-IT', { weekday: 'long' });
                     const label = dayName.charAt(0).toUpperCase() + dayName.slice(1);
 
                     const entry = data.find(e => e.date === dateStr);
@@ -6478,8 +6478,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         if (!condition) return false;
                         detailsCount++;
                         roomInfoElement.innerHTML += `
-                            <div class="flex items-center space-x-2">
-                                <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
+                            <div class="flex items-start space-x-2">
+                                <span class="material-symbols-outlined mt-0.5" style="font-size: 16px; line-height: 1;">${icon}</span>
                                 <span>${text.replace("%s", `${condition}`)}</span>
                             </div>
                         `;
@@ -6665,8 +6665,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         function addInfoRow(condition, icon, text) {
                             if (!condition) return false;
                             roomInfoElement.innerHTML += `
-                                <div class="flex items-center space-x-2">
-                                    <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
+                                <div class="flex items-start space-x-2">
+                                    <span class="material-symbols-outlined mt-0.5" style="font-size: 16px; line-height: 1;">${icon}</span>
                                     <span>${text.replace("%s", `${condition}`)}</span>
                                 </div>
                             `;
@@ -6753,8 +6753,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             if (!condition) return false;
                             detailsCount++;
                             roomInfoElement.innerHTML += `
-                                <div class="flex items-center space-x-2">
-                                    <span class="material-symbols-outlined" style="font-size: 16px; line-height: 1;">${icon}</span>
+                                <div class="flex items-start space-x-2">
+                                    <span class="material-symbols-outlined mt-0.5" style="font-size: 16px; line-height: 1;">${icon}</span>
                                     <span>${text.replace("%s", `${condition}`)}</span>
                                 </div>
                             `;
@@ -6959,9 +6959,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         function addDetailRow(icon, contentHtml) {
                             detailsCount++;
                             personInfoElement.innerHTML += `
-                                <div class="flex items-center space-x-2 overflow-hidden">
-                                     <span class="material-symbols-outlined shrink-0" style="font-size: 16px; width: 16px; text-align: center;">${icon}</span>
-                                     <span class="truncate">${contentHtml}</span>
+                                <div class="flex items-start space-x-2">
+                                     <span class="material-symbols-outlined shrink-0 mt-0.5" style="font-size: 16px; width: 16px; text-align: center;">${icon}</span>
+                                     <span>${contentHtml}</span>
                                 </div>`;
                         }
 
