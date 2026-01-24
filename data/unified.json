@@ -3292,22 +3292,6 @@
                                 "ricerca": "Langella Beatrice"
                             },
                             {
-                                "id": "dm_e7aa1fda",
-                                "room": "310",
-                                "cognome": "Pappalettera",
-                                "nome": "Umberto",
-                                "alias": [
-                                    "310",
-                                    "A1:310"
-                                ],
-                                "type": "persona",
-                                "categoria": [
-                                    "Personale"
-                                ],
-                                "hasStatus": false,
-                                "ricerca": "Pappalettera Umberto"
-                            },
-                            {
                                 "id": "dm_82bd4228",
                                 "room": "310",
                                 "cognome": "Schindler",
@@ -3324,46 +3308,64 @@
                                 "ricerca": "Schindler Jule"
                             },
                             {
-                                "id": "dm_36a0d2d9",
-                                "room": "312",
-                                "cognome": "Villa",
-                                "nome": "Riccardo",
+                                "id": "dm_212644",
+                                "room": "306",
+                                "cognome": "Caroti",
+                                "nome": "Satia",
                                 "alias": [
-                                    "312",
-                                    "A1:312"
+                                    "306",
+                                    "A1:306"
                                 ],
                                 "type": "persona",
-                                "categoria": [
-                                    "Personale"
-                                ],
                                 "hasStatus": false,
                                 "coordinates": {
-                                    "x": 716,
-                                    "y": 112,
+                                    "x": 658,
+                                    "y": 59,
                                     "zoom": 8
                                 },
-                                "ricerca": "Villa Riccardo"
+                                "unimap_id": "212644",
+                                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=212644",
+                                "ricerca": "Caroti Satia"
                             },
                             {
-                                "id": "dm_8df40c06",
-                                "room": "312",
-                                "cognome": "Pignatelli",
-                                "nome": "Roberto",
+                                "id": "dm_212475",
+                                "room": "306",
+                                "cognome": "Urso",
+                                "nome": "Francesco",
                                 "alias": [
-                                    "312",
-                                    "A1:312"
+                                    "306",
+                                    "A1:306"
                                 ],
                                 "type": "persona",
-                                "categoria": [
-                                    "Personale"
-                                ],
                                 "hasStatus": false,
                                 "coordinates": {
-                                    "x": 716,
-                                    "y": 112,
+                                    "x": 658,
+                                    "y": 59,
                                     "zoom": 8
                                 },
-                                "ricerca": "Pignatelli Roberto"
+                                "unimap_id": "212475",
+                                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=212475",
+                                "ricerca": "Urso Francesco"
+                            },
+                            {
+                                "id": "dm_213087",
+                                "room": "306",
+                                "cognome": "De Biasi",
+                                "nome": "Ivan",
+                                "alias": [
+                                    "306",
+                                    "A1:306"
+                                ],
+                                "type": "persona",
+                                "hasStatus": false,
+                                "coordinates": {
+                                    "x": 658,
+                                    "y": 59,
+                                    "zoom": 8
+                                },
+                                "unimap_id": "213087",
+                                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=213087",
+                                "ricerca": "De Biasi Ivan"
                             }
                         ],
                         "2": [
