@@ -31,6 +31,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Create config.js from Secrets
+        run: |
+          mkdir -p assets/js
+          echo "const CINECA_CLIENT_ID = '${{ secrets.CINECA_CLIENT_ID }}';" > assets/js/config.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

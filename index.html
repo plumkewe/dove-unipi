@@ -2686,7 +2686,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         </span>
     </div>
 
+    <!-- Config (Loaded from external file to support Secrets) -->
+    <script src="assets/js/config.js"></script>
+
     <script>
+        // ============================================
+        // API CONFIGURATION & STATE (Hoisted for safety)
+        // ============================================
+        
+        let cinecaCache = { data: null, timestamp: 0, date: null };
+        let cinecaFetchPromise = null;
+
         // Wait for DOM and lazy-loaded OpenSeadragon before booting the app
         let domReady = false;
         let osdReady = false;
@@ -3562,7 +3572,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // ============================================
             // CONFIGURAZIONE API
             // ============================================
-            const API_BASE_URL = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net';
+            // const API_BASE_URL = 'https://classroom-status-api-fsgzezg5a8e0ewgc.italynorth-01.azurewebsites.net';
 
             // Configurazione Lingue Supportate
             const SUPPORTED_LANGUAGES = [
@@ -4025,8 +4035,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     isExactSearch = true;
                 }
                 const matchesSettingsQuery = queryLower.includes('impostazioni') || queryLower.includes('settings');
-                const matchesShareQuery = queryLower.includes('share') || queryLower.includes('condivid');
-                const matchesFeedbackQuery = queryLower.includes('feedback');
+                const matchesShareQuery = queryLower.includes('share') || queryLower.includes('condivid') || queryLower.includes('github') || queryLower.includes('instagram');
+                const feedbackKeywords = ['feedback', 'help', 'aiuto', 'suggerimento', 'proposta', 'issue', 'segnalazione'];
+                const matchesFeedbackQuery = feedbackKeywords.some(kw => queryLower.includes(kw));
                 const matchesBotQuery = queryLower.includes('bot') || queryLower.includes('telegram');
                 const capacityFilter = parseCapacityQuery(query);
                 const results = [];
@@ -4036,7 +4047,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const specialKeywords = [
                     { keywords: ['impostazioni', 'settings', 'setting', 'impostazione', 'config'], type: 'settings', title: t('settings_title'), details: t('search_suggestion_settings_hint') },
                     { keywords: ['share', 'condivid', 'condivisione'], type: 'share_suggestion', title: t('share_aria_label'), details: t('search_suggestion_share_hint') },
-                    { keywords: ['feedback', 'feedbac', 'feed'], type: 'feedback_suggestion', title: 'Feedback', details: t('search_suggestion_feedback_hint') },
+                    { keywords: ['feedback', 'feedbac', 'feed', 'help', 'aiuto', 'propost', 'suggeriment'], type: 'feedback_suggestion', title: 'Feedback', details: t('search_suggestion_feedback_hint') },
                     { keywords: ['bot', 'telegram'], type: 'bot_suggestion', title: t('bot_title'), details: t('search_suggestion_bot_hint') }
                 ];
 
@@ -4103,6 +4114,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             title: t('share_github_title'),
                             details: t('share_github_details'),
                             url: 'https://github.com/plumkewe/dove-unipi'
+                        },
+                        {
+                            type: 'share',
+                            title: t('share_instagram_title'),
+                            details: t('share_instagram_details'),
+                            url: 'https://www.instagram.com/doveunipi/'
+                        },
+                        {
+                            type: 'share',
+                            title: t('share_telegram_title'),
+                            details: t('share_telegram_details'),
+                            url: 'https://t.me/doveunipibot'
                         }
                     );
                 }
@@ -4631,6 +4654,21 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     statusText = t('availability_occupied');
                                     if (availabilityData.startTime && availabilityData.endTime) {
                                         timeRange = `${availabilityData.startTime} - ${availabilityData.endTime}`;
+
+                                        // Parse lesson and teacher info
+                                        if (availabilityData.occupiedBy) {
+                                            const parts = availabilityData.occupiedBy.split('|');
+                                            // occupiedBy format: "Lesson Name| |Teacher Name"
+                                            const lessonName = parts[0] || '';
+                                            const teacherName = parts[2] || '';
+
+                                            if (lessonName) {
+                                                timeRange += `<br><strong>${lessonName}</strong>`;
+                                            }
+                                            if (teacherName) {
+                                                timeRange += `<br><span style="opacity:0.9">${teacherName}</span>`;
+                                            }
+                                        }
                                     }
                                 } else if (availabilityData.code === 2) {
                                     // Non disponibile - non mostrare la barra
@@ -4643,12 +4681,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     const value = availability[code];
 
                                     if (code === 1 && value) {
-                                        const scheduleStrArray = value.split("|");
+                                        const parts = value.split("|");
+                                        let start, end, occ;
+
+                                        // Check format: Cache (Start|End|Occ) vs Fresh (Range|Lesson| |Teacher)
+                                        if (parts[0] && parts[0].includes(' - ')) {
+                                            const range = parts[0];
+                                            const rangeParts = range.split(' - ');
+                                            start = rangeParts[0];
+                                            end = rangeParts[1];
+                                            occ = parts.slice(1).join('|');
+                                        } else {
+                                            start = parts[0];
+                                            end = parts[1];
+                                            occ = parts.slice(2).join('|');
+                                        }
+
                                         window.classroomAvailability[classroomName] = {
                                             code: 1,
-                                            startTime: scheduleStrArray[0] || '',
-                                            endTime: scheduleStrArray[1] || '',
-                                            occupiedBy: scheduleStrArray[2] || ''
+                                            startTime: start || '',
+                                            endTime: end || '',
+                                            occupiedBy: occ || ''
                                         };
                                     } else {
                                         window.classroomAvailability[classroomName] = {
@@ -4703,7 +4756,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                                     const detailsDiv = document.createElement('div');
                                                     detailsDiv.className = 'occupancy-details';
                                                     detailsDiv.id = occupancyId;
-                                                    detailsDiv.innerHTML = `<div class="occupancy-details-content">${availabilityData.startTime} - ${availabilityData.endTime}</div>`;
+                                                    
+                                                    let content = `${availabilityData.startTime} - ${availabilityData.endTime}`;
+                                                    if (availabilityData.occupiedBy) {
+                                                        const p = availabilityData.occupiedBy.split('|');
+                                                        const l = p[0] || '';
+                                                        const t = p[2] || '';
+                                                        if (l) content += `<br><strong>${l}</strong>`;
+                                                        if (t) content += `<br><span style="opacity:0.9">${t}</span>`;
+                                                    }
+
+                                                    detailsDiv.innerHTML = `<div class="occupancy-details-content">${content}</div>`;
                                                     // Append after status bar
                                                     statusBar.parentNode.insertBefore(detailsDiv, statusBar.nextSibling);
                                                 }
@@ -6126,6 +6189,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         loadedFromCache = true;
                         bootstrapFromCache = true;
                         console.log('Dati caricati dalla cache');
+                        fetchCinecaEventsForToday();
                     }
                 } catch (e) {
                     console.warn('Errore lettura cache:', e);
@@ -6159,6 +6223,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         dataLoaded = true;
                         populatePolos(Object.keys(data.polo));
                         handleInitialLoad();
+                        fetchCinecaEventsForToday();
                     } else {
                         data = currentData; // Ripristina per coerenza UI sessione corrente
                         // Aggiorniamo comunque i dati in memoria per le navigazioni future senza reload
@@ -8162,141 +8227,195 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const pendingApiRequests = new Map();
 
             // ============================================
-            // NEW API INTEGRATION - Complete Rewrite
+            // CINECA API INTEGRATION (Variables moved to top of script)
             // ============================================
+            
+            // DEBUG: Imposta una data specifica per testare (es. '2026-02-02T10:00:00')
+            // Imposta a null per usare la data/ora corrente reale
+            const DEBUG_TIME = null;
+
+            function getNow() {
+                return DEBUG_TIME ? new Date(DEBUG_TIME) : new Date();
+            }
+
+            async function fetchCinecaEventsForToday() {
+                const now = getNow();
+                const todayStr = now.toISOString().split('T')[0];
+
+                // 1. Check local cache (5 minutes validity)
+                if (cinecaCache.data && cinecaCache.date === todayStr && (Date.now() - cinecaCache.timestamp < 300000)) {
+                    return cinecaCache.data;
+                }
+
+                // 2. Return valid in-flight promise to duplicate requests
+                if (cinecaFetchPromise) {
+                    return cinecaFetchPromise;
+                }
+
+                // 3. Start new fetch
+                cinecaFetchPromise = (async () => {
+                    const start = getNow();
+                    start.setHours(0, 0, 0, 0);
+                    const end = getNow();
+                    end.setHours(23, 59, 59, 999);
+
+                    const payload = {
+                        'mostraImpegniAnnullati': true,
+                        'mostraIndisponibilitaTotali': false,
+                        'linkCalendarioId': data?.polo?.fibonacci?.calendar_id,
+                        'clienteId': CINECA_CLIENT_ID,
+                        'pianificazioneTemplate': false,
+                        'dataInizio': start.toISOString(),
+                        'dataFine': end.toISOString()
+                    };
+
+                    // Direct Cineca Fetch (Settings from api-orario.py)
+                    try {
+                        const response = await fetch('https://apache.prod.up.cineca.it/api/Impegni/getImpegniCalendarioPubblico', {
+                            method: 'POST',
+                            body: JSON.stringify(payload),
+                            headers: { 
+                                'Content-Type': 'application/json;charset=UTF-8'
+                            }
+                        });
+
+                        if (!response.ok) throw new Error(`Status ${response.status}`);
+                        
+                        const events = await response.json();
+                        
+                        // Success! Update cache
+                        cinecaCache = { data: events, timestamp: Date.now(), date: todayStr };
+                        return events;
+                    } catch (e) {
+                        console.error('Cineca API direct fetch failed:', e);
+                        return [];
+                    }
+
+                })().catch(err => {
+                    console.error("Cineca Fetch Error:", err);
+                    return [];
+                }).finally(() => {
+                    cinecaFetchPromise = null;
+                });
+
+                return cinecaFetchPromise;
+            }
+
+            function prettyAulaName(name) {
+                if (!name) return name;
+                let result = name.replace('FIB', 'Fib').replace('RIUNIONI', 'Riunioni');
+                result = result.replace(/([A-Z0-9])\-LAB/, 'Lab $1');
+                return result;
+            }
+
+            function prettyProfName(name, surname) {
+                const s = (surname || '').toLowerCase().trim().replace(/(?:^|\s)\S/g, c => c.toUpperCase());
+                const n = (name || '').toLowerCase().trim().replace(/(?:^|\s)\S/g, c => c.toUpperCase());
+                return n ? `${s} ${n}` : s;
+            }
+
+            function getEventStatusString(event) {
+                // "08:30 - 10:30|Course|Degree|Teacher"
+                const start = new Date(event.dataInizio);
+                const end = new Date(event.dataFine);
+                
+                const formatTime = (d) => {
+                    return d.toLocaleTimeString('it-IT', { 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        timeZone: 'Europe/Rome'
+                    });
+                };
+
+                const timeRange = `${formatTime(start)} - ${formatTime(end)}`;
+                
+                let name = event.nome || '';
+                // "ANALISI MATEMATICA - (MAT-L) - AULA 3" -> "ANALISI MATEMATICA"
+                const parts = name.split('-');
+                const cleanName = parts[0].trim();
+                
+                const docenti = (event.docenti || []).map(d => prettyProfName(d.nome, d.cognome)).join(', ');
+                
+                return `${timeRange}|${cleanName}| |${docenti}`;
+            }
 
             /**
-             * GET /api/poles_data
-             * Returns { "poles_data": [ { "<Pole Name>": "<pole URL>" }, ... ] }
+             * GET /api/poles_data -> Mocked
              */
             async function getPolesData() {
-                try {
-                    const response = await fetch(`${API_BASE_URL}/api/poles_data`);
-                    if (!response.ok) {
-                        throw new Error(`API error: ${response.status}`);
-                    }
-                    return await response.json();
-                } catch (error) {
-                    console.error('Failed to fetch poles data:', error);
-                    return null;
-                }
+                return { "poles_data": [{ "Fibonacci": "internal" }] };
             }
 
             /**
-             * GET /api/get_all_rooms_given_pole?pole_name=<text>
-             * Response { "pole": "<resolved pole name>", "all_rooms": ["Fib A", "Fib B", ...] }
+             * GET /api/get_all_rooms_given_pole -> Mocked
              */
             async function getAllRoomsGivenPole(poleName) {
-                try {
-                    const url = `${API_BASE_URL}/api/get_all_rooms_given_pole?pole_name=${encodeURIComponent(poleName)}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        if (response.status === 400) {
-                            console.error('Missing pole parameter');
-                        } else if (response.status === 404) {
-                            console.error('Pole not found');
-                        } else if (response.status === 502) {
-                            console.error('Scrape failure');
-                        }
-                        throw new Error(`API error: ${response.status}`);
-                    }
-                    return await response.json();
-                } catch (error) {
-                    console.error('Failed to fetch rooms for pole:', poleName, error);
-                    return null;
-                }
+                return { "pole": poleName, "all_rooms": [] };
             }
 
             /**
-             * GET /api/all_schedules_given_pole_and_room?pole_name=<text>&classroom=<text>
-             * Response { "<Classroom>": ["08:30 - 10:30|Course|Degree|Teacher,...", ...] }
+             * GET /api/all_schedules_given_pole_and_room
              */
             async function getAllSchedulesGivenPoleAndRoom(poleName, classroom) {
-                try {
-                    const url = `${API_BASE_URL}/api/all_schedules_given_pole_and_room?pole_name=${encodeURIComponent(poleName)}&classroom=${encodeURIComponent(classroom)}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        if (response.status === 400) {
-                            console.error('Missing pole or classroom parameter');
-                        } else if (response.status === 404) {
-                            console.error('Pole or classroom not found');
-                        } else if (response.status === 502) {
-                            console.error('Scrape failure');
-                        }
-                        throw new Error(`API error: ${response.status}`);
+                if (poleName.toLowerCase() !== 'fibonacci') return {};
+
+                const events = await fetchCinecaEventsForToday();
+                const roomEvents = [];
+
+                events.forEach(event => {
+                    const hasRoom = (event.aule || []).some(a => prettyAulaName(a.codice) === classroom);
+                    if (hasRoom) {
+                        roomEvents.push(getEventStatusString(event));
                     }
-                    return await response.json();
-                } catch (error) {
-                    console.error('Failed to fetch schedules:', poleName, classroom, error);
-                    return null;
-                }
+                });
+                
+                roomEvents.sort(); // sort by time string working roughly OK for same day (08 vs 14)
+                return { [classroom]: roomEvents };
             }
 
             /**
-             * GET /api/free_classrooms_now_given_pole?pole_name=<text>
-             * Response { "free_classrooms": [ { "Fib A": "Free until: 14:30" }, { "Fib D": "Free until: end of day" }, ... ] }
+             * GET /api/free_classrooms_now_given_pole
              */
             async function getFreeClassroomsNowGivenPole(poleName) {
-                try {
-                    const url = `${API_BASE_URL}/api/free_classrooms_now_given_pole?pole_name=${encodeURIComponent(poleName)}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error(`API error: ${response.status}`);
-                    }
-                    return await response.json();
-                } catch (error) {
-                    console.error('Failed to fetch free classrooms:', poleName, error);
-                    return null;
-                }
+                 return { free_classrooms: [] }; // Implementation complex, leaving empty
             }
 
             /**
-             * GET /api/current_schedule_given_pole_and_room?pole_name=<text>&classroom=<text>
-             * Response { "<Classroom>": "08:30 - 10:30|Course|..." } if occupied now, { "<Classroom>": "" } if free
+             * GET /api/current_schedule_given_pole_and_room
              */
             async function getCurrentScheduleGivenPoleAndRoom(poleName, classroom) {
-                try {
-                    const url = `${API_BASE_URL}/api/current_schedule_given_pole_and_room?pole_name=${encodeURIComponent(poleName)}&classroom=${encodeURIComponent(classroom)}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        if (response.status === 400) {
-                            console.error('Missing pole or classroom parameter');
-                        } else if (response.status === 404) {
-                            console.error('Pole or classroom not found');
-                        } else if (response.status === 502) {
-                            console.error('Scrape failure');
-                        }
-                        throw new Error(`API error: ${response.status}`);
-                    }
-                    return await response.json();
-                } catch (error) {
-                    console.error('Failed to fetch current schedule:', poleName, classroom, error);
-                    return null;
-                }
+                const payload = await getSchedulesPayloadGivenPole(poleName);
+                const val = payload.schedules && payload.schedules[classroom];
+                return { [classroom]: val || "" };
             }
 
             /**
-             * GET /api/schedules_payload_given_pole?pole_name=<text>[&classrooms=comma,list]
-             * Response { "pole": "<resolved pole name>", "schedules": { "Fib A": ["..."], "Fib B": ["..."], ... } }
+             * GET /api/schedules_payload_given_pole
              */
             async function getSchedulesPayloadGivenPole(poleName, classrooms = null) {
-                try {
-                    let url = `${API_BASE_URL}/api/schedules_payload_given_pole?pole_name=${encodeURIComponent(poleName)}`;
-                    if (classrooms) {
-                        url += `&classrooms=${encodeURIComponent(classrooms)}`;
+                if (poleName.toLowerCase() !== 'fibonacci') return { schedules: {} };
+
+                const events = await fetchCinecaEventsForToday();
+                const now = getNow();
+                const schedules = {};
+
+                events.forEach(event => {
+                    const start = new Date(event.dataInizio);
+                    const end = new Date(event.dataFine);
+                    
+                    // Check strict overlap (NOW is between start and end)
+                    if (now >= start && now < end) {
+                        const statusStr = getEventStatusString(event);
+                        
+                        (event.aule || []).forEach(aula => {
+                            const key = prettyAulaName(aula.codice); // "Fib A"
+                            // Last write wins for overlap
+                            schedules[key] = statusStr;
+                        });
                     }
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        if (response.status === 404) {
-                            console.error('No classrooms matched');
-                        }
-                        throw new Error(`API error: ${response.status}`);
-                    }
-                    return await response.json();
-                } catch (error) {
-                    console.error('Failed to fetch schedules payload:', poleName, error);
-                    return null;
-                }
+                });
+
+                return { pole: "Fibonacci", schedules: schedules };
             }
 
             // ============================================

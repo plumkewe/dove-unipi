@@ -431,6 +431,22 @@
     "original": "Copia https://github.com/plumkewe/dove-unipi negli appunti",
     "translation": "Copy https://github.com/plumkewe/dove-unipi to clipboard"
   },
+  "share_instagram_title": {
+    "original": "Condividi Instagram",
+    "translation": "Share Instagram"
+  },
+  "share_instagram_details": {
+    "original": "Copia https://www.instagram.com/doveunipi/ negli appunti",
+    "translation": "Copy https://www.instagram.com/doveunipi/ to clipboard"
+  },
+  "share_telegram_title": {
+    "original": "Condividi Bot Telegram",
+    "translation": "Share Telegram Bot"
+  },
+  "share_telegram_details": {
+    "original": "Copia https://t.me/doveunipibot negli appunti",
+    "translation": "Copy https://t.me/doveunipibot to clipboard"
+  },
   "search_suggestion_settings_hint": {
     "original": "Premi invio per visualizzare le impostazioni",
     "translation": "Press enter to view settings"

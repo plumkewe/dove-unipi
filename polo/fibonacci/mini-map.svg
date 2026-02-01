@@ -3,36 +3,36 @@
   <g transform="rotate(180, 425, 302.5)">
 
     <g id="Edificio_A">
-      <path d="M110,140 L240,140 L240,180 L160,180 L160,300 L110,300 Z" fill="#407F5F" stroke="none" />
-      <rect x="170" y="126" width="40" height="15" fill="#407F5F" />
+      <path d="M110,140 L240,140 L240,180 L160,180 L160,300 L110,300 Z" fill="#da21ac" stroke="none" />
+      <rect x="170" y="126" width="40" height="15" fill="#da21ac" />
       <text x="200" y="160" font-family="Arial, sans-serif" font-size="40" fill="#ffffff" font-weight="bold" 
             text-anchor="middle" dominant-baseline="central" 
             transform="rotate(180, 195, 160)">A</text>
     </g>
 
     <g id="Edificio_B">
-      <rect x="270" y="135" width="410" height="90" fill="#B24C4C" />
+      <rect x="270" y="135" width="410" height="90" fill="#8e21da" />
       <text x="475" y="180" font-family="Arial, sans-serif" font-size="60" fill="#ffffff" font-weight="bold" 
             text-anchor="middle" dominant-baseline="central" 
             transform="rotate(180, 475, 180)">B</text>
     </g>
 
     <g id="Edificio_C">
-      <rect x="270" y="260" width="310" height="90" fill="#DAA520" />
+      <rect x="270" y="260" width="310" height="90" fill="#21dad4" />
       <text x="425" y="305" font-family="Arial, sans-serif" font-size="60" fill="#ffffff" font-weight="bold" 
             text-anchor="middle" dominant-baseline="central" 
             transform="rotate(180, 425, 305)">C</text>
     </g>
 
     <g id="Edificio_D">
-      <polygon points="280,405 570,405 570,435 420,475 320,455 280,435" fill="#7D4E8A" />
+      <polygon points="280,405 570,405 570,435 420,475 320,455 280,435" fill="#da5321" />
       <text x="425" y="435" font-family="Arial, sans-serif" font-size="50" fill="#ffffff" font-weight="bold" 
             text-anchor="middle" dominant-baseline="central" 
             transform="rotate(180, 425, 435)">D</text>
     </g>
 
     <g id="Edificio_E">
-      <rect x="660" y="270" width="80" height="60" fill="#4682B4" />
+      <rect x="660" y="270" width="80" height="60" fill="#2160da" />
       <text x="700" y="300" font-family="Arial, sans-serif" font-size="50" fill="#ffffff" font-weight="bold" 
             text-anchor="middle" dominant-baseline="central" 
             transform="rotate(180, 700, 300)">E</text>

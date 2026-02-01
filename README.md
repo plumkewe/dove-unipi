@@ -49,7 +49,15 @@
   - [Campi della risposta](#campi-della-risposta)
   - [Altre biblioteche disponibili](#altre-biblioteche-disponibili)
 - [API Aule](#api-aule)
-- [Telegram Bot](#telegram-bot)
+  - [Endpoint](#endpoint-1)
+  - [Parametri (Body JSON)](#parametri-body-json)
+  - [Esempio di chiamata](#esempio-di-chiamata-1)
+  - [Risposta JSON](#risposta-json-1)
+  - [Campi della risposta](#campi-della-risposta-1)
+  - [Storia dell'API](#storia-dellapi)
+- [Telegram Bot 2.0](#telegram-bot-20)
+  - [Commandi](#commandi)
+  - [Screenshot](#screenshot)
 - [Data Sources](#data-sources)
 - [Problemi noti](#problemi-noti)
 - [Progetti simili](#progetti-simili)
@@ -115,8 +123,9 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 │   └── en.json
 │   └── it.json
 │   └── pi.json (toscano)
-├── scripts/            <- cartella per lo script
-│   └── populate_people.py
+├── .github/
+│   └── workflows/      <- automazione prelievo dati (Actions)
+├── scripts/            <- script python/js di utilità
 ├── index.html
 └── polo/ <- dove aggiungere altri poli
     └── fibonacci/
@@ -236,12 +245,13 @@ graph LR
     I[University Planner] -->|Scraping + API| C[Dati Aule]
     C --> D[unified.json]
     
-    L[Mappa Dipartimento] -->|Scraping| M[populate_people.py]
-    M -->|Anagrafica Persone| D
+    L[Mappa Dipartimento] -->|GitHub Actions| M[Dati Persone]
+    M --> D
     
     G[Contributori] -->|Raccolta Dati| D
     
     N[API SBA] -->|Orari Biblioteca| E[Applicazione Web]
+    O[API CINECA] -->|Stato Occupazione| E
     
     D --> E
     B --> E
@@ -276,6 +286,7 @@ graph TB
     SearchType -->|Capienza es: >200| FindByCapacity[Trova aule per<br/>capienza]
     SearchType -->|Impostazioni| OpenSettings[Apri pannello<br/>impostazioni]
     SearchType -->|Condividi| OpenShare[Mostra opzioni<br/>condivisione]
+    SearchType -->|Bot Telegram| OpenBot[Mostra link<br/>bot Telegram]
     SearchType -->|Feedback| OpenFeedback[Mostra link<br/>feedback]
     SearchType -->|Distributori| FindWater[Trova distributori<br/>acqua]
     
@@ -284,10 +295,15 @@ graph TB
     FindByCapacity --> ShowResults
     FindWater --> ShowResults
     OpenFeedback --> ShowResults
+    OpenBot --> ShowResults
+    
+    ShowResults --> CheckOccupancy[Controlla occupazione API Cineca]
+    CheckOccupancy --> UpdateList[Aggiorna icone<br/>stato aule]
     
     ShowResults --> SelectResult[Seleziona risultato]
-    SelectResult --> CheckOccupancy[Controlla stato<br/>occupazione API]
-    CheckOccupancy --> CheckFloor{Stesso<br/>piano?}
+    UpdateList -.-> SelectResult
+    
+    SelectResult --> CheckFloor{Stesso<br/>piano?}
     
     CheckFloor -->|Sì| ZoomToRoom[Zoom sull'aula]
     CheckFloor -->|No| ChangeFloor[Cambia piano<br/>e zoom sull'aula]
@@ -319,7 +335,7 @@ graph TB
     ApplySettings --> Ready
     
     %% Condivisione
-    OpenShare --> ShareOptions[Copia link sito<br/>o repository GitHub]
+    OpenShare --> ShareOptions[Copia link sito, repository GitHub, Telegram Bot, o Instagram]
     ShareOptions --> Ready
     
     %% Torna all'app
@@ -396,19 +412,22 @@ Digitando `feedback` troverai due risultati per fornire feedback sul progetto. I
 Usa le frecce <kbd>↑</kbd> e <kbd>↓</kbd> per scorrere i risultati e premi <kbd>Enter</kbd> per selezionarne uno.
 La ricerca si avvia automaticamente mentre digiti — non serve cliccare sulla barra di ricerca. Inoltre, se il risultato è unico oppure stai per cercare una special keyword (`impostazioni`, `feedback`, `condividi`...), ti basterà premere <kbd>Enter</kbd> per avviare la ricerca.
 
-Grazie all'API di JuliusNixi è possibile visualizzare l'occupazione delle aule in tempo reale. In futuro verrà implementata la possibilità di applicare filtri per visualizzare esclusivamente le aule libere.
+~~Grazie all'API di JuliusNixi è possibile visualizzare l'occupazione delle aule in tempo reale. In futuro verrà implementata la possibilità di applicare filtri per visualizzare esclusivamente le aule libere.~~
+
+Sia il sito che il bot adesso utilizzano L'API ufficiale di cineca.
 
 <hr>
 
 ### Accessibilità 
 
-Attualmente è possibile aggiungere **pulsanti extra** per funzioni come **zoom** e **condivisione,** oltre ad attivare la **modalità ad alto contrasto.**
-È inoltre possibile aumentare **la dimensione del testo**, attivare il **font per dislessia (OpenDyslexic)** e scegliere la preferenza per mostrare il piano terra come **"Piano 0"** o **"Piano Terra"**.
+Attualmente è possibile aggiungere **pulsanti extra** per funzioni come **zoom** e **condivisione**, oltre ad attivare la **modalità ad alto contrasto**.  
+
+È possibile anche aumentare **la dimensione del testo**, attivare il **font per dislessia (OpenDyslexic)** e scegliere se mostrare il piano terra come **"Piano 0"** o **"Piano Terra"**.  
+
+Inoltre, è possibile impostare di copiare automaticamente il link quando si clicca su un risultato, funzione particolarmente comoda quando si utilizza la web app da telefono.
+
 
 Puoi accedere alle **impostazioni di accessibilità** digitando `impostazioni` o `settings` nella barra di ricerca.  
-
-In futuro si prevede di introdurre una **modalità di navigazione basata solo su pulsanti**.
-*(Non garantiamo nulla in questa fase di sviluppo.)*
 
 <hr>
 
@@ -621,27 +640,158 @@ curl "https://www.sba.unipi.it/it/opening_hours/instances?from_date=2025-12-05&t
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
-Il progetto include un servizio API (sviluppato in Python con Flask) che permette di ottenere informazioni in tempo reale sullo stato delle aule, effettuando lo scraping del portale [aule.webhost1.unipi.it](https://aule.webhost1.unipi.it/poli-didattici/).
+Il progetto si appoggia all’API ufficiale di **Cineca** (University Planner) per ottenere lo stato delle aule (libere/occupate) in tempo reale. Le chiamate vengono fatte direttamente dal client.
 
-Le API offrono diversi endpoint per recuperare:
-- L'elenco dei poli didattici.
-- Le aule di un determinato polo.
-- L'orario completo, lo stato attuale o le attività future di una specifica aula.
-- L'elenco delle aule libere in un dato momento.
+### Endpoint
 
-Il servizio utilizza `requests` e `playwright` per il recupero dei dati e implementa un sistema di caching per ottimizzare le prestazioni e ridurre il carico sul server di origine.
+```
+POST https://apache.prod.up.cineca.it/api/Impegni/getImpegniCalendarioPubblico
+```
 
->[!NOTE]
->L'API pubblica originale è quella di Giulio e la trovate qui: https://github.com/JuliusNixi/unipi-free-classrooms-now
->Quella utilizzata in questo progetto è stata modificata per poter essere eseguita su Azure.
+### Parametri (Body JSON)
 
-## Telegram Bot
+| Parametro | Tipo | Descrizione |
+|-----------|------|-------------|
+| `clienteId` | string | ID del tenant |
+| `linkCalendarioId` | string | ID del calendario specifico del polo (es. Fibonacci: `63223a029f080a0aab032afc`) |
+| `dataInizio` | string | Data inizio in formato ISO 8601 (es. `2025-12-06T00:00:00.000Z`) |
+| `dataFine` | string | Data fine in formato ISO 8601 |
+| `mostraImpegniAnnullati` | boolean | Se `true` mostra anche le lezioni cancellate |
+| `mostraIndisponibilitaTotali` | boolean | Solitamente `false` |
+| `pianificazioneTemplate` | boolean | Solitamente `false` |
+
+### Esempio di chiamata
+
+```bash
+curl -X POST "https://apache.prod.up.cineca.it/api/Impegni/getImpegniCalendarioPubblico" \
+     -H "Content-Type: application/json;charset=UTF-8" \
+     -d '{
+           "mostraImpegniAnnullati": true,
+           "mostraIndisponibilitaTotali": false,
+           "linkCalendarioId": "63223a029f080a0aab032afc",
+           "clienteId": "                     ",
+           "pianificazioneTemplate": false,
+           "dataInizio": "2025-02-01T00:00:00.000Z",
+           "dataFine": "2025-02-01T23:59:59.999Z"
+         }'
+```
+
+### Risposta JSON
+
+```json
+[
+  {
+    "id": 123456,
+    "nome": "Analisi Matematica - 12345",
+    "dataInizio": "2025-02-01T08:30:00.000Z",
+    "dataFine": "2025-02-01T10:30:00.000Z",
+    "docenti": [
+      {
+        "nome": "MARIO",
+        "cognome": "ROSSI"
+      }
+    ],
+    "aule": [
+      {
+        "codice": "FIB_C1",
+        "descrizione": "Aula C1",
+        "capienza": 150
+      }
+    ],
+    "stato": "CONFERMATO",
+    "tipo": "LEZIONE"
+  }
+]
+```
+
+### Campi della risposta
+
+| Campo | Descrizione |
+|-------|-------------|
+| `nome` | Nome dell'attività (es. nome del corso) |
+| `dataInizio` | Data e ora di inizio evento |
+| `dataFine` | Data e ora di fine evento |
+| `docenti` | Lista dei docenti associati |
+| `aule` | Lista delle aule prenotate per l'evento |
+| `aule[].codice` | Codice univoco dell'aula |
+
+> [!NOTE]
+> Per ottenere la disponibilità di un'aula, il frontend scarica tutti gli eventi del giorno e controlla se, nell'orario corrente, esiste un evento che coinvolge quell'aula specifica.
+
+
+### Storia dell'API
+
+Nel corso del tempo, il servizio API ha subito diverse evoluzioni:
+
+1. **Inizio con l’API di Giulio**
+  Il progetto è nato sfruttando l’API pubblica sviluppata da Giulio [(link al repository)](https://github.com/JuliusNixi/unipi-free-classrooms-now), che permetteva di interrogare lo stato delle aule in modo semplice e immediato.
+2. **Migrazione su Azure**
+  Per esplorare nuove possibilità di scalabilità, l’API è stata successivamente adattata per essere eseguita su Azure.
+3. **Adozione dell’API ufficiale CINECA**
+  Attualmente il progetto si appoggia all’API ufficiale di CINECA (descritta sopra), che fornisce dati aggiornati e a costo zero.
+
+
+
+## Telegram Bot 2.0
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
-È stato creato un **Telegram Bot inline**, attualmente in fase di **beta test**, ma già disponibile per essere provato. Puoi accedervi seguendo questo link: [**@doveunipibot**](https://t.me/doveunipibot).
+È stato creato un **bot Telegram inline** dedicato, accessibile tramite il seguente link: [**@doveunipibot**](https://t.me/doveunipibot)
 
-Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E anche alcune funzionalità aggiuntive come ad esempio la posibilità di mandare la mappa del polo con il nome degli edifici.
+Il bot supporta le stesse funzionalità della ricerca intelligente disponibile sul sito e include inoltre funzionalità aggiuntive che verranno progressivamente integrate anche nella versione web.
+
+La seconda versione del bot ha introdotto numerose novità, migliorando in modo significativo l’accessibilità e l’esperienza d’uso.  
+
+Scrivendo `@doveunipibot` all’interno di una chat o di un gruppo viene mostrato automaticamente l’elenco dei comandi disponibili. Il bot fornisce inoltre un feedback immediato durante l’utilizzo: segnala quando una ricerca non produce risultati e guida l’utente, ad esempio indicando esplicitamente quando è necessario cercare un’aula.
+
+La palette dei colori è stata resa coerente con quella del sito, sia per quanto riguarda gli edifici sia per le occupazioni, garantendo una maggiore uniformità visiva e un’esperienza consistente tra le diverse piattaforme.
+
+### Commandi
+
+<table>
+  <thead>
+    <tr>
+      <th>Funzione</th>
+      <th>Comando</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Ricerca Inline</b><br>In qualsiasi chat, cerca un'aula o un professore</td>
+      <td><code>@doveunipibot &lt;query&gt;</code></td>
+    </tr>
+    <tr>
+      <td><b>Cerca Lezione</b><br>Supporta anche giorni successivi (+1, +2...)</td>
+      <td><code>@doveunipibot l:materia</code></td>
+    </tr>
+    <tr>
+      <td><b>Cerca Professore</b><br>Usare solo il cognome</td>
+      <td><code>@doveunipibot p:cognome</code></td>
+    </tr>
+    <tr>
+      <td><b>Stato Aula</b><br>Puoi aggiungere +1, +2... per i giorni successivi</td>
+      <td><code>@doveunipibot s:aula</code></td>
+    </tr>
+    <tr>
+      <td><b>Stato Aula Interattivo</b><br>Per vedere lo stato con navigazione giorni</td>
+      <td><code>@doveunipibot sl:aula</code></td>
+    </tr>
+    <tr>
+      <td><b>Menu Occupazione</b></td>
+      <td><code>/occupazione</code></td>
+    </tr>
+    <tr>
+      <td><b>Link Utili</b></td>
+      <td><code>/links</code></td>
+    </tr>
+    <tr>
+      <td><b>Guida all'uso</b></td>
+      <td><code>/help</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Screenshot
 
 <table>
   <tr>
@@ -702,12 +852,12 @@ Il bot mostra le stesse informazioni disponibili tramite la ricerca sul sito. E 
     <tr>
       <td><strong>Dati Aule</strong></td>
       <td>University Planner</td>
-      <td><a href="https://universityplanner.unipi.it/" target="_blank">Portale UP</a></td>
+      <td><a href="https://unipi.prod.up.cineca.it/calendarioPubblico/linkCalendarioId=63223a029f080a0aab032afc" target="_blank">Portale UP</a></td>
     </tr>
     <tr>
       <td><strong>Status Aule</strong></td>
-      <td>API Aule (Scraper)</td>
-      <td><a href="https://github.com/JuliusNixi/unipi-free-classrooms-now" target="_blank">Repo GitHub</a> (scraping di aule.webhost1.unipi.it)</td>
+      <td>API CINECA</td>
+      <td>Non c’è una documentazione</td>
     </tr>
     <tr>
       <td><strong>Status Biblioteche</strong></td>
