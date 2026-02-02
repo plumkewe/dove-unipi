@@ -1726,6 +1726,20 @@
                                 "hasStatus": false,
                                 "email": "rosetta.zan@unipi.it",
                                 "ricerca": "Zan Rosetta"
+                            },
+                            {
+                                "id": "dm_217771",
+                                "cognome": "Dian",
+                                "nome": "Samantha",
+                                "type": "persona",
+                                "categoria": [
+                                    "Personale Tecnico Amministrativo"
+                                ],
+                                "hasStatus": false,
+                                "unimap_id": "217771",
+                                "email": "samantha.dian@unipi.it",
+                                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=217771",
+                                "ricerca": "Dian Samantha"
                             }
                         ],
                         "1": [
@@ -3164,31 +3178,6 @@
                                 ]
                             },
                             {
-                                "id": "dm_195300",
-                                "nome": "Mirco",
-                                "cognome": "Piccinini",
-                                "alias": [
-                                    "326",
-                                    "A1:326"
-                                ],
-                                "type": "persona",
-                                "note": "",
-                                "unimap_id": "195300",
-                                "email": "mirco.piccinini@dm.unipi.it",
-                                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=195300",
-                                "room": "326",
-                                "coordinates": {
-                                    "x": 716,
-                                    "y": 408,
-                                    "zoom": 8
-                                },
-                                "hasStatus": false,
-                                "ricerca": "Piccinini Mirco",
-                                "categoria": [
-                                    "Assegnisti"
-                                ]
-                            },
-                            {
                                 "id": "dm_193074",
                                 "nome": "Nicola",
                                 "cognome": "Picenni",
@@ -3293,22 +3282,6 @@
                                 "ricerca": "Langella Beatrice"
                             },
                             {
-                                "id": "dm_82bd4228",
-                                "room": "310",
-                                "cognome": "Schindler",
-                                "nome": "Jule",
-                                "alias": [
-                                    "310",
-                                    "A1:310"
-                                ],
-                                "type": "persona",
-                                "categoria": [
-                                    "Personale"
-                                ],
-                                "hasStatus": false,
-                                "ricerca": "Schindler Jule"
-                            },
-                            {
                                 "id": "dm_212644",
                                 "room": "306",
                                 "cognome": "Caroti",
@@ -3367,6 +3340,19 @@
                                 "unimap_id": "213087",
                                 "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=213087",
                                 "ricerca": "De Biasi Ivan"
+                            },
+                            {
+                                "id": "dm_81586d24",
+                                "room": "310",
+                                "cognome": "Meng",
+                                "nome": "Jie",
+                                "alias": [
+                                    "310",
+                                    "A1:310"
+                                ],
+                                "type": "persona",
+                                "hasStatus": false,
+                                "ricerca": "Meng Jie"
                             }
                         ],
                         "2": [
@@ -12618,26 +12604,6 @@
                                 "categoria": [
                                     "Docenti",
                                     "Professore Associato"
-                                ]
-                            },
-                            {
-                                "id": "dm_209313",
-                                "nome": "Silvia",
-                                "cognome": "Morlacchi",
-                                "alias": [
-                                    "14",
-                                    "X1:14"
-                                ],
-                                "type": "persona",
-                                "note": "",
-                                "unimap_id": "209313",
-                                "email": "silvia.morlacchi@dm.unipi.it",
-                                "unimap_url": "https://unimap.unipi.it/cercapersone/dettaglio.php?ri=209313",
-                                "room": "14",
-                                "hasStatus": false,
-                                "ricerca": "Morlacchi Silvia",
-                                "categoria": [
-                                    "Assegnisti"
                                 ]
                             },
                             {
