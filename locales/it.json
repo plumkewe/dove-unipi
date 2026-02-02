@@ -35,6 +35,14 @@
     "original": "Nessun risultato trovato",
     "translation": "Nessun risultato trovato"
   },
+  "disable_promo": {
+    "original": "Clicca qui per disattivare",
+    "translation": "Clicca qui per disattivare"
+  },
+  "open_telegram_bot_v2": {
+    "original": "Prova il nostro nuovo Bot V2",
+    "translation": "Prova il nostro nuovo Bot V2"
+  },
   "sidebar_open": {
     "original": "Apri sidebar",
     "translation": "Apri sidebar"
@@ -442,6 +450,14 @@
   "share_telegram_title": {
     "original": "Condividi Bot Telegram",
     "translation": "Condividi Bot Telegram"
+  },
+  "settings_reset": {
+    "original": "Ripristina impostazioni",
+    "translation": "Ripristina impostazioni"
+  },
+  "settings_reset_description": {
+    "original": "Reimposta tutte le preferenze ai valori predefiniti",
+    "translation": "Reimposta tutte le preferenze ai valori predefiniti"
   },
   "share_telegram_details": {
     "original": "Copia https://t.me/doveunipibot negli appunti",

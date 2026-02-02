@@ -35,6 +35,14 @@
     "original": "Nessun risultato trovato",
     "translation": "No results found"
   },
+  "disable_promo": {
+    "original": "Clicca qui per disattivare",
+    "translation": "Click here to disable"
+  },
+  "open_telegram_bot_v2": {
+    "original": "Prova il nostro nuovo Bot V2",
+    "translation": "Try our new Bot V2"
+  },
   "sidebar_open": {
     "original": "Apri sidebar",
     "translation": "Open sidebar"
@@ -256,7 +264,7 @@
     "translation": "Closes at"
   },
   "Closed": {
-    "original": "Chiuso",
+    "original": "Chiusa",
     "translation": "Closed"
   },
   "search_suggestion_settings": {
@@ -280,11 +288,11 @@
     "translation": "Try: Share"
   },
   "search_suggestion_feedback": {
-    "original": "Try: Feedback",
+    "original": "Prova: Feedback",
     "translation": "Try: Feedback"
   },
   "search_suggestion_bot": {
-    "original": "Try: Bot",
+    "original": "Prova: Bot",
     "translation": "Try: Bot"
   },
   "back_button": {
@@ -332,11 +340,11 @@
     "translation": "Network Ports"
   },
   "room_detail_power_outlets": {
-    "original": "Sockets",
+    "original": "Prese",
     "translation": "Sockets"
   },
   "room_detail_power_outlets_count": {
-    "original": "Sockets: %s",
+    "original": "Prese: %s",
     "translation": "Sockets: %s"
   },
   "room_detail_computers_count": {
@@ -360,7 +368,7 @@
     "translation": "Fixed Camera"
   },
   "room_detail_blackboard": {
-    "original": "Blackboard",
+    "original": "Lavagna",
     "translation": "Blackboard"
   },
   "settings_water_dispensers": {
@@ -443,6 +451,14 @@
     "original": "Condividi Bot Telegram",
     "translation": "Share Telegram Bot"
   },
+  "settings_reset": {
+    "original": "Ripristina impostazioni",
+    "translation": "Reset settings"
+  },
+  "settings_reset_description": {
+    "original": "Reimposta tutte le preferenze ai valori predefiniti",
+    "translation": "Reset all preferences to default values"
+  },
   "share_telegram_details": {
     "original": "Copia https://t.me/doveunipibot negli appunti",
     "translation": "Copy https://t.me/doveunipibot to clipboard"
@@ -460,15 +476,15 @@
     "translation": "Press enter to send feedback"
   },
   "search_suggestion_bot_hint": {
-    "original": "Press enter to open Telegram bot",
+    "original": "Premi invio per aprire il bot Telegram",
     "translation": "Press enter to open Telegram bot"
   },
   "bot_title": {
-    "original": "Telegram Bot",
+    "original": "Bot Telegram",
     "translation": "Telegram Bot"
   },
   "bot_details": {
-    "original": "Open @doveunipibot on Telegram",
+    "original": "Apri @doveunipibot su Telegram",
     "translation": "Open @doveunipibot on Telegram"
   },
   "loading_occupancy": {
@@ -496,11 +512,11 @@
     "translation": "Laboratories"
   },
   "people_title": {
-    "original": "People",
+    "original": "Persone",
     "translation": "People"
   },
   "room": {
-    "original": "Room",
+    "original": "Stanza",
     "translation": "Room"
   },
   "room_number": {

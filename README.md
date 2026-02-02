@@ -774,7 +774,7 @@ La palette dei colori è stata resa coerente con quella del sito, sia per quanto
     </tr>
     <tr>
       <td><b>Stato Aula Interattivo</b><br>Per vedere lo stato con navigazione giorni</td>
-      <td><code>@doveunipibot sl:aula</code></td>
+      <td><code>@doveunipibot si:aula</code></td>
     </tr>
     <tr>
       <td><b>Menu Occupazione</b></td>

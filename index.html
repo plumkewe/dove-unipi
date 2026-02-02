@@ -2846,7 +2846,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
 
                 // Logic for Bot
-                if (result.type === 'bot') {
+                if (result.type === 'bot' || result.type === 'bot_promo') {
                     window.open(result.url, '_blank');
                     const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
                     setTimeout(() => currentSearchInput.focus(), 50);
@@ -3803,6 +3803,31 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             const hideSearchResultsPanels = () => {
+                // Check if we should keep the promo visible
+                const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+                const searchInputEl = isMobile() ? searchInputMobile : searchInput;
+                const isPromoFn = (el) => el && el.innerHTML.includes('type: "bot_promo"') || (el && el.innerHTML.includes('bot_promo')); // Rough check due to innerHTML structure
+                // Actually check the DOM element class or dataset
+                
+                // Let's refine: We only hide if it's NOT the empty-state promo
+                // Or if the user really wants to hide it?
+                // The user said: "voglio che me lo mostri anche quando apro la pagina nel senso sempre quando il field è vuoto"
+                // This implies it should act like a default state rather than a transient search result.
+                
+                // However, hiding it when clicking on the map is standard behavior.
+                // If I click on the map to pan/zoom, I might want to see the full map.
+                // But the search panel overlays.
+                // If the user insists "always", I should respect that condition:
+                // "always when the field is empty"
+                
+                if (searchInputEl && searchInputEl.value.trim() === '') {
+                     const isPromoDismissed = localStorage.getItem('bot_v2_promo_dismissed') === 'true';
+                     if (!isPromoDismissed) {
+                         // Don't hide
+                         return;
+                     }
+                }
+
                 if (searchResults) {
                     searchResults.classList.add('hidden');
                 }
@@ -4017,6 +4042,22 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
 
                 if (!query) {
+                    const isPromoDismissed = localStorage.getItem('bot_v2_promo_dismissed') === 'true';
+                    
+                    if (!isPromoDismissed) {
+                         const promoResult = {
+                            type: 'bot_promo',
+                            title: t('open_telegram_bot_v2'),
+                            details: t('bot_details'),
+                            url: 'https://t.me/doveunipibot'
+                        };
+                        displaySearchResults([promoResult]);
+                        currentSearchResults.classList.remove('hidden');
+                        selectedSearchResultIndex = -1;
+                        document.body.classList.remove('keyboard-navigation-active');
+                        return;
+                    }
+
                     currentSearchResults.innerHTML = '';
                     hideSearchResultsPanels();
                     selectedSearchResultIndex = -1;
@@ -4561,6 +4602,32 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         return;
                     }
 
+                    if (result.type === 'bot_promo') {
+                        resultElement.innerHTML = `
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1 min-w-0">
+                                    <div class="title">${result.title}</div>
+                                    <div class="details">
+                                        ${result.details}<br>
+                                        <span class="disable-promo-link" style="font-style: italic; text-decoration: underline; cursor: pointer;">${t('disable_promo')}</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">smart_toy</span>
+                            </div>
+                        `;
+                        const disableLink = resultElement.querySelector('.disable-promo-link');
+                        if (disableLink) {
+                            disableLink.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                localStorage.setItem('bot_v2_promo_dismissed', 'true');
+                                searchRooms('');
+                            });
+                        }
+                        fragment.appendChild(resultElement);
+                        return;
+                    }
+
                     if (result.type === 'bot') {
                         resultElement.innerHTML = `
                             <div class="flex items-center justify-between">
@@ -5044,7 +5111,88 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
                 container.appendChild(languageRow);
 
+                // Add Reset Button
+                const resetRow = document.createElement('div');
+                resetRow.className = 'search-result-item flex items-center justify-between gap-4';
+                
+                // Load more styling: <div class="details" style="font-style: italic;">...<span class="load-more-link" style="cursor: pointer; text-decoration: underline;">...</span></div>
+                // User asked: "voglio che sia scritto come quello di caricare più elementi nella search"
+                // That logic is: 
+                // <div class="search-result-item load-more-container" style="opacity: 0.9;">
+                //    <div class="details" style="font-style: italic;"> 
+                //       ... <span class="load-more-link" style="cursor: pointer; text-decoration: underline;">Load more...</span>
+                //    </div>
+                // </div>
+
+                resetRow.className = 'search-result-item reset-settings-container';
+                resetRow.style.opacity = '0.9';
+                resetRow.innerHTML = `
+                    <div class="details" style="font-style: italic;">
+                        ${t('settings_reset_description')} · 
+                        <span class="reset-settings-link" style="cursor: pointer; text-decoration: underline;">
+                            ${t('settings_reset')}
+                        </span>
+                    </div>
+                `;
+                
+                const resetLink = resetRow.querySelector('.reset-settings-link');
+                resetRow.addEventListener('click', (e) => {
+                     e.stopPropagation();
+                     // Trigger logic if clicked on the row/link
+                });
+                resetLink.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    resetSettingsToDefault();
+                });
+                // Hover effect
+                resetLink.addEventListener('mouseenter', () => {
+                   resetLink.style.opacity = '0.7';
+                });
+                resetLink.addEventListener('mouseleave', () => {
+                   resetLink.style.opacity = '1';
+                });
+
+                container.appendChild(resetRow);
+
                 syncSettingsToggles();
+            }
+
+            function resetSettingsToDefault() {
+                 // 1. Reset values
+                 // mostra stato aule:on
+                 setClassroomStatusSetting(true);
+                 // mostra piano terra: on
+                 setShowGroundFloorSetting(true);
+                 // condividi polo edificio piano: on
+                 setSharePathSetting(true);
+                 // condividi coordinate mappa: on
+                 setShareCoordinatesSetting(true);
+                 // controlli extra:off
+                 setExtraControlsSetting(false);
+                 // mostra erogatori, aule studio: on (assuming handled by waterDispensers and studyRooms)
+                 setWaterDispensersSetting(true);
+                 setStudyRoomsSetting(true);
+                 // altro contrasto: off
+                 setHighContrastSetting(false);
+                 // font per dislessia: off
+                 setDyslexicFontSetting(false);
+                 // copia il link alla selezione: off
+                 setCopyLinkOnSelectSetting(false);
+                 // testo: normale
+                 setTextSizeSetting('text-normal');
+                 
+                 // 2. Clear Promo Dismissal
+                 localStorage.removeItem('bot_v2_promo_dismissed');
+                 
+                 // 3. UI Feedback (Optional: close settings or flash message)
+                 // Just refreshing the view is good.
+                 // Maybe re-render logic to update toggles is handled by setters calling syncSettingsToggles()
+                 
+                 // 4. Force search refresh to show promo if field is empty
+                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                 if (currentSearchInput && currentSearchInput.value.trim() === '') {
+                     searchRooms('');
+                 }
             }
 
             function createSettingsToggle({ key, label, description, checked, onToggle, disabled = false }) {
@@ -5734,7 +5882,42 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Nascondi i risultati se si clicca fuori
             document.addEventListener('click', (e) => {
-                if (!document.getElementById('search-container').contains(e.target) && !document.getElementById('mobile-search-container').contains(e.target)) {
+                const searchContainer = document.getElementById('search-container');
+                const mobileSearchContainer = document.getElementById('mobile-search-container');
+                const isSearchClick = (searchContainer && searchContainer.contains(e.target)) || 
+                                     (mobileSearchContainer && mobileSearchContainer.contains(e.target));
+                
+                // Don't hide if clicking on a promo result or disable link
+                if (e.target.closest('.search-result-item') || e.target.classList.contains('disable-promo-link')) {
+                    return;
+                }
+
+                if (!isSearchClick) {
+                    const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
+                    const isPromoVisible = currentSearchResults && 
+                                          currentSearchResults.querySelector('.search-result-item .title') && 
+                                          currentSearchResults.innerHTML.includes('bot_promo');
+                    
+                    // If promo is visible, do not hide results on click outside
+                    // Unless the user explicitly cleared the search or something else logic handles it.
+                    // Actually, usually we hide results. But the user wants it to show "always".
+                    // "Always when the field is empty".
+                    // So if it's the promo, we might want to keep it?
+                    // But if I click on the map I probably want to see the map.
+                    // The user said "show it always not just when I click in the field".
+                    // This creates a conflict with map interaction.
+                    // If the results block the map, the app becomes unusable.
+                    // However, the promo is just one item, small height.
+                    // I will check if the search input is empty. If empty and promo is active, don't hide?
+                    
+                    const searchInputEl = isMobile() ? searchInputMobile : searchInput;
+                    const isEmpty = searchInputEl && searchInputEl.value.trim() === '';
+                    
+                    if (isEmpty && isPromoVisible) {
+                        // Keep it visible
+                        return;
+                    }
+
                     hideSearchResultsPanels();
                 }
             });
@@ -5995,6 +6178,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                     // Anima il bottone della sidebar per invogliare l'utente ad aprirla
                     triggerSidebarButtonAnimation();
+                } else {
+                    searchRooms('');
                 }
             }
 
