@@ -1844,6 +1844,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             #e5e7eb 0%,
                             #e5e7eb 70%,
                             rgba(229, 231, 235, 0) 100%) !important;
+                    background-size: 100% 120px !important; /* Limita l'altezza del gradiente */
+                    background-repeat: no-repeat !important; /* Non ripetere il gradiente */
+                    background-position: bottom !important; /* Posiziona in basso */
                     pointer-events: none;
                     /* Permette di cliccare la mappa sotto la parte trasparente */
                 }
@@ -2464,8 +2467,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <!-- Contenitore per il tooltip -->
     <div id="tooltip" class="tooltip"></div>
 
+
     <!-- Top Bar Container -->
-    <div id="top-bar" class="fixed top-4 left-4 right-4 z-40">
+    <div id="top-bar" class="fixed z-40" style="top: calc(1rem + env(safe-area-inset-top)); left: calc(1rem + env(safe-area-inset-left)); right: calc(1rem + env(safe-area-inset-right));">
         <!-- Bottone per Aprire la Sidebar (visibile solo quando è chiusa) -->
         <button id="open-sidebar-button"
             class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200 flex-shrink-0"
@@ -2578,11 +2582,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         <!-- Sidebar -->
         <div id="sidebar" class="w-72 fixed inset-y-0 left-0 transform -translate-x-full z-[60] flex flex-col overflow-x-hidden"
-            style="height: 100vh; height: 100dvh; z-index: 9999 !important; padding-bottom: env(safe-area-inset-bottom, 0px);">
+            style="height: 100vh; height: 100dvh; z-index: 9999 !important; padding-bottom: env(safe-area-inset-bottom, 0px); padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left, 0px);">
 
             <!-- Bottone Chiudi (Desktop & Mobile) -->
             <button id="close-sidebar-button"
-                class="absolute top-4 right-4 z-10 block p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                class="absolute right-4 z-10 block p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                style="top: calc(1rem + env(safe-area-inset-top)); right: calc(1rem + env(safe-area-inset-right));"
                 data-tooltip="Chiudi sidebar" data-shortcut="enter">
                 <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
                     aria-label="Chiudi menu">
@@ -2592,7 +2597,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             <!-- Menu di Navigazione -->
             <nav id="navigation-menu" class="p-4 space-y-1 overflow-y-auto overflow-x-hidden"
-                style="flex: 1 1 0%; min-height: 0; max-height: calc(100vh - 4rem - env(safe-area-inset-bottom, 0px));">
+                style="flex: 1 1 0%; min-height: 0; max-height: calc(100vh - 4rem - env(safe-area-inset-bottom, 0px) - env(safe-area-inset-top));">
                 <div style="height: 50px;"></div>
                 <div id="polos-list" class="space-y-1">
                     <!-- I bottoni dei poli verranno inseriti qui -->
@@ -4279,6 +4284,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Ordina i risultati in modo logico: priorità a quelli che iniziano con la query
                 if (results.length > 0 && !capacityFilter) {
                     results.sort((a, b) => {
+                        // Priorità per erogatori d'acqua basata sulla posizione corrente
+                        const isWaterDispenser = queryLower.includes('erogator') || queryLower.includes('water') || queryLower.includes('acqua');
+                        
+                        if (isWaterDispenser) {
+                            // 1. Stesso edificio e stesso piano
+                            const aSameFloor = a.polo === selectedPolo && a.edificio === selectedBuilding && a.piano === selectedFloor;
+                            const bSameFloor = b.polo === selectedPolo && b.edificio === selectedBuilding && b.piano === selectedFloor;
+                            
+                            if (aSameFloor && !bSameFloor) return -1;
+                            if (!aSameFloor && bSameFloor) return 1;
+                            
+                            // 2. Stesso edificio (piano diverso)
+                            const aSameBuilding = a.polo === selectedPolo && a.edificio === selectedBuilding;
+                            const bSameBuilding = b.polo === selectedPolo && b.edificio === selectedBuilding;
+                            
+                            if (aSameBuilding && !bSameBuilding) return -1;
+                            if (!aSameBuilding && bSameBuilding) return 1;
+                        }
+
                         const aRicerca = (a.room?.ricerca || '').toLowerCase();
                         const bRicerca = (b.room?.ricerca || '').toLowerCase();
 
@@ -4286,11 +4310,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const aStartsWith = aRicerca.startsWith(queryLower);
                         const bStartsWith = bRicerca.startsWith(queryLower);
 
-                        // 1. Priorità massima: inizia con la query
+                        // 3. Priorità massima: inizia con la query
                         if (aStartsWith && !bStartsWith) return -1;
                         if (!aStartsWith && bStartsWith) return 1;
 
-                        // 2. Se entrambi iniziano (o nessuno inizia), ordina alfabeticamente per ricerca
+                        // 4. Se entrambi iniziano (o nessuno inizia), ordina alfabeticamente per ricerca
                         return aRicerca.localeCompare(bRicerca);
                     });
                 }
@@ -7411,7 +7435,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 };
 
                 // Search in all potential lists
-                const allNavItems = roomsList.parentElement.querySelectorAll('.nav-item'); // This grabs items from Study, Lab, People too if they are descended from the wrapper
+                const allNavItems = roomsList.parentElement.querySelectorAll('.nav-item, .department-item'); // Includi anche i dipartimenti!
                 // Wait, roomsList.parentElement contains everything populated by populateRooms.
 
                 // Iterate to find by name
@@ -7428,7 +7452,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Helper function to handle the UI expansion of a found element
             function expandElementDetails(element) {
-                const container = element.closest('.nav-item-container') || element.parentElement; // Handle both structures
+                const container = element.closest('.nav-item-container') || element.closest('.department-item') || element.parentElement;
+                
                 if (!container) return;
 
                 const roomInfo = container.querySelector('.capacity-info');
@@ -7439,15 +7464,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     if (expandIcon) {
                         expandIcon.style.transform = 'rotate(180deg)';
                     }
-
-                    setTimeout(() => {
-                        element.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'center',
-                            inline: 'nearest'
-                        });
-                    }, 100);
                 }
+
+                setTimeout(() => {
+                    element.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'nearest'
+                    });
+                }, 100);
             }
 
             function selectBuilding(building, floorToSelect = null, viewParams = null, viewToSelect = null, roomData = null) {
