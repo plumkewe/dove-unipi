@@ -105,12 +105,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="msapplication-TileImage" content="https://plumkewe.github.io/dove-unipi/assets/logo/favicon.png">
 
     <!-- Cache Control for better performance -->
-    <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
     <!-- Preload critical CSS -->
-    <link rel="preload" href="assets/css/output.css" as="style">
+    <link rel="preload" href="assets/css/output.css?v=1.0.1" as="style">
     <!-- Preload data to shorten critical path -->
-    <link rel="preload" href="data/unified.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/unified.json?v=1.0.1" as="fetch" crossorigin="anonymous">
 
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
@@ -809,7 +811,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 </script>
 
     <!-- Tailwind CSS (compiled) -->
-    <link rel="stylesheet" href="assets/css/output.css">
+    <link rel="stylesheet" href="assets/css/output.css?v=1.0.1">
     <style>
         /* Caricamento del font OpenDyslexic */
         @font-face {
@@ -2764,7 +2766,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     </div>
 
     <!-- Config (Loaded from external file to support Secrets) -->
-    <script src="assets/js/config.js"></script>
+    <script src="assets/js/config.js?v=1.0.1"></script>
 
     <script>
         // ============================================
@@ -6651,7 +6653,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // Kick off network fetch immediately (runs in parallel with translations)
                 const networkFetchPromise = (async () => {
-                    const response = await fetch('data/unified.json');
+                    const response = await fetch('data/unified.json?v=1.0.1');
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
