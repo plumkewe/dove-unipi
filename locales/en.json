@@ -372,16 +372,16 @@
     "translation": "Blackboard"
   },
   "settings_water_dispensers": {
-    "original": "Mostra erogatori d'acqua (ALFA)",
-    "translation": "Show water dispensers (ALPHA)"
+    "original": "Mostra erogatori d'acqua",
+    "translation": "Show water dispensers"
   },
   "settings_water_dispensers_description": {
     "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
     "translation": "Display water dispenser locations on the map"
   },
   "settings_study_rooms": {
-    "original": "Mostra aule studio (ALFA)",
-    "translation": "Show study rooms (ALPHA)"
+    "original": "Mostra aule studio",
+    "translation": "Show study rooms"
   },
   "settings_study_rooms_description": {
     "original": "Visualizza la posizione delle aule studio sulla mappa",
@@ -530,5 +530,17 @@
   "load_more_results": {
     "original": "Carica altri",
     "translation": "Load More"
+  },
+  "other_poli_divider": {
+    "original": "Risultati in altri poli",
+    "translation": "Results in other campuses"
+  },
+  "settings_poi_blinking": {
+    "original": "Lampeggiamento marker",
+    "translation": "Marker Blinking"
+  },
+  "settings_poi_blinking_description": {
+    "original": "Effetto lampeggiante sul marker del POI selezionato",
+    "translation": "Blinking effect on the selected POI marker"
   }
 }

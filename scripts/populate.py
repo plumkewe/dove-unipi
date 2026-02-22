@@ -1763,6 +1763,11 @@ def main():
         print("\n[DRY RUN] Changes not saved.")
     else:
         save_unified_json(unified_data, UNIFIED_JSON_PATH)
+        
+        print("\n" + "=" * 60)
+        print("PHASE 5: Generating Short Links")
+        print("=" * 60)
+        os.system("python3 scripts/generate_short_links.py")
     
     print("\n" + "=" * 60)
     print("PIPELINE COMPLETE")

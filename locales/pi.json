@@ -372,16 +372,16 @@
     "translation": "Lavagna"
   },
   "settings_water_dispensers": {
-    "original": "Mostra erogatori d'acqua (ALFA)",
-    "translation": "Mostra l'acqua da bere (ALFA)"
+    "original": "Mostra erogatori d'acqua",
+    "translation": "Mostra l'acqua da bere"
   },
   "settings_water_dispensers_description": {
     "original": "Visualizza la posizione degli erogatori d'acqua sulla mappa",
     "translation": "Ti fa vedè indove prendere l'acqua sulla mappa"
   },
   "settings_study_rooms": {
-    "original": "Mostra aule studio (ALFA)",
-    "translation": "Mostra aule pe' studià (ALFA)"
+    "original": "Mostra aule studio",
+    "translation": "Mostra aule pe' studià"
   },
   "settings_study_rooms_description": {
     "original": "Visualizza la posizione delle aule studio sulla mappa",
@@ -530,5 +530,17 @@
   "load_more_results": {
     "original": "Carica altri",
     "translation": "Caricane artri"
+  },
+  "other_poli_divider": {
+    "original": "Risultati in altri poli",
+    "translation": "Roba d'artri poli"
+  },
+  "settings_poi_blinking": {
+    "original": "Lampeggiamento marker",
+    "translation": "Fallo lampeggià ir marker"
+  },
+  "settings_poi_blinking_description": {
+    "original": "Effetto lampeggiante sul marker del POI selezionato",
+    "translation": "Fa lampeggià la pallina blu ner punto scelto"
   }
 }

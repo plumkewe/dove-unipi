@@ -4,10 +4,9 @@
 
 <h1 align="center"> DOVE?UNIPI </h1>
 
-<p align="center">Un'applicazione web single-page (SPA) per esplorare gli edifici, i piani e le aule del Polo Fibonacci dell’Università di Pisa.</p>
+<p align="center">Un'applicazione web single-page (SPA) per esplorare gli edifici, i piani e le aule del Polo Fibonacci e del Polo Ingegneria dell’Università di Pisa.</p>
 
 <p align="center">L’interfaccia consente di navigare in modo interattivo tra gli edifici, visualizzare mappe .SVG dei piani e ottenere dettagli sulle singole aule.</p>
-
 
 <h2 align="right"> SCREENSHOT </h2>
 
@@ -16,7 +15,6 @@
 </p>
 
 > Per rendere il progetto ulteriormente **accessibile a TUTTI**, oltre a un'interfaccia intuitiva e diretta, è disponibile una [**guida**](assets/screenshots/spiegazione.png) che spiega i vari elementi e pulsanti dell'applicazione.
-
 
 ## Indice
 
@@ -62,7 +60,6 @@
 - [Problemi noti](#problemi-noti)
 - [Progetti simili](#progetti-simili)
   - [Bot ingegneria in movimento](#bot-ingegneria-in-movimento)
-  
 
 ## Contributori
 
@@ -74,13 +71,11 @@
 [<img src="https://wsrv.nl/?url=github.com/alesmk.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Alessia" />](https://github.com/alesmk)
 [<img src="https://wsrv.nl/?url=github.com/juliusnixi.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="JuliusNixi" />](https://github.com/juliusnixi)
 
-*Un ringraziamento speciale a chi ha dedicato il proprio tempo per la raccolta dati nelle aule.*
-
+_Un ringraziamento speciale a chi ha dedicato il proprio tempo per la raccolta dati nelle aule._
 
 ## Perché?
 
 <p align="right">(<a href="#indice">indice</a>)</p>
-
 
 L'idea nasce da un'esigenza personale, sorta fin dal primo giorno di università, quando ci dissero di recarci in un'aula specifica, in un edificio di cui nessuno sapeva nulla.
 
@@ -103,23 +98,21 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 > [!NOTE]
 > Il progetto è in sviluppo, contribuisci!
 
-
 ## Struttura del progetto
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
-
 ```graphql
 ├── README.md
 ├── assets/
-│   ├── fonts/  
+│   ├── fonts/
 │   ├── logo/
 │   │   ├── favicon.png
 │   │   └── logo.svg
 │   └── screenshots/
 ├── data/
 │   └── unified.json      <- file importante per far funzionare tutto
-├── locales               <- cartella per le traduzioni 
+├── locales               <- cartella per le traduzioni
 │   └── en.json
 │   └── it.json
 │   └── pi.json (toscano)
@@ -134,7 +127,7 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
         │   │   └── piano/
         │   │       ├── 0-top-max.svg <- top sta per vista e max sta per non si usano
         │   │       ├── 0-top.svg
-        │   │       ├── 0.dwg <- file CAD del piano 
+        │   │       ├── 0.dwg <- file CAD del piano
         │   │       ├── 0.svg <- vista prospettica
         │   │       ├── 1-top-max.svg
         │   │       ├── 1-top.svg
@@ -159,7 +152,6 @@ A dimostrazione di ciò, ecco alcuni messaggi reali presi da un gruppo Telegram:
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
-
 È il "database" dell'applicazione.
 
 Contiene tutti i dati su edifici, piani, aule, persone e facility, e l'interfaccia viene costruita dinamicamente leggendo questo file. Per aggiornare i contenuti, basta modificare unified.json senza toccare il codice.
@@ -168,8 +160,17 @@ Contiene tutti i dati su edifici, piani, aule, persone e facility, e l'interfacc
 {
   "polo": {
     "fibonacci": {
+      "prefix": "Fib",
+      "alternative_names": ["Polo Fibonacci"],
+      "address": "Via Filippo Buonarroti, 3, 56127 Pisa PI",
+      "google_maps": "https://maps.app.goo.gl/uZ6z2RRgqTqmCB9J9",
+      "apple_maps": "https://maps.apple.com/place?address=Largo%20Bruno%20Pontecorvo%203,%2056127%20Pisa,%20Italy&coordinate=43.721188,10.407775&name=Polo%20Fibonacci&place-id=I88E823420B8E0D9F&map=explore",
+      "calendar_id": "63223a029f080a0aab032afc",
+      "mappa": "fibonacci.png",
       "edificio": {
         "a": {
+          "color": "da21ac",
+          "text": "A",
           "..."
         },
         "b": {
@@ -241,18 +242,18 @@ Contiene tutti i dati su edifici, piani, aule, persone e facility, e l'interfacc
 ```mermaid
 graph LR
     A[Planimetrie UniPi] -->|Conversione DWG/SVG| B[Mappe Edifici]
-    
+
     I[University Planner] -->|Scraping + API| C[Dati Aule]
     C --> D[unified.json]
-    
+
     L[Mappa Dipartimento] -->|GitHub Actions| M[Dati Persone]
     M --> D
-    
+
     G[Contributori] -->|Raccolta Dati| D
-    
+
     N[API SBA] -->|Orari Biblioteca| E[Applicazione Web]
     O[API CINECA] -->|Stato Occupazione| E
-    
+
     D --> E
     B --> E
     E --> F[Interfaccia Utente]
@@ -265,19 +266,19 @@ graph TB
     Start[Utente apre l'app] --> DetectLang[Rileva lingua<br/>browser o preferenze salvate]
     DetectLang --> LoadTranslations[Carica traduzioni<br/>IT/EN]
     LoadTranslations --> LoadData[Carica dati<br/>edifici, aule e persone]
-    
+
     LoadData --> CheckURL{Link con<br/>parametri?}
     CheckURL -->|"Sì (Full/Short)"| UseURL[Apri polo, edificio,<br/>piano e posizione<br/>dal link]
     CheckURL -->|No| UseDefault[Apri primo polo<br/>disponibile]
-    
+
     UseURL --> ShowMap[Mostra mappa<br/>interattiva]
     UseDefault --> ShowMap
-    
+
     ShowMap --> BuildSidebar[Costruisci menu<br/>laterale con edifici,<br/>piani, aule e persone]
     BuildSidebar --> Ready[App pronta<br/>per l'uso]
-    
+
     Ready --> UserAction{Cosa fa<br/>l'utente?}
-    
+
     %% Ricerca aula
     UserAction -->|Cerca| SearchBar[Digita nella<br/>barra di ricerca]
     SearchBar --> SearchType{Tipo di<br/>ricerca?}
@@ -289,60 +290,60 @@ graph TB
     SearchType -->|Bot Telegram| OpenBot[Mostra link<br/>bot Telegram]
     SearchType -->|Feedback| OpenFeedback[Mostra link<br/>feedback]
     SearchType -->|Distributori| FindWater[Trova distributori<br/>acqua]
-    
+
     FindByName --> ShowResults[Mostra risultati]
     FindPerson --> ShowResults
     FindByCapacity --> ShowResults
     FindWater --> ShowResults
     OpenFeedback --> ShowResults
     OpenBot --> ShowResults
-    
+
     ShowResults --> CheckOccupancy[Controlla occupazione API Cineca]
     CheckOccupancy --> UpdateList[Aggiorna icone<br/>stato aule]
-    
+
     ShowResults --> SelectResult[Seleziona risultato]
     UpdateList -.-> SelectResult
-    
+
     SelectResult --> CheckFloor{Stesso<br/>piano?}
-    
+
     CheckFloor -->|Sì| ZoomToRoom[Zoom sull'aula]
     CheckFloor -->|No| ChangeFloor[Cambia piano<br/>e zoom sull'aula]
-    
+
     %% Navigazione manuale
     UserAction -->|Naviga menu| ClickSidebar[Clicca su edificio,<br/>piano, aula o persona]
     ClickSidebar --> UpdateMap[Aggiorna mappa]
     UpdateMap --> ShowMap
-    
+
     %% Zoom e pan
     UserAction -->|Zoom/Pan mappa| InteractMap[Ingrandisci o<br/>sposta la vista]
     InteractMap --> SavePosition[Salva posizione<br/>nell'URL]
-    
+
     %% Condivisione
     UserAction -->|Condividi| CopyLink[Copia link con<br/>posizione attuale]
     CopyLink --> Ready
-    
+
     %% Cambio vista
     UserAction -->|Cambia vista| SwitchView{Tipo<br/>vista?}
     SwitchView -->|Prospettica| LoadPerspective[Carica vista<br/>prospettica]
     SwitchView -->|Dall'alto| LoadTop[Carica vista<br/>dall'alto]
     LoadPerspective --> ShowMap
     LoadTop --> ShowMap
-    
+
     %% Impostazioni
     OpenSettings --> SettingsPanel[Pannello impostazioni:<br/>• Lingua IT/EN<br/>• Contrasto alto<br/>• Font dislessia<br/>• Dimensione testo<br/>• Controlli extra<br/>• Opzioni condivisione<br/>• Erogatori acqua<br/>• Aule Studio]
     SettingsPanel --> SaveSettings[Salva preferenze]
     SaveSettings --> ApplySettings[Applica modifiche]
     ApplySettings --> Ready
-    
+
     %% Condivisione
     OpenShare --> ShareOptions[Copia link sito, repository GitHub, Telegram Bot, o Instagram]
     ShareOptions --> Ready
-    
+
     %% Torna all'app
     ZoomToRoom --> SavePosition
     ChangeFloor --> SavePosition
     SavePosition --> Ready
-    
+
     style Start fill:#2ea043,stroke:#1a7f37,stroke-width:2px,color:#ffffff
     style Ready fill:#2ea043,stroke:#1a7f37,stroke-width:2px,color:#ffffff
     style ShowMap fill:#0969da,stroke:#0550ae,stroke-width:2px,color:#ffffff
@@ -394,10 +395,9 @@ graph TB
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
+### Ricerca intelligente
 
-### Ricerca intelligente 
-
-È possibile cercare **aule, persone, erogatori d'acqua, aule studio** e altro. La ricerca viene effettuata non solo sul nome ma anche sui relativi **alias** (eg. numero della stanza). Una volta selezionato un elemento, la mappa verrà automaticamente zoomata sulla sua posizione (se le coordinate sono presenti nel file `unified.json`).
+È possibile cercare **aule, persone, erogatori d'acqua, aule studio, poli** e altro. La ricerca viene effettuata non solo sul nome ma anche sui relativi **alias** (eg. numero della stanza). Una volta selezionato un elemento, la mappa verrà automaticamente zoomata sulla sua posizione (se le coordinate sono presenti nel file `unified.json`).
 
 Supporta inoltre **filtri avanzati**: ad esempio, scrivendo `> 200` verranno mostrate le aule con capienza superiore a 200.  
 Sono supportati gli operatori: `<`, `>`, `==`, `=`, `>=`, `<=`, `" "`.
@@ -418,16 +418,15 @@ Sia il sito che il bot adesso utilizzano L'API ufficiale di cineca.
 
 <hr>
 
-### Accessibilità 
+### Accessibilità
 
-Attualmente è possibile aggiungere **pulsanti extra** per funzioni come **zoom** e **condivisione**, oltre ad attivare la **modalità ad alto contrasto**.  
+Attualmente è possibile aggiungere **pulsanti extra** per funzioni come **zoom** e **condivisione**, oltre ad attivare la **modalità ad alto contrasto** e attivare il **POI lampeggiante**.
 
-È possibile anche aumentare **la dimensione del testo**, attivare il **font per dislessia (OpenDyslexic)** e scegliere se mostrare il piano terra come **"Piano 0"** o **"Piano Terra"**.  
+È possibile anche aumentare **la dimensione del testo**, attivare il **font per dislessia (OpenDyslexic)** e scegliere se mostrare il piano terra come **"Piano 0"** o **"Piano Terra"**.
 
 Inoltre, è possibile impostare di copiare automaticamente il link quando si clicca su un risultato, funzione particolarmente comoda quando si utilizza la web app da telefono.
 
-
-Puoi accedere alle **impostazioni di accessibilità** digitando `impostazioni` o `settings` nella barra di ricerca.  
+Puoi accedere alle **impostazioni di accessibilità** digitando `impostazioni` o `settings` nella barra di ricerca.
 
 <hr>
 
@@ -466,29 +465,33 @@ Al momento sono disponibili le seguenti scorciatoie:
 
 ### Path sharing
 
-Per impostazione predefinita è attivo il **path sharing** di *polo*, *edificio*, *piano* e *coordinate*.  
+Per impostazione predefinita è attivo il **path sharing** di _polo_, _edificio_, _piano_ e _coordinate_.  
 Questo significa che, condividendo un link come:
 
 ```
 https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=a&f=0&v=top&x=504.00&y=322.42&z=1.00
 ```
 
-la parte  
+la parte
+
 ```
 ?p=fibonacci&b=a&f=0&v=top&x=504.00&y=322.42&z=1.00
 ```
+
 permetterà a chi apre il link di visualizzare **lo stesso polo, edificio, piano** e anche l’**elemento evidenziato** di chi lo ha condiviso.
 
 Se la funzione non dovesse funzionare, apri la **barra di ricerca**, digita `impostazioni` e verifica che le opzioni **“Condividi polo/edificio/piano”** e **“Condividi coordinate mappa”** siano attive.
 
-Inoltre, se utilizzi la funzione di **ricerca** o selezioni un elemento dalla **sidebar** senza muoverti sulla mappa, il link generato sarà molto più breve e includerà solo il *polo* e il nome abbreviato (se disponibile) dell’aula, dipartimento, laboratorio e sala.
+Inoltre, se utilizzi la funzione di **ricerca** o selezioni un elemento dalla **sidebar** senza muoverti sulla mappa, il link generato sarà molto più breve e includerà solo il _polo_ e il nome abbreviato (se disponibile) dell’aula, dipartimento, laboratorio e sala.
 
 Ad esempio:
+
 ```
 https://plumkewe.github.io/dove-unipi/?p=fibonacci&c=D2
 ```
 
 Corrisponde a:
+
 ```
 https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=d&f=0&v=top&x=380.00&y=296.00&z=2.00
 ```
@@ -540,10 +543,9 @@ I marker appariranno sulla mappa indicando la posizione esatta delle aule dedica
 
 #### Persone
 
-È possibile cercare le persone tramite la barra di ricerca o visualizzarle nella lista dedicata nella sidebar. 
+È possibile cercare le persone tramite la barra di ricerca o visualizzarle nella lista dedicata nella sidebar.
 
 I dati vengono recuperati dai siti dei dipartimenti di [Informatica](https://di.unipi.it/) e [Matematica](https://www.dm.unipi.it/) e arricchiti con le informazioni provenienti da [UniMap](https://unimap.unipi.it/).
-
 
 ## API Orari Biblioteca
 
@@ -559,11 +561,11 @@ GET https://www.sba.unipi.it/it/opening_hours/instances
 
 ### Parametri
 
-| Parametro | Tipo | Descrizione |
-|-----------|------|-------------|
+| Parametro   | Tipo   | Descrizione                            |
+| ----------- | ------ | -------------------------------------- |
 | `from_date` | string | Data di inizio (formato: `YYYY-MM-DD`) |
-| `to_date` | string | Data di fine (formato: `YYYY-MM-DD`) |
-| `nid` | string | ID della biblioteca (`1185` = Fisica) |
+| `to_date`   | string | Data di fine (formato: `YYYY-MM-DD`)   |
+| `nid`       | string | ID della biblioteca (`1185` = Fisica)  |
 
 ### Esempio di chiamata
 
@@ -597,35 +599,34 @@ curl "https://www.sba.unipi.it/it/opening_hours/instances?from_date=2025-12-05&t
 
 ### Campi della risposta
 
-| Campo | Descrizione |
-|-------|-------------|
-| `nid` | ID della biblioteca |
-| `date` | Data (formato `YYYY-MM-DD`) |
-| `start_time` | Orario di apertura |
-| `end_time` | Orario di chiusura |
-| `notice` | Eventuali avvisi o note |
-
+| Campo        | Descrizione                 |
+| ------------ | --------------------------- |
+| `nid`        | ID della biblioteca         |
+| `date`       | Data (formato `YYYY-MM-DD`) |
+| `start_time` | Orario di apertura          |
+| `end_time`   | Orario di chiusura          |
+| `notice`     | Eventuali avvisi o note     |
 
 ### Altre biblioteche disponibili
 
-| NID | Biblioteca |
-|-----|------------|
-| 1173 | Agraria |
-| 1174 | Anglistica |
-| 1177 | Antichistica |
-| 1178 | Economia |
-| 1179 | Filosofia e Storia |
-| 1184 | Chimica |
-| 1185 | Fisica |
-| 1187 | Informatica |
-| 1195 | Giurisprudenza |
-| 1196 | Ingegneria |
-| 1197 | Matematica |
-| 1198 | Medicina |
-| 1213 | Scienze Politiche |
-| 1361 | CIPEI |
+| NID  | Biblioteca                  |
+| ---- | --------------------------- |
+| 1173 | Agraria                     |
+| 1174 | Anglistica                  |
+| 1177 | Antichistica                |
+| 1178 | Economia                    |
+| 1179 | Filosofia e Storia          |
+| 1184 | Chimica                     |
+| 1185 | Fisica                      |
+| 1187 | Informatica                 |
+| 1195 | Giurisprudenza              |
+| 1196 | Ingegneria                  |
+| 1197 | Matematica                  |
+| 1198 | Medicina                    |
+| 1213 | Scienze Politiche           |
+| 1361 | CIPEI                       |
 | 1362 | Archivio generale di Ateneo |
-| 1409 | Storia e Romanistica |
+| 1409 | Storia e Romanistica        |
 | 1477 | Scienze del turismo (Lucca) |
 | 1481 | Sistemi logistici (Livorno) |
 
@@ -650,15 +651,15 @@ POST https://apache.prod.up.cineca.it/api/Impegni/getImpegniCalendarioPubblico
 
 ### Parametri (Body JSON)
 
-| Parametro | Tipo | Descrizione |
-|-----------|------|-------------|
-| `clienteId` | string | ID del tenant |
-| `linkCalendarioId` | string | ID del calendario specifico del polo (es. Fibonacci: `63223a029f080a0aab032afc`) |
-| `dataInizio` | string | Data inizio in formato ISO 8601 (es. `2025-12-06T00:00:00.000Z`) |
-| `dataFine` | string | Data fine in formato ISO 8601 |
-| `mostraImpegniAnnullati` | boolean | Se `true` mostra anche le lezioni cancellate |
-| `mostraIndisponibilitaTotali` | boolean | Solitamente `false` |
-| `pianificazioneTemplate` | boolean | Solitamente `false` |
+| Parametro                     | Tipo    | Descrizione                                                                      |
+| ----------------------------- | ------- | -------------------------------------------------------------------------------- |
+| `clienteId`                   | string  | ID del tenant                                                                    |
+| `linkCalendarioId`            | string  | ID del calendario specifico del polo (es. Fibonacci: `63223a029f080a0aab032afc`) |
+| `dataInizio`                  | string  | Data inizio in formato ISO 8601 (es. `2025-12-06T00:00:00.000Z`)                 |
+| `dataFine`                    | string  | Data fine in formato ISO 8601                                                    |
+| `mostraImpegniAnnullati`      | boolean | Se `true` mostra anche le lezioni cancellate                                     |
+| `mostraIndisponibilitaTotali` | boolean | Solitamente `false`                                                              |
+| `pianificazioneTemplate`      | boolean | Solitamente `false`                                                              |
 
 ### Esempio di chiamata
 
@@ -706,31 +707,28 @@ curl -X POST "https://apache.prod.up.cineca.it/api/Impegni/getImpegniCalendarioP
 
 ### Campi della risposta
 
-| Campo | Descrizione |
-|-------|-------------|
-| `nome` | Nome dell'attività (es. nome del corso) |
-| `dataInizio` | Data e ora di inizio evento |
-| `dataFine` | Data e ora di fine evento |
-| `docenti` | Lista dei docenti associati |
-| `aule` | Lista delle aule prenotate per l'evento |
-| `aule[].codice` | Codice univoco dell'aula |
+| Campo           | Descrizione                             |
+| --------------- | --------------------------------------- |
+| `nome`          | Nome dell'attività (es. nome del corso) |
+| `dataInizio`    | Data e ora di inizio evento             |
+| `dataFine`      | Data e ora di fine evento               |
+| `docenti`       | Lista dei docenti associati             |
+| `aule`          | Lista delle aule prenotate per l'evento |
+| `aule[].codice` | Codice univoco dell'aula                |
 
 > [!NOTE]
 > Per ottenere la disponibilità di un'aula, il frontend scarica tutti gli eventi del giorno e controlla se, nell'orario corrente, esiste un evento che coinvolge quell'aula specifica.
-
 
 ### Storia dell'API
 
 Nel corso del tempo, il servizio API ha subito diverse evoluzioni:
 
 1. **Inizio con l’API di Giulio**
-  Il progetto è nato sfruttando l’API pubblica sviluppata da Giulio [(link al repository)](https://github.com/JuliusNixi/unipi-free-classrooms-now), che permetteva di interrogare lo stato delle aule in modo semplice e immediato.
+   Il progetto è nato sfruttando l’API pubblica sviluppata da Giulio [(link al repository)](https://github.com/JuliusNixi/unipi-free-classrooms-now), che permetteva di interrogare lo stato delle aule in modo semplice e immediato.
 2. **Migrazione su Azure**
-  Per esplorare nuove possibilità di scalabilità, l’API è stata successivamente adattata per essere eseguita su Azure.
+   Per esplorare nuove possibilità di scalabilità, l’API è stata successivamente adattata per essere eseguita su Azure.
 3. **Adozione dell’API ufficiale CINECA**
-  Attualmente il progetto si appoggia all’API ufficiale di CINECA (descritta sopra), che fornisce dati aggiornati e a costo zero.
-
-
+   Attualmente il progetto si appoggia all’API ufficiale di CINECA (descritta sopra), che fornisce dati aggiornati e a costo zero.
 
 ## Telegram Bot 2.0
 
@@ -740,7 +738,7 @@ Nel corso del tempo, il servizio API ha subito diverse evoluzioni:
 
 Il bot supporta le stesse funzionalità della ricerca intelligente disponibile sul sito e include inoltre funzionalità aggiuntive che verranno progressivamente integrate anche nella versione web.
 
-La seconda versione del bot ha introdotto numerose novità, migliorando in modo significativo l’accessibilità e l’esperienza d’uso.  
+La seconda versione del bot ha introdotto numerose novità, migliorando in modo significativo l’accessibilità e l’esperienza d’uso.
 
 Scrivendo `@doveunipibot` all’interno di una chat o di un gruppo viene mostrato automaticamente l’elenco dei comandi disponibili. Il bot fornisce inoltre un feedback immediato durante l’utilizzo: segnala quando una ricerca non produce risultati e guida l’utente, ad esempio indicando esplicitamente quando è necessario cercare un’aula.
 
@@ -761,6 +759,14 @@ La palette dei colori è stata resa coerente con quella del sito, sia per quanto
       <td><code>@doveunipibot &lt;query&gt;</code></td>
     </tr>
     <tr>
+      <td><b>Mappe</b><br>Cerca la mappa di un polo o edificio:<br>Esempi: <code>@doveunipibot fibonacci</code>, <code>@doveunipibot porta nuova</code></td>
+      <td><code>@doveunipibot [nome polo]</code></td>
+    </tr>
+    <tr>
+      <td><b>Filtri Polo</b><br>Se ottieni troppi risultati, puoi filtrare per polo:<br>• <code>+fib</code>: Filtra per Fibonacci<br>• <code>+ing</code>: Filtra per Ingegneria<br>Esempio: <code>@doveunipibot Aula B +ing</code> (cerca 'Aula B' solo a Ingegneria)</td>
+      <td><code>+&lt;polo&gt;</code></td>
+    </tr>
+    <tr>
       <td><b>Cerca Lezione</b><br>Supporta anche giorni successivi (+1, +2...)</td>
       <td><code>@doveunipibot l:materia</code></td>
     </tr>
@@ -775,6 +781,14 @@ La palette dei colori è stata resa coerente con quella del sito, sia per quanto
     <tr>
       <td><b>Stato Aula Interattivo</b><br>Per vedere lo stato con navigazione giorni</td>
       <td><code>@doveunipibot si:aula</code></td>
+    </tr>
+    <tr>
+      <td><b>Cerca Biblioteca</b><br>Cerca una biblioteca per vedere informazioni e orari</td>
+      <td><code>@doveunipibot b:&lt;nome&gt;</code></td>
+    </tr>
+    <tr>
+      <td><b>Lista Biblioteche</b><br>Lista biblioteche e orari</td>
+      <td><code>/biblioteche</code></td>
     </tr>
     <tr>
       <td><b>Menu Occupazione</b></td>
@@ -847,7 +861,7 @@ La palette dei colori è stata resa coerente con quella del sito, sia per quanto
     <tr>
       <td><strong>Planimetrie</strong></td>
       <td>Università di Pisa (Ufficio Sicurezza e Ambiente)</td>
-      <td>File <code>.dwg</code> forniti dall'ateneo, convertiti e ottimizzati in <code>.svg</code>.</td>
+      <td>File <code>.dwg</code> e <code>.pdf</code> forniti dall'ateneo, convertiti e ottimizzati in <code>.svg</code>.</td>
     </tr>
     <tr>
       <td><strong>Dati Aule</strong></td>
@@ -890,10 +904,10 @@ La palette dei colori è stata resa coerente con quella del sito, sia per quanto
 
 - [ ] **Mappe non aggiornate:** I nomi di alcune aule sulle planimetrie SVG/DWG non corrispondono a quelli reali.
 
-## Progetti simili 
+## Progetti simili
 
 <p align="right">(<a href="#indice">indice</a>)</p>
 
-### Bot ingegneria in movimento 
+### Bot ingegneria in movimento
 
 **Link:** https://t.me/inginmovbot

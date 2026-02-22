@@ -53,14 +53,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="apple-mobile-web-app-title" content="DOVE?UNIPI">
     <meta name="format-detection" content="telephone=no">
     <meta name="description" id="meta-description"
-        content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.">
+        content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci e del Polo Ingegneria dell'Università di Pisa.">
     <meta name="author" content="Lyubomyr Malay">
     <meta name="theme-color" content="#E5E7EB">
     <title id="page-title">DOVE?UNIPI</title>
 
     <meta property="og:title" id="og-title" content="DOVE?UNIPI">
     <meta property="og:description" id="og-description"
-        content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.">
+        content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci e del Polo Ingegneria dell'Università di Pisa.">
     <meta property="og:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
     <meta property="og:image:height" content="630">
     <meta property="og:image:width" content="1200">
@@ -70,12 +70,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <meta name="twitter:creator" content="Lyubomyr Malay">
     <meta name="twitter:title" id="twitter-title" content="DOVE?UNIPI">
     <meta name="twitter:description" id="twitter-description"
-        content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.">
+        content="Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci e del Polo Ingegneria dell'Università di Pisa.">
     <meta name="twitter:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
 
     <meta name="robots" content="index, follow">
     <meta name="keywords"
-        content="università pisa, unipi, polo fibonacci, aule unipi, mappe unipi, edificio a b c d e, planimetrie unipi, aula magna, dipartimento informatica pisa, dipartimento matematica pisa, dipartimento fisica pisa, aule didattiche pisa, dove unipi, navigazione campus pisa, mappa interattiva università pisa">
+        content="università pisa, unipi, polo fibonacci, polo ingegneria, aule unipi, mappe unipi, edificio a b c d e, planimetrie unipi, aula magna, dipartimento informatica pisa, dipartimento matematica pisa, dipartimento fisica pisa, dipartimento ingegneria pisa, aule didattiche pisa, dove unipi, navigazione campus pisa, mappa interattiva università pisa">
     <meta property="og:site_name" content="DOVE?UNIPI">
     <meta property="og:locale" content="it_IT">
     <meta property="og:locale:alternate" content="en_US">
@@ -126,9 +126,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "DOVE?UNIPI",
-      "alternateName": "DOVE?UNIPI - Polo Fibonacci",
+      "alternateName": "DOVE?UNIPI - Polo Fibonacci & Polo Ingegneria",
       "url": "https://plumkewe.github.io/dove-unipi/",
-      "description": "Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci dell'Università di Pisa.",
+      "description": "Orientati facilmente tra gli edifici, i piani e le aule del Polo Fibonacci e del Polo Ingegneria dell'Università di Pisa.",
       "applicationCategory": "NavigationApplication",
       "operatingSystem": "Any",
       "author": {
@@ -1072,6 +1072,35 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             background-color: var(--overlay-selected);
         }
 
+        .search-results-divider {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background-color: var(--bg-main);
+            border-top: 1px solid var(--border-divider);
+            border-bottom: 1px solid var(--border-divider);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .search-results-divider::before,
+        .search-results-divider::after {
+            display: none;
+        }
+
+        .search-results-divider + .search-result-item {
+            border-top: none;
+        }
+
         :root {
             /* =========================
                Base Palette
@@ -1441,8 +1470,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .water-dispenser-marker,
-        .study-room-marker,
-        .person-marker {
+        .study-room-marker {
             /* background: none !important; */
             border: none !important;
             opacity: 1;
@@ -1467,8 +1495,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         }
 
         .water-dispenser-marker span,
-        .study-room-marker span,
-        .person-marker span {
+        .study-room-marker span {
             display: block;
             line-height: 1;
             width: 24px;
@@ -1488,21 +1515,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             color: var(--color-study-room);
         }
 
-        .person-marker .material-symbols-outlined {
-            font-size: 24px;
-            color: var(--color-person);
-        }
-
         .water-dispenser-marker {
             background-color: var(--color-water-dispenser-bg);
         }
 
         .study-room-marker {
             background-color: var(--color-study-room-bg);
-        }
-
-        .person-marker {
-            background-color: var(--color-person-bg);
         }
 
         /* Stili per i tooltip */
@@ -2005,10 +2023,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             border: 2px solid var(--color-black) !important;
         }
 
-        /* No border for library/department buttons */
+        /* Visible border for library/department buttons in high contrast */
         .high-contrast a.bg-gray-300,
         .high-contrast button.bg-gray-300 {
-            border: none !important;
+            border: 2px solid var(--color-black) !important;
         }
 
         .high-contrast .button-group {
@@ -2163,6 +2181,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 color: var(--color-white) !important;
             }
 
+            .high-contrast a.bg-gray-300:hover .material-symbols-outlined,
+            .high-contrast button.bg-gray-300:hover .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
             body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after,
             body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after {
                 background-color: var(--color-white) !important;
@@ -2189,6 +2213,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             .high-contrast a.bg-gray-200:hover .material-symbols-outlined,
             .high-contrast button.bg-gray-200:hover .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            /* Hover for hover-effect buttons (zoom, center, flip, settings) in high contrast */
+            .high-contrast .hover-effect:hover {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast .hover-effect:hover .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            .high-contrast .button-group>button:hover:not(.active) {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast .button-group>button:hover:not(.active) .material-symbols-outlined {
                 color: var(--color-white) !important;
                 background-color: var(--color-transparent) !important;
             }
@@ -2419,6 +2464,34 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             background-color: var(--color-black) !important;
             color: var(--color-white) !important;
         }
+
+        .apple-maps-dot {
+            width: 16px;
+            height: 16px;
+            background-color: #FF3B30;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transform-origin: center center;
+            z-index: 1000;
+        }
+        body.poi-blinking-enabled .apple-maps-dot::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: rgba(255, 59, 48, 0.4);
+            border-radius: 50%;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            z-index: -1;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.3); opacity: 1; }
+            80%, 100% { transform: scale(1.5); opacity: 0; }
+        }
     </style>
 </head>
 
@@ -2508,17 +2581,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         <div id="right-controls">
             <!-- Controlli Vista -->
             <div id="view-controls" class="button-group hidden">
-                <button id="perspective-view-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
-                    aria-label="Vista Prospettica" data-tooltip="Vista Prospettica">
-                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
-                        aria-label="Vista prospettica">view_in_ar</span>
-                </button>
-                <button id="top-view-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
-                    aria-label="Vista dall'alto" data-tooltip="Vista dall'alto">
-                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
-                        aria-label="Vista dall'alto">grid_view</span>
-                </button>
-                <button id="flip-view-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200 hidden"
+                <button id="flip-view-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200 hidden"
                     aria-label="Ribalta mappa" data-tooltip="Ribalta mappa">
                     <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
                         aria-label="Ribalta mappa">
@@ -2537,20 +2600,29 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             <!-- Controlli Zoom -->
             <div id="zoom-controls" class="button-group hidden">
-                <button id="zoom-in-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
+                <button id="zoom-in-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Ingrandisci" data-tooltip="Ingrandisci">
                     <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
                         aria-label="Zoom avanti">zoom_in</span>
                 </button>
-                <button id="zoom-out-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
+                <button id="zoom-out-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Riduci" data-tooltip="Riduci">
                     <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
                         aria-label="Zoom indietro">zoom_out</span>
                 </button>
-                <button id="reset-zoom-btn" class="p-2 hover-effect text-gray-900 transition-colors duration-200"
+                <button id="reset-zoom-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
                     aria-label="Centra visuale" data-tooltip="Centra visuale" data-shortcut="k">
                     <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
                         aria-label="Centra vista">center_focus_strong</span>
+                </button>
+            </div>
+
+            <!-- Pulsante Impostazioni -->
+            <div class="button-group">
+                <button id="settings-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                    aria-label="Impostazioni" data-tooltip="Impostazioni">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Impostazioni">settings</span>
                 </button>
             </div>
         </div>
@@ -2893,6 +2965,27 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return;
                 }
 
+                // Logic for Polo
+                if (result.type === 'polo_result') {
+                    const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+
+                    selectPolo(result.polo, result.edificio || null, null, null, 'top', null);
+                    hideSearchResultsPanels();
+                    
+                    const displayName = result.title;
+                    currentSearchInput.value = displayName;
+
+                    const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
+                    otherInput.value = displayName;
+                    updateClearButtonsVisibility();
+
+                    triggerSidebarButtonAnimation();
+                    if (isMobile()) {
+                        closeSidebar();
+                    }
+                    return;
+                }
+
                 // Logic for Room/Person
                 if (result.room) {
                     const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
@@ -3063,6 +3156,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Center map ONLY if we are OPENING details (not closing)
                 if (!isClosing) {
                     centerMapOnRoom(room);
+                } else {
+                    clearSelectedRoomMarker();
                 }
 
                 requestAnimationFrame(() => {
@@ -3299,8 +3394,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const zoomOutBtn = document.getElementById('zoom-out-btn');
             const resetZoomBtn = document.getElementById('reset-zoom-btn');
             const viewControls = document.getElementById('view-controls');
-            const perspectiveViewBtn = document.getElementById('perspective-view-btn');
-            const topViewBtn = document.getElementById('top-view-btn');
             const flipViewBtn = document.getElementById('flip-view-btn');
             if (flipViewBtn) {
                 flipViewBtn.setAttribute('aria-pressed', 'false');
@@ -3313,6 +3406,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const searchResultsMobile = document.getElementById('search-results-mobile');
             const clearSearchBtn = document.getElementById('clear-search-btn');
             const clearSearchBtnMobile = document.getElementById('clear-search-btn-mobile');
+            const settingsBtn = document.getElementById('settings-btn');
             const shareBtn = document.getElementById('share-btn');
             const accessibilityToggle = document.getElementById('accessibility-toggle');
             const storedShareCoordinates = localStorage.getItem('shareCoordinatesEnabled');
@@ -3325,6 +3419,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             const storedShowClassroomStatus = localStorage.getItem('showClassroomStatusEnabled');
             const storedShowGroundFloor = localStorage.getItem('showGroundFloorEnabled');
             const storedCopyLinkOnSelect = localStorage.getItem('copyLinkOnSelectEnabled');
+            const storedPoiBlinking = localStorage.getItem('poiBlinkingEnabled');
 
             // Detect browser language automatically
             function detectBrowserLanguage() {
@@ -3347,6 +3442,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 showClassroomStatus: storedShowClassroomStatus ? storedShowClassroomStatus === 'true' : true, // Default to true
                 showGroundFloor: storedShowGroundFloor ? storedShowGroundFloor === 'true' : true, // Default to true = "Piano Terra"
                 copyLinkOnSelect: storedCopyLinkOnSelect ? storedCopyLinkOnSelect === 'true' : false,
+                poiBlinking: storedPoiBlinking ? storedPoiBlinking === 'true' : false,
                 language: storedLanguage
             };
 
@@ -3414,14 +3510,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (shareBtn) {
                     shareBtn.setAttribute('data-tooltip', t('share_button'));
                     shareBtn.setAttribute('aria-label', t('share_aria_label'));
-                }
-                if (perspectiveViewBtn) {
-                    perspectiveViewBtn.setAttribute('data-tooltip', t('view_perspective'));
-                    perspectiveViewBtn.setAttribute('aria-label', t('view_perspective'));
-                }
-                if (topViewBtn) {
-                    topViewBtn.setAttribute('data-tooltip', t('view_top'));
-                    topViewBtn.setAttribute('aria-label', t('view_top'));
                 }
                 if (flipViewBtn) {
                     flipViewBtn.setAttribute('data-tooltip', t('view_flip'));
@@ -3506,8 +3594,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             // Apply initial dyslexic font setting
             setDyslexicFontSetting(settingsConfig.dyslexicFont);
+            setPoiBlinkingSetting(settingsConfig.poiBlinking);
+            setTextSizeSetting(storedTextSize || 'text-normal');
 
-            // Load translations and apply them with retry mechanism for mobile
+            // Initialize all text size controls properlye
             let translationsLoaded = false;
 
             async function ensureTranslationsLoaded() {
@@ -3539,13 +3629,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         applyTranslations();
                     }
                 });
-            }
-
-            // Apply initial text size setting
-            if (storedTextSize && ['text-small', 'text-normal', 'text-large', 'text-xlarge'].includes(storedTextSize)) {
-                const textSizes = ['text-small', 'text-normal', 'text-large', 'text-xlarge'];
-                textSizes.forEach(size => document.body.classList.remove(size));
-                document.body.classList.add(storedTextSize);
             }
 
             // Gestione controlli accessibilità
@@ -3598,7 +3681,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             let isKeyboardSelection = false;
             let waterDispenserOverlays = []; // Array per gli overlay degli erogatori d'acqua
             let studyRoomOverlays = []; // Array per gli overlay delle aule studio
-            let personOverlays = []; // Array per gli overlay delle persone
             const markerRoomDataMap = new Map(); // Map per memorizzare i dati delle stanze associate ai marker (per event delegation)
             let shortLinkContext = null;
             let viewerInteractionGuardsInstalled = false;
@@ -3941,8 +4023,59 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 markProgrammaticMapChange();
                 viewer.viewport.panTo(viewportPoint);
                 viewer.viewport.zoomTo(viewportZoom);
+                
+                // Add Apple Maps style marker
+                addSelectedRoomMarker(room, viewportPoint);
 
                 return true;
+            }
+
+            let currentSelectedRoomOverlay = null;
+
+            function clearSelectedRoomMarker() {
+                if (!viewer) return;
+                if (currentSelectedRoomOverlay) {
+                    viewer.removeOverlay(currentSelectedRoomOverlay);
+                    currentSelectedRoomOverlay = null;
+                }
+                const mapContainer = document.getElementById('map');
+                if (mapContainer) {
+                    const hiddenPOIs = mapContainer.querySelectorAll('.poi-hidden-for-selection');
+                    hiddenPOIs.forEach(poi => {
+                        poi.style.opacity = '1';
+                        poi.classList.remove('poi-hidden-for-selection');
+                    });
+                }
+            }
+
+            function addSelectedRoomMarker(room, viewportPoint) {
+                if (!viewer || !room) return;
+                
+                clearSelectedRoomMarker();
+                
+                const mapContainer = document.getElementById('map');
+                if (mapContainer) {
+                    const roomNameSearch = (room.nome || room.ricerca || '').toLowerCase();
+                    const allMarkers = mapContainer.querySelectorAll('[data-marker-type], .water-dispenser-marker, .study-room-marker');
+                    allMarkers.forEach(marker => {
+                        const markerRoomName = (marker.getAttribute('data-room-name') || '').toLowerCase();
+                        if (markerRoomName === roomNameSearch) {
+                            marker.style.opacity = '0';
+                            marker.classList.add('poi-hidden-for-selection');
+                        }
+                    });
+                }
+                
+                const element = document.createElement('div');
+                element.className = 'apple-maps-dot counter-rotate-marker';
+                
+                viewer.addOverlay({
+                    element: element,
+                    location: viewportPoint,
+                    placement: 'CENTER'
+                });
+                
+                currentSelectedRoomOverlay = element;
             }
 
             // Nuova funzione per selezionare un'aula senza ricaricare la mappa
@@ -3964,18 +4097,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 );
 
                 if (isSameLocation) {
-                    // Siamo già sul piano giusto, forza vista top e centra la mappa
-                    if (currentView !== 'top') {
-                        selectView('top', true, null, room);
-                    } else {
-                        centerMapOnRoom(room);
-                        if (eligibleForShortLink) {
-                            updateURL(true);
-                        }
-                        // Show person marker if this is a person
-                        if (room && room.type === 'persona') {
-                            showPersonMarkers(room.ricerca);
-                        }
+                    // Siamo già sul piano giusto, centra la mappa
+                    centerMapOnRoom(room);
+                    if (eligibleForShortLink) {
+                        updateURL(true);
                     }
                 } else {
                     // Cambio di piano necessario, ricarica la mappa in vista top con le coordinate dell'aula
@@ -4176,6 +4301,72 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     );
                 }
 
+                // Cerca nei poli
+                for (const poloName in data.polo) {
+                    const polo = data.polo[poloName];
+
+                    if (poloName.toLowerCase() === 'ingegneria') {
+                        if (polo.edificio) {
+                            for (const bName in polo.edificio) {
+                                const b = polo.edificio[bName];
+                                
+                                const defaultTitle = (b.alias && b.alias.length > 0) ? b.alias[0] : ("Polo " + bName.toUpperCase());
+                                let matchedTitle = defaultTitle;
+                                let matches = false;
+                                
+                                const namesToSearch = (b.alternative_names || []).map(a => ({ text: a, display: a }));
+
+                                for (const item of namesToSearch) {
+                                    const textLower = item.text.toLowerCase();
+                                    const isMatch = isExactSearch ? (textLower === queryLower) : (textLower.includes(queryLower));
+                                    if (isMatch) {
+                                        matches = true;
+                                        matchedTitle = item.display;
+                                        break;
+                                    }
+                                }
+
+                                if (matches) {
+                                    results.push({
+                                        type: 'polo_result',
+                                        polo: poloName,
+                                        edificio: bName,
+                                        title: matchedTitle,
+                                        address: b.address || '',
+                                        google_maps: b.google_maps || ''
+                                    });
+                                }
+                            }
+                        }
+                    } else {
+                        const defaultTitle = "Polo " + poloName.charAt(0).toUpperCase() + poloName.slice(1);
+                        let matchedTitle = defaultTitle;
+                        let matches = false;
+                        
+                        const namesToSearch = (polo.alternative_names || []).map(a => ({ text: a, display: a }));
+
+                        for (const item of namesToSearch) {
+                            const textLower = item.text.toLowerCase();
+                            const isMatch = isExactSearch ? (textLower === queryLower) : (textLower.includes(queryLower));
+                            if (isMatch) {
+                                matches = true;
+                                matchedTitle = item.display;
+                                break;
+                            }
+                        }
+
+                        if (matches && polo.address) {
+                            results.push({
+                                type: 'polo_result',
+                                polo: poloName,
+                                title: matchedTitle,
+                                address: polo.address || '',
+                                google_maps: polo.google_maps || ''
+                            });
+                        }
+                    }
+                }
+
                 // Cerca nelle aule
                 for (const poloName in data.polo) {
                     const polo = data.polo[poloName];
@@ -4281,40 +4472,49 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 }
 
-                // Ordina i risultati in modo logico: priorità a quelli che iniziano con la query
-                if (results.length > 0 && !capacityFilter) {
+                // Ordina i risultati: priorità per prossimità al polo/edificio/piano corrente
+                if (results.length > 0) {
+                    // Funzione di prossimità unificata per tutti i risultati delle aule
+                    const getProximityScore = (item) => {
+                        if (!item.polo) return 4; // risultati speciali (settings, share, etc.)
+                        if (item.polo === selectedPolo && item.edificio === selectedBuilding && item.piano === selectedFloor) return 0;
+                        if (item.polo === selectedPolo && item.edificio === selectedBuilding) return 1;
+                        if (item.polo === selectedPolo) return 2;
+                        return 3;
+                    };
+
                     results.sort((a, b) => {
-                        // Priorità per erogatori d'acqua basata sulla posizione corrente
-                        const isWaterDispenser = queryLower.includes('erogator') || queryLower.includes('water') || queryLower.includes('acqua');
-                        
-                        if (isWaterDispenser) {
-                            // 1. Stesso edificio e stesso piano
-                            const aSameFloor = a.polo === selectedPolo && a.edificio === selectedBuilding && a.piano === selectedFloor;
-                            const bSameFloor = b.polo === selectedPolo && b.edificio === selectedBuilding && b.piano === selectedFloor;
-                            
-                            if (aSameFloor && !bSameFloor) return -1;
-                            if (!aSameFloor && bSameFloor) return 1;
-                            
-                            // 2. Stesso edificio (piano diverso)
-                            const aSameBuilding = a.polo === selectedPolo && a.edificio === selectedBuilding;
-                            const bSameBuilding = b.polo === selectedPolo && b.edificio === selectedBuilding;
-                            
-                            if (aSameBuilding && !bSameBuilding) return -1;
-                            if (!aSameBuilding && bSameBuilding) return 1;
+                        // I risultati speciali (senza polo) restano in cima
+                        const aIsSpecial = !a.polo;
+                        const bIsSpecial = !b.polo;
+                        if (aIsSpecial && !bIsSpecial) return -1;
+                        if (!aIsSpecial && bIsSpecial) return 1;
+                        if (aIsSpecial && bIsSpecial) return 0;
+
+                        // Priorità per prossimità (stesso piano > stesso edificio > stesso polo > altro polo)
+                        const scoreA = getProximityScore(a);
+                        const scoreB = getProximityScore(b);
+                        if (scoreA !== scoreB) return scoreA - scoreB;
+
+                        // Per ricerca di capienza, ordina per capienza decrescente
+                        if (capacityFilter) {
+                            const capA = a.room?.capienza || 0;
+                            const capB = b.room?.capienza || 0;
+                            if (capA !== capB) return capB - capA;
                         }
 
                         const aRicerca = (a.room?.ricerca || '').toLowerCase();
                         const bRicerca = (b.room?.ricerca || '').toLowerCase();
 
-                        // Controlla se la ricerca inizia con la query
-                        const aStartsWith = aRicerca.startsWith(queryLower);
-                        const bStartsWith = bRicerca.startsWith(queryLower);
+                        // Per ricerca testuale: priorità a chi inizia con la query
+                        if (!capacityFilter) {
+                            const aStartsWith = aRicerca.startsWith(queryLower);
+                            const bStartsWith = bRicerca.startsWith(queryLower);
+                            if (aStartsWith && !bStartsWith) return -1;
+                            if (!aStartsWith && bStartsWith) return 1;
+                        }
 
-                        // 3. Priorità massima: inizia con la query
-                        if (aStartsWith && !bStartsWith) return -1;
-                        if (!aStartsWith && bStartsWith) return 1;
-
-                        // 4. Se entrambi iniziano (o nessuno inizia), ordina alfabeticamente per ricerca
+                        // Ordinamento alfabetico come fallback
                         return aRicerca.localeCompare(bRicerca);
                     });
                 }
@@ -4322,6 +4522,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // Ordina i risultati delle persone e aggiungili in fondo
                 if (peopleMatches.length > 0) {
                     peopleMatches.sort((a, b) => {
+                        // Priorità per polo corrente
+                        const aIsCurrentPolo = a.polo === selectedPolo;
+                        const bIsCurrentPolo = b.polo === selectedPolo;
+                        if (aIsCurrentPolo && !bIsCurrentPolo) return -1;
+                        if (!aIsCurrentPolo && bIsCurrentPolo) return 1;
+
                         const aRicerca = (a.room.ricerca || '').toLowerCase();
                         const bRicerca = (b.room.ricerca || '').toLowerCase();
 
@@ -4604,8 +4810,25 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const resultsToShow = allSearchResults.slice(startIndex, endIndex);
                 currentResultsShown = endIndex;
 
+                // Track if we've inserted the "other poli" divider
+                let otherPoliDividerInserted = loadMore ? currentSearchResults.querySelector('.search-results-divider') !== null : false;
+
                 resultsToShow.forEach((result, localIndex) => {
                     const globalIndex = startIndex + localIndex; // Calculate global index for event handlers
+
+                    // Insert "Risultati in altri poli" divider before the first result from another polo
+                    if (!otherPoliDividerInserted && result.polo && result.polo !== selectedPolo && selectedPolo && result.type !== 'polo_result') {
+                        // Only insert if there were results from the current polo before this
+                        const hasPriorCurrentPoloResults = allSearchResults.slice(0, startIndex + localIndex).some(r => r.polo === selectedPolo);
+                        if (hasPriorCurrentPoloResults) {
+                            const divider = document.createElement('div');
+                            divider.className = 'search-results-divider';
+                            divider.textContent = t('other_poli_divider') || 'Risultati in altri poli';
+                            fragment.appendChild(divider);
+                        }
+                        otherPoliDividerInserted = true;
+                    }
+
                     const resultElement = document.createElement('div');
                     resultElement.className = 'search-result-item';
                     resultElement.dataset.index = globalIndex;
@@ -4688,6 +4911,18 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     <div class="details">${result.details}</div>
                                 </div>
                                 <span class="material-symbols-outlined" data-copy-icon style="font-size: 20px; line-height: 1;">content_copy</span>
+                            </div>
+                        `;
+                    } else if (result.type === 'polo_result') {
+                        resultElement.innerHTML = `
+                            <div class="title">${result.title}</div>
+                            <div class="details text-gray-500">
+                                ${result.address}
+                                <div style="margin-top: 4px;">
+                                    <a href="${result.google_maps}" target="_blank" class="text-blue-600 hover:underline" style="display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()">
+                                        Apri in Google Maps
+                                    </a>
+                                </div>
                             </div>
                         `;
                     } else {
@@ -4918,7 +5153,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             <div class="title">${result.room.ricerca || result.room.nome}</div>
                             <div class="details">
                                 Polo ${result.polo.charAt(0).toUpperCase() + result.polo.slice(1)} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
-                                ${t('building')} ${result.edificio.toUpperCase()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
+                                ${t('building')} ${result.edificio.toUpperCase()}${(() => { const bd = data.polo[result.polo]?.edificio?.[result.edificio]; const al = bd?.alias; return al && al.length > 0 ? ' (' + al[0] + ')' : ''; })()} <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: -3px;">chevron_right</span>
                                 ${result.piano === '0' && settingsConfig.showGroundFloor ? t('floor_ground') : t('floor') + ' ' + result.piano}${roomDetails}${categoryDetails}${capacityDetails ? '<div>' + t('capacity') + ' ' + capacityDetails + '</div>' : ''}
                             </div>
                             ${availabilityHTML}
@@ -5084,6 +5319,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         description: t('settings_copy_link_on_select_description'),
                         checked: settingsConfig.copyLinkOnSelect,
                         onToggle: setCopyLinkOnSelectSetting
+                    },
+                    {
+                        key: 'poiBlinking',
+                        label: t('settings_poi_blinking'),
+                        description: t('settings_poi_blinking_description'),
+                        checked: settingsConfig.poiBlinking,
+                        onToggle: setPoiBlinkingSetting
                     }
                 ];
 
@@ -5202,6 +5444,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                  setDyslexicFontSetting(false);
                  // copia il link alla selezione: off
                  setCopyLinkOnSelectSetting(false);
+                 // poi blinking: off
+                 setPoiBlinkingSetting(false);
                  // testo: normale
                  setTextSizeSetting('text-normal');
                  
@@ -5440,6 +5684,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 syncSettingsToggles();
             }
 
+            function setPoiBlinkingSetting(isEnabled) {
+                settingsConfig.poiBlinking = isEnabled;
+                localStorage.setItem('poiBlinkingEnabled', isEnabled);
+                if (isEnabled) {
+                    document.body.classList.add('poi-blinking-enabled');
+                } else {
+                    document.body.classList.remove('poi-blinking-enabled');
+                }
+                syncSettingsToggles();
+            }
+
             function setWaterDispensersSetting(isEnabled) {
                 settingsConfig.showWaterDispensers = isEnabled;
                 localStorage.setItem('showWaterDispensersEnabled', isEnabled);
@@ -5587,6 +5842,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             break;
                         case 'showGroundFloor':
                             input.checked = settingsConfig.showGroundFloor;
+                            break;
+                        case 'copyLinkOnSelect':
+                            input.checked = settingsConfig.copyLinkOnSelect;
+                            break;
+                        case 'poiBlinking':
+                            input.checked = settingsConfig.poiBlinking;
                             break;
                         default:
                             break;
@@ -5776,6 +6037,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         searchRooms('');
                         hideSearchResultsPanels();
                         updateClearButtonsVisibility();
+                        clearSelectedRoomMarker();
                         inputElement.focus();
                     });
                 }
@@ -5945,6 +6207,26 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     hideSearchResultsPanels();
                 }
             });
+
+            // Funzione per mostrare le impostazioni
+            if (settingsBtn) {
+                settingsBtn.addEventListener('click', () => {
+                    const input = window.innerWidth <= 768 ? searchInputMobile : searchInput;
+                    if (input) {
+                        input.value = 'impostazioni';
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                        
+                        // Chiudi la sidebar se aperta (su mobile è utile)
+                        const sidebar = document.getElementById('sidebar');
+                        if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+                            const closeBtn = document.getElementById('close-sidebar-button');
+                            if (closeBtn) closeBtn.click();
+                        }
+                        
+                        setTimeout(() => input.focus(), 50);
+                    }
+                });
+            }
 
             // Funzione per copiare il link
             shareBtn.addEventListener('click', () => {
@@ -6184,12 +6466,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 }
 
+                // Solo applica le coordinate se edificio e piano sono esplicitamente nell'URL
+                // per evitare coordinate obsolete dopo un refresh
+                const hasExplicitContext = buildingParam && floorParam;
+                const effectiveViewParams = hasExplicitContext ? viewParams : null;
+
                 // Passa i parametri dell'edificio, del piano e della vista
                 selectPolo(
                     poloToSelect,
                     buildingParam,
                     floorParam,
-                    viewParams,
+                    effectiveViewParams,
                     viewParam,
                     roomFromShortLink ? roomFromShortLink.room : null
                 );
@@ -6287,19 +6574,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             });
 
-            perspectiveViewBtn.addEventListener('click', () => {
-                clearShortLinkContext();
-                if (currentView !== 'perspective') {
-                    selectView('perspective');
-                }
-            });
-
-            topViewBtn.addEventListener('click', () => {
-                clearShortLinkContext();
-                if (currentView !== 'top') {
-                    selectView('top');
-                }
-            });
 
             if (flipViewBtn) {
                 flipViewBtn.addEventListener('click', () => {
@@ -6484,15 +6758,19 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 svg.classList.add('mini-map-svg');
                                 svg.dataset.polo = polo;
                                 
-                                // Update state for this polo if it's currently selected
+                                // Update state for this polo
                                 if (polo === selectedPolo) {
                                     updateMiniMapState();
+                                } else {
+                                    // Dim all buildings for non-selected polos
+                                    setMiniMapHighlight(polo, null);
                                 }
                             }
                         })
                         .catch(() => {
-                            // If SVG doesn't exist, remove the container
+                            // If SVG doesn't exist, remove the container and extra spacing
                             miniMapContainer.remove();
+                            titleSpan.classList.remove('mb-2');
                         });
                     
                     button.appendChild(miniMapContainer);
@@ -6559,12 +6837,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     // Extract letter: "Edificio_A" -> "a"
                     const buildingLetter = id.replace(/^Edificio_/i, '').toLowerCase();
                     
-                    // Logic: 
-                    // If no building is selected, show all (or keep previous state? - usually safe to show all)
-                    // If building is selected, highlight it and dim others
-                    const isSelected = !building || buildingLetter === building.toLowerCase();
-                    
-                    if (isSelected) {
+                    if (!building) {
+                        // No building selected: dim all buildings
+                        group.classList.add('mini-map-building-dimmed');
+                        group.classList.remove('mini-map-building-selected');
+                        group.style.transition = 'opacity 0.3s ease';
+                    } else if (buildingLetter === building.toLowerCase()) {
                         group.classList.remove('mini-map-building-dimmed');
                         group.classList.add('mini-map-building-selected');
                         group.style.transition = 'opacity 0.3s ease';
@@ -6589,8 +6867,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 
                 setMiniMapRotation(selectedPolo, shouldBeFlipped);
                 
-                // Highlight the selected building
+                // Highlight the selected building for the current polo
                 setMiniMapHighlight(selectedPolo, building);
+                
+                // Reset highlights on all other polos' mini-maps
+                document.querySelectorAll('.mini-map-svg').forEach(svg => {
+                    if (svg.dataset.polo !== selectedPolo) {
+                        setMiniMapHighlight(svg.dataset.polo, null);
+                    }
+                });
             }
 
             function selectPolo(polo, buildingToSelect = null, floorToSelect = null, viewParams = null, viewToSelect = null, roomData = null) {
@@ -6623,8 +6908,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 buildings.forEach(building => {
                     const button = document.createElement('button');
                     button.className = 'nav-item w-full text-left flex items-center space-x-3 p-2 pl-6 rounded-lg';
+                    button.dataset.building = building;
+
+                    const buildingData = data.polo[selectedPolo]?.edificio?.[building];
+                    const aliases = buildingData?.alias;
+                    const aliasHTML = aliases && aliases.length > 0
+                        ? `<span style="display: block; font-size: 0.75em; opacity: 0.6; margin-top: 1px; line-height: 1.2;">${aliases.join(' · ')}</span>`
+                        : '';
+
                     button.innerHTML = `
-                        <span>${t('building')} ${building.toUpperCase()}</span>
+                        <span>${t('building')} ${building.toUpperCase()}${aliasHTML}</span>
                     `;
                     button.addEventListener('click', () => {
                         clearShortLinkContext();
@@ -7097,6 +7390,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             // Center map ONLY if we are OPENING details (not closing)
                             if (!isClosing) {
                                 centerMapOnRoom(studyRoom);
+                            } else {
+                                clearSelectedRoomMarker();
                             }
 
                             // Defer heavy UI updates to next frame to allow animation to start smoothly
@@ -7352,6 +7647,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             // Center map ONLY if we are OPENING details (not closing)
                             if (!isClosing) {
                                 centerMapOnRoom(entry.personData);
+                            } else {
+                                clearSelectedRoomMarker();
                             }
 
                             // Toggle Details Logic
@@ -7364,14 +7661,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         expandIcon.style.transform = personInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
                                     }
 
-                                    // Show marker when opening details, hide when closing
-                                    if (isCurrentlyHidden) {
-                                        // Details are being opened
-                                        showPersonMarkers(entry.personData.ricerca);
-                                    } else {
-                                        // Details are being closed
-                                        hidePersonMarkers();
-                                    }
                                 }
                             });
                         });
@@ -7482,8 +7771,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // Aggiorna lo stile dei bottoni degli edifici
                 Array.from(buildingsList.children).forEach(child => {
-                    const buildingName = child.querySelector('span:last-child').textContent.split(' ')[1].toLowerCase();
-                    if (buildingName === building) {
+                    const bName = child.dataset.building;
+                    if (bName === building) {
                         child.classList.add('selected');
                     } else {
                         child.classList.remove('selected');
@@ -7506,23 +7795,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const shouldReload = selectedBuilding !== lastLoadedBuilding || floor !== lastLoadedFloor;
                 selectedFloor = floor;
 
-                // Controlla quali viste sono disponibili per questo piano
-                checkAvailableViews(selectedBuilding, floor).then(({ hasPerspective, hasTopView }) => {
-                    // Aggiorna visibilità bottoni in base alle viste disponibili
-                    updateViewButtonsVisibility(hasPerspective, hasTopView);
-
-                    // Determina quale vista usare
-                    let view = viewToSelect === 'perspective' ? 'perspective' : 'top';
-
-                    // Se la vista richiesta non è disponibile, usa quella disponibile
-                    if (view === 'perspective' && !hasPerspective && hasTopView) {
-                        view = 'top';
-                    } else if (view === 'top' && !hasTopView && hasPerspective) {
-                        view = 'perspective';
-                    }
-
-                    selectView(view, shouldReload, viewParams, roomData);
-                });
+                selectView('top', shouldReload, viewParams, roomData);
 
                 populateRooms(selectedBuilding, selectedFloor);
 
@@ -7541,28 +7814,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             }
 
             function selectView(viewType, forceReload = false, viewParams = null, roomData = null) {
-                if (currentView === viewType && !forceReload) return;
+                if (currentView === 'top' && !forceReload) return;
 
-                currentView = viewType;
-
-                // Nascondi i marker degli erogatori d'acqua e aule studio quando si passa alla vista prospettica
-                if (viewType === 'perspective') {
-                    hideWaterDispensers();
-                    hideStudyRoomMarkers();
-                    hidePersonMarkers();
-                }
+                currentView = 'top';
 
                 if (selectedFloor !== "?")
-                    loadSVG(selectedBuilding, selectedFloor, currentView, viewParams, roomData);
-
-                // Aggiorna stile bottoni vista
-                if (viewType === 'top') {
-                    topViewBtn.classList.add('active');
-                    perspectiveViewBtn.classList.remove('active');
-                } else {
-                    perspectiveViewBtn.classList.add('active');
-                    topViewBtn.classList.remove('active');
-                }
+                    loadSVG(selectedBuilding, selectedFloor, 'top', viewParams, roomData);
             }
 
             function setMapFlipState(shouldFlip, animate = true, delayVisuals = 0, persistState = true) {
@@ -7656,7 +7913,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const exists = svgCache.get(cacheKey);
                     if (exists) {
                         viewControls.classList.remove('hidden');
-                        topViewBtn.classList.remove('hidden');
                     } else {
                         viewControls.classList.add('hidden');
                     }
@@ -7670,7 +7926,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         svgCache.set(cacheKey, exists);
                         if (exists) {
                             viewControls.classList.remove('hidden');
-                            topViewBtn.classList.remove('hidden');
                         } else {
                             viewControls.classList.add('hidden');
                         }
@@ -7697,49 +7952,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             }
 
-            // Funzione per controllare quali viste sono disponibili per un edificio/piano
-            async function checkAvailableViews(building, floor) {
-                const perspectivePath = `polo/${selectedPolo}/edificio/${building}/piano/${floor}.svg`;
-                const topViewPath = `polo/${selectedPolo}/edificio/${building}/piano/${floor}-top.svg`;
 
-                // Controlla entrambi i file in parallelo
-                const [hasPerspective, hasTopView] = await Promise.all([
-                    fetch(perspectivePath, { method: 'HEAD' })
-                        .then(response => response.ok)
-                        .catch(() => false),
-                    fetch(topViewPath, { method: 'HEAD' })
-                        .then(response => response.ok)
-                        .catch(() => false)
-                ]);
-
-                return { hasPerspective, hasTopView };
-            }
-
-            // Funzione per aggiornare la visibilità dei bottoni vista
-            function updateViewButtonsVisibility(hasPerspective, hasTopView) {
-                // Abilita/disabilita bottone vista prospettica
-                if (hasPerspective) {
-                    perspectiveViewBtn.disabled = false;
-                    perspectiveViewBtn.style.display = '';
-                } else {
-                    perspectiveViewBtn.style.display = 'none';
-                }
-
-                // Abilita/disabilita bottone vista dall'alto
-                if (hasTopView) {
-                    topViewBtn.disabled = false;
-                    topViewBtn.style.display = '';
-                } else {
-                    topViewBtn.style.display = 'none';
-                }
-
-                // Se solo una vista è disponibile, forza quella vista
-                if (hasTopView && !hasPerspective && currentView === 'perspective') {
-                    selectView('top', true);
-                } else if (hasPerspective && !hasTopView && currentView === 'top') {
-                    selectView('perspective', true);
-                }
-            }
 
             // Funzione per precaricare una SVG in background
             function preloadSVG(building, floor, viewType = 'top') {
@@ -7838,7 +8051,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             // State tracking to prevent redundant marker updates
             let currentWaterDispenserContext = null;
             let currentStudyRoomContext = null;
-            let currentPersonMarkerContext = null;
 
             // Funzioni per gestire i marker degli erogatori d'acqua
             function showWaterDispensers() {
@@ -7873,6 +8085,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 const element = document.createElement('div');
                                 element.className = 'water-dispenser-marker counter-rotate-marker';
                                 element.innerHTML = `<span class="material-symbols-outlined">water_ec</span>`;
+                                
+                                element.setAttribute('data-marker-type', 'water-dispenser');
+                                element.setAttribute('data-room-name', facility.nome || facility.ricerca || '');
 
                                 viewer.addOverlay({
                                     element: element,
@@ -7900,9 +8115,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
             function showStudyRoomMarkers() {
                 if (!viewer || !data || !selectedPolo || !selectedBuilding || !selectedFloor) return;
-
-                // Non mostrare in vista prospettica
-                if (currentView === 'perspective') return;
 
                 const newContext = `${selectedPolo}-${selectedBuilding}-${selectedFloor}`;
                 if (currentStudyRoomContext === newContext && studyRoomOverlays.length > 0) {
@@ -7978,95 +8190,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 });
                 studyRoomOverlays = [];
             }
-
-            // Funzioni per gestire i marker delle persone
-            function showPersonMarkers(targetPersonName = null) {
-                if (!viewer || !data || !selectedPolo || !selectedBuilding || !selectedFloor) return;
-
-                // Non mostrare in vista prospettica
-                if (currentView === 'perspective') return;
-
-                // Se non è specificata una persona, non mostrare nulla
-                if (!targetPersonName) return;
-
-                const newContext = `${selectedPolo}-${selectedBuilding}-${selectedFloor}-${targetPersonName}`;
-                if (currentPersonMarkerContext === newContext && personOverlays.length > 0) {
-                    return;
-                }
-
-                // Rimuovi marker esistenti
-                hidePersonMarkers();
-                currentPersonMarkerContext = newContext;
-
-                const tiledImage = viewer.world.getItemAt(0);
-                if (!tiledImage) return;
-                const contentSize = tiledImage.getContentSize();
-
-                try {
-                    const floorData = data.polo[selectedPolo].edificio[selectedBuilding]?.piano[selectedFloor];
-                    const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
-
-                    rooms.forEach(room => {
-                        if (room.type === 'persona' && room.coordinates) {
-                            // Mostra solo il marker della persona selezionata
-                            if (room.ricerca !== targetPersonName) return;
-
-                            const { x, y } = room.coordinates;
-                            if (x != null && y != null) {
-                                const osdY = contentSize.y - parseFloat(y);
-                                const osdX = parseFloat(x);
-                                const imagePoint = new OpenSeadragon.Point(osdX, osdY);
-                                const viewportPoint = tiledImage.imageToViewportCoordinates(imagePoint);
-
-                                const element = document.createElement('div');
-                                element.className = 'person-marker counter-rotate-marker';
-                                element.innerHTML = `<span class="material-symbols-outlined">person</span>`;
-
-                                // Make marker interactive and add data attributes for event delegation
-                                element.style.pointerEvents = 'auto';
-                                element.style.cursor = 'pointer';
-
-                                // Create unique marker ID and store room data
-                                const markerId = `person-${selectedPolo}-${selectedBuilding}-${selectedFloor}-${room.ricerca}`;
-                                element.setAttribute('data-marker-type', 'person');
-                                element.setAttribute('data-marker-id', markerId);
-                                element.setAttribute('data-polo', selectedPolo);
-                                element.setAttribute('data-building', selectedBuilding);
-                                element.setAttribute('data-floor', selectedFloor);
-                                element.setAttribute('data-room-name', room.ricerca);
-
-                                // Store room data for retrieval in event handler
-                                markerRoomDataMap.set(markerId, room);
-
-                                viewer.addOverlay({
-                                    element: element,
-                                    location: viewportPoint,
-                                    placement: 'CENTER'
-                                });
-                                personOverlays.push(element);
-                            }
-                        }
-                    });
-                } catch (error) {
-                    console.error('Errore nel mostrare i marker delle persone:', error);
-                }
-            }
-
-            function hidePersonMarkers() {
-                currentPersonMarkerContext = null;
-                if (!viewer) return;
-
-                personOverlays.forEach(element => {
-                    // Clean up marker data from Map
-                    const markerId = element.getAttribute('data-marker-id');
-                    if (markerId) {
-                        markerRoomDataMap.delete(markerId);
-                    }
-                    viewer.removeOverlay(element);
-                });
-                personOverlays = [];
-            }
-
 
             function loadSVG(building, floor, viewType = 'top', viewParams = null, roomData = null) {
                 // Controlla se la vista top è disponibile
@@ -8323,7 +8446,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 // che i marker siano già lì e non faranno nulla.
                 hideWaterDispensers();
                 hideStudyRoomMarkers();
-                hidePersonMarkers();
+                currentSelectedRoomOverlay = null;
 
                 // Open the image
                 viewer.open({
@@ -8357,6 +8480,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         requestAnimationFrame(() => {
                             viewer.viewport.panTo(viewportPoint);
                             viewer.viewport.zoomTo(viewportZoom);
+                            
+                            addSelectedRoomMarker(roomData, viewportPoint);
                         });
                     } else if (viewParams && viewParams.x && viewParams.y && viewParams.z) {
                         // Usa i parametri salvati dall'URL (Leaflet coords)
@@ -8394,19 +8519,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }, 50);
 
                     // Mostra gli erogatori d'acqua solo se il setting è attivo E la vista è "top"
-                    if (settingsConfig.showWaterDispensers && currentView === 'top') {
+                    if (settingsConfig.showWaterDispensers) {
                         showWaterDispensers();
                     }
 
                     // Mostra le aule studio solo se il setting è attivo E la vista è "top"
-                    if (settingsConfig.showStudyRooms && currentView === 'top') {
+                    if (settingsConfig.showStudyRooms) {
                         showStudyRoomMarkers();
                     }
 
-                    // Show person markers if roomData is a person and we're in top view
-                    if (roomData && roomData.type === 'persona' && currentView === 'top') {
-                        showPersonMarkers(roomData.ricerca);
-                    }
+                    // Aggiorna l'URL con le coordinate corrette dopo il caricamento
+                    // per evitare coordinate obsolete dopo un refresh
+                    requestAnimationFrame(() => {
+                        updateURL(true);
+                    });
                 });
             }
 
