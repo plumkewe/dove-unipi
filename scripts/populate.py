@@ -1767,7 +1767,9 @@ def main():
         print("\n" + "=" * 60)
         print("PHASE 5: Generating Short Links")
         print("=" * 60)
-        os.system("python3 scripts/generate_short_links.py")
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        generate_script = os.path.join(script_dir, "generate_short_links.py")
+        os.system(f"python3 {generate_script}")
     
     print("\n" + "=" * 60)
     print("PIPELINE COMPLETE")
