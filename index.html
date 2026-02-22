@@ -811,7 +811,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 </script>
 
     <!-- Tailwind CSS (compiled) -->
-    <link rel="stylesheet" href="assets/css/output.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/output.css">
     <style>
         /* Caricamento del font OpenDyslexic */
         @font-face {
@@ -6210,22 +6210,28 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 }
             });
 
-            // Funzione per mostrare le impostazioni
+            // Funzione per mostrare/nascondere le impostazioni
             if (settingsBtn) {
                 settingsBtn.addEventListener('click', () => {
                     const input = window.innerWidth <= 768 ? searchInputMobile : searchInput;
                     if (input) {
-                        input.value = 'impostazioni';
-                        input.dispatchEvent(new Event('input', { bubbles: true }));
-                        
-                        // Chiudi la sidebar se aperta (su mobile è utile)
-                        const sidebar = document.getElementById('sidebar');
-                        if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
-                            const closeBtn = document.getElementById('close-sidebar-button');
-                            if (closeBtn) closeBtn.click();
+                        if (input.value.trim().toLowerCase() === 'impostazioni') {
+                            input.value = '';
+                            input.dispatchEvent(new Event('input', { bubbles: true }));
+                            input.blur();
+                        } else {
+                            input.value = 'impostazioni';
+                            input.dispatchEvent(new Event('input', { bubbles: true }));
+                            
+                            // Chiudi la sidebar se aperta (su mobile è utile)
+                            const sidebar = document.getElementById('sidebar');
+                            if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+                                const closeBtn = document.getElementById('close-sidebar-button');
+                                if (closeBtn) closeBtn.click();
+                            }
+                            
+                            setTimeout(() => input.focus(), 50);
                         }
-                        
-                        setTimeout(() => input.focus(), 50);
                     }
                 });
             }
