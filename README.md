@@ -36,7 +36,7 @@
   - [Path sharing](#path-sharing)
   - [Lingue supportate](#lingue-supportate)
   - [Altri dati](#altri-dati)
-    - [Distributori d'acqua](#distributori-dacqua)
+    - [Erogatori d'acqua](#erogatori-dacqua)
     - [Aule Studio](#aule-studio)
     - [Persone](#persone)
 - [API Orari Biblioteca](#api-orari-biblioteca)
@@ -70,6 +70,7 @@
 [<img src="https://wsrv.nl/?url=github.com/gregoriop06.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Gregorio Pescucci" />](https://github.com/gregoriop06)
 [<img src="https://wsrv.nl/?url=github.com/alesmk.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="Alessia" />](https://github.com/alesmk)
 [<img src="https://wsrv.nl/?url=github.com/juliusnixi.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="JuliusNixi" />](https://github.com/juliusnixi)
+[<img src="https://wsrv.nl/?url=github.com/HairouLiu.png?w=64&h=64&mask=circle&fit=cover" width="46" height="46" alt="HairouLiu" />](https://github.com/HairouLiu)
 
 _Un ringraziamento speciale a chi ha dedicato il proprio tempo per la raccolta dati nelle aule._
 
@@ -289,7 +290,7 @@ graph TB
     SearchType -->|Condividi| OpenShare[Mostra opzioni<br/>condivisione]
     SearchType -->|Bot Telegram| OpenBot[Mostra link<br/>bot Telegram]
     SearchType -->|Feedback| OpenFeedback[Mostra link<br/>feedback]
-    SearchType -->|Distributori| FindWater[Trova distributori<br/>acqua]
+    SearchType -->|Erogatori| FindWater[Trova erogatori<br/>acqua]
 
     FindByName --> ShowResults[Mostra risultati]
     FindPerson --> ShowResults
@@ -515,15 +516,15 @@ In futuro verranno aggiunte altre **lingue!**
 
 ### Altri dati
 
-#### Distributori d'acqua
+#### Erogatori d'acqua
 
-È disponibile in **versione alfa** la possibilità di visualizzare i **distributori d'acqua** presenti negli edifici del Polo Fibonacci.
+È Possibile visualizzare gli **erogatori d'acqua** presenti negli edifici.
 
-Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risultati saranno evidenziati con un **colore blu**, come omaggio al progetto [**CoSA** dell'Università di Pisa ↗](https://sostenibile.unipi.it)
+Puoi cercare gli erogatori digitando `Erog...` nella barra di ricerca. I risultati saranno evidenziati con un **colore blu**, come omaggio al progetto [**CoSA** dell'Università di Pisa ↗](https://sostenibile.unipi.it)
 
 > [!NOTE]
-> **Hai trovato distributori non mappati?**  
-> Ci servono dati sulla posizione di **distributori d'acqua**, **distributori di caffè**, **distributori di cibo...**
+> **Hai trovato erogatori non mappati?**  
+> Ci servono dati sulla posizione di **erogatori d'acqua**, **distributori di caffè**, **distributori di cibo...**
 > Apri una [issue](https://github.com/plumkewe/dove-unipi/issues) oppure inviami un'email a: [lyubomyr.malay@icloud.com](mailto:lyubomyr.malay@icloud.com)  
 > **Grazie per il supporto!**
 
@@ -531,10 +532,9 @@ Puoi cercare i distributori digitando `Dist...` nella barra di ricerca. I risult
 
 #### Aule Studio
 
-È possibile visualizzare le **aule studio** presenti negli edifici del Polo Fibonacci.
-Questa funzione permette di attivare dei marker specifici sulla mappa per individuare facilmente le zone studio.
+È possibile visualizzare le **aule studio**.
 
-I marker appariranno sulla mappa indicando la posizione esatta delle aule dedicate allo studio.
+Sono contrasegnati sulla mappa dai marker marronni.
 
 > [!NOTE]
 > Se siete interessati alle aule studio esterne, potete consultare [Fantamappa](https://www.google.com/maps/d/viewer?mid=1q4ousVeGWQnZX-5K3i_SYE3bBsky2tkv), realizzata da [Sinistraper](https://www.sinistraper.org/fantamappa/).
