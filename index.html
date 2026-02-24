@@ -2920,8 +2920,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         // API CONFIGURATION & STATE (Hoisted for safety)
         // ============================================
         
-        let cinecaCache = { data: null, timestamp: 0, date: null };
-        let cinecaFetchPromise = null;
+        // Per-calendar cache: Map<calendarId, { data, timestamp, date }>
+        const cinecaCacheMap = new Map();
+        const cinecaFetchPromiseMap = new Map();
 
         // Wait for DOM and lazy-loaded OpenSeadragon before booting the app
         let domReady = false;
@@ -5111,7 +5112,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         } else if (settingsConfig.showClassroomStatus && !isFacility && shouldCheckStatus) {
                             const availabilitySource = window.classroomAvailability || {};
                             const classroomName = result.room?.nome || '';
-                            const availabilityData = classroomName && availabilitySource[classroomName];
+                            const classroomKey = result.polo ? `${result.polo}:${classroomName}` : classroomName;
+                            const availabilityData = classroomKey && availabilitySource[classroomKey];
 
                             let statusClass = 'loading';
                             let statusText = t('loading_occupancy');
@@ -5151,7 +5153,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 }
                             } else if (classroomName) {
                                 // Carica i dati solo per questa aula specifica (on-demand)
-                                getClassroomAvailability(classroomName).then(availability => {
+                                getClassroomAvailability(classroomKey).then(availability => {
                                     const code = Number(Object.keys(availability)[0]);
                                     const value = availability[code];
 
@@ -5172,14 +5174,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                             occ = parts.slice(2).join('|');
                                         }
 
-                                        window.classroomAvailability[classroomName] = {
+                                        window.classroomAvailability[classroomKey] = {
                                             code: 1,
                                             startTime: start || '',
                                             endTime: end || '',
                                             occupiedBy: occ || ''
                                         };
                                     } else {
-                                        window.classroomAvailability[classroomName] = {
+                                        window.classroomAvailability[classroomKey] = {
                                             code: code,
                                             startTime: '',
                                             endTime: '',
@@ -5188,11 +5190,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     }
 
                                     // FIX: Aggiorna UI immediatamente se l'elemento esiste
-                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${classroomName}"]`);
+                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${CSS.escape(classroomKey)}"]`);
                                     if (statusBar) {
                                         statusBar.classList.remove('loading');
                                         const statusTextSpan = statusBar.querySelector('.occupancy-text');
-                                        const availabilityData = window.classroomAvailability[classroomName];
+                                        const availabilityData = window.classroomAvailability[classroomKey];
 
                                         if (availabilityData.code === 0) {
                                             statusBar.classList.add('free');
@@ -5203,7 +5205,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                             // Handle details (time range)
                                             if (availabilityData.startTime && availabilityData.endTime) {
-                                                const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
+                                                const occupancyId = `occupancy-${classroomKey.replace(/[\s:]/g, '-')}`;
 
                                                 // Create expand icon if not exists
                                                 if (!statusBar.querySelector('.occupancy-expand-icon')) {
@@ -5252,14 +5254,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     }
                                 }).catch(error => {
                                     console.warn(`Failed to get availability for ${classroomName}:`, error);
-                                    window.classroomAvailability[classroomName] = {
+                                    window.classroomAvailability[classroomKey] = {
                                         code: 2,
                                         startTime: '',
                                         endTime: '',
                                         occupiedBy: ''
                                     };
                                     // Update UI on error too
-                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${classroomName}"]`);
+                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${CSS.escape(classroomKey)}"]`);
                                     if (statusBar) {
                                         statusBar.classList.remove('loading');
                                         statusBar.style.display = 'none'; // Hide on error
@@ -5267,9 +5269,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 });
                             }
 
-                            const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
+                            const occupancyId = `occupancy-${classroomKey.replace(/[\s:]/g, '-')}`;
                             availabilityHTML = showBar ? `
-                                <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomName}">
+                                <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomKey}">
                                     <span class="occupancy-text">${statusText}</span>
                                     ${timeRange ? `<span class="occupancy-expand-icon material-symbols-outlined" data-occupancy-id="${occupancyId}">keyboard_arrow_down</span>` : ''}
                                 </div>
@@ -8729,22 +8731,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 return DEBUG_TIME ? new Date(DEBUG_TIME) : new Date();
             }
 
-            async function fetchCinecaEventsForToday() {
+            async function fetchCinecaEventsForCalendar(calendarId) {
+                if (!calendarId) return [];
                 const now = getNow();
                 const todayStr = now.toISOString().split('T')[0];
 
-                // 1. Check local cache (5 minutes validity)
-                if (cinecaCache.data && cinecaCache.date === todayStr && (Date.now() - cinecaCache.timestamp < 300000)) {
-                    return cinecaCache.data;
+                // 1. Check per-calendar cache (5 minutes validity)
+                const cached = cinecaCacheMap.get(calendarId);
+                if (cached && cached.date === todayStr && (Date.now() - cached.timestamp < 300000)) {
+                    return cached.data;
                 }
 
-                // 2. Return valid in-flight promise to duplicate requests
-                if (cinecaFetchPromise) {
-                    return cinecaFetchPromise;
+                // 2. Return valid in-flight promise to avoid duplicate requests
+                if (cinecaFetchPromiseMap.has(calendarId)) {
+                    return cinecaFetchPromiseMap.get(calendarId);
                 }
 
                 // 3. Start new fetch
-                cinecaFetchPromise = (async () => {
+                const fetchPromise = (async () => {
                     const start = getNow();
                     start.setHours(0, 0, 0, 0);
                     const end = getNow();
@@ -8753,14 +8757,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const payload = {
                         'mostraImpegniAnnullati': true,
                         'mostraIndisponibilitaTotali': false,
-                        'linkCalendarioId': data?.polo?.fibonacci?.calendar_id,
+                        'linkCalendarioId': calendarId,
                         'clienteId': CINECA_CLIENT_ID,
                         'pianificazioneTemplate': false,
                         'dataInizio': start.toISOString(),
                         'dataFine': end.toISOString()
                     };
 
-                    // Direct Cineca Fetch (Settings from api-orario.py)
                     try {
                         const response = await fetch('https://apache.prod.up.cineca.it/api/Impegni/getImpegniCalendarioPubblico', {
                             method: 'POST',
@@ -8774,27 +8777,79 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         
                         const events = await response.json();
                         
-                        // Success! Update cache
-                        cinecaCache = { data: events, timestamp: Date.now(), date: todayStr };
+                        // Success! Update per-calendar cache
+                        cinecaCacheMap.set(calendarId, { data: events, timestamp: Date.now(), date: todayStr });
                         return events;
                     } catch (e) {
-                        console.error('Cineca API direct fetch failed:', e);
+                        console.error('Cineca API fetch failed for calendar', calendarId, ':', e);
                         return [];
                     }
-
                 })().catch(err => {
                     console.error("Cineca Fetch Error:", err);
                     return [];
                 }).finally(() => {
-                    cinecaFetchPromise = null;
+                    cinecaFetchPromiseMap.delete(calendarId);
                 });
 
-                return cinecaFetchPromise;
+                cinecaFetchPromiseMap.set(calendarId, fetchPromise);
+                return fetchPromise;
+            }
+
+            /**
+             * Get all calendar entries for a polo.
+             * Returns an array of { calendarId, prefix, buildingKey } objects.
+             * - Fibonacci: has a single calendar_id at polo level
+             * - Ingegneria: each building has its own calendar_id
+             */
+            function getCalendarIdsForPolo(poloName) {
+                const poloData = data?.polo?.[poloName];
+                if (!poloData) return [];
+
+                const result = [];
+
+                // 1. Check polo-level calendar_id (e.g., Fibonacci)
+                if (poloData.calendar_id) {
+                    result.push({
+                        calendarId: poloData.calendar_id,
+                        prefix: poloData.prefix || '',
+                        buildingKey: null
+                    });
+                }
+
+                // 2. Check per-building calendar_ids (e.g., Ingegneria buildings)
+                if (poloData.edificio) {
+                    Object.entries(poloData.edificio).forEach(([buildingKey, buildingData]) => {
+                        if (buildingData.calendar_id) {
+                            result.push({
+                                calendarId: buildingData.calendar_id,
+                                prefix: buildingData.prefix || '',
+                                buildingKey: buildingKey
+                            });
+                        }
+                    });
+                }
+
+                return result;
+            }
+
+            /**
+             * Fetch all events for a polo by fetching from all its calendars.
+             * Returns a flat array of all events across all calendars.
+             */
+            async function fetchAllEventsForPolo(poloName) {
+                const calendarEntries = getCalendarIdsForPolo(poloName);
+                if (calendarEntries.length === 0) return [];
+
+                const allEvents = await Promise.all(
+                    calendarEntries.map(entry => fetchCinecaEventsForCalendar(entry.calendarId))
+                );
+
+                return allEvents.flat();
             }
 
             function prettyAulaName(name) {
                 if (!name) return name;
-                let result = name.replace('FIB', 'Fib').replace('RIUNIONI', 'Riunioni');
+                let result = name.replace('RIUNIONI', 'Riunioni');
                 result = result.replace(/([A-Z0-9])\-LAB/, 'Lab $1');
                 return result;
             }
@@ -8848,9 +8903,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
              * GET /api/all_schedules_given_pole_and_room
              */
             async function getAllSchedulesGivenPoleAndRoom(poleName, classroom) {
-                if (poleName.toLowerCase() !== 'fibonacci') return {};
-
-                const events = await fetchCinecaEventsForToday();
+                const events = await fetchAllEventsForPolo(poleName.toLowerCase());
                 const roomEvents = [];
 
                 events.forEach(event => {
@@ -8860,7 +8913,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 });
                 
-                roomEvents.sort(); // sort by time string working roughly OK for same day (08 vs 14)
+                roomEvents.sort();
                 return { [classroom]: roomEvents };
             }
 
@@ -8884,9 +8937,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
              * GET /api/schedules_payload_given_pole
              */
             async function getSchedulesPayloadGivenPole(poleName, classrooms = null) {
-                if (poleName.toLowerCase() !== 'fibonacci') return { schedules: {} };
-
-                const events = await fetchCinecaEventsForToday();
+                const poloKey = poleName.toLowerCase();
+                const events = await fetchAllEventsForPolo(poloKey);
                 const now = getNow();
                 const schedules = {};
 
@@ -8899,14 +8951,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const statusStr = getEventStatusString(event);
                         
                         (event.aule || []).forEach(aula => {
-                            const key = prettyAulaName(aula.codice); // "Fib A"
+                            const key = prettyAulaName(aula.codice);
                             // Last write wins for overlap
                             schedules[key] = statusStr;
                         });
                     }
                 });
 
-                return { pole: "Fibonacci", schedules: schedules };
+                return { pole: poleName, schedules: schedules };
             }
 
             // ============================================
@@ -8937,11 +8989,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         const payload = await getSchedulesPayloadGivenPole(displayPoloName);
                         if (!payload || !payload.schedules) return;
 
-                        // Map local room names to availability based on "Fib X" keys
+                        // Map local room names to availability using per-building prefix
                         const poloData = data.polo[poloName];
                         if (!poloData) return;
 
                         Object.values(poloData.edificio || {}).forEach(building => {
+                            // Use building prefix, fall back to polo prefix
+                            const prefix = building.prefix || poloData.prefix || '';
+
                             Object.values(building.piano || {}).forEach(floorData => {
                                 const rooms = Array.isArray(floorData) ? floorData : (floorData?.aule ? Object.values(floorData.aule) : []);
 
@@ -8951,22 +9006,26 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                     if (!room.nome) return;
                                     if (room.type && !['aula', 'studio', 'sala', 'laboratorio'].includes(room.type)) return;
 
-                                    // Generate key expected in API response ("Aula A" -> "Fib A")
-                                    const apiKey = room.nome.replace(/^Aula\s+/i, 'Fib ');
+                                    // Generate key expected in API response
+                                    // e.g. "Aula A" -> "FIB A", "Aula B32" -> "ING B32", "Aula F5" -> "ETR F5", "Aula 6" -> "PN 6"
+                                    const apiKey = room.nome.replace(/^Aula\s+/i, prefix + ' ');
 
                                     // Direct lookup in payload
                                     const scheduleValue = payload.schedules[apiKey];
 
+                                    // Use polo-scoped key to avoid collisions between polos
+                                    const availabilityKey = `${poloName}:${room.nome}`;
+
                                     // Update global state
                                     if (scheduleValue === undefined) {
                                         // Not found in API -> Unavailable
-                                        window.classroomAvailability[room.nome] = {
+                                        window.classroomAvailability[availabilityKey] = {
                                             code: 2,
                                             startTime: '', endTime: '', occupiedBy: ''
                                         };
                                     } else if (scheduleValue === "" || scheduleValue === null) {
                                         // Free
-                                        window.classroomAvailability[room.nome] = {
+                                        window.classroomAvailability[availabilityKey] = {
                                             code: 0,
                                             startTime: '', endTime: '', occupiedBy: ''
                                         };
@@ -8976,7 +9035,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         const timeRange = parts[0] || '';
                                         const [start, end] = timeRange.split(' - ');
 
-                                        window.classroomAvailability[room.nome] = {
+                                        window.classroomAvailability[availabilityKey] = {
                                             code: 1,
                                             startTime: start || '',
                                             endTime: end || '',
@@ -9006,7 +9065,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return { 2: unavailableLabel };
                 }
 
-                // Se già in cache, restituisci immediatamente
+                // classroom is now polo-scoped: "polo:Aula X"
                 if (window.classroomAvailability[classroom]) {
                     const cached = window.classroomAvailability[classroom];
                     if (cached.code === 0) {
@@ -9024,18 +9083,40 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return pendingApiRequests.get(classroom);
                 }
 
-                // Converti sempre "Aula X" in "Fib X" per l'API
-                const classroomName = classroom.replace(/^Aula\s+/i, 'Fib ');
+                // Parse polo and room name from the scoped key
+                const colonIdx = classroom.indexOf(':');
+                const poloName = colonIdx >= 0 ? classroom.substring(0, colonIdx) : (selectedPolo || 'fibonacci');
+                const roomName = colonIdx >= 0 ? classroom.substring(colonIdx + 1) : classroom;
+
+                const poloData = data?.polo?.[poloName];
+                let prefix = poloData?.prefix || 'FIB';
+
+                // For polos with per-building calendars, find the correct building prefix
+                if (poloData?.edificio) {
+                    for (const building of Object.values(poloData.edificio)) {
+                        if (building.prefix) {
+                            const buildingHasRoom = Object.values(building.piano || {}).some(floorData => {
+                                const rooms = Array.isArray(floorData) ? floorData : [];
+                                return rooms.some(r => r.nome === roomName);
+                            });
+                            if (buildingHasRoom) {
+                                prefix = building.prefix;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                const classroomApiName = roomName.replace(/^Aula\s+/i, prefix + ' ');
+                const displayPoloName = poloName.charAt(0).toUpperCase() + poloName.slice(1);
 
                 // Crea la promessa e salvala nella cache delle richieste pendenti
-                const promise = getCurrentScheduleGivenPoleAndRoom('Fibonacci', classroomName)
+                const promise = getCurrentScheduleGivenPoleAndRoom(displayPoloName, classroomApiName)
                     .then(data => {
-                        // data format: { "Fib X": "valore" } or { "Fib X": "" }
                         if (!data || typeof data !== 'object') {
                             return { 2: unavailableLabel };
                         }
 
-                        // Cerca la chiave dell'aula
                         const classroomKey = Object.keys(data)[0];
                         if (!classroomKey) {
                             return { 2: unavailableLabel };
@@ -9043,12 +9124,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                         const scheduleValue = data[classroomKey];
 
-                        // Se è vuoto, l'aula è libera
                         if (scheduleValue === "" || scheduleValue === null) {
                             return { 0: freeLabel };
                         }
 
-                        // Se c'è un valore, l'aula è occupata
                         return { 1: scheduleValue };
                     })
                     .catch(error => {
@@ -9056,11 +9135,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         return { 2: unavailableLabel };
                     })
                     .finally(() => {
-                        // Rimuovi dalla cache delle richieste pendenti quando completata
                         pendingApiRequests.delete(classroom);
                     });
 
-                // Salva la promessa nella cache
                 pendingApiRequests.set(classroom, promise);
 
                 return promise;
@@ -9155,7 +9232,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                             // Add expand icon if time range exists and not already present
                             if (availabilityData.startTime && availabilityData.endTime && !statusBar.querySelector('.occupancy-expand-icon')) {
-                                const occupancyId = `occupancy-${classroomName.replace(/\s/g, '-')}`;
+                                const occupancyId = `occupancy-${classroomName.replace(/[\s:]/g, '-')}`;
                                 const timeRange = `${availabilityData.startTime} - ${availabilityData.endTime}`;
 
                                 const expandIcon = document.createElement('span');
