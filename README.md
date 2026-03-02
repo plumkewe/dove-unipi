@@ -8,6 +8,14 @@
 
 <p align="center">L’interfaccia consente di navigare in modo interattivo tra gli edifici, visualizzare mappe .SVG dei piani e ottenere dettagli sulle singole aule.</p>
 
+<p align="center">
+  <a href="https://github.com/luxxiu/dove-unipi-bot">REPO DEL BOT</a>
+  &nbsp;•&nbsp;
+  <a href="https://t.me/doveunipibot">BOT</a>
+  &nbsp;•&nbsp;
+  <a href="https://instagram.com/doveunipi">INSTAGRAM</a>
+</p>
+
 <h2 align="right"> SCREENSHOT </h2>
 
 <p align="center">
@@ -744,66 +752,78 @@ Scrivendo `@doveunipibot` all’interno di una chat o di un gruppo viene mostrat
 
 La palette dei colori è stata resa coerente con quella del sito, sia per quanto riguarda gli edifici sia per le occupazioni, garantendo una maggiore uniformità visiva e un’esperienza consistente tra le diverse piattaforme.
 
+>[!TIP]
+> Leggi di più nella [repository del bot](https://github.com/luxxiu/dove-unipi-bot).
+
 ### Commandi
 
 <table>
   <thead>
     <tr>
       <th>Funzione</th>
-      <th>Comando</th>
+      <th>Comando / Query</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><b>Ricerca Inline</b><br>In qualsiasi chat, cerca un'aula o un professore</td>
-      <td><code>@doveunipibot &lt;query&gt;</code></td>
+      <td><b>Benvenuto</b><br>Mostra il messaggio di benvenuto e la guida rapida</td>
+      <td><code>/start</code></td>
     </tr>
     <tr>
-      <td><b>Mappe</b><br>Cerca la mappa di un polo o edificio:<br>Esempi: <code>@doveunipibot fibonacci</code>, <code>@doveunipibot porta nuova</code></td>
-      <td><code>@doveunipibot [nome polo]</code></td>
-    </tr>
-    <tr>
-      <td><b>Filtri Polo</b><br>Se ottieni troppi risultati, puoi filtrare per polo:<br>• <code>+fib</code>: Filtra per Fibonacci<br>• <code>+ing</code>: Filtra per Ingegneria<br>Esempio: <code>@doveunipibot Aula B +ing</code> (cerca 'Aula B' solo a Ingegneria)</td>
-      <td><code>+&lt;polo&gt;</code></td>
-    </tr>
-    <tr>
-      <td><b>Cerca Lezione</b><br>Supporta anche giorni successivi (+1, +2...)</td>
-      <td><code>@doveunipibot l:materia</code></td>
-    </tr>
-    <tr>
-      <td><b>Cerca Professore</b><br>Usare solo il cognome</td>
-      <td><code>@doveunipibot p:cognome</code></td>
-    </tr>
-    <tr>
-      <td><b>Stato Aula</b><br>Puoi aggiungere +1, +2... per i giorni successivi</td>
-      <td><code>@doveunipibot s:aula</code></td>
-    </tr>
-    <tr>
-      <td><b>Stato Aula Interattivo</b><br>Per vedere lo stato con navigazione giorni</td>
-      <td><code>@doveunipibot si:aula</code></td>
-    </tr>
-    <tr>
-      <td><b>Cerca Biblioteca</b><br>Cerca una biblioteca per vedere informazioni e orari</td>
-      <td><code>@doveunipibot b:&lt;nome&gt;</code></td>
-    </tr>
-    <tr>
-      <td><b>Lista Biblioteche</b><br>Lista biblioteche e orari</td>
-      <td><code>/biblioteche</code></td>
-    </tr>
-    <tr>
-      <td><b>Menu Occupazione</b></td>
+      <td><b>Occupazione Aule</b><br>Naviga lo stato delle aule per polo, edificio e piano</td>
       <td><code>/occupazione</code></td>
     </tr>
     <tr>
-      <td><b>Link Utili</b></td>
+      <td><b>Biblioteche</b><br>Lista biblioteche con orari e informazioni</td>
+      <td><code>/biblioteche</code></td>
+    </tr>
+    <tr>
+      <td><b>Link Utili</b><br>GitHub, sito web, Instagram, Twitter</td>
       <td><code>/links</code></td>
     </tr>
     <tr>
-      <td><b>Guida all'uso</b></td>
+      <td><b>Guida all'uso</b><br>Guida dettagliata a tutte le funzionalità</td>
       <td><code>/help</code></td>
+    </tr>
+    <tr>
+      <td><b>Cerca Aula / Ufficio</b><br>Ricerca inline per nome aula in tutti i poli</td>
+      <td><code>@doveunipibot nome aula</code></td>
+    </tr>
+    <tr>
+      <td><b>Posizione Polo</b><br>Invia i link a Google Maps e Apple Maps per la posizione del polo cercato</td>
+      <td><code>@doveunipibot nome polo</code></td>
+    </tr>
+    <tr>
+      <td><b>Stato Aula</b><br>Libera o occupata, con orario e programma giornata</td>
+      <td><code>@doveunipibot s:nome aula</code></td>
+    </tr>
+    <tr>
+      <td><b>Stato Interattivo</b><br>Stato aula con navigazione giorni tramite pulsanti</td>
+      <td><code>@doveunipibot si:nome aula</code></td>
+    </tr>
+    <tr>
+      <td><b>Cerca Lezione</b><br>Cerca dove si svolge una lezione per materia</td>
+      <td><code>@doveunipibot l:nome materia</code></td>
+    </tr>
+    <tr>
+      <td><b>Cerca Professore</b><br>Cerca un professore e le sue lezioni (solo cognome)</td>
+      <td><code>@doveunipibot p:cognome</code></td>
+    </tr>
+    <tr>
+      <td><b>Cerca Biblioteca</b><br>Orari e info di una biblioteca universitaria</td>
+      <td><code>@doveunipibot b:nome biblioteca</code></td>
+    </tr>
+    <tr>
+      <td><b>Occupazione Rapida Polo</b><br>Stato immediato di tutte le aule del polo selezionato</td>
+      <td>Pulsante polo nella tastiera persistente</td>
+    </tr>
+    <tr>
+      <td><b>Filtro per Orario</b><br>Filtra le aule libere rispondendo a un messaggio di occupazione.<br><code>13:00</code> → libere da quell'ora a fine giornata<br><code>13:00-15:00</code> → libere per l'intero intervallo</td>
+      <td>Rispondi a un messaggio di occupazione (polo / edificio / piano)</td>
     </tr>
   </tbody>
 </table>
+
 
 ### Screenshot
 
