@@ -1347,7 +1347,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             top: 0;
             right: 0;
             bottom: 0;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             padding: 0 12px;
@@ -1356,16 +1356,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             cursor: pointer;
             color: var(--text-muted);
             /* gray-400 */
-            transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1;
-            transform: scale(1);
+            transition: color 0.2s ease-in-out;
         }
 
-        .clear-search-button.hidden {
-            display: flex !important; /* overrides Tailwind's hidden */
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.8);
+        .clear-search-button:not(.hidden) {
+            display: flex;
         }
 
         .clear-search-button:hover {
@@ -1692,59 +1687,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             /* Forza la larghezza al 100% */
         }
 
-        /* === ANIMATION: search results (fluid & logical) === */
-        #search-results {
-            opacity: 1;
-            max-height: 240px;
-            visibility: visible;
-            pointer-events: auto;
-            transform: translateY(0);
-            transition: max-height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-            transform-origin: top center;
-        }
-
-        #search-results-mobile {
-            opacity: 1;
-            max-height: 50vh;
-            visibility: visible;
-            pointer-events: auto;
-            transform: translateY(0);
-            transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            transform-origin: bottom center;
-        }
-
-        #search-results.hidden {
-            display: block !important; 
-            max-height: 0 !important;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(-10px);
-            border-width: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            transition: max-height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.3s;
-        }
-
-        #search-results-mobile.hidden {
-            display: block !important; 
-            max-height: 0 !important;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(10px);
-            border-width: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            transition: max-height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.35s;
-        }
-        
-        /* Grid transition base on wrapper to smoothly animate height */
-        #search-wrapper,
-        #search-wrapper-mobile {
-            transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
         #right-controls {
             grid-area: controls;
             display: flex;
@@ -1797,8 +1739,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 padding-right: 1rem;
                 display: flex;
                 justify-content: center;
-                /* Rimosso transition: bottom per evitare lag con tastiera iOS/Android, ora è fluido frame per frame */
-                will-change: bottom;
+                transition: bottom 0.3s ease-in-out;
             }
 
             #mobile-search-container .search-wrapper-mobile {
@@ -1921,7 +1862,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     /* Sfondo sfumato che va verso l'alto */
                     background: linear-gradient(to top,
                             #e5e7eb 0%,
-                            #e5e7eb 70%,
+                            #e5e7eb 40%,
                             rgba(229, 231, 235, 0) 100%) !important;
                     background-size: 100% 120px !important; /* Limita l'altezza del gradiente */
                     background-repeat: no-repeat !important; /* Non ripetere il gradiente */
@@ -3397,11 +3338,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (keyboardHeight > 100) {
                     // Sposta la barra di ricerca sopra la tastiera
                     // Aggiungi un offset extra di 16px per un po' di padding
-                    mobileSearchContainer.style.setProperty('bottom', `${keyboardHeight + 16}px`, 'important');
+                    mobileSearchContainer.style.bottom = `${keyboardHeight + 16}px`;
                 } else {
                     // Ripristina la posizione originale
-                    mobileSearchContainer.style.setProperty('bottom', '', 'important');
-                    mobileSearchContainer.style.bottom = ''; // Fallback
+                    mobileSearchContainer.style.bottom = '48px';
                 }
             }
 
@@ -4959,51 +4899,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
 
-                // [START] Animation helper state per evitare scatti visivi su aggiornamento risultati/impostazioni
-                const wasHidden = currentSearchResults.classList.contains('hidden');
-                let oldHeight = 0;
-                
-                if (!wasHidden && !loadMore) {
-                    oldHeight = currentSearchResults.offsetHeight;
-                    // Fissa temporaneamente l'altezza per evitare che durante 'innerHTML = ""' la barra collassi di colpo
-                    currentSearchResults.style.height = oldHeight + 'px';
-                }
-
-                // Helper che completa l'aggiornamento e lancia la transizione fluida per l'altezza
-                const finalizeAndAnimate = () => {
-                    currentSearchResults.classList.remove('hidden');
-
-                    if (!wasHidden && !loadMore) {
-                        // Resetta l'altezza a 'auto' per poter calcolare l'ingombro reale dei nuovi contenuti (tappato da max-height)
-                        currentSearchResults.style.height = 'auto';
-                        const newHeightTarget = currentSearchResults.offsetHeight;
-                        
-                        // Se c'è stata una differenza di altezza rispetto prima
-                        if (oldHeight !== newHeightTarget) {
-                            // ri-applica l'altezza vecchia
-                            currentSearchResults.style.height = oldHeight + 'px';
-                            currentSearchResults.offsetHeight; // forza reflow per registrare la height iniziale della transizione
-                            
-                            // avvia transizione
-                            currentSearchResults.style.transition = 'height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
-                            currentSearchResults.style.height = newHeightTarget + 'px';
-                            
-                            // Cleanup a fine transizione
-                            setTimeout(() => {
-                                // Rimuovi stili inline se ancora presente l'altezza di destinazione
-                                if (currentSearchResults.style.height === newHeightTarget + 'px') {
-                                    currentSearchResults.style.height = '';
-                                    currentSearchResults.style.transition = '';
-                                }
-                            }, 300);
-                        } else {
-                            currentSearchResults.style.height = '';
-                            currentSearchResults.style.transition = '';
-                        }
-                    }
-                };
-                // [END] Animation helper state
-
                 // Store the current index to preserve it after re-render
                 const previousIndex = selectedSearchResultIndex;
 
@@ -5051,7 +4946,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                              </div>
                         </div>
                     `;
-                    finalizeAndAnimate();
+                    currentSearchResults.classList.remove('hidden');
                     selectedSearchResultIndex = -1;
                     document.body.classList.remove('keyboard-navigation-active');
                     return;
@@ -5294,9 +5189,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         };
                                     }
 
-                                    // FIX: Aggiorna UI immediatamente se l'elemento esiste
-                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${CSS.escape(classroomKey)}"]`);
-                                    if (statusBar) {
+                                    // FIX: Aggiorna UI immediatamente se l'elemento esiste (tutti le occorrenze)
+                                    const statusBars = currentSearchResults.querySelectorAll(`.occupancy-status-bar[data-classroom="${CSS.escape(classroomKey)}"]`);
+                                    statusBars.forEach(statusBar => {
                                         statusBar.classList.remove('loading');
                                         const statusTextSpan = statusBar.querySelector('.occupancy-text');
                                         const availabilityData = window.classroomAvailability[classroomKey];
@@ -5310,7 +5205,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                                             // Handle details (time range)
                                             if (availabilityData.startTime && availabilityData.endTime) {
-                                                const occupancyId = `occupancy-${classroomKey.replace(/[\s:]/g, '-')}`;
+                                                const occupancyId = `occupancy-${classroomKey.replace(/[\s:]/g, '-')}-${Math.random().toString(36).substr(2, 9)}`; // Unique ID for each instance
 
                                                 // Create expand icon if not exists
                                                 if (!statusBar.querySelector('.occupancy-expand-icon')) {
@@ -5333,9 +5228,11 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                                     });
                                                 }
 
-                                                // Create details container if not exists
-                                                if (!document.getElementById(occupancyId)) {
-                                                    const detailsDiv = document.createElement('div');
+                                                // Create details container if not exists (checked by ID which is now unique per instance)
+                                                // Actually, since we are iterating DOM elements, we should check relative to statusBar
+                                                let detailsDiv = statusBar.nextSibling;
+                                                if (!detailsDiv || !detailsDiv.classList || !detailsDiv.classList.contains('occupancy-details')) {
+                                                    detailsDiv = document.createElement('div');
                                                     detailsDiv.className = 'occupancy-details';
                                                     detailsDiv.id = occupancyId;
                                                     
@@ -5356,7 +5253,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         } else if (availabilityData.code === 2) {
                                             statusBar.style.display = 'none';
                                         }
-                                    }
+                                    });
                                 }).catch(error => {
                                     console.warn(`Failed to get availability for ${classroomName}:`, error);
                                     window.classroomAvailability[classroomKey] = {
@@ -5366,15 +5263,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                         occupiedBy: ''
                                     };
                                     // Update UI on error too
-                                    const statusBar = currentSearchResults.querySelector(`.occupancy-status-bar[data-classroom="${CSS.escape(classroomKey)}"]`);
-                                    if (statusBar) {
+                                    const statusBars = currentSearchResults.querySelectorAll(`.occupancy-status-bar[data-classroom="${CSS.escape(classroomKey)}"]`);
+                                    statusBars.forEach(statusBar => {
                                         statusBar.classList.remove('loading');
                                         statusBar.style.display = 'none'; // Hide on error
-                                    }
+                                    });
                                 });
                             }
 
-                            const occupancyId = `occupancy-${classroomKey.replace(/[\s:]/g, '-')}`;
+                            const occupancyId = `occupancy-${classroomKey.replace(/[\s:]/g, '-')}-${Math.random().toString(36).substr(2, 9)}`;
                             availabilityHTML = showBar ? `
                                 <div class="occupancy-status-bar ${statusClass}" data-classroom="${classroomKey}">
                                     <span class="occupancy-text">${statusText}</span>
@@ -5494,7 +5391,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     document.body.classList.remove('keyboard-navigation-active');
                 }
 
-                finalizeAndAnimate();
+                currentSearchResults.classList.remove('hidden');
 
                 // Reset scroll position to top after showing the results panel (but not when loading more)
                 if (currentSearchResults && !loadMore) {
@@ -6426,10 +6323,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             document.addEventListener('click', (e) => {
                 const searchContainer = document.getElementById('search-container');
                 const mobileSearchContainer = document.getElementById('mobile-search-container');
-                const minimizeMapPanel = document.getElementById('polo-minimap-panel');
                 const isSearchClick = (searchContainer && searchContainer.contains(e.target)) || 
                                      (mobileSearchContainer && mobileSearchContainer.contains(e.target));
-                const isMapClick = document.getElementById('viewer-container') && document.getElementById('viewer-container').contains(e.target);
                 
                 // Don't hide if clicking on a promo result or disable link
                 if (e.target.closest('.search-result-item') || e.target.classList.contains('disable-promo-link')) {
@@ -6439,9 +6334,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 if (!isSearchClick) {
                     const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                     const isPromoVisible = currentSearchResults && 
-                                          currentSearchResults.textContent && 
-                                          currentSearchResults.textContent.includes('Sito in Beta') &&
-                                          !currentSearchResults.classList.contains('hidden');
+                                          currentSearchResults.querySelector('.search-result-item .title') && 
+                                          currentSearchResults.innerHTML.includes('bot_promo');
+                    
+                    // If promo is visible, do not hide results on click outside
+                    // Unless the user explicitly cleared the search or something else logic handles it.
+                    // Actually, usually we hide results. But the user wants it to show "always".
+                    // "Always when the field is empty".
+                    // So if it's the promo, we might want to keep it?
+                    // But if I click on the map I probably want to see the map.
+                    // The user said "show it always not just when I click in the field".
+                    // This creates a conflict with map interaction.
+                    // If the results block the map, the app becomes unusable.
+                    // However, the promo is just one item, small height.
+                    // I will check if the search input is empty. If empty and promo is active, don't hide?
                     
                     const searchInputEl = isMobile() ? searchInputMobile : searchInput;
                     const isEmpty = searchInputEl && searchInputEl.value.trim() === '';
@@ -6475,7 +6381,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 if (closeBtn) closeBtn.click();
                             }
                             
-                            input.focus();
+                            setTimeout(() => input.focus(), 50);
                         }
                     }
                 });
