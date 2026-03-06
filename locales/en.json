@@ -535,6 +535,10 @@
     "original": "Risultati in altri poli",
     "translation": "Results in other campuses"
   },
+  "not_on_dove_divider": {
+    "original": "Non su DOVE?UNIPI",
+    "translation": "Not on DOVE?UNIPI"
+  },
   "settings_poi_blinking": {
     "original": "Lampeggiamento marker",
     "translation": "Marker Blinking"

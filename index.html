@@ -113,6 +113,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
     <link rel="preload" href="assets/css/output.css?v=1.0.1" as="style">
     <!-- Preload data to shorten critical path -->
     <link rel="preload" href="data/unified.json?v=1.0.1" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/biblioteche.json" as="fetch" crossorigin="anonymous">
 
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
@@ -1347,7 +1348,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             top: 0;
             right: 0;
             bottom: 0;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             padding: 0 12px;
@@ -1356,11 +1357,16 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             cursor: pointer;
             color: var(--text-muted);
             /* gray-400 */
-            transition: color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: scale(1);
         }
 
-        .clear-search-button:not(.hidden) {
-            display: flex;
+        .clear-search-button.hidden {
+            display: flex !important;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
         }
 
         .clear-search-button:hover {
@@ -1678,13 +1684,63 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             overflow: hidden;
         }
 
+        /* === ANIMAZIONE: risultati ricerca (fluida) === */
         #search-results {
+            opacity: 1;
             max-height: 240px;
+            visibility: visible;
+            pointer-events: auto;
             overflow-y: auto;
             overflow-x: hidden;
-            /* Previene lo scroll orizzontale */
             width: 100%;
-            /* Forza la larghezza al 100% */
+            transform: translateY(0);
+            transition: max-height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: top center;
+        }
+
+        #search-results-mobile {
+            opacity: 1;
+            max-height: 50vh;
+            visibility: visible;
+            pointer-events: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            transform: translateY(0);
+            transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: bottom center;
+        }
+
+        #search-results.hidden {
+            display: block !important;
+            max-height: 0 !important;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-10px);
+            border-width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transition: max-height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.3s;
+        }
+
+        #search-results-mobile.hidden {
+            display: block !important;
+            max-height: 0 !important;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(10px);
+            border-width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transition: max-height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.35s;
+        }
+
+        /* Transizione wrapper per altezza più morbida */
+        #search-wrapper,
+        #search-wrapper-mobile {
+            transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         #right-controls {
@@ -3138,6 +3194,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // Logic for Room/Person
                 if (result.room) {
+                    // External library (from biblioteche.json) - opens Google Maps
+                    if (result.type === 'external_library') {
+                        const googleMapsUrl = result.room['google maps'];
+                        if (googleMapsUrl) {
+                            window.open(googleMapsUrl, '_blank');
+                        }
+                        const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+                        setTimeout(() => currentSearchInput.focus(), 50);
+                        return;
+                    }
+
                     const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
 
                     selectRoom(result.polo, result.edificio, result.piano, result.room);
@@ -3820,6 +3887,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             ];
 
             let data = {};
+            let biblioteche = []; // Biblioteche dall'SBA non presenti su DOVE?UNIPI
             let selectedPolo = '';
             let selectedBuilding = '';
             let selectedFloor = '0';
@@ -4696,8 +4764,66 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     results.push(...peopleMatches);
                 }
 
+                // Cerca nelle biblioteche esterne (biblioteche.json) non presenti su DOVE?UNIPI
+                if (biblioteche.length > 0 && !capacityFilter) {
+                    // Raccogli i nid già presenti in unified.json (biblioteche già mappate)
+                    const unifiedLibraryNids = new Set();
+                    for (const poloName in data.polo) {
+                        const polo = data.polo[poloName];
+                        for (const buildingName in polo.edificio) {
+                            const building = polo.edificio[buildingName];
+                            for (const floorName in (building.piano || {})) {
+                                const items = building.piano[floorName];
+                                if (Array.isArray(items)) {
+                                    items.forEach(item => {
+                                        const isLib = Array.isArray(item.type) ? item.type.includes('biblioteca') : item.type === 'biblioteca';
+                                        if (isLib && item.nid) unifiedLibraryNids.add(item.nid);
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    const externalLibMatches = [];
+                    biblioteche.forEach(bib => {
+                        // Salta le biblioteche già presenti in unified.json (stesso nid)
+                        if (bib.nid && unifiedLibraryNids.has(bib.nid)) return;
+
+                        const ricercaLower = (bib.ricerca || bib.nome || '').toLowerCase();
+                        const aliasLower = Array.isArray(bib.alias) ? bib.alias.map(a => a.toLowerCase()) : [];
+                        const nomeLower = (bib.nome || '').toLowerCase();
+
+                        const matches = isExactSearch
+                            ? (ricercaLower === queryLower || nomeLower === queryLower || aliasLower.some(a => a === queryLower))
+                            : (ricercaLower.includes(queryLower) || nomeLower.includes(queryLower) || aliasLower.some(a => a.includes(queryLower)));
+
+                        if (matches) {
+                            externalLibMatches.push({
+                                type: 'external_library',
+                                room: bib
+                            });
+                        }
+                    });
+
+                    // Ordina alfabeticamente
+                    externalLibMatches.sort((a, b) => {
+                        const aName = (a.room.ricerca || a.room.nome || '').toLowerCase();
+                        const bName = (b.room.ricerca || b.room.nome || '').toLowerCase();
+                        const aStarts = aName.startsWith(queryLower);
+                        const bStarts = bName.startsWith(queryLower);
+                        if (aStarts && !bStarts) return -1;
+                        if (!aStarts && bStarts) return 1;
+                        return aName.localeCompare(bName);
+                    });
+
+                    results.push(...externalLibMatches);
+                }
+
                 displaySearchResults(results, matchesSettingsQuery);
             }
+
+            // In-flight library fetch deduplication: nid → Promise<data>
+            const libraryFetchInFlight = {};
 
             function fetchLibrarySchedule(nid, container) {
                 const today = new Date();
@@ -4718,7 +4844,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     const cachedData = localStorage.getItem(cacheKey);
                     if (cachedData) {
                         const parsed = JSON.parse(cachedData);
-                        // Check if cache is from today
                         if (parsed.date === fromDate && parsed.data) {
                             updateLibraryUI(getLiveContainer(), parsed.data);
                             return;
@@ -4726,6 +4851,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     }
                 } catch (e) {
                     console.warn('Error reading library cache:', e);
+                }
+
+                // If already fetching this nid, attach to the existing promise
+                if (libraryFetchInFlight[nid]) {
+                    libraryFetchInFlight[nid]
+                        .then(data => updateLibraryUI(getLiveContainer(), data))
+                        .catch(() => updateLibraryUI(getLiveContainer(), null, true));
+                    return;
                 }
 
                 const nextWeek = new Date(today);
@@ -4736,49 +4869,33 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const toDate = `${yyyy2}-${mm2}-${dd2}`;
 
                 const apiUrl = `https://www.sba.unipi.it/it/opening_hours/instances?from_date=${fromDate}&to_date=${toDate}&nid=${nid}`;
-                // Use a CORS proxy as a fallback because the SBA API doesn't support CORS
-                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
 
-                fetch(apiUrl)
+                // Fetch with timeout
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 8000);
+                const fetchPromise = fetch(apiUrl, { signal: controller.signal })
+                    .finally(() => clearTimeout(timer))
                     .then(response => {
-                        if (!response.ok) throw new Error('Network response was not ok');
+                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
                         return response.json();
-                    })
+                    });
+
+                libraryFetchInFlight[nid] = fetchPromise;
+
+                fetchPromise
                     .then(data => {
-                        // Save to cache
+                        delete libraryFetchInFlight[nid];
                         try {
-                            localStorage.setItem(cacheKey, JSON.stringify({
-                                date: fromDate,
-                                data: data
-                            }));
+                            localStorage.setItem(cacheKey, JSON.stringify({ date: fromDate, data }));
                         } catch (e) {
                             console.warn('Error saving library cache:', e);
                         }
                         updateLibraryUI(getLiveContainer(), data);
                     })
                     .catch(err => {
-                        console.warn("Direct fetch failed, trying proxy...", err);
-                        fetch(proxyUrl)
-                            .then(response => {
-                                if (!response.ok) throw new Error('Proxy response was not ok');
-                                return response.json();
-                            })
-                            .then(data => {
-                                // Save to cache
-                                try {
-                                    localStorage.setItem(cacheKey, JSON.stringify({
-                                        date: fromDate,
-                                        data: data
-                                    }));
-                                } catch (e) {
-                                    console.warn('Error saving library cache:', e);
-                                }
-                                updateLibraryUI(getLiveContainer(), data);
-                            })
-                            .catch(err2 => {
-                                console.error("Proxy fetch also failed:", err2);
-                                updateLibraryUI(getLiveContainer(), null, true);
-                            });
+                        delete libraryFetchInFlight[nid];
+                        console.error('Library fetch failed:', err);
+                        updateLibraryUI(getLiveContainer(), null, true);
                     });
             }
 
@@ -4792,8 +4909,9 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 statusBar.classList.remove('loading');
 
                 if (isError || !data) {
-                    // Hide the entire bar when there's an error or no data (like room status)
-                    statusBar.style.display = 'none';
+                    // Show unavailable state instead of hiding completely
+                    statusBar.classList.add('occupied');
+                    statusText.textContent = t('availability_unavailable');
                     return;
                 }
 
@@ -4899,6 +5017,35 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
 
+                const wasHidden = currentSearchResults.classList.contains('hidden');
+                const oldHeight = (!wasHidden && !loadMore) ? currentSearchResults.scrollHeight : 0;
+
+                const getResultsMaxHeight = () => {
+                    return isMobile() ? Math.floor(window.innerHeight * 0.50) : 240;
+                };
+
+                const finalizeAndAnimate = () => {
+                    if (!wasHidden && !loadMore) {
+                        const maxHeight = getResultsMaxHeight();
+                        const startHeight = Math.min(oldHeight, maxHeight);
+                        const targetHeight = Math.min(currentSearchResults.scrollHeight, maxHeight);
+
+                        currentSearchResults.style.maxHeight = `${startHeight}px`;
+                        currentSearchResults.classList.remove('hidden');
+                        currentSearchResults.getBoundingClientRect();
+
+                        requestAnimationFrame(() => {
+                            currentSearchResults.style.maxHeight = `${targetHeight}px`;
+                        });
+
+                        setTimeout(() => {
+                            currentSearchResults.style.maxHeight = '';
+                        }, isMobile() ? 420 : 340);
+                    } else {
+                        currentSearchResults.classList.remove('hidden');
+                    }
+                };
+
                 // Store the current index to preserve it after re-render
                 const previousIndex = selectedSearchResultIndex;
 
@@ -4946,7 +5093,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                              </div>
                         </div>
                     `;
-                    currentSearchResults.classList.remove('hidden');
+                                        finalizeAndAnimate();
                     selectedSearchResultIndex = -1;
                     document.body.classList.remove('keyboard-navigation-active');
                     return;
@@ -4962,6 +5109,8 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
                 // Track if we've inserted the "other poli" divider
                 let otherPoliDividerInserted = loadMore ? currentSearchResults.querySelector('.search-results-divider') !== null : false;
+                // Track if we've inserted the "Non su DOVE?UNIPI" divider
+                let externalLibDividerInserted = loadMore ? currentSearchResults.querySelector('.search-results-divider-external') !== null : false;
 
                 resultsToShow.forEach((result, localIndex) => {
                     const globalIndex = startIndex + localIndex; // Calculate global index for event handlers
@@ -4977,6 +5126,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                             fragment.appendChild(divider);
                         }
                         otherPoliDividerInserted = true;
+                    }
+
+                    // Insert "Non su DOVE?UNIPI" divider before the first external library result
+                    if (!externalLibDividerInserted && result.type === 'external_library') {
+                        const divider = document.createElement('div');
+                        divider.className = 'search-results-divider search-results-divider-external';
+                        divider.textContent = t('not_on_dove_divider') || 'Non su DOVE?UNIPI';
+                        fragment.appendChild(divider);
+                        externalLibDividerInserted = true;
                     }
 
                     const resultElement = document.createElement('div');
@@ -5075,6 +5233,28 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                                 </div>
                             </div>
                         `;
+                    } else if (result.type === 'external_library') {
+                        const bib = result.room;
+                        const libraryNid = bib.nid;
+                        const occupancyId = `library-schedule-${libraryNid}`;
+                        const scheduleHTML = libraryNid ? `
+                            <div class="occupancy-status-bar loading" data-library-nid="${libraryNid}">
+                                <span class="occupancy-text">${t('loading_occupancy')}</span>
+                            </div>
+                            <div class="occupancy-details" id="${occupancyId}">
+                                <div class="occupancy-details-content"></div>
+                            </div>
+                        ` : '';
+                        resultElement.innerHTML = `
+                            <div class="title">${bib.ricerca || bib.nome}</div>
+                            <div class="details">${bib.indirizzo || ''}${bib.capienza > 0 ? '<div>' + t('room_detail_capacity').replace('%s', bib.capienza) + '</div>' : ''}</div>
+                            ${scheduleHTML}
+                        `;
+                        if (libraryNid) {
+                            fetchLibrarySchedule(libraryNid, resultElement);
+                        }
+                        fragment.appendChild(resultElement);
+                        return;
                     } else {
                         const capacityDetails = result.room && result.room.capienza != null ? result.room.capienza : null;
                         const isFacility = result.isFacility || false;
@@ -5391,7 +5571,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     document.body.classList.remove('keyboard-navigation-active');
                 }
 
-                currentSearchResults.classList.remove('hidden');
+                finalizeAndAnimate();
 
                 // Reset scroll position to top after showing the results panel (but not when loading more)
                 if (currentSearchResults && !loadMore) {
@@ -6818,6 +6998,12 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                     return unifiedJson;
                 })();
 
+                // Carica biblioteche.json in parallelo
+                fetch('data/biblioteche.json')
+                    .then(r => r.ok ? r.json() : [])
+                    .then(json => { biblioteche = Array.isArray(json) ? json : []; })
+                    .catch(() => { biblioteche = []; });
+
                 // 1. Tentativo caricamento da cache
                 try {
                     const cachedUnified = localStorage.getItem(UNIFIED_CACHE_KEY);
@@ -6831,7 +7017,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         loadedFromCache = true;
                         bootstrapFromCache = true;
                         console.log('Dati caricati dalla cache');
-                        fetchCinecaEventsForToday();
                     }
                 } catch (e) {
                     console.warn('Errore lettura cache:', e);
@@ -6865,7 +7050,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
                         dataLoaded = true;
                         populatePolos(Object.keys(data.polo));
                         handleInitialLoad();
-                        fetchCinecaEventsForToday();
                     } else {
                         data = currentData; // Ripristina per coerenza UI sessione corrente
                         // Aggiorniamo comunque i dati in memoria per le navigazioni future senza reload
