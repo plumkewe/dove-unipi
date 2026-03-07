@@ -1,0 +1,70 @@
+# DOVE?UNIPI
+> Applicazione per orientarsi tra edifici, piani e aule del Polo Fibonacci
+> e del Polo Ingegneria dell'Università di Pisa.
+> URL: https://plumkewe.github.io/dove-unipi/
+
+## Polo Fibonacci — Aule e Aule Studio
+
+### Edificio A
+- [Aula 1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-1/)
+- [Aula 2](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-2/)
+- [Aula 3](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-3/)
+- [Aula 4](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-4/)
+- [Aula Magna (DM)](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-magna-dm/)
+- [Aula Studio](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-studio/)
+- [Aula portatili](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-portatili/)
+
+### Edificio B
+- [Aula A](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-a/)
+- [Aula A1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-a1/)
+- [Aula B](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-b/)
+- [Aula B1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-b1/)
+- [Aula C](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-c/)
+- [Aula C1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-c1/)
+- [Aula D](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-d/)
+- [Aula D1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-d1/)
+- [Aula E](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-e/)
+- [Aula E1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-e1/)
+- [Aula F](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-f/)
+- [Aula F1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-f1/)
+- [Aula G](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-g/)
+- [Aula G1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-g1/)
+- [Aula H-Lab](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-h-lab/)
+- [Aula I-Lab](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-i-lab/)
+- [Aula I1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-i1/)
+- [Aula L](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-l/)
+- [Aula L1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-l1/)
+- [Aula M-Lab](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-m-lab/)
+- [Aula M1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-m1/)
+- [Aula N](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-n/)
+- [Aula N1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-n1/)
+- [Aula O](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-o/)
+- [Aula O1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-o1/)
+- [Aula P](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-p/)
+- [Aula P1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-p1/)
+- [Aula R1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-r1/)
+- [Aula S1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-s1/)
+- [Aula Studio Mitnick](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-studio-mitnick/)
+- [Aula Studio Moot](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-studio-moot/)
+- [Aula Studio Ponte](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-studio-ponte/)
+- [Aula Studio Torvalds](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-studio-torvalds/)
+- [Aula Studio Wozniak](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-studio-wozniak/)
+- [Aula T1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-t1/)
+- [Aula V1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/1/aula-v1/)
+- [Aula X1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-x1/)
+- [Aula X2](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-x2/)
+- [Aula X3](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-x3/)
+- [Aula X5](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-x5/)
+- [Aula X6](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-x6/)
+- [Aula X7](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/piano/0/aula-x7/)
+
+### Edificio D
+- [Aula D2](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/d/piano/0/aula-d2/)
+- [Aula D3](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/d/piano/0/aula-d3/)
+- [Aula D4](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/d/piano/0/aula-d4/)
+- [Aula D5](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/d/piano/0/aula-d5/)
+
+### Edificio E
+- [Aula Magna](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/e/piano/1/aula-magna/)
+- [Aula PS1](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/e/piano/0/aula-ps1/)
+- [Aula PS4](https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/e/piano/1/aula-ps4/)
