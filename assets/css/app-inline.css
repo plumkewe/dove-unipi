@@ -1,0 +1,1736 @@
+/* Caricamento del font OpenDyslexic */
+        @font-face {
+            font-family: 'OpenDyslexic';
+            src: url('../fonts/OpenDyslexic-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Material Symbols (self-hosted) */
+        @font-face {
+            font-family: 'Material Symbols Outlined';
+            src: url('../fonts/material-symbols-outlined-subset.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Stile personalizzato */
+        html,
+        body {
+            touch-action: manipulation;
+            overflow: hidden;
+            /* Impedisce lo scroll su tutta la pagina */
+            height: 100vh;
+            /* Fallback per browser vecchi */
+            height: 100dvh;
+            /* Forza l'altezza al 100% del viewport dinamico (iOS fix) */
+            width: 100vw;
+            /* Forza la larghezza al 100% del viewport */
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-gray-200);
+            /* Assicura che il background sia uniforme (gray-200) */
+        }
+
+        /* Nascondi le scrollbar su tutti i browser */
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        html,
+        body {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* IE 10+ */
+            user-select: none;
+            /* Standard syntax */
+            font-size: 16px;
+            /* Base font size */
+        }
+
+        /* Classe per il font OpenDyslexic */
+        body.dyslexic-font,
+        body.dyslexic-font * {
+            font-family: 'OpenDyslexic', sans-serif !important;
+        }
+
+        /* Escludi le icone Material Symbols dal font OpenDyslexic */
+        body.dyslexic-font .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined' !important;
+        }
+
+        /* Aggiustamenti per il font OpenDyslexic (è più largo) */
+        body.dyslexic-font .search-result-item .flex-1.min-w-0 {
+            max-width: calc(100% - 70px);
+            /* Più spazio per il toggle */
+        }
+
+        body.dyslexic-font .search-result-item .flex-1.min-w-0 .title,
+        body.dyslexic-font .search-result-item .flex-1.min-w-0 .details {
+            font-size: 0.95em;
+            /* Riduci leggermente il testo */
+            line-height: 1.3;
+            /* Riduce l'altezza delle righe */
+        }
+
+        /* Text size scaling classes */
+        body.text-small {
+            font-size: 14px;
+        }
+
+        body.text-normal {
+            font-size: 16px;
+        }
+
+        body.text-large {
+            font-size: 18px;
+        }
+
+        body.text-xlarge {
+            font-size: 20px;
+        }
+
+        /* Nascondi la scrollbar del menu di navigazione */
+        #navigation-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        #navigation-menu {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        /* Stili per la transizione della sidebar */
+        .no-transition #sidebar {
+            transition: none;
+        }
+
+        #sidebar {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.5s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Default width will be overridden by specific classes below */
+            width: 290px;
+            min-width: 290px;
+            max-width: 290px;
+            background-color: var(--bg-main);
+            border-right: 1px solid var(--border-divider);
+            color: #0d0d0d;
+        }
+
+        /* Sidebar width adjustments based on text size */
+        body.text-small #sidebar {
+            width: 210px;
+            min-width: 210px;
+            max-width: 210px;
+        }
+
+        body.text-normal #sidebar {
+            width: 225px;
+            min-width: 225px;
+            max-width: 225px;
+        }
+
+        body.text-large #sidebar {
+            width: 250px;
+            min-width: 250px;
+            max-width: 250px;
+        }
+
+        body.text-xlarge #sidebar {
+            width: 260px;
+            min-width: 260px;
+            max-width: 260px;
+        }
+
+        /* Stile per l'hover degli elementi */
+        @media (hover: hover) {
+            .nav-item:hover {
+                background-color: var(--bg-surface-hover);
+                /* Aligned with normal buttons */
+            }
+
+            .hover-effect:hover {
+                background-color: var(--color-gray-300);
+                /* gray-300 */
+            }
+
+            .hover-effect-darker:hover {
+                background-color: var(--overlay-selected);
+                /* 10% black opacity */
+            }
+
+            .hover-text-effect:hover {
+                color: var(--color-gray-800);
+                /* gray-800 */
+            }
+
+            /* Hover effect for library and department buttons (not in high-contrast mode) */
+            body:not(.high-contrast) a.bg-gray-300:hover,
+            body:not(.high-contrast) button.bg-gray-300:hover {
+                background-color: var(--color-gray-350) !important;
+            }
+        }
+
+        /* Reset hover effects on touch devices to prevent sticky hover */
+        @media (hover: none) {
+            .nav-item:hover {
+                background-color: var(--color-transparent);
+            }
+        }
+
+
+
+        /* Fix per iOS cursor jumping */
+        @supports (-webkit-touch-callout: none) {
+            input[type="text"] {
+                font-size: 16px !important;
+                /* Previene lo zoom automatico su iOS */
+                transform: translateZ(0);
+                /* Forza l'accelerazione hardware */
+            }
+
+            /* Stabilizza il contenitore di ricerca su mobile */
+            #mobile-search-container {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+
+        /* Fix per Safari iOS - gestisce la barra degli indirizzi dinamica */
+        @supports (-webkit-touch-callout: none) {
+            #sidebar {
+                height: -webkit-fill-available;
+            }
+        }
+
+        .search-result-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            border-top: 1px solid var(--border-divider);
+            /* gray-300 70% */
+            transition: background-color 0.2s ease-in-out;
+            overflow: hidden;
+            /* Previene lo scroll orizzontale */
+            width: 100%;
+            /* Forza la larghezza al 100% del contenitore */
+            box-sizing: border-box;
+            /* Include padding nel calcolo della larghezza */
+        }
+
+        .search-result-item {
+            position: relative;
+        }
+
+        .search-result-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-transparent);
+            transition: background-color 0.2s ease-in-out;
+            pointer-events: none;
+        }
+
+        @media (hover: hover) {
+            body:not(.keyboard-navigation-active) .search-result-item:hover::before {
+                background-color: var(--overlay-selected);
+            }
+        }
+
+        .search-result-item.selected::before {
+            background-color: var(--overlay-selected);
+        }
+
+        .search-results-divider {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background-color: var(--bg-main);
+            border-top: 1px solid var(--border-divider);
+            border-bottom: 1px solid var(--border-divider);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .search-results-divider::before,
+        .search-results-divider::after {
+            display: none;
+        }
+
+        .search-results-divider + .search-result-item {
+            border-top: none;
+        }
+
+        :root {
+            /* =========================
+               Base Palette
+               ========================= */
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-transparent: transparent;
+
+            /* Grays (Tailwind-aligned) */
+            --color-gray-50: #f8fafc;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-350: #b7bcc5; /* Custom gray for hover states */
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-600: #4b5563;
+            --color-gray-800: #1f2937;
+
+            /* Status Colors */
+            --color-status-free: #8BACAA;
+            --color-status-occupied: #B04759;
+            --color-status-unavailable-bg: var(--color-gray-200);
+            --color-status-unavailable-text: var(--color-gray-500);
+
+            /* =========================
+               Semantic Variables
+               ========================= */
+            /* Text */
+            --text-primary: var(--color-gray-800);
+            --text-secondary: var(--color-gray-600);
+            --text-muted: var(--color-gray-400);
+            --text-inverse: var(--color-white);
+
+            /* Backgrounds */
+            --bg-main: var(--color-gray-200);
+            --bg-surface: var(--color-gray-200);
+            --bg-surface-hover: var(--color-gray-300);
+            --bg-tooltip: var(--color-gray-300);
+
+            /* Interactive / Overlays */
+            --overlay-hover: rgba(0, 0, 0, 0.05);
+            --overlay-selected: rgba(0, 0, 0, 0.1);
+            --overlay-nav-selected: #eaeaea;
+
+            /* Elements */
+            --focus-ring: var(--color-gray-600);
+
+            /* Previous Definitions */
+            --color-water-dispenser: #3B82F6;
+            --color-water-dispenser-bg: rgba(59, 130, 246, 0.2);
+            --color-water-dispenser-search-bg: rgb(216, 220, 242);
+
+            --color-study-room: #BC9F8B;
+            --color-study-room-bg: rgba(188, 159, 139, 0.2);
+            --color-person: #A7AAE1;
+            --color-person-bg: rgba(167, 170, 225, 0.2);
+
+
+            /* Dividers / Borders */
+            --border-divider: rgba(209, 213, 219, 0.7);
+        }
+
+        /* Stile specifico per gli erogatori d'acqua */
+        .search-result-item.water-dispenser {
+            background-color: var(--color-water-dispenser-search-bg);
+        }
+
+        .search-result-item .title {
+            color: var(--text-primary);
+            /* gray-800 */
+            font-weight: 600;
+            overflow: hidden;
+            /* Previene overflow */
+            text-overflow: ellipsis;
+            /* Aggiunge ... se il testo è troppo lungo */
+            white-space: nowrap;
+            /* Mantiene il testo su una riga */
+            width: 100%;
+            /* Forza la larghezza */
+        }
+
+        /* Permetti al testo delle impostazioni di andare a capo su mobile */
+        .search-result-item .flex-1.min-w-0 {
+            overflow: hidden;
+            /* Previene overflow del container */
+            max-width: calc(100% - 60px);
+            /* Lascia spazio per il toggle */
+        }
+
+        .search-result-item .flex-1.min-w-0 .title {
+            white-space: normal;
+            /* Permette al testo di andare a capo */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            /* Per parole molto lunghe */
+            hyphens: auto;
+            /* Aggiunge trattini quando necessario */
+            max-width: 100%;
+        }
+
+        .search-result-item .details {
+            color: var(--text-secondary);
+            /* gray-600 */
+            font-size: 12px;
+            overflow: hidden;
+            /* Previene overflow */
+            word-wrap: break-word;
+            /* Permette di spezzare le parole lunghe */
+            word-break: break-word;
+            /* Compatibilità aggiuntiva */
+            width: 100%;
+            /* Forza la larghezza */
+            max-width: 100%;
+        }
+
+        @media (hover: hover) {
+
+            body:not(.keyboard-navigation-active) .search-result-item:hover .title,
+            body:not(.keyboard-navigation-active) .search-result-item:hover .details {
+                color: var(--text-primary);
+                /* gray-800 */
+            }
+        }
+
+        .search-result-item.selected .title,
+        .search-result-item.selected .details {
+            color: var(--text-primary);
+            /* gray-800 */
+        }
+
+        /* Occupancy Status Bar Styles */
+        .occupancy-status-bar {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin-top: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            gap: 8px;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .occupancy-status-bar.loading {
+            background: linear-gradient(90deg, var(--color-gray-300) 25%, var(--color-gray-400) 50%, var(--color-gray-300) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2.5s infinite;
+            color: var(--text-secondary);
+            will-change: background-position;
+            /* Optimize animation */
+        }
+
+        .occupancy-status-bar.free {
+            background-color: var(--color-status-free);
+            color: var(--color-white);
+        }
+
+        .occupancy-status-bar.occupied {
+            background-color: var(--color-status-occupied);
+            color: var(--color-white);
+        }
+
+        .occupancy-status-bar.unavailable {
+            background-color: var(--color-gray-200);
+            color: var(--color-gray-500);
+        }
+
+
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .occupancy-text {
+            flex: 1 1 auto;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        .occupancy-expand-icon {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .occupancy-expand-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .occupancy-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 12px;
+        }
+
+        .occupancy-details.expanded {
+            max-height: 500px;
+            padding: 8px 12px;
+        }
+
+        .occupancy-details-content {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        .occupancy-details-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+
+        .nav-item.selected {
+            background-color: var(--overlay-selected);
+        }
+
+        .nav-item {
+            -webkit-tap-highlight-color: var(--color-transparent);
+        }
+
+        .clear-search-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            background: var(--color-transparent);
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            /* gray-400 */
+            transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .clear-search-button.hidden {
+            display: flex !important;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
+        }
+
+        .clear-search-button:hover {
+            color: var(--text-secondary);
+            /* gray-600 */
+        }
+
+        /* Add padding to input when clear button is visible */
+        #search-input,
+        #search-input-mobile {
+            padding-right: 40px;
+        }
+
+        .clear-search-button:focus-visible {
+            outline: 2px solid var(--color-gray-600);
+            outline-offset: 2px;
+        }
+
+        .high-contrast .clear-search-button {
+            background-color: var(--color-transparent) !important;
+            border: none !important;
+            color: var(--color-black) !important;
+        }
+
+        .high-contrast .clear-search-button:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Stile per Google Material Symbols */
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24;
+            display: inline-block;
+            /* Helps with alignment */
+            vertical-align: middle;
+            /* Aligns with text if needed */
+            -webkit-font-smoothing: antialiased;
+            /* Migliora il rendering su WebKit */
+            -moz-osx-font-smoothing: grayscale;
+            /* Migliora il rendering su Firefox */
+        }
+
+        /* Stili per l'animazione di cambio piano */
+        #viewer-container {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        #viewer-container.loading {
+            opacity: 0;
+            transform: scale(0.98);
+        }
+
+        /* Previeni il jittering durante lo zoom */
+        #viewer-container svg {
+            touch-action: none;
+            user-select: none;
+        }
+
+        /* Stili per OpenSeadragon map */
+        #viewer-container {
+            position: relative;
+            z-index: 1;
+            /* Livello base per il contenitore della mappa */
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-main);
+            /* gray-200 */
+            z-index: 1;
+            /* Mappa al livello più basso */
+            position: relative;
+            will-change: transform;
+            backface-visibility: hidden;
+            contain: layout paint;
+            transform: translateZ(0);
+            transform-origin: center center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #map.map-flipped {
+            transform: rotate(180deg) translateZ(0);
+        }
+
+        /* Ruota le icone dei servizi quando la mappa è girata per mantenerle dritte */
+        #map.map-flipped .counter-rotate-marker .material-symbols-outlined {
+            transform: rotate(180deg);
+        }
+
+        @media (pointer: coarse) {
+            #map {
+                touch-action: none;
+            }
+        }
+
+        main#main-content,
+        #main-content {
+            position: relative;
+            z-index: 1;
+            /* Contenuto principale dietro all'interfaccia */
+        }
+
+        .water-dispenser-marker,
+        .study-room-marker {
+            /* background: none !important; */
+            border: none !important;
+            opacity: 1;
+            /* Ensure visibility */
+            display: flex !important;
+            /* Force flex */
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            /* Fix for potential offset */
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            will-change: transform;
+            /* Hint browser to optimize compositing */
+            contain: layout style paint;
+            /* Isolate rendering */
+            transform: translateZ(0);
+            /* Promote to own layer */
+        }
+
+        .water-dispenser-marker span,
+        .study-room-marker span {
+            display: block;
+            line-height: 1;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            /* Use variables for colors in JS, or here if we move them from inline */
+        }
+
+        /* New classes for icon colors to replace inline styles */
+        .water-dispenser-marker .material-symbols-outlined {
+            font-size: 24px;
+            color: var(--color-water-dispenser);
+        }
+
+        .study-room-marker .material-symbols-outlined {
+            font-size: 24px;
+            color: var(--color-study-room);
+        }
+
+        .water-dispenser-marker {
+            background-color: var(--color-water-dispenser-bg);
+        }
+
+        .study-room-marker {
+            background-color: var(--color-study-room-bg);
+        }
+
+        /* Stili per i tooltip */
+        .tooltip {
+            position: absolute;
+            background-color: var(--bg-surface-hover);
+            /* gray-300 */
+            color: var(--text-primary);
+            /* gray-800 */
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            z-index: 10000;
+            /* Aumentato per essere sopra tutto (inclusa sidebar z-9999) */
+            pointer-events: none;
+            /* Evita che il tooltip intercetti i click */
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Stili per i gruppi di bottoni */
+        .button-group {
+            display: flex;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            background-color: var(--bg-main);
+            /* bg-gray-200 */
+            border: 1px solid var(--color-gray-200);
+            /* border-gray-200 */
+        }
+
+        .button-group.hidden {
+            display: none;
+        }
+
+        .button-group>button {
+            border-radius: 0;
+        }
+
+        .button-group>button:first-child {
+            border-left: none;
+        }
+
+        .button-group>button.active {
+            background-color: var(--bg-surface-hover);
+            /* gray-300 */
+        }
+
+        /* Stile per il feedback al click su mobile */
+        .mobile-active {
+            background-color: var(--color-gray-300) !important;
+            /* gray-300 */
+            transition: background-color 0.1s ease-in-out;
+        }
+
+        /* Stili per la barra superiore responsiva */
+        #top-bar {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-areas: "open search controls";
+            align-items: center;
+            justify-items: center;
+            column-gap: 1rem;
+            row-gap: 0;
+        }
+
+        #open-sidebar-button {
+            grid-area: open;
+            justify-self: start;
+            display: flex;
+            /* Aggiunto per coerenza */
+            align-items: center;
+            /* Aggiunto per coerenza */
+            justify-content: center;
+            /* Aggiunto per coerenza */
+        }
+
+        #open-sidebar-button:hover {
+            cursor: e-resize;
+        }
+
+        #close-sidebar-button:hover {
+            cursor: w-resize;
+        }
+
+        /* Animazione per invogliare l'apertura della sidebar */
+        @keyframes sidebar-button-pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #open-sidebar-button.pulse-animation {
+            animation: sidebar-button-pulse 0.6s ease-in-out 2;
+        }
+
+        /* Respect prefers-reduced-motion to save CPU for sensitive users */
+        @media (prefers-reduced-motion: reduce) {
+            .occupancy-status-bar.loading {
+                background: var(--color-gray-200);
+                animation: none;
+            }
+
+            #open-sidebar-button.pulse-animation {
+                animation: none;
+            }
+        }
+
+        #search-container {
+            grid-area: search;
+            justify-self: center;
+            width: 360px;
+            max-width: 90vw;
+            position: relative;
+            /* Aggiunto per posizionare il wrapper */
+        }
+
+        #search-wrapper {
+            position: absolute;
+            /* Sgancia dal flusso del layout */
+            width: 100%;
+            z-index: 50;
+            /* Assicura che sia sopra gli altri elementi */
+            background-color: var(--bg-main);
+            /* bg-gray-200 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
+            --tw-ring-color: var(--text-muted);
+            /* ring-gray-400 */
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+            overflow: hidden;
+        }
+
+        /* === ANIMAZIONE: risultati ricerca (fluida) === */
+        #search-results {
+            opacity: 1;
+            max-height: 240px;
+            visibility: visible;
+            pointer-events: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            transform: translateY(0);
+            transition: max-height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: top center;
+        }
+
+        #search-results-mobile {
+            opacity: 1;
+            max-height: 50vh;
+            visibility: visible;
+            pointer-events: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            transform: translateY(0);
+            transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: bottom center;
+        }
+
+        #search-results.hidden {
+            display: block !important;
+            max-height: 0 !important;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-10px);
+            border-width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transition: max-height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.3s;
+        }
+
+        #search-results-mobile.hidden {
+            display: block !important;
+            max-height: 0 !important;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(10px);
+            border-width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transition: max-height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.35s;
+        }
+
+        /* Transizione wrapper per altezza più morbida */
+        #search-wrapper,
+        #search-wrapper-mobile {
+            transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        #right-controls {
+            grid-area: controls;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            /* space-x-2 */
+            flex-shrink: 0;
+            /* Impedisce ai controlli di restringersi */
+            justify-self: end;
+        }
+
+        @media (max-width: 1200px) {
+            #top-bar {
+                grid-template-columns: auto auto;
+                grid-template-rows: auto auto;
+                grid-template-areas:
+                    "open controls"
+                    "search search";
+                row-gap: 0.75rem;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #open-sidebar-button {
+                justify-self: start;
+            }
+
+            #right-controls {
+                justify-self: end;
+            }
+
+            #search-container {
+                grid-column: 1 / span 2;
+                justify-self: center;
+                display: none;
+                /* Nascondi la ricerca nella top-bar su mobile */
+            }
+
+            #mobile-search-container {
+                display: block;
+                /* Mostra il contenitore della ricerca su mobile */
+                position: fixed;
+                bottom: 48px;
+                /* Sopra il footer */
+                left: 0;
+                right: 0;
+                z-index: 40;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                display: flex;
+                justify-content: center;
+                transition: bottom 0.3s ease-in-out;
+            }
+
+            #mobile-search-container .search-wrapper-mobile {
+                display: flex;
+                flex-direction: column-reverse;
+                /* Inverte l'ordine: risultati sopra, input sotto */
+                width: 100%;
+                max-width: 360px;
+                /* Rimosso background e shadow per applicarli ai figli */
+            }
+
+            #mobile-search-container .search-wrapper-mobile>div {
+                background-color: var(--bg-main);
+                /* bg-gray-200 */
+                --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+                --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
+                --tw-ring-color: var(--text-muted);
+                /* ring-gray-400 */
+                transition-property: all;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 300ms;
+            }
+
+            #mobile-search-container .search-wrapper-mobile>#search-results-mobile {
+                border-top-left-radius: 0.5rem;
+                border-top-right-radius: 0.5rem;
+                overflow: hidden;
+                max-height: 50vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                /* Previene lo scroll orizzontale */
+                width: 100%;
+                /* Forza la larghezza al 100% */
+            }
+
+            #mobile-search-container .search-wrapper-mobile>.relative {
+                border-bottom-left-radius: 0.5rem;
+                border-bottom-right-radius: 0.5rem;
+                overflow: hidden;
+            }
+        }
+
+        /* Stili per la barra di ricerca mobile */
+        #mobile-search-container {
+            display: none;
+            /* Nascosto di default */
+        }
+
+        @media (max-width: 1200px) {
+            #top-bar #search-container {
+                display: none;
+                /* Nascondi la ricerca nella top-bar su mobile */
+            }
+
+            #mobile-search-container {
+                display: block;
+                /* Mostra il contenitore della ricerca su mobile */
+                position: fixed;
+                bottom: 48px;
+                /* Sopra il footer */
+                left: 0;
+                right: 0;
+                z-index: 40;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                display: flex;
+                justify-content: center;
+            }
+
+            #mobile-search-container #search-wrapper-mobile {
+                display: flex;
+                flex-direction: column-reverse;
+                /* Inverte l'ordine: risultati sopra, input sotto */
+                width: 100%;
+                max-width: 360px;
+                background-color: var(--bg-main);
+                /* bg-gray-200 */
+                border-radius: 0.5rem;
+                /* rounded-lg */
+                --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+                --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+                box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
+                --tw-ring-color: var(--text-muted);
+                /* ring-gray-400 */
+                transition: border-radius 0.3s ease-in-out;
+                overflow: hidden;
+                overflow-x: hidden;
+                /* Previene lo scroll orizzontale sul wrapper */
+            }
+
+            /* Nuovi stili per mobile richiesti: footer e ricerca attaccati in basso */
+            @media (max-width: 767px) {
+                #app-footer {
+                    width: 100% !important;
+                    bottom: 0 !important;
+                    left: 0 !important;
+                    transform: none !important;
+                    border-radius: 0 !important;
+                    border: none !important;
+                    /* Rimuovo bordo per seamless look se necessario, o lo tengo sottile */
+                    border-top: none !important;
+                    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px)) !important;
+                    background-color: var(--bg-main) !important;
+                    z-index: 50 !important;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                #mobile-search-container {
+                    bottom: 0 !important;
+                    /* Esteso fino in fondo */
+                    padding: 1rem !important;
+                    /* Ripristino padding per staccarlo dai bordi */
+                    padding-bottom: calc(2.4rem + env(safe-area-inset-bottom, 0px)) !important;
+                    /* Padding ottimizzato per visibilità e vicinanza */
+                    width: 100% !important;
+                    z-index: 49 !important;
+
+                    /* Sfondo sfumato che va verso l'alto */
+                    background: linear-gradient(to top,
+                            #e5e7eb 0%,
+                            #e5e7eb 40%,
+                            rgba(229, 231, 235, 0) 100%) !important;
+                    background-size: 100% 120px !important; /* Limita l'altezza del gradiente */
+                    background-repeat: no-repeat !important; /* Non ripetere il gradiente */
+                    background-position: bottom !important; /* Posiziona in basso */
+                    pointer-events: none;
+                    /* Permette di cliccare la mappa sotto la parte trasparente */
+                }
+
+                #mobile-search-container>* {
+                    pointer-events: auto;
+                    /* Riabilita click sulla barra di ricerca */
+                }
+
+                /* NESSUN reset per #search-wrapper-mobile così mantiene lo stile a card */
+
+                #mobile-search-container #search-results-mobile {
+                    /* Assicuro che i risultati abbiano uno sfondo solido */
+                    background-color: var(--bg-main) !important;
+                }
+            }
+        }
+
+        /* Stili per mobile */
+        @media (max-width: 768px) {
+            #main-content {
+                width: 100vw;
+                /* Occupa tutta la larghezza dello schermo */
+            }
+
+            /* Forza la larghezza minima dell'SVG su mobile per evitare tagli */
+            #viewer-container svg {
+                min-width: 900px !important;
+                width: 900px !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #zoom-controls {
+                position: fixed;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                flex-direction: column;
+                width: auto;
+                z-index: 45;
+            }
+
+            #zoom-controls.button-group {
+                border-radius: 0.75rem;
+            }
+
+            #zoom-controls>button {
+                border-left: none;
+                width: 48px;
+            }
+
+            #zoom-controls>button:first-child {
+                border-top: none;
+                border-top-left-radius: 0.75rem;
+                border-top-right-radius: 0.75rem;
+            }
+
+            #zoom-controls>button:last-child {
+                border-bottom-left-radius: 0.75rem;
+                border-bottom-right-radius: 0.75rem;
+            }
+
+            #share-btn.hidden {
+                display: none;
+            }
+
+            #share-btn {
+                position: fixed;
+                right: 16px;
+                top: calc(50% + 84px);
+                width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0.75rem;
+                z-index: 45;
+            }
+        }
+
+        /* High Contrast Mode */
+        .high-contrast {
+            background-color: var(--color-white) !important;
+            color: var(--color-black) !important;
+        }
+
+        .high-contrast * {
+            background-color: var(--color-white) !important;
+            color: var(--color-black) !important;
+            border-color: var(--color-black) !important;
+        }
+
+        .high-contrast .water-dispenser-marker,
+        .high-contrast .water-dispenser-marker * {
+            background-color: var(--color-transparent) !important;
+            border-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast .study-room-marker,
+        .high-contrast .study-room-marker * {
+            background-color: var(--color-transparent) !important;
+            border-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast svg * {
+            fill: var(--color-black) !important;
+            stroke: var(--color-black) !important;
+        }
+
+        /* Mini-map labels: default white, selected building stays black */
+        .high-contrast .mini-map-svg text {
+            fill: var(--color-white) !important;
+            stroke: none !important;
+        }
+
+        .high-contrast .mini-map-svg .mini-map-building-selected text {
+            fill: var(--color-black) !important;
+        }
+
+        /* Higher specificity to force selected label to black */
+        .high-contrast .mini-map-svg g.mini-map-building-selected > text,
+        .high-contrast .mini-map-svg g.mini-map-building-selected text {
+            fill: var(--color-black) !important;
+            stroke: none !important;
+        }
+
+        .high-contrast .github-icon * {
+            fill: var(--color-gray-800) !important;
+            stroke: none !important;
+        }
+
+        .high-contrast #mobile-search-container {
+            background-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast #share-btn {
+            width: 52px !important;
+            height: 52px !important;
+        }
+
+        /* Mini-map: dim only shapes, keep labels readable */
+        .mini-map-building-dimmed path,
+        .mini-map-building-dimmed rect,
+        .mini-map-building-dimmed polygon {
+            opacity: 0.35;
+        }
+
+        .mini-map-svg text {
+            opacity: 1 !important;
+        }
+
+        .high-contrast button,
+        .high-contrast .button-group>button,
+        .high-contrast a.bg-gray-200 {
+            border: 2px solid var(--color-black) !important;
+        }
+
+        /* Visible border for library/department buttons in high contrast */
+        .high-contrast a.bg-gray-300,
+        .high-contrast button.bg-gray-300 {
+            border: 2px solid var(--color-black) !important;
+        }
+
+        .high-contrast .button-group {
+            border: 2px solid var(--color-black) !important;
+        }
+
+        .high-contrast .button-group>button {
+            border: none !important;
+        }
+
+        .high-contrast .button-group>button.active {
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .button-group>button.active .material-symbols-outlined {
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast .button-group>button.active svg * {
+            fill: var(--color-white) !important;
+            stroke: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast #top-bar {
+            background-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast .nav-item.selected {
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .nav-item.selected * {
+            background-color: var(--color-transparent) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .nav-item.selected .material-symbols-outlined {
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast .nav-item.selected svg * {
+            fill: var(--color-white) !important;
+            stroke: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        /* Search result item selected in high contrast mode */
+        .high-contrast .search-result-item.selected {
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .search-result-item.selected * {
+            background-color: var(--color-transparent) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .search-result-item.selected .title,
+        .high-contrast .search-result-item.selected .details {
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        /* Disable transitions on search result items in high contrast mode */
+        .high-contrast .search-result-item {
+            transition: none !important;
+        }
+
+        /* Disable transitions on department buttons in high contrast mode */
+        .high-contrast a.bg-gray-200,
+        .high-contrast button.bg-gray-200 {
+            transition: none !important;
+        }
+
+        /* Hover effects in high contrast mode */
+        @media (hover: hover) {
+            .high-contrast .nav-item:hover:not(.selected) {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast .nav-item:hover:not(.selected) * {
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast .nav-item:hover:not(.selected) .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            .high-contrast .nav-item:hover:not(.selected) svg * {
+                fill: var(--color-white) !important;
+                stroke: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            /* Disable ::before overlay in high contrast hover */
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected)::before,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected)::before {
+                background-color: var(--color-transparent) !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected),
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) *,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) * {
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) .title,
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) .details,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) .title,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) .details {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            /* Preserve toggle switch colors during hover in high contrast mode */
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div {
+                background-color: var(--color-black) !important;
+                box-shadow: inset 0 0 0 1px var(--color-white) !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div {
+                background-color: var(--color-white) !important;
+                box-shadow: inset 0 0 0 1px var(--color-black) !important;
+            }
+
+            /* Hover effects for library/department buttons in high contrast mode */
+            .high-contrast a.bg-gray-300:hover,
+            .high-contrast button.bg-gray-300:hover {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast a.bg-gray-300:hover *,
+            .high-contrast button.bg-gray-300:hover * {
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast a.bg-gray-300:hover .material-symbols-outlined,
+            .high-contrast button.bg-gray-300:hover .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex>div::after {
+                background-color: var(--color-white) !important;
+                border-color: var(--color-white) !important;
+            }
+
+            body:not(.keyboard-navigation-active).high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div::after,
+            body:not(.keyboard-navigation-active) .high-contrast.high-contrast .search-result-item:hover:not(.selected) label.relative.inline-flex input:checked+div::after {
+                background-color: var(--color-black) !important;
+                border-color: var(--color-black) !important;
+            }
+
+            .high-contrast a.bg-gray-200:hover,
+            .high-contrast button.bg-gray-200:hover {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast a.bg-gray-200:hover *,
+            .high-contrast button.bg-gray-200:hover * {
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast a.bg-gray-200:hover .material-symbols-outlined,
+            .high-contrast button.bg-gray-200:hover .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            /* Hover for hover-effect buttons (zoom, center, flip, settings) in high contrast */
+            .high-contrast .hover-effect:hover {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast .hover-effect:hover .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            .high-contrast .button-group>button:hover:not(.active) {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast .button-group>button:hover:not(.active) .material-symbols-outlined {
+                color: var(--color-white) !important;
+                background-color: var(--color-transparent) !important;
+            }
+
+            .high-contrast a[href*="github"]:hover {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast a[href*="github"]:hover * {
+                background-color: var(--color-transparent) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast a[href*="github"]:hover .github-icon {
+                fill: var(--color-white) !important;
+            }
+
+            .high-contrast a[href*="github"]:hover .github-icon * {
+                fill: var(--color-white) !important;
+                stroke: none !important;
+                background-color: var(--color-transparent) !important;
+            }
+        }
+
+        /* High contrast mode for occupancy status bars */
+        .high-contrast .occupancy-status-bar {
+            border: 2px solid currentColor !important;
+            font-weight: 700 !important;
+            background-color: var(--color-transparent) !important;
+            color: inherit !important;
+        }
+
+        .high-contrast .occupancy-status-bar.loading,
+        .high-contrast .occupancy-status-bar.free,
+        .high-contrast .occupancy-status-bar.occupied,
+        .high-contrast .occupancy-status-bar.unavailable {
+            background: none !important;
+            background-color: var(--color-transparent) !important;
+            color: inherit !important;
+            animation: none !important;
+        }
+
+        /* Ensure text remains visible on hover in high‑contrast mode (when hovering the search result) */
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.loading,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.free,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable {
+            background-color: var(--color-transparent) !important;
+            color: inherit !important;
+            border: 2px solid currentColor !important;
+        }
+
+        /* Override the search-result-item * rule for children of occupancy bar */
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.loading *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.free *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.occupied *,
+        body:not(.keyboard-navigation-active) .high-contrast .search-result-item:hover .occupancy-status-bar.unavailable * {
+            color: inherit !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast .occupancy-expand-icon {
+            color: inherit !important;
+        }
+
+        .high-contrast .occupancy-details {
+            border: none !important;
+            background-color: var(--color-transparent) !important;
+            color: inherit !important;
+        }
+
+        .high-contrast .occupancy-details-content {
+            color: inherit !important;
+        }
+
+        .high-contrast .occupancy-details-content strong {
+            color: inherit !important;
+        }
+
+
+        /* Toggle switches in high contrast mode */
+        .high-contrast label.relative.inline-flex>div {
+            background-color: var(--color-black) !important;
+            box-shadow: inset 0 0 0 1px var(--color-white) !important;
+        }
+
+        .high-contrast label.relative.inline-flex input:checked+div {
+            background-color: var(--color-white) !important;
+            box-shadow: inset 0 0 0 1px var(--color-black) !important;
+        }
+
+        .high-contrast label.relative.inline-flex>div::after {
+            background-color: var(--color-white) !important;
+            border-color: var(--color-white) !important;
+        }
+
+        .high-contrast label.relative.inline-flex input:checked+div::after {
+            background-color: var(--color-black) !important;
+            border-color: var(--color-black) !important;
+        }
+
+        /* Text size control buttons */
+        .text-size-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background-color: var(--color-gray-200);
+            border-radius: 0.5rem;
+            padding: 0.25rem;
+        }
+
+        .text-size-btn {
+            padding: 0.375rem 0.5rem;
+            background-color: var(--color-transparent);
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            min-width: 36px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-600);
+        }
+
+        .text-size-btn:hover:not(:disabled) {
+            background-color: var(--overlay-hover);
+        }
+
+        .text-size-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .text-size-btn.active {
+            background-color: var(--color-gray-300);
+            color: var(--color-gray-800);
+        }
+
+        .high-contrast .text-size-controls {
+            background-color: var(--color-white) !important;
+            border: 2px solid var(--color-black) !important;
+        }
+
+        .high-contrast .text-size-btn {
+            background-color: var(--color-transparent) !important;
+            color: var(--color-black) !important;
+            transition: none !important;
+        }
+
+        .high-contrast .text-size-btn:hover:not(:disabled) {
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .text-size-btn:hover:not(:disabled) .material-symbols-outlined {
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        .high-contrast .text-size-btn.active {
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .text-size-btn.active .material-symbols-outlined {
+            color: var(--color-white) !important;
+            background-color: var(--color-transparent) !important;
+        }
+
+        /* Language selector styles */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background-color: var(--color-gray-200);
+            border-radius: 0.5rem;
+            padding: 0.25rem;
+        }
+
+        .language-btn {
+            padding: 0.375rem 0.75rem;
+            background-color: var(--color-transparent);
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-600);
+            font-size: 14px;
+        }
+
+        .language-btn:hover {
+            background-color: var(--overlay-hover);
+        }
+
+        .language-btn.active {
+            background-color: var(--color-gray-300);
+            color: var(--color-gray-800);
+        }
+
+        .high-contrast .language-selector {
+            background-color: var(--color-white) !important;
+            border: 2px solid var(--color-black) !important;
+        }
+
+        .high-contrast .language-btn {
+            background-color: var(--color-transparent) !important;
+            color: var(--color-black) !important;
+            transition: none !important;
+        }
+
+        .high-contrast .language-btn:hover {
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
+        }
+
+        .high-contrast .language-btn.active {
+            background-color: var(--color-black) !important;
+            color: var(--color-white) !important;
+        }
+
+        .apple-maps-dot {
+            width: 16px;
+            height: 16px;
+            background-color: #FF3B30;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transform-origin: center center;
+            z-index: 1000;
+        }
+        body.poi-blinking-enabled .apple-maps-dot::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: rgba(255, 59, 48, 0.4);
+            border-radius: 50%;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            z-index: -1;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.3); opacity: 1; }
+            80%, 100% { transform: scale(1.5); opacity: 0; }
+        }

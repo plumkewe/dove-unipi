@@ -3,11 +3,12 @@
     "fibonacci": {
       "prefix": "FIB",
       "alternative_names": ["Polo Fibonacci"],
-      "address": "Via Filippo Buonarroti, 3, 56127 Pisa PI",
+      "address": "Via Filippo Buonarroti, 3",
       "google_maps": "https://maps.app.goo.gl/uZ6z2RRgqTqmCB9J9",
       "apple_maps": "https://maps.apple.com/place?address=Largo%20Bruno%20Pontecorvo%203,%2056127%20Pisa,%20Italy&coordinate=43.721188,10.407775&name=Polo%20Fibonacci&place-id=I88E823420B8E0D9F&map=explore",
       "calendar_id": "63223a029f080a0aab032afc",
       "mappa": "fibonacci.png",
+      "miniMap": true,
       "edificio": {
         "a": {
           "color": "da21ac",
@@ -4644,7 +4645,7 @@
                 "link": "https://plumkewe.github.io/dove-unipi/?p=fibonacci&c=salaseminariest"
               },
               {
-                "id": "fib_sse-c-2",
+                "id": "fib_sso-c-2",
                 "nome": "Seminari OVEST",
                 "alias": ["Sala seminari OVEST"],
                 "type": "sala",
@@ -12242,7 +12243,7 @@
           "piano": {
             "0": [
               {
-                "id": "ing_f1-f-0",
+                "id": "ing_as-f-0",
                 "nome": "Aula Studio",
                 "alias": ["Study room"],
                 "type": "studio",
@@ -12691,6 +12692,7 @@
     "carmignani": {
       "calendar_id": "63247758e3772a0690e3b9f3",
       "prefix": "Car",
+      "alternative_names": ["Polo Carmignani"],
       "mappa": "carmignani.png",
       "address": "P.za dei Cavalieri, 6",
       "google_maps": "https://maps.app.goo.gl/MrnS2Yb3pPZxVPJz5",
@@ -12848,6 +12850,7 @@
     "piagge": {
       "calendar_id": "631e682b617f10007c563735",
       "prefix": "Pia",
+      "alternative_names": ["Polo Piagge"],
       "address": "Via Giacomo Matteotti, 11",
       "google_maps": "https://maps.app.goo.gl/jqmqHk2GSsWuhkpr9",
       "apple_maps": "https://maps.apple.com/place?address=Via%20Giacomo%20Matteotti%2011,%2056124%20Pisa,%20Italy&coordinate=43.710587,10.412014&name=Polo%20Piagge&place-id=I8138620B0D4F6A6C",
@@ -12889,6 +12892,7 @@
                 "type": "sala",
                 "note": "",
                 "ricerca": "Sala Convegni",
+                "cineca": "Pie Conv",
                 "hasStatus": true,
                 "capienza": 224,
                 "proiettore": true,

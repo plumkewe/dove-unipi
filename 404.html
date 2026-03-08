@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina non trovata | DOVE?UNIPI</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#E5E7EB">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #E5E7EB; color: #111827;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0;
+      padding: 2rem 1.5rem;
+      max-width: 360px; width: 100%;
+    }
+
+    .code {
+      font-size: 6rem; font-weight: 700; line-height: 1;
+      color: #111827; letter-spacing: -.04em;
+      margin: 0 0 .25rem;
+    }
+
+    .title {
+      font-size: 1rem; font-weight: 600;
+      color: #111827; margin: 0 0 .5rem;
+    }
+
+    .desc {
+      font-size: .875rem; color: #6B7280;
+      margin: 0 0 2rem; line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: #111827; color: #F9FAFB;
+      border-radius: .625rem; padding: .6rem 1.25rem;
+      text-decoration: none; font-size: .875rem; font-weight: 500;
+      border: none; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn:hover { background: #374151; }
+  </style>
+
+  <script>
+    (function () {
+      const path = window.location.pathname;
+      const knownPolos = ['fibonacci', 'ingegneria', 'carmignani', 'piagge'];
+      const poloMarker = '/polo/';
+      const markerIdx = path.indexOf(poloMarker);
+      let root = '/';
+      if (markerIdx !== -1) {
+        root = path.slice(0, markerIdx + 1);
+      } else {
+        root = path.endsWith('/index.html')
+          ? path.slice(0, -'index.html'.length)
+          : (path.endsWith('/') ? path : path.slice(0, path.lastIndexOf('/') + 1));
+      }
+
+      let targetPolo = 'fibonacci';
+      if (markerIdx !== -1) {
+        const afterPolo = path.slice(markerIdx + poloMarker.length);
+        for (const polo of knownPolos) {
+          if (afterPolo === polo || afterPolo.startsWith(polo + '/')) {
+            targetPolo = polo;
+            break;
+          }
+        }
+      }
+
+      const targetUrl = `${root}polo/${targetPolo}/`;
+
+      function detectLang() {
+        try {
+          const saved = localStorage.getItem('language');
+          if (saved === 'en' || saved === 'it') return saved;
+        } catch(e) {}
+        const nav = (navigator.language || navigator.userLanguage || 'it').toLowerCase();
+        return nav.startsWith('en') ? 'en' : 'it';
+      }
+
+      const lang = detectLang();
+      const localeUrl = `${root}locales/${lang}.json`;
+
+      function applyStrings(strings) {
+        const t = key => (strings[key] && strings[key].translation) || key;
+
+        document.title = t('404_title');
+        document.documentElement.lang = lang;
+
+        const titleEl = document.getElementById('page-title');
+        const descEl = document.getElementById('redirect-desc-text');
+        const destEl = document.getElementById('redirect-dest');
+        const btnEl = document.getElementById('redirect-link');
+
+        if (titleEl) titleEl.textContent = t('404_page_title');
+        if (descEl) descEl.textContent = t('404_desc');
+        if (destEl) destEl.textContent = 'Polo ' + targetPolo.charAt(0).toUpperCase() + targetPolo.slice(1);
+        if (btnEl) { btnEl.href = targetUrl; btnEl.textContent = t('404_btn') + ' →'; }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        // Set link immediately so it works even if fetch fails
+        const btnEl = document.getElementById('redirect-link');
+        if (btnEl) btnEl.href = targetUrl;
+        const destEl = document.getElementById('redirect-dest');
+        if (destEl) destEl.textContent = 'Polo ' + targetPolo.charAt(0).toUpperCase() + targetPolo.slice(1);
+
+        fetch(localeUrl)
+          .then(r => r.ok ? r.json() : null)
+          .then(strings => { if (strings) applyStrings(strings); })
+          .catch(() => {});
+      });
+
+      setTimeout(function () {
+        window.location.replace(targetUrl);
+      }, 3000);
+    })();
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="code">404</div>
+    <div class="title" id="page-title">Pagina non trovata</div>
+    <p class="desc"><span id="redirect-desc-text">Verrai reindirizzato a</span> <strong id="redirect-dest">Polo Fibonacci</strong>.</p>
+    <a class="btn" id="redirect-link" href="polo/fibonacci/">Vai subito &rarr;</a>
+  </div>
+</body>
+</html>

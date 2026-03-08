@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <base href="../../../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="apple-touch-icon" href="assets/logo/icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="DOVE?UNIPI">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" id="meta-description" content="Apri direttamente la mappa interattiva di DOVE?UNIPI su Polo Fibonacci, Edificio B.">
+    <meta name="author" content="Lyubomyr Malay">
+    <meta name="theme-color" content="#E5E7EB">
+    <title id="page-title">Polo Fibonacci - Edificio B | DOVE?UNIPI</title>
+
+    <meta property="og:title" id="og-title" content="Polo Fibonacci - Edificio B | DOVE?UNIPI">
+    <meta property="og:description" id="og-description" content="Apri direttamente la mappa interattiva di DOVE?UNIPI su Polo Fibonacci, Edificio B.">
+    <meta property="og:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:url" content="https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="Lyubomyr Malay">
+    <meta name="twitter:title" id="twitter-title" content="Polo Fibonacci - Edificio B | DOVE?UNIPI">
+    <meta name="twitter:description" id="twitter-description" content="Apri direttamente la mappa interattiva di DOVE?UNIPI su Polo Fibonacci, Edificio B.">
+    <meta name="twitter:image" content="https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png">
+
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Polo Fibonacci, Universita di Pisa, UniPi, DOVE?UNIPI, mappa campus pisa, Edificio B">
+    <meta property="og:site_name" content="DOVE?UNIPI">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/">
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://plumkewe.github.io/dove-unipi/sitemap.xml">
+
+    <!-- Google Verification-->
+    <meta name="google-site-verification" content="xlBn5i5J3qQtfPNRFDym6OA-74TvolPdXLckGrViAvM" />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="IT-PI">
+    <meta name="geo.placename" content="Pisa, Italy">
+    <meta name="geo.position" content="43.7228;10.4017">
+    <meta name="ICBM" content="43.7228, 10.4017">
+
+    <!-- Favicon (PNG & SVG) - multiple sizes for search engines and social previews -->
+    <link rel="icon" href="https://plumkewe.github.io/dove-unipi/assets/logo/favicon.png" type="image/png"
+        sizes="32x32">
+    <link rel="icon" href="https://plumkewe.github.io/dove-unipi/assets/logo/favicon.png" type="image/png"
+        sizes="16x16">
+    <link rel="shortcut icon" href="https://plumkewe.github.io/dove-unipi/assets/logo/favicon.png" type="image/png">
+    <!-- Microsoft tile -->
+    <meta name="msapplication-TileImage" content="https://plumkewe.github.io/dove-unipi/assets/logo/favicon.png">
+
+    <!-- Cache Control for better performance -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="assets/css/output.css?v=1.0.1" as="style">
+    <!-- Preload data to shorten critical path -->
+    <link rel="preload" href="data/unified.json?v=1.0.1" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/biblioteche.json" as="fetch" crossorigin="anonymous">
+
+    <!-- Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="preload" href="assets/fonts/material-symbols-outlined-subset.woff2" as="font" type="font/woff2"
+        crossorigin>
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "DOVE?UNIPI",
+    "alternateName": "DOVE?UNIPI - Poli Fibonacci, Ingegneria, Carmignani e Piagge",
+      "url": "https://plumkewe.github.io/dove-unipi/",
+    "description": "Orientati facilmente tra gli edifici, i piani e le aule dei Poli Fibonacci, Ingegneria, Carmignani e Piagge dell'Università di Pisa.",
+      "applicationCategory": "NavigationApplication",
+      "operatingSystem": "Any",
+      "author": {
+        "@type": "Person",
+        "name": "Lyubomyr Malay",
+        "githubUrl": "https://github.com/plumkewe",
+        "linkedinUrl": "https://www.linkedin.com/in/myrmyr"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "DOVE?UNIPI",
+        "url": "https://plumkewe.github.io/dove-unipi/"
+      },
+      "about": {
+        "@type": "EducationalOrganization",
+        "name": "Università di Pisa",
+        "alternateName": "UniPi",
+        "department": {
+          "@type": "Organization",
+          "name": "Polo Fibonacci",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pisa",
+            "addressRegion": "PI",
+            "addressCountry": "IT"
+          }
+        }
+      },
+      "inLanguage": ["it-IT", "en-US"],
+      "screenshot": "https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png",
+      "featureList": [
+        "Ricerca aule per nome o codice (D1, D2, M1, H, Aula Magna)",
+        "Visualizzazione planimetrie interattive edifici A, B, C, D, E",
+        "Navigazione per edificio e piano (piano terra, primo piano, secondo piano)",
+        "Filtro per capienza aule",
+        "Mappe dettagliate di ogni piano",
+        "Informazioni su dipartimenti e laboratori",
+        "Supporto multilingua (Italiano/Inglese)",
+        "Modalità ad alto contrasto",
+        "Font per dislessici",
+        "Condivisione link diretti alle aule",
+        "Status delle aule in tempo reale",
+        "Orario delle biblioteche in tempo reale"
+      ],
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0",
+      "datePublished": "2025",
+      "dateModified": "2025-12-06"
+    }
+    </script>
+
+
+    <!-- Tailwind CSS (compiled) -->
+    <link rel="stylesheet" href="assets/css/output.css">
+    <link rel="stylesheet" href="assets/css/app-inline.css?v=1.0.2">
+
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DOVE?UNIPI",
+      "item": "https://plumkewe.github.io/dove-unipi/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Polo Fibonacci",
+      "item": "https://plumkewe.github.io/dove-unipi/polo/fibonacci/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Edificio B",
+      "item": "https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Edificio B",
+      "item": "https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/"
+    }
+  ]
+}
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Polo Fibonacci - Edificio B | DOVE?UNIPI",
+  "description": "Apri direttamente la mappa interattiva di DOVE?UNIPI su Polo Fibonacci, Edificio B.",
+  "url": "https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/",
+  "primaryImageOfPage": "https://plumkewe.github.io/dove-unipi/assets/screenshots/preview.png",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      "h1",
+      ".static-room-description"
+    ]
+  }
+}
+    </script>
+
+</head>
+<body class="bg-gray-200 text-gray-900 no-transition text-normal">
+
+    <section data-static-room-content style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
+        <h1>Edificio B</h1>
+        <p class="static-room-description">Apri direttamente la mappa interattiva di DOVE?UNIPI su Polo Fibonacci, Edificio B.</p>
+        <p>Questa pagina carica direttamente la mappa interattiva di DOVE?UNIPI su Polo Fibonacci, Edificio B.</p>
+    </section>
+    <noscript>
+        <main style="max-width: 720px; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, -apple-system, sans-serif;">
+            <h1>Edificio B</h1>
+            <p>Apri direttamente la mappa interattiva di DOVE?UNIPI su Polo Fibonacci, Edificio B.</p>
+        </main>
+    </noscript>
+
+    <section style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
+
+        <h1 id="about-dove-unipi">DOVE?UNIPI - Trova aule, edifici e dipartimenti dell'Università di Pisa</h1>
+
+        <p>
+            <strong>DOVE?UNIPI</strong> è un'applicazione web gratuita e open-source progettata per
+            aiutare studenti, docenti e visitatori a orientarsi nei campus dell'<strong>Università di Pisa</strong>.
+            Trova rapidamente aule, laboratori, biblioteche, dipartimenti, sale studio, erogatori d'acqua
+            e uffici dei docenti. Supporta il <strong>Polo Fibonacci (Ex-Marzotto)</strong>,
+            il <strong>Polo Ingegneria</strong>, il <strong>Polo Carmignani</strong>
+            e il <strong>Polo Piagge</strong> con le rispettive sedi didattiche.
+        </p>
+
+        <h2>Polo Fibonacci (Ex-Marzotto)</h2>
+        <p>
+            Il <strong>Polo Fibonacci</strong>, noto anche come <strong>Ex-Marzotto</strong>, si trova in
+            <strong>Via Filippo Buonarroti 3, 56127 Pisa</strong> (Largo Bruno Pontecorvo).
+            Ospita i dipartimenti di Informatica, Matematica e Fisica.
+        </p>
+
+        <h3>Edificio A – Dipartimento di Matematica</h3>
+        <p>
+            L'<strong>Edificio A</strong> del Polo Fibonacci ospita il <strong>Dipartimento di Matematica</strong>
+            e diversi uffici docenti. Si accede dal piano terra e si estende fino al secondo piano.
+            Qui si trovano la <strong>Saletta riunioni</strong>, la <strong>Sala seminari</strong>
+            e la <strong>Sala riunioni</strong>, oltre agli erogatori d'acqua.
+        </p>
+
+        <h3>Edificio B – Aule didattiche, Laboratori e Dipartimento di Fisica</h3>
+        <p>
+            L'<strong>Edificio B</strong> è il più grande del Polo Fibonacci. Al <strong>piano terra</strong> si trovano
+            le aule <strong>Aula X1, Aula X2, Aula X3, Aula X4, Aula X5, Aula X6, Aula X7</strong>,
+            le aule lettere <strong>Aula A, Aula B, Aula C, Aula D, Aula E, Aula F, Aula G,
+            Aula H-Lab, Aula I-Lab, Aula L, Aula M-Lab, Aula N, Aula O, Aula P</strong>,
+            i <strong>Laboratori 1-12</strong> e le aule studio
+            <strong>Aula Studio Torvalds, Aula Studio Moot, Aula Studio Wozniak</strong>.
+        </p>
+        <p>
+            Al <strong>primo piano</strong> dell'Edificio B si trovano il <strong>Dipartimento di Fisica</strong>,
+            le aule <strong>Aula A1, Aula B1, Aula C1, Aula D1, Aula E1, Aula F1, Aula G1,
+            Aula I1, Aula L1, Aula M1, Aula N1, Aula O1, Aula P1, Aula Q1-Lab,
+            Aula R1, Aula S1, Aula T1, Aula V1</strong>,
+            le aule studio <strong>Aula Studio Mitnick</strong> e <strong>Aula Studio Ponte</strong>,
+            la <strong>Biblioteca MIF</strong> (Matematica, Informatica, Fisica)
+            e gli erogatori d'acqua.
+        </p>
+
+        <h3>Edificio C – Dipartimento di Informatica</h3>
+        <p>
+            L'<strong>Edificio C</strong> ospita al <strong>secondo piano</strong> il
+            <strong>Dipartimento di Informatica</strong>, con le sale riunioni
+            <strong>Sala riunioni OVEST, Sala riunioni EST, Sala DEMO, Sala GERACE,
+            Seminari EST, Seminari OVEST</strong>, erogatori d'acqua e gli uffici
+            di docenti, ricercatori, dottorandi e personale tecnico-amministrativo.
+            Al <strong>piano interrato (-1)</strong> si trovano ulteriori strutture di servizio.
+        </p>
+
+        <h3>Edificio D – Aule D2, D3, D4, D5</h3>
+        <p>
+            L'<strong>Edificio D</strong> del Polo Fibonacci ospita le grandi aule didattiche:
+            <strong>Aula D2, Aula D3, Aula D4, Aula D5</strong>.
+            L'<strong>Aula D5</strong> (216 posti) è nota come aula delle matricole di Informatica.
+            Queste aule sono al <strong>piano terra</strong> e dispongono di un erogatore d'acqua.
+            Dove si trova l'Aula D2? Dove si trova l'Aula D5? Sono nell'Edificio D del Polo Fibonacci.
+        </p>
+
+        <h3>Edificio E – Aula Magna e Aula PS1, PS4</h3>
+        <p>
+            L'<strong>Edificio E</strong> ospita al <strong>piano terra</strong> l'<strong>Aula PS1</strong>
+            e un erogatore d'acqua. Al <strong>primo piano</strong> si trovano
+            l'<strong>Aula Magna</strong> (la più grande del polo) e l'<strong>Aula PS4</strong>.
+        </p>
+
+        <h2>Polo Ingegneria</h2>
+        <p>
+            Il <strong>Polo Ingegneria</strong> dell'Università di Pisa comprende diverse sedi
+            distribuite nella zona sud-est della città. Le sedi sono suddivise in
+            <strong>Polo A, Polo B, Polo C, Polo Etruria (Polo F / Polo E. Vitale)</strong>
+            e <strong>Polo Porta Nuova (Polo PN)</strong>.
+        </p>
+
+        <h3>Polo A (Edificio B46) – Aule A11-A28</h3>
+        <p>
+            Il <strong>Polo A</strong> (edificio B46) del Polo Ingegneria ospita al <strong>terzo piano</strong>
+            le <strong>Aula A11, Aula A12, Aula A13</strong> e al <strong>quinto piano</strong>
+            le <strong>Aula A21, Aula A22, Aula A23, Aula A24, Aula A26, Aula A28</strong>.
+        </p>
+
+        <h3>Polo B (Edificio B47) – Aule B11-B34 e Aule SI</h3>
+        <p>
+            Il <strong>Polo B</strong> (edificio B47) del Polo Ingegneria dispone di 4 piani.
+            Al <strong>piano terra</strong>: <strong>Aula Studio 1, Aula Studio 2, Aula B11, Aula SI5</strong>.
+            Al <strong>primo piano</strong>: <strong>Aula B11, Aula SI4, Aula SI3, Aula SI1</strong>.
+            Al <strong>secondo piano</strong>: <strong>Aula B21, Aula B22, Aula B23, Aula B24,
+            Aula SI6, Aula SI7, Aula B25, Aula ADII3</strong>.
+            Al <strong>terzo piano</strong>: <strong>Aula B21, Aula B31, Aula B32, Aula B33, Aula B34</strong>.
+        </p>
+
+        <h3>Polo C (Edificio B44) – Aule C01-C44</h3>
+        <p>
+            Il <strong>Polo C</strong> (edificio B44) del Polo Ingegneria dispone di 5 piani.
+            <strong>Piano terra</strong>: <strong>Aula C01</strong>.
+            <strong>Primo piano</strong>: <strong>Aula C11, Aula C12</strong>.
+            <strong>Secondo piano</strong>: <strong>Aula C21, Aula C22</strong>.
+            <strong>Terzo piano</strong>: <strong>Aula C31, Aula C32, Aula C33</strong>.
+            <strong>Quarto piano</strong>: <strong>Aula C41, Aula C42, Aula C43, Aula C44</strong>.
+        </p>
+
+        <h3>Polo Etruria / Polo F / Polo E. Vitale (Edificio B75) – Aule F1-F9</h3>
+        <p>
+            Il <strong>Polo Etruria</strong>, noto anche come <strong>Polo F</strong>,
+            <strong>Polo Vitale</strong> o <strong>Polo E. Vitale</strong> (edificio B75),
+            ha un solo piano con <strong>Aula Studio, Aula F1, Aula F2, Aula F3,
+            Aula F4, Aula F5, Aula F6, Aula F7, Aula F8, Aula F9</strong>.
+        </p>
+
+        <h3>Polo Porta Nuova / Polo PN (Edificio B68) – Aule 1-10</h3>
+        <p>
+            Il <strong>Polo Porta Nuova</strong>, abbreviato <strong>Polo PN</strong> (edificio B68),
+            dispone di un piano terra con <strong>Aula 1, Aula 2, Aula 3, Aula 4,
+            Aula 5, Aula 6, Aula 7, Aula 8, Aula 9, Aula 10</strong>,
+            un'<strong>Aula studio</strong> e un <strong>erogatore d'acqua</strong>.
+        </p>
+
+        <h2>Polo Carmignani</h2>
+        <p>
+            Il <strong>Polo Carmignani</strong> si trova in <strong>Piazza dei Cavalieri 6, Pisa</strong>
+            e raccoglie aule didattiche nel centro storico dell'Università di Pisa.
+        </p>
+
+        <h3>Piano terra e primo piano – Aula 1, 2, 3, 3/4, 4 e Aula Magna</h3>
+        <p>
+            Al <strong>piano terra</strong> del Polo Carmignani si trovano le <strong>Aula 1, Aula 2,
+            Aula 3, Aula 3/4 e Aula 4</strong>. Al <strong>primo piano</strong> si trova
+            l'<strong>Aula Magna</strong>.
+        </p>
+
+        <h2>Polo Piagge</h2>
+        <p>
+            Il <strong>Polo Piagge</strong> si trova in <strong>Via Giacomo Matteotti 11, Pisa</strong>
+            e ospita aule distribuite su più livelli, oltre a una sala convegni e a un'aula studio.
+        </p>
+
+        <h3>Piano terra – Aula A0, Sala Convegni e Aula Studio</h3>
+        <p>
+            Al <strong>piano terra</strong> del Polo Piagge si trovano <strong>Aula A0</strong>,
+            <strong>Sala Convegni</strong> e <strong>Aula Studio</strong>.
+        </p>
+
+        <h3>Primo e secondo piano – Aule A1-Q2</h3>
+        <p>
+            Al <strong>primo piano</strong> si trovano le <strong>Aula A1, Aula B1, Aula C1, Aula D1,
+            Aula E1, Aula F1, Aula G1, Aula H1, Aula I1, Aula L1, Aula M1, Aula N1, Aula O1,
+            Aula P1, Aula Q1</strong>. Al <strong>secondo piano</strong> si trovano le
+            <strong>Aula A2, Aula B2, Aula C2, Aula D2, Aula E2, Aula F2, Aula G2, Aula H2,
+            Aula I2, Aula L2, Aula M2, Aula N2, Aula O2, Aula P2, Aula Q2</strong>.
+        </p>
+
+        <h2>Servizi e funzionalità</h2>
+
+        <h3>Ricerca intelligente</h3>
+        <p>
+            Usa la barra di ricerca per trovare un'aula per nome, alias, edificio, capienza o docente.
+            Supporta filtri avanzati come <strong>"> 200"</strong> per trovare aule con più di 200 posti.
+            Puoi cercare persone, erogatori d'acqua, aule studio, biblioteche e dipartimenti.
+        </p>
+
+        <h3>Mappe interattive</h3>
+        <p>
+            Naviga visivamente tra le planimetrie di ogni edificio: piano terra, primo piano,
+            secondo piano e piani superiori. Le mappe sono zoomabili e pannabili.
+            Quando selezioni un'aula, la mappa si centra automaticamente sulla sua posizione.
+        </p>
+
+        <h3>Occupazione aule in tempo reale</h3>
+        <p>
+            Grazie all'<strong>API ufficiale CINECA</strong>, puoi vedere in tempo reale
+            se un'aula è <strong>libera</strong>, <strong>occupata</strong> o <strong>non disponibile</strong>,
+            incluso il nome del corso e del docente.
+        </p>
+
+        <h3>Biblioteche</h3>
+        <p>
+            Cerca le biblioteche dell'Università di Pisa e consulta gli <strong>orari di apertura</strong>
+            in tempo reale tramite il Sistema Bibliotecario di Ateneo (SBA).
+            <strong>Biblioteca MIF</strong> (Matematica, Informatica, Fisica) al Polo Fibonacci,
+            Biblioteca di Ingegneria, Biblioteca di Informatica e molte altre.
+        </p>
+
+        <h3>Erogatori d'acqua</h3>
+        <p>
+            Localizza gli <strong>erogatori/distributori d'acqua</strong> presenti nei vari edifici
+            del Polo Fibonacci, del Polo Ingegneria e del Polo Carmignani. Cerca "erogatore" nella barra di ricerca.
+        </p>
+
+        <h3>Aule studio</h3>
+        <p>
+            Trova le <strong>aule studio</strong> disponibili: Aula Studio Torvalds, Aula Studio Moot,
+            Aula Studio Wozniak, Aula Studio Mitnick, Aula Studio Ponte (Polo Fibonacci),
+            Aule Studio 1 e 2 (Polo B Ingegneria), Aula Studio (Polo Etruria, Polo Porta Nuova e Polo Piagge).
+        </p>
+
+        <h3>Docenti e personale</h3>
+        <p>
+            Cerca <strong>docenti, ricercatori e dottorandi</strong> del Dipartimento di Informatica,
+            Dipartimento di Matematica e Dipartimento di Fisica dell'Università di Pisa.
+            Visualizza il loro ufficio sulla mappa.
+        </p>
+
+        <h3>Condivisione</h3>
+        <p>
+            Condividi un link diretto a qualsiasi aula, edificio o piano. Il link include
+            la posizione esatta sulla mappa, così chi lo apre vedrà lo stesso punto che vedi tu.
+        </p>
+
+        <h3>Bot Telegram</h3>
+        <p>
+            Usa il <strong>bot Telegram @doveunipibot</strong> per cercare aule, lezioni,
+            docenti, biblioteche e stato di occupazione direttamente da Telegram.
+        </p>
+
+        <p class="footer-links">
+            <a href="https://github.com/plumkewe/dove-unipi" target="_blank" rel="noopener noreferrer">
+                Vedi il progetto su GitHub
+            </a>
+        </p>
+
+    </section>
+
+    <!-- Contenitore per il tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+
+    <!-- Top Bar Container -->
+    <div id="top-bar" class="fixed z-40" style="top: calc(1rem + env(safe-area-inset-top)); left: calc(1rem + env(safe-area-inset-left)); right: calc(1rem + env(safe-area-inset-right));">
+        <!-- Bottone per Aprire la Sidebar (visibile solo quando è chiusa) -->
+        <button id="open-sidebar-button"
+            class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200 flex-shrink-0"
+            data-tooltip="Apri sidebar" data-shortcut="enter">
+            <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                aria-label="Apri menu laterale">
+                left_panel_open
+            </span>
+        </button>
+
+        <!-- Search Bar -->
+        <div id="search-container" class="max-w-md">
+            <div id="search-wrapper"
+                class="relative bg-gray-200 rounded-lg ring-2 ring-gray-400 transition-all duration-300 overflow-hidden">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <span class="material-symbols-outlined text-gray-500" style="font-size: 24px; line-height: 1;"
+                            aria-label="Cerca">search</span>
+                    </span>
+                    <input type="text" id="search-input" placeholder="Cerca un'aula..."
+                        class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
+                        autocomplete="off">
+                    <button type="button" id="clear-search-btn" class="clear-search-button hidden"
+                        aria-label="Cancella ricerca">
+                        <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
+                            aria-label="Cancella">close</span>
+                    </button>
+                </div>
+                <div id="search-results" class="hidden">
+                    <!-- I risultati della ricerca verranno inseriti qui -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Controlli a Destra (Vista e Zoom) -->
+        <div id="right-controls">
+            <!-- Controlli Vista -->
+            <div id="view-controls" class="button-group hidden">
+                <button id="flip-view-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200 hidden"
+                    aria-label="Ribalta mappa" data-tooltip="Ribalta mappa">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Ribalta mappa">
+                        screen_rotation_alt
+                    </span>
+                </button>
+            </div>
+
+            <!-- Pulsante Condividi -->
+            <button id="share-btn"
+                class="p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200 hidden"
+                aria-label="Condividi" data-tooltip="Copia link" data-shortcut="j">
+                <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                    aria-label="Condividi">share</span>
+            </button>
+
+            <!-- Controlli Zoom -->
+            <div id="zoom-controls" class="button-group hidden">
+                <button id="zoom-in-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                    aria-label="Ingrandisci" data-tooltip="Ingrandisci">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Zoom avanti">zoom_in</span>
+                </button>
+                <button id="zoom-out-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                    aria-label="Riduci" data-tooltip="Riduci">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Zoom indietro">zoom_out</span>
+                </button>
+                <button id="reset-zoom-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                    aria-label="Centra visuale" data-tooltip="Centra visuale" data-shortcut="k">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Centra vista">center_focus_strong</span>
+                </button>
+            </div>
+
+            <!-- Pulsante Impostazioni -->
+            <div class="button-group">
+                <button id="settings-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                    aria-label="Impostazioni" data-tooltip="Impostazioni">
+                    <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1;"
+                        aria-label="Impostazioni">settings</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Search Bar -->
+    <div id="mobile-search-container">
+        <div id="search-wrapper-mobile">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 z-10 pointer-events-none">
+                    <span class="material-symbols-outlined text-gray-500"
+                        style="font-size: 24px; line-height: 1;">search</span>
+                </span>
+                <input type="text" id="search-input-mobile" placeholder="Cerca un'aula..."
+                    class="w-full p-3 pl-10 pr-10 bg-transparent border-none rounded-lg focus:outline-none"
+                    autocomplete="off">
+                <button type="button" id="clear-search-btn-mobile" class="clear-search-button hidden"
+                    aria-label="Cancella ricerca">
+                    <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;">close</span>
+                </button>
+            </div>
+            <div id="search-results-mobile" class="overflow-y-auto max-h-48 hidden">
+                <!-- Mobile search results here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="app-container" class="relative min-h-screen">
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-72 fixed inset-y-0 left-0 transform -translate-x-full z-[60] flex flex-col overflow-x-hidden"
+            style="height: 100vh; height: 100dvh; z-index: 9999 !important; padding-bottom: env(safe-area-inset-bottom, 0px); padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left, 0px);">
+
+            <!-- Bottone Chiudi (Desktop & Mobile) -->
+            <button id="close-sidebar-button"
+                class="absolute right-4 z-10 block p-2 rounded-lg bg-gray-200 border border-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+                style="top: calc(1rem + env(safe-area-inset-top)); right: calc(1rem + env(safe-area-inset-right));"
+                data-tooltip="Chiudi sidebar" data-shortcut="enter">
+                <span class="material-symbols-outlined" style="font-size: 24px; line-height: 1;"
+                    aria-label="Chiudi menu">
+                    left_panel_close
+                </span>
+            </button>
+
+            <!-- Menu di Navigazione -->
+            <nav id="navigation-menu" class="p-4 space-y-1 overflow-y-auto overflow-x-hidden"
+                style="flex: 1 1 0%; min-height: 0; max-height: calc(100vh - 4rem - env(safe-area-inset-bottom, 0px) - env(safe-area-inset-top));">
+                <div style="height: 50px;"></div>
+                <div id="polos-list" class="space-y-1">
+                    <!-- I bottoni dei poli verranno inseriti qui -->
+                </div>
+
+                <!-- Edifici -->
+                <div id="buildings-section" class="p-2">
+                    <h3 id="buildings-title" class="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                        Edifici</h3>
+                    <div id="buildings-list" class="mt-2 space-y-1">
+                        <!-- I bottoni degli edifici verranno inseriti qui -->
+                    </div>
+                </div>
+
+                <!-- Piani -->
+                <div class="p-2">
+                    <h3 id="floors-title" class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Piani
+                    </h3>
+                    <div id="floors-list" class="mt-2 space-y-1">
+                        <!-- I bottoni dei piani verranno inseriti qui -->
+                    </div>
+                </div>
+
+                <!-- Aule -->
+                <div class="p-2">
+                    <h3 id="rooms-title" class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Aule</h3>
+                    <div id="rooms-list" class="mt-2 mb-4 space-y-1">
+                        <!-- Le aule verranno inserite qui -->
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Footer Sidebar -->
+            <div class="flex-shrink-0 p-4 border-t border-gray-300/50 space-y-4">
+                <a href="https://github.com/plumkewe/dove-unipi" target="_blank"
+                    class="nav-item flex items-center space-x-3 p-2 rounded-lg">
+                    <svg class="w-8 h-8 text-gray-800 github-icon" viewBox="0 0 16 16" fill="currentColor" role="img"
+                        aria-label="Logo GitHub">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                        </path>
+                    </svg>
+                    <span id="github-link-text">Repository GitHub</span>
+                </a>
+            </div>
+
+            <style>
+                /* Sidebar specific overrides */
+                #sidebar .text-gray-500 {
+                    color: var(--text-muted) !important;
+                }
+
+                #sidebar .text-gray-900 {
+                    color: #0d0d0d !important;
+                }
+            </style>
+        </div>
+
+        <!-- Contenuto Principale -->
+        <main id="main-content" class="flex-1 ml-0 transition-all duration-300 ease-in-out">
+            <!-- Area Contenuto per il visualizzatore SVG -->
+            <div id="viewer-container"
+                class="w-full h-screen overflow-hidden flex items-center justify-center bg-gray-200">
+                <div id="map"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Hidden accessibility toggle for script access -->
+    <div style="display: none;">
+        <input type="checkbox" id="accessibility-toggle">
+    </div>
+
+    <!-- Controlli Zoom/Pan e Vista -->
+    <div class="fixed top-4 right-4 z-40 flex items-center space-x-2 hidden">
+        <!-- Questo contenitore è ora un segnaposto e non verrà visualizzato -->
+    </div>
+
+    <!-- Footer -->
+    <div id="app-footer"
+        class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 px-3 py-1 rounded-lg bg-gray-200 border border-gray-200">
+        <span class="text-sm text-gray-600 whitespace-nowrap">
+            Fatto con
+            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;"
+                aria-label="amore">favorite</span>
+            e
+            <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: -3px;"
+                aria-label="intelligenza artificiale">smart_toy</span>
+            da <a href="https://github.com/plumkewe" target="_blank"
+                class="underline font-medium hover-text-effect">Lyubomyr Malay</a>
+        </span>
+    </div>
+
+    <!-- Config (Loaded from external file to support Secrets) -->
+
+
+    <script src="assets/js/config.js?v=1.0.2"></script>
+    <script>
+        window.__DOVE_STATIC_CONTEXT__ = {"pageType": "building", "canonicalPath": "https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/b/", "polo": "fibonacci", "building": "b", "floor": "0"};
+    </script>
+    <script src="assets/js/app.js?v=1.0.2"></script>
+</body>
+</html>

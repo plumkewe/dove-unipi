@@ -474,38 +474,25 @@ Al momento sono disponibili le seguenti scorciatoie:
 
 ### Path sharing
 
-Per impostazione predefinita è attivo il **path sharing** di _polo_, _edificio_, _piano_ e _coordinate_.  
-Questo significa che, condividendo un link come:
+Per impostazione predefinita è attivo il **path sharing** di _polo_, _edificio_, _piano_, _aula_ e _coordinate_.  
+I link seguono ora una struttura **basata sul percorso URL**, ad esempio:
 
 ```
-https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=a&f=0&v=top&x=504.00&y=322.42&z=1.00
+https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/aula-1/
 ```
 
-la parte
+oppure, con le coordinate della mappa:
 
 ```
-?p=fibonacci&b=a&f=0&v=top&x=504.00&y=322.42&z=1.00
+https://plumkewe.github.io/dove-unipi/polo/fibonacci/edificio/a/piano/0/?x=504.00&y=322.42&z=1.00
 ```
 
-permetterà a chi apre il link di visualizzare **lo stesso polo, edificio, piano** e anche l’**elemento evidenziato** di chi lo ha condiviso.
+Condividendo un link del genere, chi lo apre vedrà **lo stesso polo, edificio, piano** e anche l’**elemento evidenziato** di chi lo ha condiviso.
 
 Se la funzione non dovesse funzionare, apri la **barra di ricerca**, digita `impostazioni` e verifica che le opzioni **“Condividi polo/edificio/piano”** e **“Condividi coordinate mappa”** siano attive.
 
-Inoltre, se utilizzi la funzione di **ricerca** o selezioni un elemento dalla **sidebar** senza muoverti sulla mappa, il link generato sarà molto più breve e includerà solo il _polo_ e il nome abbreviato (se disponibile) dell’aula, dipartimento, laboratorio e sala.
-
-Ad esempio:
-
-```
-https://plumkewe.github.io/dove-unipi/?p=fibonacci&c=D2
-```
-
-Corrisponde a:
-
-```
-https://plumkewe.github.io/dove-unipi/?p=fibonacci&b=d&f=0&v=top&x=380.00&y=296.00&z=2.00
-```
-
-Aprendo quel link, oltre all’aula verranno mostrati anche i dati relativi alla ricerca, quindi la sua posizione, la capienza e lo stato.
+> [!NOTE]
+> I **link legacy** con parametri query (es. `?p=fibonacci&b=a&f=0`) sono ancora supportati per garantire la compatibilità con i vecchi link condivisi.
 
 <hr>
 

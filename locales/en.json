@@ -187,6 +187,22 @@
     "original": "Polo",
     "translation": "Campus"
   },
+  "404_title": {
+    "original": "Pagina non trovata | DOVE?UNIPI",
+    "translation": "Page not found | DOVE?UNIPI"
+  },
+  "404_page_title": {
+    "original": "Pagina non trovata",
+    "translation": "Page not found"
+  },
+  "404_desc": {
+    "original": "Verrai reindirizzato a",
+    "translation": "You will be redirected to"
+  },
+  "404_btn": {
+    "original": "Vai subito",
+    "translation": "Go now"
+  },
   "made_with": {
     "original": "Fatto con",
     "translation": "Made with"
@@ -530,6 +546,14 @@
   "load_more_results": {
     "original": "Carica altri",
     "translation": "Load More"
+  },
+  "this_polo_divider": {
+    "original": "Questo polo",
+    "translation": "This campus"
+  },
+  "other_poli_polo_divider": {
+    "original": "Altri poli",
+    "translation": "Other campuses"
   },
   "other_poli_divider": {
     "original": "Risultati in altri poli",

@@ -187,6 +187,22 @@
     "original": "Polo",
     "translation": "Polo"
   },
+  "404_title": {
+    "original": "Pagina non trovata | DOVE?UNIPI",
+    "translation": "Pagina non trovata | DOVE?UNIPI"
+  },
+  "404_page_title": {
+    "original": "Pagina non trovata",
+    "translation": "Pagina non trovata"
+  },
+  "404_desc": {
+    "original": "Verrai reindirizzato a",
+    "translation": "Verrai reindirizzato a"
+  },
+  "404_btn": {
+    "original": "Vai subito",
+    "translation": "Vai subito"
+  },
   "made_with": {
     "original": "Fatto con",
     "translation": "Fatto con"
@@ -530,6 +546,14 @@
   "load_more_results": {
     "original": "Carica altri",
     "translation": "Carica altri"
+  },
+  "this_polo_divider": {
+    "original": "Questo polo",
+    "translation": "Questo polo"
+  },
+  "other_poli_polo_divider": {
+    "original": "Altri poli",
+    "translation": "Altri poli"
   },
   "other_poli_divider": {
     "original": "Risultati in altri poli",

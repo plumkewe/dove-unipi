@@ -168,7 +168,7 @@
     "indirizzo": "Palazzo Matteucci, Piazza Torricelli 2"
   },
   {
-    "id": "bib_matematica_informatica_fisica",
+    "id": "fib_bib-b-1",
     "nome": "Biblioteca Matematica, Informatica, Fisica",
     "alias": ["Matematica, Informatica, Fisica", "Biblioteca MIF", "MIF"],
     "type": ["biblioteca"],
@@ -184,7 +184,7 @@
     "email": " info.mif@sba.unipi.it ",
     "telefono": "050 2213703",
     "fax": "050 2210677",
-    "indirizzo": "Complesso ex Marzotto, Largo Bruno Pontecorvo 3 - 56127 Pisa"
+    "indirizzo": "Complesso ex Marzotto, Largo Bruno Pontecorvo 3"
   },
   {
     "id": "bib_medicina_e_chirurgia_farmacia",
