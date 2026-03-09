@@ -3920,7 +3920,9 @@
                     } else {
                         const params = new URLSearchParams();
                         params.set('c', shortLinkContext.code);
-                        for (const [k, v] of coordParams) params.set(k, v);
+                        if (!shortLinkContext.isPerson) {
+                            for (const [k, v] of coordParams) params.set(k, v);
+                        }
                         const queryBasePath = shortLinkContext.queryBasePath || contextPath || appIndexPath;
                         newUrl = `${queryBasePath}?${params.toString()}`;
                     }
@@ -4146,17 +4148,24 @@
                             room: roomFromShortLink.room,
                             codeOverride: roomParam
                         });
+                    }
+                }
 
-                        // Popola automaticamente il campo di ricerca con il nome della persona o dell'aula
-                        // Use ricerca field for consistent display
-                        const displayName = roomFromShortLink.room.ricerca || roomFromShortLink.matchedPersonName || roomFromShortLink.room.nome || roomParam;
-                        const searchQuery = `${displayName}`;
-
-                        if (searchInput) searchInput.value = searchQuery;
-                        if (searchInputMobile) searchInputMobile.value = searchQuery;
-
-                        // Triggerare la ricerca per mostrare i risultati
-                        searchRooms(searchQuery);
+                let initialSearchQuery = null;
+                if (roomFromShortLink) {
+                    // Popola automaticamente il campo di ricerca con il nome della persona o dell'aula
+                    // Use ricerca field for consistent display
+                    let displayName = roomFromShortLink.room.ricerca || roomFromShortLink.matchedPersonName || roomFromShortLink.room.nome;
+                    if (!displayName) {
+                        displayName = roomFromShortLink.room.id || roomFromShortLink.room.slug || roomParam;
+                        if (displayName && typeof displayName === 'string') {
+                            displayName = displayName.replace(/-/g, ' ');
+                        }
+                    }
+                    if (displayName) {
+                        initialSearchQuery = String(displayName).trim();
+                        if (searchInput) searchInput.value = initialSearchQuery;
+                        if (searchInputMobile) searchInputMobile.value = initialSearchQuery;
                     }
                 }
 
@@ -4175,6 +4184,11 @@
                   effectiveViewParam,
                     roomFromShortLink ? roomFromShortLink.room : null
                 );
+
+                if (initialSearchQuery) {
+                    // Triggerare la ricerca per mostrare i risultati limitati a questa stanza
+                    searchRooms(initialSearchQuery);
+                }
 
                 // Espandi automaticamente i dettagli dell'aula nella sidebar se proveniamo da un link breve
                 if (roomFromShortLink) {
