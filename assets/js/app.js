@@ -76,10 +76,6 @@
             const mobileSearchContainer = document.getElementById('mobile-search-container');
             const searchInputMobileElement = document.getElementById('search-input-mobile');
 
-            let keyboardViewportAdjustmentActive = false;
-            let viewportResizeRaf = null;
-            let visualViewportListenersAttached = false;
-
             // Setup global delegated listeners
             setupDelegatedListeners();
             setupSidebarDelegation();
@@ -368,9 +364,7 @@
             }
 
             function handleRoomItemClick(e, roomElement, room, polo, building, floor) {
-                // Logic from original click listener
-
-                // Determina se stiamo chiudendo i dettagli (se sono già visibili)
+                // Determine if we are closing details (if they are already visible)
                 const roomContainer = roomElement.parentNode;
                 const roomInfoElement = roomContainer.querySelector('.capacity-info');
                 const isClosing = roomInfoElement && !roomInfoElement.classList.contains('hidden');
@@ -386,9 +380,6 @@
                         updateURL(true);
                     } else {
                         // When closing, we specifically do NOT want to update the URL or clear context
-                        // because that triggers a map reset/zoom which the user wants to avoid.
-                        // clearShortLinkContext();
-                        // updateURL(true);
                     }
                 } else {
                     if (!isClosing) {
@@ -397,17 +388,45 @@
                 }
 
                 // Center map ONLY if we are OPENING details (not closing)
+                const roomName = room.ricerca || room.nome;
+                const topInput = typeof searchInput !== 'undefined' ? searchInput : document.getElementById('search-input');
+                const mobileInput = typeof searchInputMobile !== 'undefined' ? searchInputMobile : document.getElementById('search-input-mobile');
+
                 if (!isClosing) {
                     centerMapOnRoom(room);
+                    
+                    // Write the selected element to the search bar
+                    if (roomName && topInput) {
+                        topInput.value = roomName;
+                        if (mobileInput) {
+                            mobileInput.value = roomName;
+                        }
+                        if (typeof updateClearButtonsVisibility === 'function') {
+                            updateClearButtonsVisibility();
+                        }
+                        // Dispara l'evento input per aggiornare i risultati della ricerca
+                        const inputEvent = new Event('input', { bubbles: true });
+                        topInput.dispatchEvent(inputEvent);
+                        if (mobileInput) mobileInput.dispatchEvent(inputEvent);
+                    }
                 } else {
-                    clearSelectedRoomMarker();
+                    if (roomName && topInput && topInput.value.trim().toLowerCase() === roomName.trim().toLowerCase()) {
+                        clearSelectedRoomMarker();
+                        topInput.value = '';
+                        if (mobileInput) mobileInput.value = '';
+                        if (typeof updateClearButtonsVisibility === 'function') updateClearButtonsVisibility();
+                    }
                 }
 
                 requestAnimationFrame(() => {
                     // Toggle details
                     if (roomInfoElement && roomInfoElement.innerHTML.trim() !== '') {
-                        roomInfoElement.classList.toggle('hidden');
                         const expandIcon = roomElement.querySelector('.expand-icon');
+                        
+                        // User requested: "voglio che sparisce quando nascondo i dettagli di quello che mi sta mostrando"
+                        // This means we DO want to toggle the hidden state on click.
+                        // However, we DO NOT want to clear the search bar or anything else here.
+                        roomInfoElement.classList.toggle('hidden');
                         if (expandIcon) {
                             expandIcon.style.transform = roomInfoElement.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
                         }
@@ -415,91 +434,15 @@
                 });
             }
 
-            // Funzione per gestire il ridimensionamento della viewport (quando si apre la tastiera)
-            function handleViewportResize() {
-                if (!isKeyboardViewportAdjustmentActive()) {
-                    return;
-                }
-                if (!mobileSearchContainer || !window.visualViewport) return;
-
-                // Calcola lo spostamento necessario
-                const viewportHeight = window.visualViewport.height;
-                const windowHeight = window.innerHeight;
-                const keyboardHeight = windowHeight - viewportHeight;
-
-                // Se la tastiera è aperta (differenza > 100px per evitare falsi positivi)
-                if (keyboardHeight > 100) {
-                    // Sposta la barra di ricerca sopra la tastiera
-                    // Aggiungi un offset extra di 16px per un po' di padding
-                    mobileSearchContainer.style.bottom = `${keyboardHeight + 16}px`;
-                } else {
-                    // Ripristina la posizione originale
-                    mobileSearchContainer.style.bottom = '48px';
-                }
-            }
-
-            function isKeyboardViewportAdjustmentActive() {
-                return keyboardViewportAdjustmentActive && !!window.visualViewport;
-            }
-
-            function scheduleViewportResize() {
-                if (!isKeyboardViewportAdjustmentActive()) return;
-                if (viewportResizeRaf) return;
-                viewportResizeRaf = requestAnimationFrame(() => {
-                    viewportResizeRaf = null;
-                    handleViewportResize();
-                });
-            }
-
-            function attachVisualViewportListeners() {
-                if (!window.visualViewport || visualViewportListenersAttached) return;
-                window.visualViewport.addEventListener('resize', scheduleViewportResize);
-                window.visualViewport.addEventListener('scroll', scheduleViewportResize);
-                visualViewportListenersAttached = true;
-            }
-
-            function detachVisualViewportListeners() {
-                if (!window.visualViewport || !visualViewportListenersAttached) return;
-                window.visualViewport.removeEventListener('resize', scheduleViewportResize);
-                window.visualViewport.removeEventListener('scroll', scheduleViewportResize);
-                visualViewportListenersAttached = false;
-            }
-
-            // Fallback per dispositivi che non supportano visualViewport
-            // Monitora il focus sull'input di ricerca mobile
             if (searchInputMobileElement) {
                 searchInputMobileElement.addEventListener('focus', () => {
-                    keyboardViewportAdjustmentActive = true;
-
-                    if (window.visualViewport) {
-                        attachVisualViewportListeners();
-                        // Usa un timeout per dare tempo alla tastiera di aprirsi
-                        setTimeout(() => {
-                            if (isKeyboardViewportAdjustmentActive()) {
-                                scheduleViewportResize();
-                            }
-                        }, 250);
-                    } else {
-                        // Fallback: scroll per mantenere l'input visibile
-                        setTimeout(() => {
-                            searchInputMobileElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }, 300);
-                    }
+                    if (!mobileSearchContainer) return;
+                    mobileSearchContainer.style.removeProperty('bottom');
                 });
 
                 searchInputMobileElement.addEventListener('blur', () => {
-                    keyboardViewportAdjustmentActive = false;
-                    if (viewportResizeRaf) {
-                        cancelAnimationFrame(viewportResizeRaf);
-                        viewportResizeRaf = null;
-                    }
-                    detachVisualViewportListeners();
-                    // Quando l'input perde il focus, ripristina la posizione
-                    setTimeout(() => {
-                        if (mobileSearchContainer) {
-                            mobileSearchContainer.style.bottom = '48px';
-                        }
-                    }, 100);
+                    if (!mobileSearchContainer) return;
+                    mobileSearchContainer.style.removeProperty('bottom');
                 });
             }
 
@@ -683,7 +626,7 @@
                 showClassroomStatus: storedShowClassroomStatus ? storedShowClassroomStatus === 'true' : true, // Default to true
                 showGroundFloor: storedShowGroundFloor ? storedShowGroundFloor === 'true' : true, // Default to true = "Piano Terra"
                 copyLinkOnSelect: storedCopyLinkOnSelect ? storedCopyLinkOnSelect === 'true' : false,
-                poiBlinking: storedPoiBlinking ? storedPoiBlinking === 'true' : false,
+                poiBlinking: storedPoiBlinking ? storedPoiBlinking === 'true' : true,
                 language: storedLanguage
             };
 
@@ -1359,6 +1302,85 @@
                 return null;
               }
 
+            function getSearchResultsHideDuration(resultsElement) {
+                return resultsElement === searchResultsMobile ? 360 : 310;
+            }
+
+            function getSearchResultsShowDuration(resultsElement) {
+                return resultsElement === searchResultsMobile ? 420 : 340;
+            }
+
+            function getSearchResultsOpenMaxHeight(resultsElement) {
+                return resultsElement === searchResultsMobile ? Math.floor(window.innerHeight * 0.5) : 240;
+            }
+
+            function animateSearchResultsPanelResize(resultsElement, previousHeight = 0) {
+                if (!resultsElement) return;
+
+                if (resultsElement.searchHideTimer) {
+                    clearTimeout(resultsElement.searchHideTimer);
+                    resultsElement.searchHideTimer = null;
+                }
+
+                if (resultsElement.searchResizeTimer) {
+                    clearTimeout(resultsElement.searchResizeTimer);
+                    resultsElement.searchResizeTimer = null;
+                }
+
+                const maxHeight = getSearchResultsOpenMaxHeight(resultsElement);
+                const targetHeight = Math.min(resultsElement.scrollHeight, maxHeight);
+                const startHeight = Math.min(Math.max(previousHeight, 0), maxHeight);
+
+                resultsElement.classList.remove('hidden');
+                resultsElement.style.maxHeight = `${startHeight}px`;
+                resultsElement.getBoundingClientRect();
+
+                requestAnimationFrame(() => {
+                    resultsElement.style.maxHeight = `${targetHeight}px`;
+                });
+
+                resultsElement.searchResizeTimer = setTimeout(() => {
+                    if (!resultsElement.classList.contains('hidden')) {
+                        resultsElement.style.maxHeight = '';
+                    }
+                    resultsElement.searchResizeTimer = null;
+                }, getSearchResultsShowDuration(resultsElement));
+            }
+
+            function animateSearchResultsPanelHide(resultsElement, { clearContent = false } = {}) {
+                if (!resultsElement) return;
+
+                if (resultsElement.searchHideTimer) {
+                    clearTimeout(resultsElement.searchHideTimer);
+                    resultsElement.searchHideTimer = null;
+                }
+
+                if (resultsElement.searchResizeTimer) {
+                    clearTimeout(resultsElement.searchResizeTimer);
+                    resultsElement.searchResizeTimer = null;
+                }
+
+                if (!resultsElement.classList.contains('hidden')) {
+                    const currentHeight = resultsElement.scrollHeight;
+                    if (currentHeight > 0) {
+                        resultsElement.style.maxHeight = `${currentHeight}px`;
+                        resultsElement.getBoundingClientRect();
+                    }
+                }
+
+                resultsElement.classList.add('hidden');
+
+                resultsElement.searchHideTimer = setTimeout(() => {
+                    if (resultsElement.classList.contains('hidden')) {
+                        resultsElement.style.maxHeight = '';
+                        if (clearContent) {
+                            resultsElement.innerHTML = '';
+                        }
+                    }
+                    resultsElement.searchHideTimer = null;
+                }, getSearchResultsHideDuration(resultsElement));
+            }
+
             const hideSearchResultsPanels = () => {
                 // Check if we should keep the promo visible
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
@@ -1385,12 +1407,8 @@
                      }
                 }
 
-                if (searchResults) {
-                    searchResults.classList.add('hidden');
-                }
-                if (searchResultsMobile) {
-                    searchResultsMobile.classList.add('hidden');
-                }
+                animateSearchResultsPanelHide(searchResults);
+                animateSearchResultsPanelHide(searchResultsMobile);
                 stopOccupancyRefreshLoop();
             };
 
@@ -1660,8 +1678,10 @@
                         return;
                     }
 
-                    currentSearchResults.innerHTML = '';
-                    hideSearchResultsPanels();
+                    animateSearchResultsPanelHide(currentSearchResults, { clearContent: true });
+                    const inactiveSearchResults = currentSearchResults === searchResults ? searchResultsMobile : searchResults;
+                    animateSearchResultsPanelHide(inactiveSearchResults);
+                    stopOccupancyRefreshLoop();
                     selectedSearchResultIndex = -1;
                     document.body.classList.remove('keyboard-navigation-active');
                     return;
@@ -2270,38 +2290,21 @@
             function displaySearchResults(results, showSettings = false, loadMore = false) {
                 const currentSearchResults = isMobile() ? searchResultsMobile : searchResults;
                 const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
-
-                const wasHidden = currentSearchResults.classList.contains('hidden');
-                const oldHeight = (!wasHidden && !loadMore) ? currentSearchResults.scrollHeight : 0;
-
-                const getResultsMaxHeight = () => {
-                    return isMobile() ? Math.floor(window.innerHeight * 0.50) : 240;
-                };
+                const previousHeight = currentSearchResults.classList.contains('hidden')
+                    ? 0
+                    : currentSearchResults.getBoundingClientRect().height;
 
                 const finalizeAndAnimate = () => {
-                    if (!wasHidden && !loadMore) {
-                        const maxHeight = getResultsMaxHeight();
-                        const startHeight = Math.min(oldHeight, maxHeight);
-                        const targetHeight = Math.min(currentSearchResults.scrollHeight, maxHeight);
-
-                        currentSearchResults.style.maxHeight = `${startHeight}px`;
-                        currentSearchResults.classList.remove('hidden');
-                        currentSearchResults.getBoundingClientRect();
-
-                        requestAnimationFrame(() => {
-                            currentSearchResults.style.maxHeight = `${targetHeight}px`;
-                        });
-
-                        setTimeout(() => {
-                            currentSearchResults.style.maxHeight = '';
-                        }, isMobile() ? 420 : 340);
-                    } else {
-                        currentSearchResults.classList.remove('hidden');
-                    }
+                    animateSearchResultsPanelResize(currentSearchResults, previousHeight);
                 };
 
                 // Store the current index to preserve it after re-render
                 const previousIndex = selectedSearchResultIndex;
+
+                if (!loadMore && previousHeight > 0) {
+                    currentSearchResults.style.maxHeight = `${previousHeight}px`;
+                    currentSearchResults.getBoundingClientRect();
+                }
 
                 // If not loading more, reset the state and clear results
                 if (!loadMore) {
@@ -2501,7 +2504,7 @@
                             <div class="details text-gray-500">
                                 ${result.address}
                                 <div style="margin-top: 4px;">
-                                    <a href="${result.google_maps}" target="_blank" class="text-blue-600 hover:underline" style="display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()">
+                                    <a href="${result.google_maps}" target="_blank" class="hover:underline" style="display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()">
                                         Apri in Google Maps
                                     </a>
                                 </div>
@@ -3629,7 +3632,7 @@
                         if (clearButtonElement && !clearButtonElement.classList.contains('hidden')) {
                             clearButtonElement.click();
                         } else {
-                            currentSearchResults.classList.add('hidden');
+                            animateSearchResultsPanelHide(currentSearchResults);
                         }
                     }
                 });
@@ -3644,7 +3647,6 @@
                         selectedSearchResultIndex = -1;
                         document.body.classList.remove('keyboard-navigation-active');
                         searchRooms('');
-                        hideSearchResultsPanels();
                         updateClearButtonsVisibility();
                         clearSelectedRoomMarker();
                         inputElement.focus();
@@ -3817,16 +3819,22 @@
                 }
             });
 
+            // Variabile per ricordare la ricerca precedente
+            let previousSearchValue = '';
+
             // Funzione per mostrare/nascondere le impostazioni
             if (settingsBtn) {
                 settingsBtn.addEventListener('click', () => {
                     const input = window.innerWidth <= 768 ? searchInputMobile : searchInput;
                     if (input) {
                         if (input.value.trim().toLowerCase() === 'impostazioni') {
-                            input.value = '';
+                            input.value = previousSearchValue || '';
                             input.dispatchEvent(new Event('input', { bubbles: true }));
                             input.blur();
                         } else {
+                            if (input.value.trim().toLowerCase() !== 'impostazioni') {
+                                previousSearchValue = input.value;
+                            }
                             input.value = 'impostazioni';
                             input.dispatchEvent(new Event('input', { bubbles: true }));
                             
@@ -4224,15 +4232,7 @@
 
             // Funzione per animare il bottone della sidebar come feedback visivo
             function triggerSidebarButtonAnimation() {
-                // Controlla se la sidebar è chiusa prima di animare
-                if (sidebar.classList.contains('-translate-x-full')) {
-                    openSidebarBtn.classList.add('pulse-animation');
-
-                    // Rimuovi la classe dopo l'animazione per permettere animazioni future
-                    setTimeout(() => {
-                        openSidebarBtn.classList.remove('pulse-animation');
-                    }, 1200); // 0.6s * 2 ripetizioni = 1.2s
-                }
+                // Animazione disabilitata (nessun puntino pulsante)
             }
 
             // Event Listener per il bottone Apri
@@ -5141,11 +5141,29 @@
                                 }
                             }
 
+                            const roomName = studyRoom.ricerca || studyRoom.nome;
+                            const topInput = typeof searchInput !== 'undefined' ? searchInput : document.getElementById('search-input');
+                            const mobileInput = typeof searchInputMobile !== 'undefined' ? searchInputMobile : document.getElementById('search-input-mobile');
+
                             // Center map ONLY if we are OPENING details (not closing)
                             if (!isClosing) {
                                 centerMapOnRoom(studyRoom);
+                                if (roomName && topInput) {
+                                    topInput.value = roomName;
+                                    if (mobileInput) mobileInput.value = roomName;
+                                    if (typeof updateClearButtonsVisibility === 'function') updateClearButtonsVisibility();
+                                    
+                                    const inputEvent = new Event('input', { bubbles: true });
+                                    topInput.dispatchEvent(inputEvent);
+                                    if (mobileInput) mobileInput.dispatchEvent(inputEvent);
+                                }
                             } else {
-                                clearSelectedRoomMarker();
+                                if (roomName && topInput && topInput.value.trim().toLowerCase() === roomName.trim().toLowerCase()) {
+                                    clearSelectedRoomMarker();
+                                    topInput.value = '';
+                                    if (mobileInput) mobileInput.value = '';
+                                    if (typeof updateClearButtonsVisibility === 'function') updateClearButtonsVisibility();
+                                }
                             }
 
                             // Defer heavy UI updates to next frame to allow animation to start smoothly
@@ -5276,7 +5294,7 @@
                         // --- Details Construction ---
                         const personInfoElement = document.createElement('div');
                         let detailsCount = 0;
-                        personInfoElement.className = 'capacity-info hidden pl-10 p-2 text-sm text-gray-600 space-y-2'; // Uniform spacing with space-y-2
+                        personInfoElement.className = 'capacity-info hidden pl-10 p-1 text-sm text-gray-600';
 
                         // Helper for uniform rows
                         function addDetailRow(icon, contentHtml) {
@@ -5284,7 +5302,7 @@
                             personInfoElement.innerHTML += `
                                 <div class="flex items-start space-x-2 min-w-0 w-full overflow-hidden">
                                      <span class="material-symbols-outlined shrink-0 mt-0.5" style="font-size: 16px; width: 16px; text-align: center;">${icon}</span>
-                                     <span class="truncate block min-w-0 flex-1">${contentHtml}</span>
+                                     <span class="block min-w-0 flex-1 break-words">${contentHtml}</span>
                                 </div>`;
                         }
 
@@ -5303,7 +5321,7 @@
 
                            categories.forEach(cat => {
                                // Display each category on a new line with a label icon
-                               addDetailRow('label', `<span class="font-medium text-gray-700">${cat}</span>`);
+                               addDetailRow('label', `<span>${cat}</span>`);
                            });
                         }
 
@@ -5356,8 +5374,8 @@
                         if (surname) {
                             nameHtml = `
                             <div class="flex flex-col">
-                                <span class="leading-tight">${surname}</span>
-                                <span class="text-sm text-gray-600 leading-tight">${firstName}</span>
+                                <span>${surname}</span>
+                                <span class="text-sm text-gray-600">${firstName}</span>
                             </div>`;
                         } else {
                             // Fallback for unexpected data structure
@@ -5398,11 +5416,29 @@
                                 }
                             }
 
+                            const roomName = entry.personData.ricerca || entry.personData.nome;
+                            const topInput = typeof searchInput !== 'undefined' ? searchInput : document.getElementById('search-input');
+                            const mobileInput = typeof searchInputMobile !== 'undefined' ? searchInputMobile : document.getElementById('search-input-mobile');
+
                             // Center map ONLY if we are OPENING details (not closing)
                             if (!isClosing) {
                                 centerMapOnRoom(entry.personData);
+                                if (roomName && topInput) {
+                                    topInput.value = roomName;
+                                    if (mobileInput) mobileInput.value = roomName;
+                                    if (typeof updateClearButtonsVisibility === 'function') updateClearButtonsVisibility();
+                                    
+                                    const inputEvent = new Event('input', { bubbles: true });
+                                    topInput.dispatchEvent(inputEvent);
+                                    if (mobileInput) mobileInput.dispatchEvent(inputEvent);
+                                }
                             } else {
-                                clearSelectedRoomMarker();
+                                if (roomName && topInput && topInput.value.trim().toLowerCase() === roomName.trim().toLowerCase()) {
+                                    clearSelectedRoomMarker();
+                                    topInput.value = '';
+                                    if (mobileInput) mobileInput.value = '';
+                                    if (typeof updateClearButtonsVisibility === 'function') updateClearButtonsVisibility();
+                                }
                             }
 
                             // Toggle Details Logic
@@ -5638,6 +5674,19 @@
                 flipViewBtn.classList.toggle('hidden', !shouldShow);
                 flipViewBtn.disabled = !shouldShow;
 
+                // Toggle visibility of the parent container if it's the view-controls
+                // This removes the "artifact" shadow from empty .button-group wrappers
+                if (flipViewBtn.parentElement && flipViewBtn.parentElement.id === 'view-controls') {
+                    // Check if there are other visible buttons in this viewControls (like settings-btn)
+                    // We only want to hide the wrapper if NO other buttons are visible
+                    const otherVisible = Array.from(flipViewBtn.parentElement.children).some(child => child !== flipViewBtn && !child.classList.contains('hidden'));
+                    if (!otherVisible) {
+                         flipViewBtn.parentElement.classList.toggle('hidden', !shouldShow);
+                    } else {
+                         flipViewBtn.parentElement.classList.remove('hidden');
+                    }
+                }
+
                 if (shouldShow) {
                     // Restore state
                     const key = `${selectedPolo}-${building}`;
@@ -5663,38 +5712,6 @@
                 return building !== ''
                     ? `${root}polo/${selectedPolo}/edificio/${building}/piano/${floor}${suffix}.svg`
                     : `${root}polo/${selectedPolo}/edificio/${floor}${suffix}.svg`;
-            }
-
-            function checkForTopView(building, floor) {
-                const topViewPath = getSVGPath(building, floor, '-top');
-                const cacheKey = `${selectedPolo}/${building}/${floor}/top-exists`;
-
-                // Controlla prima nella cache
-                if (svgCache.has(cacheKey)) {
-                    const exists = svgCache.get(cacheKey);
-                    if (exists) {
-                        viewControls.classList.remove('hidden');
-                    } else {
-                        viewControls.classList.add('hidden');
-                    }
-                    return;
-                }
-
-                // Se non in cache, fai la richiesta HEAD
-                fetch(topViewPath, { method: 'HEAD' })
-                    .then(response => {
-                        const exists = response.ok;
-                        svgCache.set(cacheKey, exists);
-                        if (exists) {
-                            viewControls.classList.remove('hidden');
-                        } else {
-                            viewControls.classList.add('hidden');
-                        }
-                    })
-                    .catch(() => {
-                        svgCache.set(cacheKey, false);
-                        viewControls.classList.add('hidden');
-                    });
             }
 
             // Funzione per gestire la cache LRU (Least Recently Used)
@@ -5951,9 +5968,6 @@
             }
 
             function loadSVG(building, floor, viewType = 'top', viewParams = null, roomData = null) {
-                // Controlla se la vista top è disponibile
-                checkForTopView(building, floor);
-
                 // Aggiungi classe loading per l'animazione
                 viewerContainer.classList.add('loading');
 
@@ -6172,6 +6186,19 @@
                                     selectRoom(polo, building, floor, room);
                                     expandRoomDetailsInSidebar(roomName);
                                     triggerSidebarButtonAnimation();
+                                    
+                                    // Update search bar with selected room name
+                                    const topInput = typeof searchInput !== 'undefined' ? searchInput : document.getElementById('search-input');
+                                    const mobileInput = typeof searchInputMobile !== 'undefined' ? searchInputMobile : document.getElementById('search-input-mobile');
+                                    if (roomName && topInput) {
+                                        topInput.value = roomName;
+                                        if (mobileInput) mobileInput.value = roomName;
+                                        if (typeof updateClearButtonsVisibility === 'function') updateClearButtonsVisibility();
+                                        
+                                        const inputEvent = new Event('input', { bubbles: true });
+                                        topInput.dispatchEvent(inputEvent);
+                                        if (mobileInput) mobileInput.dispatchEvent(inputEvent);
+                                    }
                                 }
                             } else if (markerType === 'person') {
                                 e.stopPropagation();
@@ -6189,6 +6216,19 @@
                                     selectRoom(polo, building, floor, room);
                                     expandRoomDetailsInSidebar(roomName);
                                     triggerSidebarButtonAnimation();
+                                    
+                                    // Update search bar with selected room name
+                                    const topInput = typeof searchInput !== 'undefined' ? searchInput : document.getElementById('search-input');
+                                    const mobileInput = typeof searchInputMobile !== 'undefined' ? searchInputMobile : document.getElementById('search-input-mobile');
+                                    if (roomName && topInput) {
+                                        topInput.value = roomName;
+                                        if (mobileInput) mobileInput.value = roomName;
+                                        if (typeof updateClearButtonsVisibility === 'function') updateClearButtonsVisibility();
+                                        
+                                        const inputEvent = new Event('input', { bubbles: true });
+                                        topInput.dispatchEvent(inputEvent);
+                                        if (mobileInput) mobileInput.dispatchEvent(inputEvent);
+                                    }
                                 }
                             }
                             // Future marker types can be added here (e.g., water-dispenser)

@@ -169,6 +169,11 @@
                 /* gray-300 */
             }
 
+            #open-sidebar-button.hover-effect:hover,
+            #share-btn.hover-effect:hover {
+                background-color: var(--color-gray-300);
+            }
+
             .hover-effect-darker:hover {
                 background-color: var(--overlay-selected);
                 /* 10% black opacity */
@@ -749,8 +754,10 @@
             /* rounded-lg */
             background-color: var(--bg-main);
             /* bg-gray-200 */
-            border: 1px solid var(--color-gray-200);
-            /* border-gray-200 */
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 transparent);
+            --tw-ring-color: var(--text-muted);
         }
 
         .button-group.hidden {
@@ -761,8 +768,8 @@
             border-radius: 0;
         }
 
-        .button-group>button:first-child {
-            border-left: none;
+        .button-group>button + button {
+            border-left: 2px solid var(--text-muted);
         }
 
         .button-group>button.active {
@@ -797,6 +804,12 @@
             /* Aggiunto per coerenza */
             justify-content: center;
             /* Aggiunto per coerenza */
+            background-color: var(--bg-main);
+            border: none;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 transparent);
+            --tw-ring-color: var(--text-muted);
         }
 
         #open-sidebar-button:hover {
@@ -841,8 +854,10 @@
         #search-container {
             grid-area: search;
             justify-self: center;
-            width: 360px;
-            max-width: 90vw;
+            width: min(360px, 90vw);
+            min-width: min(360px, 90vw);
+            max-width: min(360px, 90vw);
+            flex-shrink: 0;
             position: relative;
             /* Aggiunto per posizionare il wrapper */
         }
@@ -862,9 +877,6 @@
             box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
             --tw-ring-color: var(--text-muted);
             /* ring-gray-400 */
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 300ms;
             overflow: hidden;
         }
 
@@ -924,7 +936,8 @@
         /* Transizione wrapper per altezza più morbida */
         #search-wrapper,
         #search-wrapper-mobile {
-            transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+            min-width: 0;
         }
 
         #right-controls {
@@ -937,6 +950,15 @@
             flex-shrink: 0;
             /* Impedisce ai controlli di restringersi */
             justify-self: end;
+        }
+
+        #share-btn {
+            background-color: var(--bg-main);
+            border: none;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 transparent);
+            --tw-ring-color: var(--text-muted);
         }
 
         @media (max-width: 1200px) {
@@ -979,15 +1001,16 @@
                 padding-right: 1rem;
                 display: flex;
                 justify-content: center;
-                transition: bottom 0.3s ease-in-out;
             }
 
             #mobile-search-container .search-wrapper-mobile {
                 display: flex;
                 flex-direction: column-reverse;
                 /* Inverte l'ordine: risultati sopra, input sotto */
-                width: 100%;
+                width: min(360px, 100%);
+                min-width: 0;
                 max-width: 360px;
+                flex: 0 0 auto;
                 /* Rimosso background e shadow per applicarli ai figli */
             }
 
@@ -999,9 +1022,6 @@
                 box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
                 --tw-ring-color: var(--text-muted);
                 /* ring-gray-400 */
-                transition-property: all;
-                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-                transition-duration: 300ms;
             }
 
             #mobile-search-container .search-wrapper-mobile>#search-results-mobile {
@@ -1054,8 +1074,10 @@
                 display: flex;
                 flex-direction: column-reverse;
                 /* Inverte l'ordine: risultati sopra, input sotto */
-                width: 100%;
+                width: min(360px, 100%);
+                min-width: 0;
                 max-width: 360px;
+                flex: 0 0 auto;
                 background-color: var(--bg-main);
                 /* bg-gray-200 */
                 border-radius: 0.5rem;
@@ -1065,7 +1087,6 @@
                 box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 var(--color-transparent));
                 --tw-ring-color: var(--text-muted);
                 /* ring-gray-400 */
-                transition: border-radius 0.3s ease-in-out;
                 overflow: hidden;
                 overflow-x: hidden;
                 /* Previene lo scroll orizzontale sul wrapper */
@@ -1279,6 +1300,10 @@
             border: none !important;
         }
 
+        .high-contrast .button-group>button + button {
+            border-left: 2px solid var(--color-black) !important;
+        }
+
         .high-contrast .button-group>button.active {
             background-color: var(--color-black) !important;
             color: var(--color-white) !important;
@@ -1461,6 +1486,12 @@
 
             /* Hover for hover-effect buttons (zoom, center, flip, settings) in high contrast */
             .high-contrast .hover-effect:hover {
+                background-color: var(--color-black) !important;
+                color: var(--color-white) !important;
+            }
+
+            .high-contrast #open-sidebar-button.hover-effect:hover,
+            .high-contrast #share-btn.hover-effect:hover {
                 background-color: var(--color-black) !important;
                 color: var(--color-white) !important;
             }
