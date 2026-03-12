@@ -9755,6 +9755,39 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
       opacity: 1 !important;
     }
 
+    /* ── Floating mini-map panel ─────────────────────────────── */
+    #polo-minimap-panel {
+      transition:
+        opacity   0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 0s;
+    }
+
+    #polo-minimap-panel.minimap-panel-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px) scale(0.97);
+      transition:
+        opacity   0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 0.3s;
+    }
+
+    #polo-minimap-panel {
+      --tw-ring-offset-shadow: var(--tw-ring-inset,) 0 0 0 var(--tw-ring-offset-width, 0px) var(--tw-ring-offset-color, #fff);
+      --tw-ring-shadow:        var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width, 0px)) var(--tw-ring-color, currentColor);
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 transparent);
+      --tw-ring-color: var(--text-muted);
+    }
+
+    @media (max-width: 1200px) {
+      #polo-minimap-panel {
+        width: min(260px, calc(100vw - 2rem)) !important;
+        border-radius: 0.5rem;
+      }
+    }
+
     .high-contrast button,
     .high-contrast .button-group>button,
     .high-contrast a.bg-gray-200 {
@@ -10573,12 +10606,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
     <!-- Controlli a Destra (Vista e Zoom) -->
     <div id="right-controls">
-      <!-- Controlli Vista -->
-      <div id="view-controls" class="button-group">
-        <button id="settings-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
-          aria-label="Impostazioni" data-tooltip="Impostazioni">
+
+      <!-- Minimappa polo + Flip (monolite quando entrambi visibili) -->
+      <div id="minimap-controls" class="button-group hidden">
+        <button id="polo-minimap-toggle-button"
+          class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+          aria-label="Mostra minimappa polo" data-tooltip="Minimappa polo">
           <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1"
-            aria-label="Impostazioni">settings</span>
+            aria-label="Mostra minimappa polo">map</span>
         </button>
         <button id="flip-view-btn"
           class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200 hidden"
@@ -10587,6 +10622,24 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             screen_rotation_alt
           </span>
         </button>
+      </div>
+
+      <!-- Controlli Vista (solo impostazioni) -->
+      <div id="view-controls" class="button-group">
+        <button id="settings-btn" class="p-2 bg-gray-200 hover-effect text-gray-900 transition-colors duration-200"
+          aria-label="Impostazioni" data-tooltip="Impostazioni">
+          <span class="material-symbols-outlined" style="font-size: 32px; line-height: 1"
+            aria-label="Impostazioni">settings</span>
+        </button>
+      </div>
+
+      <!-- Pannello flottante minimappa polo -->
+      <div id="polo-minimap-panel"
+        class="minimap-panel-hidden fixed z-50 bg-gray-200 border border-gray-200 rounded-lg p-2"
+        style="top: calc(5.5rem + env(safe-area-inset-top));
+               right: calc(1rem + env(safe-area-inset-right));
+               width: min(340px, calc(100vw - 2rem));">
+        <div id="polo-minimap-content" class="w-full"></div>
       </div>
 
       <!-- Pulsante Condividi -->
@@ -11495,10 +11548,14 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
       const zoomOutBtn = document.getElementById("zoom-out-btn");
       const resetZoomBtn = document.getElementById("reset-zoom-btn");
       const viewControls = document.getElementById("view-controls");
+      const minimapControls = document.getElementById("minimap-controls");
       const flipViewBtn = document.getElementById("flip-view-btn");
       if (flipViewBtn) {
         flipViewBtn.setAttribute("aria-pressed", "false");
       }
+      const miniMapToggleBtn = document.getElementById("polo-minimap-toggle-button");
+      const poloMinimapPanel = document.getElementById("polo-minimap-panel");
+      const poloMinimapContent = document.getElementById("polo-minimap-content");
 
       // Elementi della barra di ricerca
       const searchInput = document.getElementById("search-input");
@@ -11668,6 +11725,10 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         if (flipViewBtn) {
           flipViewBtn.setAttribute("data-tooltip", t("view_flip"));
           flipViewBtn.setAttribute("aria-label", t("view_flip"));
+        }
+        if (miniMapToggleBtn) {
+          miniMapToggleBtn.setAttribute("data-tooltip", t("minimap_polo"));
+          miniMapToggleBtn.setAttribute("aria-label", t("minimap_polo"));
         }
         if (zoomInBtn) {
           zoomInBtn.setAttribute("data-tooltip", t("zoom_in"));
@@ -15595,10 +15656,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
           view: currentView,
         };
 
+        const resolvedHistoryUrl = new URL(newUrl, window.location.href);
+        let historyUrl = `${resolvedHistoryUrl.pathname}${resolvedHistoryUrl.search}${resolvedHistoryUrl.hash}`;
+
         if (replace) {
-          history.replaceState(state, "", newUrl);
+          history.replaceState(state, "", historyUrl);
         } else {
-          history.pushState(state, "", newUrl);
+          history.pushState(state, "", historyUrl);
         }
 
         // Update page title dynamically
@@ -15609,12 +15673,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         const buildingAlias = selectedBuilding ?
           data?.polo?. [selectedPolo]?.edificio?. [selectedBuilding]?.alias?. [0] :
           null;
-        const poloDisplay =
-          buildingAlias ||
-          `Polo ${selectedPolo.charAt(0).toUpperCase() + selectedPolo.slice(1)}`;
-        document.title = roomName ?
-          `${roomName} | DOVE?UNIPI` :
-          `${poloDisplay} | DOVE?UNIPI`;
+        
+        let titleDisplay;
+        if (roomName) {
+          titleDisplay = roomName;
+        } else if (selectedBuilding && selectedPolo === 'fibonacci') {
+          // For Fibonacci buildings, show "Edificio X"
+          titleDisplay = `Edificio ${selectedBuilding.toUpperCase()}`;
+        } else {
+          // Default: use building alias or polo name
+          titleDisplay = buildingAlias ||
+            `Polo ${selectedPolo.charAt(0).toUpperCase() + selectedPolo.slice(1)}`;
+        }
+        
+        document.title = `${titleDisplay} | DOVE?UNIPI`;
       }
 
       function findRoomByShortCode(poloName, code) {
@@ -16133,52 +16205,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
           // Add polo title
           const titleSpan = document.createElement("span");
           titleSpan.textContent = `Polo ${polo.charAt(0).toUpperCase() + polo.slice(1)}`;
-          titleSpan.className = "mb-2"; // Margin bottom for spacing
           button.appendChild(titleSpan);
-
-          // Create container for mini-map SVG
-          const miniMapContainer = document.createElement("div");
-          miniMapContainer.className = "w-full mini-map-container";
-          miniMapContainer.style.maxHeight = "120px";
-          miniMapContainer.dataset.polo = polo;
-
-          // Try to load the mini-map SVG (only if the polo config declares it)
-          const poloConfig = data?.polo?. [polo];
-          if (poloConfig?.miniMap) {
-            const miniMapPath = `${getSiteRootPath()}polo/${polo}/mini-map.svg`;
-            fetch(miniMapPath)
-              .then((response) => {
-                if (!response.ok) throw new Error("SVG not found");
-                return response.text();
-              })
-              .then((svgText) => {
-                miniMapContainer.innerHTML = svgText;
-                const svg = miniMapContainer.querySelector("svg");
-                if (svg) {
-                  svg.style.width = "100%";
-                  svg.style.height = "auto";
-                  svg.style.maxHeight = "120px";
-                  svg.classList.add("mini-map-svg");
-                  svg.dataset.polo = polo;
-
-                  // Update state for this polo
-                  if (polo === selectedPolo) {
-                    updateMiniMapState();
-                  } else {
-                    // Dim all buildings for non-selected polos
-                    setMiniMapHighlight(polo, null);
-                  }
-                }
-              })
-              .catch(() => {
-                miniMapContainer.remove();
-                titleSpan.classList.remove("mb-2");
-              });
-
-            button.appendChild(miniMapContainer);
-          } else {
-            titleSpan.classList.remove("mb-2");
-          }
 
           button.addEventListener("click", () => {
             clearShortLinkContext();
@@ -16304,13 +16331,125 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         // Highlight the selected building for the current polo
         setMiniMapHighlight(selectedPolo, building);
+      }
 
-        // Reset highlights on all other polos' mini-maps
-        document.querySelectorAll(".mini-map-svg").forEach((svg) => {
-          if (svg.dataset.polo !== selectedPolo) {
-            setMiniMapHighlight(svg.dataset.polo, null);
+      // ── Floating mini-map panel logic ──────────────────────────
+      function renderPoloMiniMapPanel() {
+        if (!poloMinimapPanel || !poloMinimapContent || !selectedPolo) return;
+        const miniMapPath = `${getSiteRootPath()}polo/${selectedPolo}/mini-map.svg`;
+
+        fetch(miniMapPath)
+          .then((response) => {
+            if (!response.ok) throw new Error("Mini-map not found");
+            return response.text();
+          })
+          .then((svgText) => {
+            poloMinimapContent.innerHTML = svgText;
+            const svg = poloMinimapContent.querySelector("svg");
+            if (!svg) return;
+
+            svg.style.width = "100%";
+            svg.style.height = "auto";
+            svg.style.maxHeight = window.innerWidth <= 767 ? "150px" : "220px";
+            svg.classList.add("mini-map-svg");
+            svg.dataset.polo = selectedPolo;
+
+            updateMiniMapState();
+          })
+          .catch(() => {
+            poloMinimapContent.innerHTML =
+              `<div style="font-size:.875rem;color:var(--color-gray-600);padding:.5rem;">
+                 Mini-mappa non disponibile
+               </div>`;
+          });
+      }
+
+      function updatePoloMiniMapPanelPosition() {
+        if (!poloMinimapPanel || !miniMapToggleBtn) return;
+
+        const isMobileLayout = window.matchMedia("(max-width: 1200px)").matches;
+        if (isMobileLayout) {
+          const buttonRect = miniMapToggleBtn.getBoundingClientRect();
+          const panelWidth = Math.min(260, window.innerWidth - 32);
+          const minSidePad = 16;
+          let panelLeft = buttonRect.right + window.scrollX - panelWidth;
+          panelLeft = Math.max(minSidePad, Math.min(panelLeft, window.innerWidth - panelWidth - minSidePad));
+          const panelTop = buttonRect.bottom + window.scrollY + 8;
+
+          poloMinimapPanel.style.top = `${panelTop}px`;
+          poloMinimapPanel.style.left = `${panelLeft}px`;
+          poloMinimapPanel.style.right = "auto";
+          poloMinimapPanel.style.width = `${panelWidth}px`;
+          return;
+        }
+
+        // Desktop: anchored top-right below the button group
+        const buttonRect = miniMapToggleBtn.getBoundingClientRect();
+        poloMinimapPanel.style.top = `${buttonRect.bottom + 8}px`;
+        poloMinimapPanel.style.right = `calc(1rem + env(safe-area-inset-right))`;
+        poloMinimapPanel.style.left = "auto";
+        poloMinimapPanel.style.width = "min(340px, calc(100vw - 2rem))";
+      }
+
+      function closeMinimapPanel() {
+        if (poloMinimapPanel) poloMinimapPanel.classList.add("minimap-panel-hidden");
+      }
+
+      function openMinimapPanel() {
+        if (!poloMinimapPanel || !selectedPolo) return;
+        renderPoloMiniMapPanel();
+        updatePoloMiniMapPanelPosition();
+        poloMinimapPanel.classList.remove("minimap-panel-hidden");
+      }
+
+      if (miniMapToggleBtn) {
+        miniMapToggleBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (!poloMinimapPanel || !selectedPolo) return;
+
+          const willShow = poloMinimapPanel.classList.contains("minimap-panel-hidden");
+          if (willShow) {
+            openMinimapPanel();
+          } else {
+            closeMinimapPanel();
           }
         });
+      }
+
+      // Close panel on outside click
+      document.addEventListener("click", (e) => {
+        if (!poloMinimapPanel || poloMinimapPanel.classList.contains("minimap-panel-hidden")) return;
+        if (poloMinimapPanel.contains(e.target)) return;
+        if (miniMapToggleBtn && (e.target === miniMapToggleBtn || miniMapToggleBtn.contains(e.target))) return;
+        closeMinimapPanel();
+      });
+
+      // Reposition on resize / scroll
+      window.addEventListener("resize", () => {
+        if (!poloMinimapPanel || poloMinimapPanel.classList.contains("minimap-panel-hidden")) return;
+        updatePoloMiniMapPanelPosition();
+      });
+      window.addEventListener("scroll", () => {
+        if (!poloMinimapPanel || poloMinimapPanel.classList.contains("minimap-panel-hidden")) return;
+        updatePoloMiniMapPanelPosition();
+      }, { passive: true });
+
+      // Show/hide minimap toggle button based on polo having a miniMap
+      function updateMiniMapButtonVisibility() {
+        if (!miniMapToggleBtn) return;
+        const poloConfig = data?.polo?.[selectedPolo];
+        const hasMiniMap = poloConfig?.miniMap === true;
+        miniMapToggleBtn.classList.toggle("hidden", !hasMiniMap);
+        // Show/hide the parent container
+        if (minimapControls) {
+          minimapControls.classList.toggle("hidden", !hasMiniMap);
+        }
+        if (!hasMiniMap) {
+          closeMinimapPanel();
+        } else if (poloMinimapPanel && !poloMinimapPanel.classList.contains("minimap-panel-hidden")) {
+          // Panel was open and polo changed — re-render
+          renderPoloMiniMapPanel();
+        }
       }
 
       function isSingleBuildingPolo(polo) {
@@ -16329,6 +16468,7 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
         roomData = null,
       ) {
         selectedPolo = polo;
+        updateMiniMapButtonVisibility();
         const buildings = Object.keys(data.polo[polo].edificio);
         const singleBuilding = isSingleBuildingPolo(polo);
 
@@ -17548,6 +17688,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
           floor !== lastLoadedFloor;
         selectedFloor = floor;
 
+        if (selectedBuilding && floor !== "?") {
+          checkForTopView(selectedBuilding, floor);
+        } else {
+          currentSelectionHasTopView = false;
+          syncFlipViewControlState();
+        }
+
         selectView("top", shouldReload, viewParams, roomData);
 
         populateRooms(selectedBuilding, selectedFloor);
@@ -17651,18 +17798,6 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
           currentBuildingSupportsFlip && currentSelectionHasTopView;
         flipViewBtn.classList.toggle("hidden", !shouldShowFlip);
         flipViewBtn.disabled = !shouldShowFlip;
-
-        // Auto-hide the parent .button-group if the flip button is the only child and it's hidden
-        if (flipViewBtn.parentElement && flipViewBtn.parentElement.id === "view-controls") {
-          const otherVisible = Array.from(flipViewBtn.parentElement.children).some(
-            (child) => child !== flipViewBtn && !child.classList.contains("hidden")
-          );
-          if (!otherVisible) {
-            flipViewBtn.parentElement.classList.toggle("hidden", !shouldShowFlip);
-          } else {
-            flipViewBtn.parentElement.classList.remove("hidden");
-          }
-        }
       }
 
       function updateFlipButtonVisibility(building) {
