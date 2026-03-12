@@ -271,6 +271,35 @@
           return;
         }
 
+        // Logic for Building
+        if (result.type === "building_result") {
+          const currentSearchInput = isMobile() ? searchInputMobile : searchInput;
+
+          // Select the polo and switch to the specific building and ground floor ("0")
+          selectPolo(
+            result.polo,
+            result.edificio,
+            "0",
+            null,
+            "top",
+            null,
+          );
+          hideSearchResultsPanels();
+
+          const displayName = result.title;
+          currentSearchInput.value = displayName;
+
+          const otherInput = currentSearchInput === searchInput ? searchInputMobile : searchInput;
+          otherInput.value = displayName;
+          updateClearButtonsVisibility();
+
+          triggerSidebarButtonAnimation();
+          if (isMobile()) {
+            closeSidebar();
+          }
+          return;
+        }
+
         // Logic for Room/Person
         if (result.room) {
           // External library (from biblioteche.json) - opens Google Maps
@@ -2267,7 +2296,6 @@
                     textLower.includes(queryLower);
                   if (isMatch) {
                     matches = true;
-                    matchedTitle = item.display;
                     break;
                   }
                 }
@@ -2324,6 +2352,45 @@
           const polo = data.polo[poloName];
           for (const buildingName in polo.edificio) {
             const building = polo.edificio[buildingName];
+
+            // Cerca edificio indipendentemente dal polo per poterci cliccare sopra e aprirlo (al piano 0)
+            if (buildingName !== "") {
+              let buildingMatches = false;
+              let buildingMatchedTitle = t("building") + " " + buildingName.toUpperCase();
+              
+              const buildingNamesToSearch = [
+                { text: t("building") + " " + buildingName, display: buildingMatchedTitle }
+              ];
+
+              if (building.alias) {
+                building.alias.forEach(a => buildingNamesToSearch.push({ text: a, display: a }));
+              }
+
+              if (building.alternative_names) {
+                building.alternative_names.forEach(a => buildingNamesToSearch.push({ text: a, display: a }));
+              }
+
+              for (const item of buildingNamesToSearch) {
+                const textLower = item.text.toLowerCase();
+                const isMatch = isExactSearch ?
+                  textLower === queryLower || textLower === t("building").toLowerCase() + " " + queryLower :
+                  textLower.includes(queryLower);
+                if (isMatch) {
+                  buildingMatches = true;
+                  break;
+                }
+              }
+
+              if (buildingMatches) {
+                 results.push({
+                   type: "building_result",
+                   polo: poloName,
+                   edificio: buildingName,
+                   title: buildingMatchedTitle,
+                   subtitle: "Polo " + poloName.charAt(0).toUpperCase() + poloName.slice(1)
+                 });
+              }
+            }
 
             // Cerca nei dipartimenti definiti a livello di edificio
             if (
@@ -3091,10 +3158,17 @@
                             <div class="details text-gray-500">
                                 ${result.address}
                                 <div style="margin-top: 4px;">
-                                    <a href="${result.google_maps}" target="_blank" class="text-blue-600 hover:underline" style="display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()">
+                                    <a href="${result.google_maps}" target="_blank" class="hover:underline" style="color: inherit; display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()">
                                         Apri in Google Maps
                                     </a>
                                 </div>
+                            </div>
+                        `;
+          } else if (result.type === "building_result") {
+            resultElement.innerHTML = `
+                            <div class="title">${result.title}</div>
+                            <div class="details text-gray-500">
+                                ${result.subtitle}
                             </div>
                         `;
           } else if (result.type === "external_library") {
@@ -5510,6 +5584,13 @@
       // ── Floating mini-map panel logic ──────────────────────────
       function renderPoloMiniMapPanel() {
         if (!poloMinimapPanel || !poloMinimapContent || !selectedPolo) return;
+
+        const existingSvg = poloMinimapContent.querySelector("svg.mini-map-svg");
+        if (existingSvg && existingSvg.dataset.polo === selectedPolo) {
+          updateMiniMapState();
+          return;
+        }
+
         const miniMapPath = `${getSiteRootPath()}polo/${selectedPolo}/mini-map.svg`;
 
         fetch(miniMapPath)
@@ -5571,7 +5652,6 @@
 
       function openMinimapPanel() {
         if (!poloMinimapPanel || !selectedPolo) return;
-        renderPoloMiniMapPanel();
         updatePoloMiniMapPanelPosition();
         poloMinimapPanel.classList.remove("minimap-panel-hidden");
       }
@@ -5620,8 +5700,8 @@
         }
         if (!hasMiniMap) {
           closeMinimapPanel();
-        } else if (poloMinimapPanel && !poloMinimapPanel.classList.contains("minimap-panel-hidden")) {
-          // Panel was open and polo changed — re-render
+        } else if (poloMinimapPanel) {
+          // Preload the minimap so it's ready without delay when opened
           renderPoloMiniMapPanel();
         }
       }
