@@ -99,6 +99,10 @@
     "original": "Vista dall'alto",
     "translation": "Vista d'in cima"
   },
+  "minimap_polo": {
+    "original": "Minimappa polo",
+    "translation": "Mapparella der polo"
+  },
   "view_flip": {
     "original": "Ribalta mappa",
     "translation": "Girala sossopra"
@@ -554,5 +558,13 @@
   "settings_poi_blinking_description": {
     "original": "Effetto lampeggiante sul marker del POI selezionato",
     "translation": "Fa lampeggià la pallina blu ner punto scelto"
+  },
+  "settings_breadcrumb": {
+    "original": "Percorso di navigazione",
+    "translation": "Percorso dù s'è"
+  },
+  "settings_breadcrumb_description": {
+    "original": "Mostra il percorso polo › edificio › piano › aula sopra i controlli (solo mobile)",
+    "translation": "Ti fa vedè dove sei esatto (solo telefono)"
   }
 }

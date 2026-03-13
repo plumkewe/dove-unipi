@@ -834,33 +834,10 @@
       cursor: w-resize;
     }
 
-    /* Animazione per invogliare l'apertura della sidebar */
-    @keyframes sidebar-button-pulse {
-      0% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.08);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    #open-sidebar-button.pulse-animation {
-      animation: sidebar-button-pulse 0.6s ease-in-out 2;
-    }
-
     /* Respect prefers-reduced-motion to save CPU for sensitive users */
     @media (prefers-reduced-motion: reduce) {
       .occupancy-status-bar.loading {
         background: var(--color-gray-200);
-        animation: none;
-      }
-
-      #open-sidebar-button.pulse-animation {
         animation: none;
       }
     }

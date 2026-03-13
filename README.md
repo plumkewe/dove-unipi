@@ -68,6 +68,10 @@
 - [Problemi noti](#problemi-noti)
 - [Progetti simili](#progetti-simili)
   - [Bot ingegneria in movimento](#bot-ingegneria-in-movimento)
+  - [AulePi](#aulepi)
+  - [unipi-free-classrooms-now](#unipi-free-classrooms-now)
+  - [DI Mappa](#di-mappa)
+  - [DM Mappa](#dm-mappa)
 
 ## Contributori
 
@@ -739,7 +743,7 @@ Scrivendo `@doveunipibot` all’interno di una chat o di un gruppo viene mostrat
 
 La palette dei colori è stata resa coerente con quella del sito, sia per quanto riguarda gli edifici sia per le occupazioni, garantendo una maggiore uniformità visiva e un’esperienza consistente tra le diverse piattaforme.
 
->[!TIP]
+> [!TIP]
 > Leggi di più nella [repository del bot](https://github.com/luxxiu/dove-unipi-bot).
 
 ### Commandi
@@ -810,7 +814,6 @@ La palette dei colori è stata resa coerente con quella del sito, sia per quanto
     </tr>
   </tbody>
 </table>
-
 
 ### Screenshot
 
@@ -918,3 +921,19 @@ La palette dei colori è stata resa coerente con quella del sito, sia per quanto
 ### Bot ingegneria in movimento
 
 **Link:** https://t.me/inginmovbot
+
+### AulePi
+
+**Link:** https://github.com/giuliocapecchi/aulepi
+
+### unipi-free-classrooms-now
+
+**Link:** https://github.com/JuliusNixi/unipi-free-classrooms-now
+
+### DM Mappa
+
+**Link:** https://www.dm.unipi.it/mappa/
+
+### DI Mappa
+
+**Link:** https://di.unipi.it/mappa-dipartimento/
