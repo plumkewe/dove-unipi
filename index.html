@@ -10533,6 +10533,17 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
       Telegram.
     </p>
 
+    <h3>Nuovo progetto: LA MAPPA UniPi</h3>
+    <p>
+      Prova <strong>LA MAPPA UniPi</strong>, la nuova versione con molti più
+      dati (orario lezioni, eventi in università e in città, offerte,
+      programmazione cinema, erogatori d'acqua, CicloPi, ciclabili... e tanto alto) e una
+      ricostruzione delle aule ancora migliore.
+      <a href="https://unipi.lamappa.org/app" target="_blank" rel="noopener noreferrer">
+        Apri LA MAPPA UniPi
+      </a>
+    </p>
+
     <p class="footer-links">
       <a href="https://github.com/plumkewe/dove-unipi" target="_blank" rel="noopener noreferrer">
         Vedi il progetto su GitHub
@@ -10984,6 +10995,15 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
 
         // Logic for Bot
         if (result.type === "bot" || result.type === "bot_promo") {
+          window.open(result.url, "_blank");
+          const currentSearchInput = isMobile() ?
+            searchInputMobile :
+            searchInput;
+          setTimeout(() => currentSearchInput.focus(), 50);
+          return;
+        }
+
+        if (result.type === "lamappa_promo") {
           window.open(result.url, "_blank");
           const currentSearchInput = isMobile() ?
             searchInputMobile :
@@ -12893,7 +12913,13 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
               details: t("bot_details"),
               url: "https://t.me/doveunipibot",
             };
-            displaySearchResults([promoResult]);
+            const laMappaPromoResult = {
+              type: "lamappa_promo",
+              title: t("open_lamappa_unipi"),
+              details: t("lamappa_details"),
+              url: "https://unipi.lamappa.org/app",
+            };
+            displaySearchResults([promoResult, laMappaPromoResult]);
             currentSearchResults.classList.remove("hidden");
             selectedSearchResultIndex = -1;
             document.body.classList.remove("keyboard-navigation-active");
@@ -13930,6 +13956,20 @@ RMMMMRMMMMME        EMMMMMMMMMMMMM!
             fragment.appendChild(resultElement);
             return;
           }
+
+            if (result.type === "lamappa_promo") {
+            resultElement.innerHTML = `
+                    <div class="flex items-center justify-between">
+                      <div class="flex-1 min-w-0">
+                        <div class="title">${result.title}</div>
+                        <div class="details">${result.details}</div>
+                      </div>
+                      <span class="material-symbols-outlined" style="font-size: 20px; line-height: 1;">explore</span>
+                    </div>
+                  `;
+            fragment.appendChild(resultElement);
+            return;
+            }
 
           if (result.type === "feedback") {
             resultElement.innerHTML = `

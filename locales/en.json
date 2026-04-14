@@ -43,6 +43,14 @@
     "original": "Prova il nostro nuovo Bot V2",
     "translation": "Try our new Bot V2"
   },
+  "open_lamappa_unipi": {
+    "original": "Scopri LA MAPPA UniPi",
+    "translation": "Discover LA MAPPA UniPi"
+  },
+  "lamappa_details": {
+    "original": "Nuova versione con più dati: orario lezioni, eventi, offerte, cinema, erogatori, Ciclopi, ciclabili... e tanto altro!",
+    "translation": "New version with more data: class schedules, events, offers, cinemas, water dispensers, Ciclopi, bike lanes... and much more!"
+  },
   "sidebar_open": {
     "original": "Apri sidebar",
     "translation": "Open sidebar"

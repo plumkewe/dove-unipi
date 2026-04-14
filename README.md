@@ -1,5 +1,18 @@
+> [!IMPORTANT]
+> È disponibile una nuova versione del progetto: **LA MAPPA UniPi**.
+>
+> È un netto passo avanti sotto ogni aspetto, soprattutto nella ricostruzione delle aule dei poli, ora molto più efficiente e senza cicli inutili rispetto a questa versione.
+>
+> Troverai molti più dati utili, tra cui: orario delle tue lezioni, eventi in università e in città, offerte, programmazione dei cinema, erogatori d'acqua, CicloPi e percorsi ciclabili... e molto altro!
+>
+> Provala subito: **[unipi.lamappa.org/app](https://unipi.lamappa.org/app)**.
+>
+> Grazie di cuore a tutte le persone che hanno contribuito a **DOVE?UNIPI**: senza il vostro aiuto questo progetto non sarebbe stato possibile.
+
+
+
 <p align="center">
-  <img src="assets/logo/logo.svg" alt="DOVE? UniPI Logo" width="200">
+  <img src="assets/logo/logo.svg" alt="DOVE?UNIPI Logo" width="200">
 </p>
 
 <h1 align="center"> DOVE?UNIPI </h1>
@@ -70,8 +83,8 @@
   - [Bot ingegneria in movimento](#bot-ingegneria-in-movimento)
   - [AulePi](#aulepi)
   - [unipi-free-classrooms-now](#unipi-free-classrooms-now)
-  - [DI Mappa](#di-mappa)
   - [DM Mappa](#dm-mappa)
+  - [DI Mappa](#di-mappa)
 
 ## Contributori
 
